@@ -171,4 +171,75 @@ function wpb_add_google_fonts() {
 	
 add_action( 'wp_enqueue_scripts', 'wpb_add_google_fonts' );
 
+
+function my_acf_block_render_callback( $block, $content = '', $is_preview = false ) {
+	$context = Timber::context();
+
+	// Store block values.
+	$context['block'] = $block;
+
+	// Store field values.
+	$context['fields'] = get_fields();
+
+	// Store $is_preview value.
+	$context['is_preview'] = $is_preview;
+
+	$slug = str_replace('acf/', '', $block['name']);
+
+	// Render the block.
+	Timber::render( 'block/' . $slug . '.twig', $context );
+}
+
+// ACF INIT
+add_action('acf/init', 'my_acf_init');
+
+function my_acf_init() {
+	
+	// check function exists
+	if ( ! function_exists( 'acf_register_block' ) ) {
+			return;
+	}
+	// register blocks
+	acf_register_block(array(
+		'name'				=> 'banner',
+		'title'				=> __('Banner'),
+		'description'		=> __('A custom banner block.'),
+		'render_callback'	=> 'my_acf_block_render_callback',
+		'category'			=> 'layout',
+		'icon'				=> 'admin-comments',
+		'keywords'			=> array( 'banner' ),
+	));
+	acf_register_block(array(
+		'name'				=> 'textblock',
+		'title'				=> __('Textblock'),
+		'description'		=> __('A custom textblock block.'),
+		'render_callback'	=> 'my_acf_block_render_callback',
+		'category'			=> 'layout',
+		'icon'				=> 'admin-comments',
+		'keywords'			=> array( 'text' ),
+	));
+	acf_register_block(array(
+		'name'				=> 'testimonial',
+		'title'				=> __('Testimonial'),
+		'description'		=> __('A custom testimonial block.'),
+		'render_callback'	=> 'my_acf_block_render_callback',
+		'category'			=> 'layout',
+		'icon'				=> 'admin-comments',
+		'keywords'			=> array( 'testimonial' ),
+	));
+}
+
+// add_filter( 'allowed_block_types', 'misha_allowed_block_types' );
+ 
+// function misha_allowed_block_types( $allowed_blocks ) {
+ 
+// 	return array(
+// 		'core/image',
+// 		'core/paragraph',
+// 		'core/heading',
+// 		'core/list'
+// 	);
+ 
+// }
+
 new StarterSite();

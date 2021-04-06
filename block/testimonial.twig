@@ -1,0 +1,21 @@
+{#
+/**
+ * Block Name: Example block
+ *
+ * This is the template that displays the example block.
+ */
+#}
+
+{% if is_preview %}
+    <p>I will only appear in the editor.</p>
+{% endif %}
+
+<div id="example-{{ block.id }}" class="container-narrow relative my-20" >
+  <h5>
+    {{ fields.testimonial }}
+  </h5>
+  <h6>
+    {{ fields.quotee }}
+  </h6>
+        
+</div>

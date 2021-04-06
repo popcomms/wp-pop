@@ -1,0 +1,23 @@
+{#
+/**
+ * Block Name: Example block
+ *
+ * This is the template that displays the example block.
+ */
+#}
+
+{% if is_preview %}
+    <p>I will only appear in the editor.</p>
+{% endif %}
+
+<div id="example-{{ block.id }}" class="container-narrow relative flex flex-wrap md:flex-nowrap  my-20" >
+  <div class="md:mr-6 md:w-1/2">
+    <h3>
+      {{ fields.title }}
+    </h3>
+  </div>
+  <div class="md:ml-6 md:w-1/2">
+    {{ fields.text }}
+  </div>
+        
+</div>

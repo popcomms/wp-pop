@@ -4,12 +4,25 @@ module.exports = {
   theme: {
     screens: {
       'sm': '375px',
-      'md': '843px',
+      'md': '966px',
       'lg': '1024px',
       'xl': '1920px'
     },
     fontFamily: {
       'default': ['Poppins', 'Arial', 'sans-serif']
+    },
+    fontSize: {
+      'xs': '.75rem',
+      'sm': '.875rem',
+      'tiny': '.875rem',
+      'base': '1rem',
+      'lg': '1.125rem',
+      'xl': '1.3125rem',
+      '2xl': '1.75rem',
+      '3xl': '2.25rem',
+      '4xl': '2.625rem',
+      '5xl': '3.5rem',
+      '6xl': '4rem'
     },
     extend: {
       colors: {

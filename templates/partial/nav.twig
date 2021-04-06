@@ -1,0 +1,12 @@
+<header class="z-50 nav fixed w-screen opacity-50 bg-pop-green" >
+    {% block header %}
+        <div class="wrapper flex justify-center items-center">
+            <h6 class="hdr-logo my-2" role="banner">
+                <a class="hdr-logo-link" href="{{site.url}}" rel="home">{{site.name}}</a>
+            </h6>
+            <nav id="nav-main" class="nav-main flex-grow items-center text-center" role="navigation">
+                {% include "menu.twig" with {'items': menu.get_items} %}
+            </nav><!-- #nav -->
+        </div>
+    {% endblock %}
+</header>
