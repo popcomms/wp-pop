@@ -1,61 +1,35 @@
-{#
-/**
- * Block Name: Example block
- *
- * This is the template that displays the example block.
- */
-#}
-
 {% if is_preview %}
-    <p>I will only appear in the editor.</p>
+  <p><strong>Problems List</strong> - I will only appear in the editor.</p>
 {% endif %}
 
-<div id="example-{{ block.id }}" class="container-wide" >
-  {% include "/templates/partial/link.twig" with 
-    {
-      'link': fields.button.link,
-    }
-  %}
-  <div class="px-8 py-12 pattern polkadot-blue">
-    <h4>{{ fields.title }}</h4>
-  </div>
-  <div class="relative">
-    {% for item in fields.problems %}
-      <a href="{{ item.url }}" >
-        <div class="flex justify-between items-center {{ loop.last ? '' : 'border-b-1 border-pop-' ~ fields.accent_color }} ">
-          <p class="px-4">0{{ loop.index }}</p>
-          <h6 class="p-6 m-0">{{ item.text }}</h6>
-          <div class="self-end p-3">
-            <svg width="96" height="96" viewBox="0 0 96 96" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path class="fill-current text-pop-{{ fields.accent_color }}" d="M40.75 48L39.3358 49.4142L38.75 48.8284L38.75 48L40.75 48ZM74.75 80C74.75 81.1046 73.8546 82 72.75 82L54.75 82C53.6454 82 52.75 81.1046 52.75 80C52.75 78.8954 53.6454 78 54.75 78L70.75 78L70.75 62C70.75 60.8954 71.6454 60 72.75 60C73.8546 60 74.75 60.8954 74.75 62L74.75 80ZM42.1642 46.5858L74.1642 78.5858L71.3358 81.4142L39.3358 49.4142L42.1642 46.5858ZM38.75 48V12.5L42.75 12.5V48L38.75 48Z"/>
-            </svg>              
+{% if not is_preview %}
+  <div class="container-wide" >
+    <div class="relative">
+      <div class="absolute bottom-0 right-0 sm:relative">
+        {% include "/templates/partial/link.twig" with 
+          {
+            'link': fields.link,
+          }
+        %}
+      </div>
+      <div class="px-8 py-12 pattern polkadot-blue">
+        <h4>{{ fields.title }}</h4>
+      </div>
+    </div>
+    <div class="relative">
+      {% for item in fields.problems %}
+        <a href="{{ item.url }}" >
+          <div class="flex justify-between items-center {{ loop.last ? '' : 'border-b-1 border-pop-' ~ fields.accent_color }} ">
+            <p class="px-4">0{{ loop.index }}</p>
+            <h6 class="p-6 m-0">{{ item.text }}</h6>
+            <div class="self-end p-3">
+              <svg width="96" height="96" viewBox="0 0 96 96" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path class="fill-current text-pop-{{ fields.accent_color }}" d="M40.75 48L39.3358 49.4142L38.75 48.8284L38.75 48L40.75 48ZM74.75 80C74.75 81.1046 73.8546 82 72.75 82L54.75 82C53.6454 82 52.75 81.1046 52.75 80C52.75 78.8954 53.6454 78 54.75 78L70.75 78L70.75 62C70.75 60.8954 71.6454 60 72.75 60C73.8546 60 74.75 60.8954 74.75 62L74.75 80ZM42.1642 46.5858L74.1642 78.5858L71.3358 81.4142L39.3358 49.4142L42.1642 46.5858ZM38.75 48V12.5L42.75 12.5V48L38.75 48Z"/>
+              </svg>              
+            </div>
           </div>
-        </div>
-      </a>
-    {% endfor %}
-
+        </a>
+      {% endfor %}
+    </div>   
   </div>
-
-
-  {# <div class="row-span-2">
-    <img src="{{ fields.image.url }}" alt="">
-  </div>
-  <div class="flex items-center p-6 bg-pop-{{ fields.accent_color }}">
-    <h3 class="text-pop-white">
-      {{ fields.title }}
-    </h3>
-  </div>
-  <div class="flex flex-col bg-pop-white">
-    <div class="flex-grow p-6">
-      {{ fields.text }}
-    </div>
-    <div class="self-end">
-      {% include "/templates/partial/link.twig" with 
-        {
-          'link': fields.link,
-        }
-      %}
-    </div>
-  </div> #}
-        
-</div>
+{% endif %}

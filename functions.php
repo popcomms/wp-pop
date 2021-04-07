@@ -254,6 +254,24 @@ function my_acf_init() {
 		'icon'				=> 'admin-comments',
 		'keywords'			=> array( 'problemslist' ),
 	));
+	acf_register_block(array(
+		'name'				=> 'contactcta',
+		'title'				=> __('Contact CTA'),
+		'description'		=> __('A custom contactcta block.'),
+		'render_callback'	=> 'my_acf_block_render_callback',
+		'category'			=> 'layout',
+		'icon'				=> 'admin-comments',
+		'keywords'			=> array( 'contactcta' ),
+	));
+	acf_register_block(array(
+		'name'				=> 'portfolio',
+		'title'				=> __('Portfolio'),
+		'description'		=> __('A custom portfolio block.'),
+		'render_callback'	=> 'my_acf_block_render_callback',
+		'category'			=> 'layout',
+		'icon'				=> 'admin-comments',
+		'keywords'			=> array( 'portfolio' ),
+	));
 }
 
 // add_filter( 'allowed_block_types', 'misha_allowed_block_types' );

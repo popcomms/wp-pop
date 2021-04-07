@@ -1,17 +1,10 @@
-{#
-/**
- * Block Name: Example block
- *
- * This is the template that displays the example block.
- */
-#}
-
 {% if is_preview %}
-    <p>I will only appear in the editor.</p>
+  <p><strong>Downloads</strong> - I will only appear in the editor.</p>
 {% endif %}
 
-<div id="example-{{ block.id }}" class="container-wide grid grid-cols-2 grid-rows-2 relative" >
-  <div class="row-span-2">
+{% if not is_preview %}
+<div class="container-wide grid grid-cols-1 grid-rows-2 sm:grid-cols-2 relative" >
+  <div class="row-span-2 hidden sm:block">
     <img src="{{ fields.image.url }}" alt="">
   </div>
   <div class="flex items-center p-6 bg-pop-{{ fields.accent_color }}">
@@ -30,6 +23,6 @@
         }
       %}
     </div>
-  </div>
-        
+  </div>        
 </div>
+{% endif %}

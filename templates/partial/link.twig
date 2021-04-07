@@ -1,11 +1,13 @@
-<a href="{{ link.link }}">
+<a href="{{ link.url }}">
   <div class="flex">
-    <div class="flex lowercase items-center px-8 py-2 {{ link.background_color == 'transparent' ? 'text-pop-white bg-pop-black' : 'text-pop-black bg-pop-white' }}">
-      {{ link.text }}
-    </div>
+    {% if link.text %}
+      <div class="flex lowercase items-center px-8 py-2 {{ link.background_color == 'black' ? 'text-pop-white bg-pop-black' : 'text-pop-black bg-pop-white' }}">
+        {{ link.text }}
+      </div>
+    {% endif %}
     <div class="w-12 h-12 p-3 bg-pop-{{ link.accent_color }}">
-      <svg class="" width="36" height="35" viewBox="5 5 39 38" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M27.6816 9.18171C27.6816 8.35328 27.01 7.68171 26.1816 7.68171H12.6816C11.8531 7.68171 11.1816 8.35328 11.1816 9.18171C11.1816 10.0101 11.8531 10.6817 12.6816 10.6817L24.6816 10.6817L24.6816 22.6817C24.6816 23.5101 25.3531 24.1817 26.1816 24.1817C27.01 24.1817 27.6816 23.5101 27.6816 22.6817V9.18171ZM9.56457 27.92L27.2422 10.2424L25.1209 8.12105L7.44325 25.7987L9.56457 27.92Z" fill="#F8F7EE"/>
+      <svg class="transform rotate-{{ link.angle }}" width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path class="fill-current text-pop-{{ link.arrow_color }}" d="M13.0607 0.625645C12.4749 0.0398579 11.5251 0.0398579 10.9393 0.625645L1.3934 10.1716C0.807611 10.7574 0.807611 11.7071 1.3934 12.2929C1.97919 12.8787 2.92893 12.8787 3.51472 12.2929L12 3.80762L20.4853 12.2929C21.0711 12.8787 22.0208 12.8787 22.6066 12.2929C23.1924 11.7071 23.1924 10.7574 22.6066 10.1716L13.0607 0.625645ZM13.5 24.3137V1.6863H10.5V24.3137H13.5Z" fill="#3A3EAB"/>
       </svg>
     </div>
   </div>

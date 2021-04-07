@@ -90,26 +90,53 @@
     background-position: 0 0, 0 0;
   }
 
+  html::-webkit-scrollbar,
+  body::-webkit-scrollbar,
+  .back-card-content::-webkit-scrollbar {
+    width: 5px;
+    overflow: visible;
+    display: block !important;
+  }
+
+  html::-webkit-scrollbar-track.
+  body::-webkit-scrollbar-track {
+    @apply bg-pop-gray;
+
+    /* border-radius: 10px; */
+  }
+
+  html::-webkit-scrollbar-thumb,
+  body::-webkit-scrollbar-thumb {
+    @apply bg-pop-pink;
+
+    /* border-radius: 10px; */
+  }
+
+  html::-webkit-scrollbar-thumb:window-inactive,
+  body::-webkit-scrollbar-thumb:window-inactive {
+    @apply bg-pop-pink;
+  }
+
   .container-banner {
-    @apply px-4 sm:px-10 md:px-0 md:mx-auto;
+    @apply px-4 xs:px-10 md:px-0 md:mx-auto;
 
     max-width: 886px;
   }
 
   .container-narrow {
-    @apply px-4 sm:px-10 md:px-0 md:mx-auto mb-40 mt-20;
+    @apply px-4 xs:px-10 md:px-0 md:mx-auto mb-40 mt-20;
 
     max-width: 886px;
   }
 
   .container-wide {
-    @apply px-4 sm:px-10 md:px-0 md:mx-auto mb-40 mt-20;
+    @apply md:px-0 md:mx-auto sm:mb-40 sm:mt-20;
 
     max-width: 985px;
   }
 
   .wp-block-video {
-    @apply px-4 sm:px-10 md:px-0 md:mx-auto mb-40 mt-20 shadow-md !important;
+    @apply px-4 xs:px-10 md:px-0 md:mx-auto mb-40 mt-20 shadow-md !important;
 
     max-width: 886px;
   }
