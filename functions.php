@@ -227,6 +227,33 @@ function my_acf_init() {
 		'icon'				=> 'admin-comments',
 		'keywords'			=> array( 'testimonial' ),
 	));
+	acf_register_block(array(
+		'name'				=> 'downloads',
+		'title'				=> __('Downloads'),
+		'description'		=> __('A custom downloads block.'),
+		'render_callback'	=> 'my_acf_block_render_callback',
+		'category'			=> 'layout',
+		'icon'				=> 'admin-comments',
+		'keywords'			=> array( 'downloads' ),
+	));
+	acf_register_block(array(
+		'name'				=> 'squaregrid',
+		'title'				=> __('Square Grid'),
+		'description'		=> __('A custom squaregrid block.'),
+		'render_callback'	=> 'my_acf_block_render_callback',
+		'category'			=> 'layout',
+		'icon'				=> 'admin-comments',
+		'keywords'			=> array( 'squaregrid' ),
+	));
+	acf_register_block(array(
+		'name'				=> 'problemslist',
+		'title'				=> __('Problems List'),
+		'description'		=> __('A custom problemslist block.'),
+		'render_callback'	=> 'my_acf_block_render_callback',
+		'category'			=> 'layout',
+		'icon'				=> 'admin-comments',
+		'keywords'			=> array( 'problemslist' ),
+	));
 }
 
 // add_filter( 'allowed_block_types', 'misha_allowed_block_types' );

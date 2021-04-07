@@ -1,0 +1,64 @@
+{#
+/**
+ * Block Name: Example block
+ *
+ * This is the template that displays the example block.
+ */
+#}
+
+{% if is_preview %}
+    <p>I will only appear in the editor.</p>
+{% endif %}
+
+<div id="example-{{ block.id }}" class="container-wide border-16 border-pop-white shadow-sm box-content" >
+  <div class="px-8 py-12 pattern polkadot-blue">
+    <h4>{{ fields.title }}</h4>
+  </div>
+  <div class="grid grid-cols-4 grid-rows-2 relative border border-pop-gray">
+
+    {% for item in fields.square_grid %}
+      {% if item.type == 'icon' %}
+        <div class="bg-pop-pink border border-pop-gray" style="aspect-ratio: 1;">
+          icon
+
+        </div>
+      {% endif %}
+      {% if item.type == 'link' %}
+        <a href="{{ item.link.url }}" >
+          <div class="bg-pop-white flex flex-col justify-between border border-pop-gray" style="aspect-ratio: 1;">
+            <h6 class="p-6 m-0">{{ item.link.text }}</h6>
+            <div class="self-end w-12 h-12 p-3 bg-pop-{{ item.link.accent_color }}">
+              <svg class="" width="36" height="35" viewBox="5 5 39 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M27.6816 9.18171C27.6816 8.35328 27.01 7.68171 26.1816 7.68171H12.6816C11.8531 7.68171 11.1816 8.35328 11.1816 9.18171C11.1816 10.0101 11.8531 10.6817 12.6816 10.6817L24.6816 10.6817L24.6816 22.6817C24.6816 23.5101 25.3531 24.1817 26.1816 24.1817C27.01 24.1817 27.6816 23.5101 27.6816 22.6817V9.18171ZM9.56457 27.92L27.2422 10.2424L25.1209 8.12105L7.44325 25.7987L9.56457 27.92Z" fill="#F8F7EE"/>
+              </svg>
+            </div>
+          </div>
+        </a>
+      {% endif %}
+    {% endfor %}
+
+  </div>
+
+
+  {# <div class="row-span-2">
+    <img src="{{ fields.image.url }}" alt="">
+  </div>
+  <div class="flex items-center p-6 bg-pop-{{ fields.accent_color }}">
+    <h3 class="text-pop-white">
+      {{ fields.title }}
+    </h3>
+  </div>
+  <div class="flex flex-col bg-pop-white">
+    <div class="flex-grow p-6">
+      {{ fields.text }}
+    </div>
+    <div class="self-end">
+      {% include "/templates/partial/link.twig" with 
+        {
+          'link': fields.link,
+        }
+      %}
+    </div>
+  </div> #}
+        
+</div>

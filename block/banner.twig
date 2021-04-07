@@ -26,7 +26,7 @@
   </div>
   
   <div
-    class="container-narrow flex flex-col justify-between z-10 h-1/2 text-pop-{{fields.text_color}} bg-pop-{{fields.bg_color}}"
+    class="container-banner flex flex-col justify-between z-10 h-1/2 bg-pop-{{fields.bg_color}}"
     style="min-height: 485px;"
   >
       <div class="flex">
@@ -34,9 +34,9 @@
           <img class="h-16" src="{{ item.icon }}" />
         {% endfor %}
       </div>
-      <h1 class="px-8 flex-grow flex items-center">{{ fields.title }}</h1>
+      <h1 class="px-8 flex-grow flex items-center text-pop-{{fields.text_color}}">{{ fields.title }}</h1>
       <div class="flex">
-        <div class="flex items-center px-8 py-2 bg-pop-{{ fields.bg_color == 'transparent' ? 'black' : 'white ' }}">
+        <div class="flex items-center px-8 py-2 {{ fields.bg_color == 'transparent' ? 'text-pop-white bg-pop-black' : 'text-pop-black bg-pop-white ' }}">
           {{ fields.button.text }}
         </div>
         <div class="w-12 h-12 p-3 bg-pop-{{ fields.button.accent_color }}">
