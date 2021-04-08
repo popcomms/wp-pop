@@ -283,6 +283,16 @@ function my_acf_init() {
 		'icon'				=> 'admin-comments',
 		'keywords'			=> array( 'popcontainer' ),
 	));
+	// Sub Container
+	acf_register_block(array(
+		'name'				=> 'sub-container',
+		'title'				=> __('Sub Container'),
+		'description'		=> __('A custom subcontainer block.'),
+		'render_callback'	=> 'my_acf_block_render_callback',
+		'category'			=> 'layout',
+		'icon'				=> 'admin-comments',
+		'keywords'			=> array( 'subcontainer' ),
+	));
 }
 
 // add_filter( 'allowed_block_types', 'misha_allowed_block_types' );
@@ -297,5 +307,10 @@ function my_acf_init() {
 // 	);
  
 // }
+
+function myprefix_enqueue_scripts() {
+	wp_enqueue_script( 'site', get_template_directory_uri() . '/static/site.js', array(), true );
+}
+add_action( 'wp_enqueue_scripts', 'myprefix_enqueue_scripts' );
 
 new StarterSite();

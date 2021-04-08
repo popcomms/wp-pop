@@ -37,6 +37,7 @@ module.exports = {
         'pop-black': '#2D2D2D',
         'pop-black-dark': '#272727',
         'pop-gray': '#DFDFDF',
+        'pop-mid-gray': "#8E8E8E",
         'pop-navy': '#212363',
         'pop-green': '#64FFE3',
         'pop-green-pale': '#E8FDF5',
@@ -50,7 +51,7 @@ module.exports = {
         '16': '16px'
       },
       gap: {
-        '0.5': '2px'
+        '0.5': '1px'
       }
     }
   },
