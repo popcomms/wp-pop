@@ -4,8 +4,9 @@
 
 @layer base {
   * {
-    @apply leading-normal text-pop-black;
+    @apply leading-normal text-pop-white;
 
+    position: relative;
     box-sizing: border-box;
   }
 
@@ -90,6 +91,12 @@
     background-position: 0 0, 0 0;
   }
 
+  .pattern.strip-blue {
+    background: linear-gradient(45deg, #00f00f 1%, 1%, #fff 49%, 49%, #00f00f 51%, 51%, 99%, #00f00f 99%);
+    background-size: 20px 20px;
+    background-position: 0 0;
+  }
+
   html::-webkit-scrollbar,
   body::-webkit-scrollbar,
   .back-card-content::-webkit-scrollbar {
@@ -124,13 +131,13 @@
   }
 
   .container-narrow {
-    @apply px-4 xs:px-10 md:px-0 md:mx-auto mb-40 mt-20;
+    @apply px-4 xs:px-10 md:px-0 md:mx-auto pb-40;
 
     max-width: 886px;
   }
 
   .container-wide {
-    @apply md:px-0 md:mx-auto sm:mb-40 sm:mt-20;
+    @apply md:px-0 md:mx-auto sm:pb-40;
 
     max-width: 985px;
   }

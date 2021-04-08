@@ -272,6 +272,17 @@ function my_acf_init() {
 		'icon'				=> 'admin-comments',
 		'keywords'			=> array( 'portfolio' ),
 	));
+
+	// Pop Container
+	acf_register_block(array(
+		'name'				=> 'pop-container',
+		'title'				=> __('Pop Container'),
+		'description'		=> __('A custom popcontainer block.'),
+		'render_callback'	=> 'my_acf_block_render_callback',
+		'category'			=> 'layout',
+		'icon'				=> 'admin-comments',
+		'keywords'			=> array( 'popcontainer' ),
+	));
 }
 
 // add_filter( 'allowed_block_types', 'misha_allowed_block_types' );

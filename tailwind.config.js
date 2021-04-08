@@ -28,12 +28,14 @@ module.exports = {
     boxShadow: {
       'sm': '0px 1px 1px rgba(0, 0, 0, 0.25)',
       'md': '0px 4px 4px rgba(0, 0, 0, 0.25)',
+      'inset': 'inset 0 0 0 1.5px #DFDFDF',
       none: 'none',
     },
     extend: {
       colors: {
         'pop-white': '#F8F7EE',
         'pop-black': '#2D2D2D',
+        'pop-black-dark': '#272727',
         'pop-gray': '#DFDFDF',
         'pop-navy': '#212363',
         'pop-green': '#64FFE3',
@@ -44,7 +46,7 @@ module.exports = {
         'pop-yellow': '#FFFF99',
       },
       borderWidth: {
-        '1': '1px',
+        '1': '0.5px',
         '16': '16px'
       },
       gap: {

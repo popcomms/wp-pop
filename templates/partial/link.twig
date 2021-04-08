@@ -1,8 +1,10 @@
 <a href="{{ link.url }}">
   <div class="flex">
     {% if link.text %}
-      <div class="flex lowercase items-center px-8 py-2 {{ link.background_color == 'black' ? 'text-pop-white bg-pop-black' : 'text-pop-black bg-pop-white' }}">
-        {{ link.text }}
+      <div class="flex lowercase items-center px-8 py-2 {{ link.background_color == 'black' ? 'bg-pop-black' : 'bg-pop-white' }}">
+        <p class="text-pop-white m-0 hover:text-lg {{ link.background_color == 'black' ? 'text-pop-white' : 'text-pop-black' }}">
+          {{ link.text }}
+        </p>
       </div>
     {% endif %}
     <div class="w-12 h-12 p-3 bg-pop-{{ link.accent_color }}">
