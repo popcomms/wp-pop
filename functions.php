@@ -228,6 +228,15 @@ function my_acf_init() {
 		'keywords'			=> array( 'text' ),
 	));
 	acf_register_block(array(
+		'name'				=> 'two-col-text',
+		'title'				=> __('Two Column Text'),
+		'description'		=> __('A custom two-col-text block.'),
+		'render_callback'	=> 'my_acf_block_render_callback',
+		'category'			=> 'layout',
+		'icon'				=> 'admin-comments',
+		'keywords'			=> array( 'text' ),
+	));
+	acf_register_block(array(
 		'name'				=> 'raised-text',
 		'title'				=> __('Raised Text'),
 		'description'		=> __('A custom raised-text block.'),
@@ -235,6 +244,15 @@ function my_acf_init() {
 		'category'			=> 'layout',
 		'icon'				=> 'admin-comments',
 		'keywords'			=> array( 'text' ),
+	));
+	acf_register_block(array(
+		'name'				=> 'full-width-image',
+		'title'				=> __('Image'),
+		'description'		=> __('A custom image block.'),
+		'render_callback'	=> 'my_acf_block_render_callback',
+		'category'			=> 'layout',
+		'icon'				=> 'admin-comments',
+		'keywords'			=> array( 'image' ),
 	));
 	acf_register_block(array(
 		'name'				=> 'testimonial',

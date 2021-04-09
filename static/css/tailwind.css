@@ -53,8 +53,40 @@
     @apply my-5 text-xl font-medium;
   }
 
-  p {
-    @apply my-3 text-lg font-normal;
+  p,
+  li,
+  pre {
+    @apply text-lg font-normal;
+
+    line-height: 180%;
+  }
+
+  ul li {
+    @apply pl-5;
+  }
+
+  ul li::before {
+    @apply absolute top-1/2 left-0 transform -translate-y-1/2 w-2 h-2 bg-pop-pink rounded;
+
+    content: '';
+  }
+
+  ol {
+    list-style: decimal-leading-zero;
+    list-style-position: inside;
+  }
+
+  ol::marker {
+    @apply text-pop-pink;
+  }
+
+  pre {
+    @apply border-4 border-pop-pink rounded-2xl p-8 my-10 overflow-auto;
+  }
+
+  p,
+  ul {
+    @apply my-3;
 
     line-height: 180%;
   }
