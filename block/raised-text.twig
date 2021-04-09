@@ -1,0 +1,18 @@
+{% if is_preview %}
+  <p><strong>Text Block</strong> - I will only appear in the editor.</p>
+{% endif %}
+
+{% if not is_preview %}
+  <div class="container-narrow relative flex -mt-36 {{ theme_bg_color }} p-16 shadow-md" >
+    <div class="{{ theme_text_color }}">
+      {{ fields.text }}
+    </div>
+    <div class="absolute top-0 left-0 transform -translate-y-full">
+      {% include "/templates/partial/link.twig" with 
+        {
+          'link': fields.link,
+        }
+      %}
+    </div>
+  </div>
+{% endif %}

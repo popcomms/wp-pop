@@ -4,7 +4,7 @@
 
 {% if not is_preview %}
 <div class="relative">
-  <div class="z-30 hidden absolute -top-24 left-1/2 sm:flex items-center transform -translate-x-1/2 -translate-y-1/2" style="width: 90%">
+  <div class="{{ theme_bg_color }} py-2 px-8 shadow-md z-30 hidden absolute -top-24 left-1/2 sm:flex items-center transform -translate-x-1/2 -translate-y-1/2" style="width: 90%">
     <p class="text-pop-mid-gray text-xs m-0 mr-4">{{ fields.title }}</p>
     <div class="bg-pop-mid-gray flex-grow" style="height: 1px"></div>
   </div>

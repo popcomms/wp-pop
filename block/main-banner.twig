@@ -1,0 +1,35 @@
+{#
+/**
+ * Block Name: Example block
+ *
+ * This is the template that displays the example block.
+ */
+#}
+
+{% if is_preview %}
+  <p><strong>Main Banner</strong> - I will only appear in the editor.</p>
+{% endif %}
+
+{% if not is_preview %}
+
+<div class="relative h-screen overflow-hidden flex justify-center bg-pop-{{ fields.bg_color }}" >
+  <div class="absolute top-1/2 left-1/2 transform -translate-y-1/2 w-auto h-2/3 bg-center bg-cover no-repeat pb-12 px-12 pt-12" style="background-image: url();">
+    <img class="h-full" src="{{ fields.background_image.url }}" alt="">
+  </div>
+  
+  <div class="container-narrow relative h-full flex justify-center items-center">
+      <div class="banner-title text-pop-{{fields.text_color}}">{{ fields.title }}</div>
+      {% if fields.show_link %}
+        <div class="absolute bottom-0 left-0">
+          {% include "/templates/partial/link.twig" with 
+            {
+              'link': fields.link.link,
+            }
+          %}
+        </div>
+      {% endif %}
+  </div>
+</div>
+
+{% endif %}
+

@@ -210,9 +210,27 @@ function my_acf_init() {
 		'keywords'			=> array( 'banner' ),
 	));
 	acf_register_block(array(
+		'name'				=> 'main-banner',
+		'title'				=> __('Main Banner'),
+		'description'		=> __('A custom banner block.'),
+		'render_callback'	=> 'my_acf_block_render_callback',
+		'category'			=> 'layout',
+		'icon'				=> 'admin-comments',
+		'keywords'			=> array( 'main-banner' ),
+	));
+	acf_register_block(array(
 		'name'				=> 'textblock',
 		'title'				=> __('Textblock'),
 		'description'		=> __('A custom textblock block.'),
+		'render_callback'	=> 'my_acf_block_render_callback',
+		'category'			=> 'layout',
+		'icon'				=> 'admin-comments',
+		'keywords'			=> array( 'text' ),
+	));
+	acf_register_block(array(
+		'name'				=> 'raised-text',
+		'title'				=> __('Raised Text'),
+		'description'		=> __('A custom raised-text block.'),
 		'render_callback'	=> 'my_acf_block_render_callback',
 		'category'			=> 'layout',
 		'icon'				=> 'admin-comments',
@@ -294,19 +312,6 @@ function my_acf_init() {
 		'keywords'			=> array( 'subcontainer' ),
 	));
 }
-
-// add_filter( 'allowed_block_types', 'misha_allowed_block_types' );
- 
-// function misha_allowed_block_types( $allowed_blocks ) {
- 
-// 	return array(
-// 		'core/image',
-// 		'core/paragraph',
-// 		'core/heading',
-// 		'core/list'
-// 	);
- 
-// }
 
 function myprefix_enqueue_scripts() {
 	wp_enqueue_script( 'site', get_template_directory_uri() . '/static/site.js', array(), true );

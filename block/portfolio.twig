@@ -8,19 +8,15 @@
       <div class="relative px-8 py-12 pattern strip-blue {{ theme_text_color }}">
         <h4>{{ fields.title }}</h4>
       </div>
-
       <div class="grid gap-0.5 grid-cols-1 sm:grid-cols-2 sm:grid-rows-4 relative border-2 {{ theme_border_color }} bg-pop-gray">
         {% for item in fields.content %}
           {% set width = 'col-span-1' %}
           {% set height = 'row-span-1' %}
-          {% set ratio = 'auto' %}
           
           {% if loop.index == 3 %}
             {% set width = 'col-span-1 sm:col-span-2' %}
           {% elseif loop.index == 4 %}
             {% set height = 'row-span-1 sm:row-span-2' %}
-          {% else %}
-            {% set ratio = '1' %}
           {% endif %}
 
           {% if item.acf_fc_layout == 'Image' %}
