@@ -29,3 +29,12 @@ Install this theme as you would any other, and be sure the Timber plugin is acti
 * [A real live Timber theme](https://github.com/laras126/yuling-theme).
 * [Timber Video Tutorials](http://timber.github.io/timber/#video-tutorials) and [an incomplete set of screencasts](https://www.youtube.com/playlist?list=PLuIlodXmVQ6pkqWyR6mtQ5gQZ6BrnuFx-) for building a Timber theme from scratch.
 
+---
+
+## Tailwind
+
+To compile changes to tailwind styling
+
+`
+npm run build
+`
