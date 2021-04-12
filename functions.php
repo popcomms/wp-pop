@@ -201,112 +201,22 @@ function my_acf_init() {
 	}
 	// register blocks
 	acf_register_block(array(
-		'name'				=> 'banner',
-		'title'				=> __('Banner'),
+		'name'				=> 'post-banner',
+		'title'				=> __('Post Banner'),
 		'description'		=> __('A custom banner block.'),
 		'render_callback'	=> 'my_acf_block_render_callback',
 		'category'			=> 'layout',
-		'icon'				=> 'admin-comments',
+		'icon'				=> 'cover-image',
 		'keywords'			=> array( 'banner' ),
 	));
 	acf_register_block(array(
-		'name'				=> 'main-banner',
-		'title'				=> __('Main Banner'),
+		'name'				=> 'page-banner',
+		'title'				=> __('Page Banner'),
 		'description'		=> __('A custom banner block.'),
 		'render_callback'	=> 'my_acf_block_render_callback',
 		'category'			=> 'layout',
-		'icon'				=> 'admin-comments',
-		'keywords'			=> array( 'main-banner' ),
-	));
-	acf_register_block(array(
-		'name'				=> 'textblock',
-		'title'				=> __('Textblock'),
-		'description'		=> __('A custom textblock block.'),
-		'render_callback'	=> 'my_acf_block_render_callback',
-		'category'			=> 'layout',
-		'icon'				=> 'admin-comments',
-		'keywords'			=> array( 'text' ),
-	));
-	acf_register_block(array(
-		'name'				=> 'two-col-text',
-		'title'				=> __('Two Column Text'),
-		'description'		=> __('A custom two-col-text block.'),
-		'render_callback'	=> 'my_acf_block_render_callback',
-		'category'			=> 'layout',
-		'icon'				=> 'admin-comments',
-		'keywords'			=> array( 'text' ),
-	));
-	acf_register_block(array(
-		'name'				=> 'raised-text',
-		'title'				=> __('Raised Text'),
-		'description'		=> __('A custom raised-text block.'),
-		'render_callback'	=> 'my_acf_block_render_callback',
-		'category'			=> 'layout',
-		'icon'				=> 'admin-comments',
-		'keywords'			=> array( 'text' ),
-	));
-	acf_register_block(array(
-		'name'				=> 'full-width-image',
-		'title'				=> __('Image'),
-		'description'		=> __('A custom image block.'),
-		'render_callback'	=> 'my_acf_block_render_callback',
-		'category'			=> 'layout',
-		'icon'				=> 'admin-comments',
-		'keywords'			=> array( 'image' ),
-	));
-	acf_register_block(array(
-		'name'				=> 'testimonial',
-		'title'				=> __('Testimonial'),
-		'description'		=> __('A custom testimonial block.'),
-		'render_callback'	=> 'my_acf_block_render_callback',
-		'category'			=> 'layout',
-		'icon'				=> 'admin-comments',
-		'keywords'			=> array( 'testimonial' ),
-	));
-	acf_register_block(array(
-		'name'				=> 'downloads',
-		'title'				=> __('Downloads'),
-		'description'		=> __('A custom downloads block.'),
-		'render_callback'	=> 'my_acf_block_render_callback',
-		'category'			=> 'layout',
-		'icon'				=> 'admin-comments',
-		'keywords'			=> array( 'downloads' ),
-	));
-	acf_register_block(array(
-		'name'				=> 'squaregrid',
-		'title'				=> __('Square Grid'),
-		'description'		=> __('A custom squaregrid block.'),
-		'render_callback'	=> 'my_acf_block_render_callback',
-		'category'			=> 'layout',
-		'icon'				=> 'admin-comments',
-		'keywords'			=> array( 'squaregrid' ),
-	));
-	acf_register_block(array(
-		'name'				=> 'problemslist',
-		'title'				=> __('Problems List'),
-		'description'		=> __('A custom problemslist block.'),
-		'render_callback'	=> 'my_acf_block_render_callback',
-		'category'			=> 'layout',
-		'icon'				=> 'admin-comments',
-		'keywords'			=> array( 'problemslist' ),
-	));
-	acf_register_block(array(
-		'name'				=> 'contactcta',
-		'title'				=> __('Contact CTA'),
-		'description'		=> __('A custom contactcta block.'),
-		'render_callback'	=> 'my_acf_block_render_callback',
-		'category'			=> 'layout',
-		'icon'				=> 'admin-comments',
-		'keywords'			=> array( 'contactcta' ),
-	));
-	acf_register_block(array(
-		'name'				=> 'portfolio',
-		'title'				=> __('Portfolio'),
-		'description'		=> __('A custom portfolio block.'),
-		'render_callback'	=> 'my_acf_block_render_callback',
-		'category'			=> 'layout',
-		'icon'				=> 'admin-comments',
-		'keywords'			=> array( 'portfolio' ),
+		'icon'				=> 'cover-image',
+		'keywords'			=> array( 'banner' ),
 	));
 
 	// Pop Container
@@ -316,19 +226,112 @@ function my_acf_init() {
 		'description'		=> __('A custom popcontainer block.'),
 		'render_callback'	=> 'my_acf_block_render_callback',
 		'category'			=> 'layout',
-		'icon'				=> 'admin-comments',
+		'icon'				=> 'align-full-width',
 		'keywords'			=> array( 'popcontainer' ),
 	));
+
 	// Sub Container
-	acf_register_block(array(
-		'name'				=> 'sub-container',
-		'title'				=> __('Sub Container'),
-		'description'		=> __('A custom subcontainer block.'),
-		'render_callback'	=> 'my_acf_block_render_callback',
-		'category'			=> 'layout',
-		'icon'				=> 'admin-comments',
-		'keywords'			=> array( 'subcontainer' ),
-	));
+	// acf_register_block(array(
+	// 	'name'				=> 'sub-container',
+	// 	'title'				=> __('Sub Container'),
+	// 	'description'		=> __('A custom subcontainer block.'),
+	// 	'render_callback'	=> 'my_acf_block_render_callback',
+	// 	'category'			=> 'layout',
+	// 	'icon'				=> 'admin-comments',
+	// 	'keywords'			=> array( 'subcontainer' ),
+	// ));
+	
+	// acf_register_block(array(
+	// 	'name'				=> 'textblock',
+	// 	'title'				=> __('Textblock'),
+	// 	'description'		=> __('A custom textblock block.'),
+	// 	'render_callback'	=> 'my_acf_block_render_callback',
+	// 	'category'			=> 'layout',
+	// 	'icon'				=> 'admin-comments',
+	// 	'keywords'			=> array( 'text' ),
+	// ));
+	// acf_register_block(array(
+	// 	'name'				=> 'two-col-text',
+	// 	'title'				=> __('Two Column Text'),
+	// 	'description'		=> __('A custom two-col-text block.'),
+	// 	'render_callback'	=> 'my_acf_block_render_callback',
+	// 	'category'			=> 'layout',
+	// 	'icon'				=> 'admin-comments',
+	// 	'keywords'			=> array( 'text' ),
+	// ));
+	// acf_register_block(array(
+	// 	'name'				=> 'raised-text',
+	// 	'title'				=> __('Raised Text'),
+	// 	'description'		=> __('A custom raised-text block.'),
+	// 	'render_callback'	=> 'my_acf_block_render_callback',
+	// 	'category'			=> 'layout',
+	// 	'icon'				=> 'admin-comments',
+	// 	'keywords'			=> array( 'text' ),
+	// ));
+	// acf_register_block(array(
+	// 	'name'				=> 'full-width-image',
+	// 	'title'				=> __('Image'),
+	// 	'description'		=> __('A custom image block.'),
+	// 	'render_callback'	=> 'my_acf_block_render_callback',
+	// 	'category'			=> 'layout',
+	// 	'icon'				=> 'admin-comments',
+	// 	'keywords'			=> array( 'image' ),
+	// ));
+	// acf_register_block(array(
+	// 	'name'				=> 'testimonial',
+	// 	'title'				=> __('Testimonial'),
+	// 	'description'		=> __('A custom testimonial block.'),
+	// 	'render_callback'	=> 'my_acf_block_render_callback',
+	// 	'category'			=> 'layout',
+	// 	'icon'				=> 'admin-comments',
+	// 	'keywords'			=> array( 'testimonial' ),
+	// ));
+	// acf_register_block(array(
+	// 	'name'				=> 'downloads',
+	// 	'title'				=> __('Downloads'),
+	// 	'description'		=> __('A custom downloads block.'),
+	// 	'render_callback'	=> 'my_acf_block_render_callback',
+	// 	'category'			=> 'layout',
+	// 	'icon'				=> 'admin-comments',
+	// 	'keywords'			=> array( 'downloads' ),
+	// ));
+	// acf_register_block(array(
+	// 	'name'				=> 'squaregrid',
+	// 	'title'				=> __('Square Grid'),
+	// 	'description'		=> __('A custom squaregrid block.'),
+	// 	'render_callback'	=> 'my_acf_block_render_callback',
+	// 	'category'			=> 'layout',
+	// 	'icon'				=> 'admin-comments',
+	// 	'keywords'			=> array( 'squaregrid' ),
+	// ));
+	// acf_register_block(array(
+	// 	'name'				=> 'problemslist',
+	// 	'title'				=> __('Problems List'),
+	// 	'description'		=> __('A custom problemslist block.'),
+	// 	'render_callback'	=> 'my_acf_block_render_callback',
+	// 	'category'			=> 'layout',
+	// 	'icon'				=> 'admin-comments',
+	// 	'keywords'			=> array( 'problemslist' ),
+	// ));
+	// acf_register_block(array(
+	// 	'name'				=> 'contactcta',
+	// 	'title'				=> __('Contact CTA'),
+	// 	'description'		=> __('A custom contactcta block.'),
+	// 	'render_callback'	=> 'my_acf_block_render_callback',
+	// 	'category'			=> 'layout',
+	// 	'icon'				=> 'admin-comments',
+	// 	'keywords'			=> array( 'contactcta' ),
+	// ));
+	// acf_register_block(array(
+	// 	'name'				=> 'portfolio',
+	// 	'title'				=> __('Portfolio'),
+	// 	'description'		=> __('A custom portfolio block.'),
+	// 	'render_callback'	=> 'my_acf_block_render_callback',
+	// 	'category'			=> 'layout',
+	// 	'icon'				=> 'admin-comments',
+	// 	'keywords'			=> array( 'portfolio' ),
+	// ));
+
 }
 
 function myprefix_enqueue_scripts() {
