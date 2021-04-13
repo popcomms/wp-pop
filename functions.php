@@ -201,15 +201,6 @@ function my_acf_init() {
 	}
 	// register blocks
 	acf_register_block(array(
-		'name'				=> 'post-banner',
-		'title'				=> __('Post Banner'),
-		'description'		=> __('A custom banner block.'),
-		'render_callback'	=> 'my_acf_block_render_callback',
-		'category'			=> 'layout',
-		'icon'				=> 'cover-image',
-		'keywords'			=> array( 'banner' ),
-	));
-	acf_register_block(array(
 		'name'				=> 'page-banner',
 		'title'				=> __('Page Banner'),
 		'description'		=> __('A custom banner block.'),
@@ -218,6 +209,16 @@ function my_acf_init() {
 		'icon'				=> 'cover-image',
 		'keywords'			=> array( 'banner' ),
 	));
+
+	// acf_register_block(array(
+	// 	'name'				=> 'post-banner',
+	// 	'title'				=> __('Post Banner'),
+	// 	'description'		=> __('A custom banner block.'),
+	// 	'render_callback'	=> 'my_acf_block_render_callback',
+	// 	'category'			=> 'layout',
+	// 	'icon'				=> 'cover-image',
+	// 	'keywords'			=> array( 'banner' ),
+	// ));
 
 	// Pop Container
 	acf_register_block(array(
@@ -323,7 +324,7 @@ function my_acf_init() {
 	// 	'keywords'			=> array( 'contactcta' ),
 	// ));
 	// acf_register_block(array(
-	// 	'name'				=> 'portfolio',
+	// 	'name'				=> 'custom/portfolio',
 	// 	'title'				=> __('Portfolio'),
 	// 	'description'		=> __('A custom portfolio block.'),
 	// 	'render_callback'	=> 'my_acf_block_render_callback',
@@ -334,9 +335,27 @@ function my_acf_init() {
 
 }
 
+// Register Custom Post Types
+function custom_case_study_post_type() {
+	register_post_type('case-studies',
+			array(
+					'labels'      => array(
+							'name'          => __('Case Studies'),
+							'singular_name' => __('Case Study'),
+					),
+					'supports' => array('title', 'editor', 'thumbnail', 'excerpt'),
+					'public' => true,
+					'has_archive' => true,
+					'show_in_rest' => true
+			)
+	);
+}
+add_action('init', 'custom_case_study_post_type');
+
 function myprefix_enqueue_scripts() {
 	wp_enqueue_script( 'site', get_template_directory_uri() . '/static/site.js', array(), true );
 }
 add_action( 'wp_enqueue_scripts', 'myprefix_enqueue_scripts' );
+
 
 new StarterSite();

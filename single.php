@@ -9,9 +9,15 @@
  * @since    Timber 0.1
  */
 
-$context         = Timber::context();
 $timber_post     = Timber::get_post();
+$context         = Timber::context();
 $context['post'] = $timber_post;
+$all_acf = get_field_objects($context["post"]->ID);
+if (!empty($all_acf["post_options"])) {
+	$context["content"] = $all_acf["post_options"]["value"];
+}
+$context["banner"] = $all_acf["banner"]["value"];
+
 
 if ( post_password_required( $timber_post->ID ) ) {
 	Timber::render( 'single-password.twig', $context );

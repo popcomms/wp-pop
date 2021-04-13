@@ -186,9 +186,13 @@
   }
 
   .container-banner {
-    @apply px-4 xs:px-10 md:px-0 md:mx-auto;
+    @apply px-4 xs:px-10 md:px-0 mx-auto;
+  }
 
-    max-width: 886px;
+  @media (min-width: 886px) {
+    .container-banner {
+      width: 886px;
+    }
   }
 
   .container-narrow {
@@ -206,7 +210,6 @@
 
     max-width: 985px;
   }
-
 
   .wp-block-video {
     @apply px-4 xs:px-10 md:px-0 md:mx-auto mb-40 mt-20 shadow-md !important;
