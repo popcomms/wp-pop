@@ -1,0 +1,26 @@
+html::-webkit-scrollbar,
+body::-webkit-scrollbar,
+.back-card-content::-webkit-scrollbar {
+  width: 5px;
+  overflow: visible;
+  display: block !important;
+}
+
+html::-webkit-scrollbar-track.
+body::-webkit-scrollbar-track {
+  @apply bg-pop-gray;
+
+  /* border-radius: 10px; */
+}
+
+html::-webkit-scrollbar-thumb,
+body::-webkit-scrollbar-thumb {
+  @apply bg-pop-pink;
+
+  /* border-radius: 10px; */
+}
+
+html::-webkit-scrollbar-thumb:window-inactive,
+body::-webkit-scrollbar-thumb:window-inactive {
+  @apply bg-pop-pink;
+}

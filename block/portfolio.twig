@@ -5,10 +5,10 @@
 {% if not is_preview %}
   <div class="container-wide" >
     <div class="md:border-16 md:{{ theme == 'dark' ? 'border-pop-black' : 'border-pop-white'}} {{ theme_bg_color }} md:shadow-md md:box-content">
-      <div class="relative px-8 py-12 pattern strip-blue {{ theme_text_color }}">
+      <div class="relative px-8 py-12 pattern {{ fields.pattern.type }}-{{ fields.pattern.color }} {{ theme_text_color }}">
         <h4>{{ fields.title }}</h4>
       </div>
-      <div class="grid gap-0.5 grid-cols-1 sm:grid-cols-2 sm:grid-rows-4 relative border-2 {{ theme_border_color }} bg-pop-gray">
+      <div class="portfolio grid gap-0.5 grid-cols-1 sm:grid-cols-2 sm:grid-rows-4 relative border-2 {{ theme_border_color }} {{ theme_bg_color }}">
         {% for item in fields.content %}
           {% set width = 'col-span-1' %}
           {% set height = 'row-span-1' %}
@@ -19,28 +19,28 @@
             {% set height = 'row-span-1 sm:row-span-2' %}
           {% endif %}
 
-          <div class="relative {{ width }} {{ height }}" style="padding-bottom: {{ loop.first ? '100%' : 'auto' }}">
+          <div class="portfolio__item relative">
             {% if item.acf_fc_layout == 'Image' %}
               <div
-                class="absolute top-0 left-0 flex flex-col h-full w-full bg-cover bg-no-repeat bg-center"
+                class="portfolio__item--image absolute top-0 left-0 flex flex-col h-full w-full bg-cover bg-no-repeat bg-center"
                 style="background-image: url({{ item.image.url }});">
               </div>
               
             {% elseif item.acf_fc_layout == 'Icon' %}
               <div
-                class="absolute top-0 left-0 flex flex-col h-full w-full bg-cover bg-no-repeat bg-center"
+                class="portfolio__item--icon absolute top-0 left-0 flex flex-col h-full w-full bg-cover bg-no-repeat bg-center"
                 style="background-image: url({{ item.icon }});">
               </div>
 
             {% elseif item.acf_fc_layout == 'Link Card' %}
-              <div class="absolute top-0 left-0 flex flex-col h-full w-full">
+              <div class="link-card absolute top-0 left-0 flex flex-col h-full w-full">
                 <a class="h-full" href="{{ item.link_card.url }}" >
                   <div class="bg-pop-white flex flex-col justify-between h-full">
                     <h4 class="p-6 m-0">{{ item.link_card.text }}</h4>
                     <div class="self-end">
                       {% include "/templates/partial/arrow.twig" with 
                         {
-                          'arrow': item.link_card.arrow,
+                          'arrow': fields.arrow,
                         }
                       %}
                     </div>

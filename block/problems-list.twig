@@ -12,18 +12,21 @@
           }
         %}
       </div>
-      <div class="text-3xl font-medium px-8 py-12 pattern polkadot-pink {{ theme_text_color }}">
+      <div class="text-3xl font-medium px-8 py-12 pattern {{ fields.pattern.type }}-{{ fields.pattern.color }} {{ theme_text_color }}">
         {{ fields.title }}
       </div>
     </div>
-    <div class="relative {{ fields.show_bg ? theme_bg_color : '' }}">
+    <div class="problems-list relative {{ fields.show_bg ? theme_bg_color : '' }}">
       {% for item in fields.problems %}
-        <a href="{{ item.url }}" >
-          <div class="flex flex-col sm:flex-row sm:justify-between items-start sm:items-center mt-6 sm:mt-0 border-pop-{{ fields.accent_color}} {{ loop.last ? '' : 'sm:border-b-1' }} ">
+        <a class="relative" href="{{ item.url }}" >
+          <div class="problems-list__item relative flex flex-col sm:flex-row sm:justify-between items-start sm:items-center mt-6 sm:mt-0 border-pop-{{ fields.accent_color}} {{ loop.last ? '' : 'sm:border-b-1' }} ">
+            <div class="problems-list__item-bg absolute w-full h-full bg-pop-{{ fields.accent_color }}"></div>
             <p class="hidden sm:block px-6 {{ theme_text_color }}">0{{ loop.index }}</p>
             <p class="block sm:hidden absolute -top-11 left-8 opacity-30 text-6xl text-pop-{{ fields.accent_color }} p-0 m-0">0{{ loop.index }}</p>
 
-            <h6 class="p-6 pl-12  sm:p-6 sm:py-8 m-0 {{ theme_text_color }}">{{ item.text }}</h6>
+            <div class="p-6 pl-12 sm:p-6 sm:py-8 m-0 text-xl font-medium {{ theme_text_color }}">
+              {{ item.text }}
+            </div>
             <div class="hidden sm:block px-6">
               <svg width="53" height="54" viewBox="0 0 53 54" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <line x1="0.353553" y1="0.646447" x2="52.3536" y2="52.6464" stroke="white"/>

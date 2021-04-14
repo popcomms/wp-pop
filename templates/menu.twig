@@ -1,7 +1,7 @@
 {% if menu %}
 	{% for item in items %}
 		<div class="mx-6  {{ item.classes | join(' ') }}">
-			<a class=" text-pop-pink" target="{{ item.target }}" href="{{ item.divnk }}">{{ item.title }}</a>
+			<a class=" text-pop-pink" target="{{ item.target }}" href="{{ item.link }}">{{ item.title }}</a>
 			{% include "menu.twig" with {'items': item.children} %}
 		</div>
 	{% endfor %}

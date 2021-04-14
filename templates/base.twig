@@ -19,7 +19,11 @@
 
 		{% block footer %}
 			<footer id="footer">
-				{% include 'footer.twig' %}
+				{% include 'footer.twig' with 
+					{
+						'fields': content,
+					}
+				%}
 			</footer>
 			{{ function('wp_footer') }}
 		{% endblock %}

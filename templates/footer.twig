@@ -1,1 +1,14 @@
-Copyright {{"now"|date('Y')}}
+  {% if post.post_type == 'page' %}
+  {% set bg = 'black' %}
+  {% set color = 'white' %}
+{% endif %}
+
+{% if post.post_type == 'post' %}
+  {% set bg = post.post_options_theme == 'white' ? 'white' : 'black' %}
+  {% set color = post.post_options_theme == 'white' ? 'black' : 'white' %}
+{% endif %}
+
+
+<div class="flex justify-center items-center p-10 bg-pop-{{ bg }} text-pop-{{ color }}">
+  Copyright {{"now"|date('Y')}}
+</div>
