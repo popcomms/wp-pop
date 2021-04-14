@@ -1,0 +1,8 @@
+/*!
+ * Theme Name: WP-Pop
+ * Description: Bespoke WordPress theme for POPcomms 
+ * Author: @popcomms
+*/
+@import 'tailwind.css';
+@import 'link.css';
+@import 'link-card.css';

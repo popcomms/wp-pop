@@ -353,10 +353,10 @@ function custom_case_study_post_type() {
 add_action('init', 'custom_case_study_post_type');
 
 function myprefix_enqueue_scripts() {
-	// wp_enqueue_script( 'gsap', get_template_directory_uri() . '/static/site.js', array(), true );
-	wp_enqueue_script( 'site', get_template_directory_uri() . '/static/site.js', array(), true );
+	wp_enqueue_script( 'gsap', 'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.6.1/gsap.min.js', array(), true );
+	wp_enqueue_script( 'scrollTrigger', 'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.6.1/ScrollTrigger.min.js', array(), true );
+	wp_enqueue_script( 'site', get_template_directory_uri() . '/static/site.js', array('gsap', 'scrollTrigger'), true );
 }
 add_action( 'wp_enqueue_scripts', 'myprefix_enqueue_scripts' );
-
 
 new StarterSite();

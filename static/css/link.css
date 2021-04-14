@@ -1,0 +1,12 @@
+.link {
+  &__text {
+    transition: transform 0.3s ease;
+  }
+}
+
+.link:hover {
+  .link__text {
+    transform: scale(1.2);
+    transition: transform 0.3s ease;
+  }
+}

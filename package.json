@@ -7,7 +7,7 @@
     "test": "tests"
   },
   "scripts": {
-    "build": "postcss static/css/tailwind.css -o style.css",
+    "build": "postcss --watch static/css/main.css -o style.css",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -24,6 +24,7 @@
   "dependencies": {
     "@fullhuman/postcss-purgecss": "^4.0.3",
     "autoprefixer": "^10.2.5",
+    "gsap": "file:gsap-bonus.tgz",
     "postcss-cli": "^8.3.1",
     "postcss-import": "^14.0.1",
     "postcss-nested": "^5.0.5",

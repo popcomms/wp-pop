@@ -1,0 +1,12 @@
+.link-card {
+  .arrow svg {
+    transition: transform 0.3s ease;
+  }
+}
+
+.link-card:hover {
+  .arrow svg {
+    transform: rotate(90deg);
+    transition: transform 0.3s ease;
+  }
+}
