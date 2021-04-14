@@ -2,9 +2,9 @@
 
 {% block content %}
 	<div class="relative content-wrapper">
-		{% include "/templates/partial/post-banner.twig" with 
+		{% include "/templates/partial/post-hero.twig" with 
 			{
-				'fields': banner,
+				'fields': hero,
 			}
 		%}
 		<article id="content" class="pop-container bg-pop-{{ content.theme }} post-type-{{ post.post_type }}" id="post-{{ post.ID }}">

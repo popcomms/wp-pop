@@ -201,13 +201,13 @@ function my_acf_init() {
 	}
 	// register blocks
 	acf_register_block(array(
-		'name'				=> 'page-banner',
-		'title'				=> __('Page Banner'),
-		'description'		=> __('A custom banner block.'),
+		'name'				=> 'page-hero',
+		'title'				=> __('Page Hero'),
+		'description'		=> __('A custom hero block.'),
 		'render_callback'	=> 'my_acf_block_render_callback',
 		'category'			=> 'layout',
 		'icon'				=> 'cover-image',
-		'keywords'			=> array( 'banner' ),
+		'keywords'			=> array( 'hero' ),
 	));
 
 	// acf_register_block(array(
@@ -222,28 +222,28 @@ function my_acf_init() {
 
 	// Pop Container
 	acf_register_block(array(
-		'name'				=> 'pop-container',
-		'title'				=> __('Pop Container'),
-		'description'		=> __('A custom popcontainer block.'),
+		'name'				=> 'container',
+		'title'				=> __('Container'),
+		'description'		=> __('A custom container block.'),
 		'render_callback'	=> 'my_acf_block_render_callback',
 		'category'			=> 'layout',
 		'icon'				=> 'align-full-width',
-		'keywords'			=> array( 'popcontainer' ),
+		'keywords'			=> array( 'container' ),
 	));
 
 	// Sub Container
 	// acf_register_block(array(
-	// 	'name'				=> 'sub-container',
-	// 	'title'				=> __('Sub Container'),
-	// 	'description'		=> __('A custom subcontainer block.'),
+	// 	'name'				=> 'section',
+	// 	'title'				=> __('section'),
+	// 	'description'		=> __('A custom section block.'),
 	// 	'render_callback'	=> 'my_acf_block_render_callback',
 	// 	'category'			=> 'layout',
 	// 	'icon'				=> 'admin-comments',
-	// 	'keywords'			=> array( 'subcontainer' ),
+	// 	'keywords'			=> array( 'section' ),
 	// ));
 	
 	// acf_register_block(array(
-	// 	'name'				=> 'textblock',
+	// 	'name'				=> 'text-block',
 	// 	'title'				=> __('Textblock'),
 	// 	'description'		=> __('A custom textblock block.'),
 	// 	'render_callback'	=> 'my_acf_block_render_callback',
@@ -297,31 +297,31 @@ function my_acf_init() {
 	// 	'keywords'			=> array( 'downloads' ),
 	// ));
 	// acf_register_block(array(
-	// 	'name'				=> 'squaregrid',
+	// 	'name'				=> 'square-grid',
 	// 	'title'				=> __('Square Grid'),
-	// 	'description'		=> __('A custom squaregrid block.'),
+	// 	'description'		=> __('A custom square grid block.'),
 	// 	'render_callback'	=> 'my_acf_block_render_callback',
 	// 	'category'			=> 'layout',
 	// 	'icon'				=> 'admin-comments',
-	// 	'keywords'			=> array( 'squaregrid' ),
+	// 	'keywords'			=> array( 'square-grid' ),
 	// ));
 	// acf_register_block(array(
-	// 	'name'				=> 'problemslist',
+	// 	'name'				=> 'problems-list',
 	// 	'title'				=> __('Problems List'),
-	// 	'description'		=> __('A custom problemslist block.'),
+	// 	'description'		=> __('A custom problems list block.'),
 	// 	'render_callback'	=> 'my_acf_block_render_callback',
 	// 	'category'			=> 'layout',
 	// 	'icon'				=> 'admin-comments',
-	// 	'keywords'			=> array( 'problemslist' ),
+	// 	'keywords'			=> array( 'problems-list' ),
 	// ));
 	// acf_register_block(array(
-	// 	'name'				=> 'contactcta',
+	// 	'name'				=> 'contact-cta',
 	// 	'title'				=> __('Contact CTA'),
-	// 	'description'		=> __('A custom contactcta block.'),
+	// 	'description'		=> __('A custom contact cta block.'),
 	// 	'render_callback'	=> 'my_acf_block_render_callback',
 	// 	'category'			=> 'layout',
 	// 	'icon'				=> 'admin-comments',
-	// 	'keywords'			=> array( 'contactcta' ),
+	// 	'keywords'			=> array( 'contact-cta' ),
 	// ));
 	// acf_register_block(array(
 	// 	'name'				=> 'custom/portfolio',
@@ -353,6 +353,7 @@ function custom_case_study_post_type() {
 add_action('init', 'custom_case_study_post_type');
 
 function myprefix_enqueue_scripts() {
+	// wp_enqueue_script( 'gsap', get_template_directory_uri() . '/static/site.js', array(), true );
 	wp_enqueue_script( 'site', get_template_directory_uri() . '/static/site.js', array(), true );
 }
 add_action( 'wp_enqueue_scripts', 'myprefix_enqueue_scripts' );

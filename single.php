@@ -16,7 +16,7 @@ $all_acf = get_field_objects($context["post"]->ID);
 if (!empty($all_acf["post_options"])) {
 	$context["content"] = $all_acf["post_options"]["value"];
 }
-$context["banner"] = $all_acf["banner"]["value"];
+$context["hero"] = $all_acf["hero"]["value"];
 
 
 if ( post_password_required( $timber_post->ID ) ) {

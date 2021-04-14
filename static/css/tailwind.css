@@ -1,3 +1,5 @@
+/* @import 'base.css'; */
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -201,7 +203,11 @@
     max-width: 886px;
   }
 
-  .pop-container-content div > .container-narrow ~ .container-narrow {
+  .pop-container div > .container-narrow ~ .container-narrow {
+    @apply mt-20 sm:mt-0;
+  }
+
+  .pop-section > .container-narrow ~ .container-narrow {
     @apply mt-20 sm:mt-0;
   }
 

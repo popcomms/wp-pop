@@ -7,8 +7,10 @@
     <h5>
       {{ fields.testimonial }}
     </h5>
-    <h6>
-      {{ fields.quotee }}
-    </h6>
+    {% if fields.quotee|length > 0 %}
+      <h6>
+        {{ fields.quotee }}
+      </h6>
+    {% endif %}
   </div>
 {% endif %}
