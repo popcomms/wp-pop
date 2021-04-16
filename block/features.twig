@@ -1,0 +1,22 @@
+{% if is_preview %}
+  <p><strong>Features</strong> - I will only appear in the editor.</p>
+{% endif %}
+
+{% if not is_preview %}
+  <div class="container-wide" >
+    <div class="md:border-16 md:{{ theme == 'dark' ? 'border-pop-black' : 'border-pop-white'}} {{ theme_bg_color }} md:shadow-md md:box-content">
+      <div class="relative px-8 py-12 pattern {{ fields.pattern.type }}-{{ fields.pattern.color }} {{ theme_text_color }}">
+        <h4>Features</h4>
+      </div>
+      <div class="relative grid gap-0.5 grid-cols-2 grid-rows-2 sm:grid-cols-2 sm:grid-rows-2 border-2 {{ theme_border_color }} {{ theme == 'dark' ? 'bg-pop-black' : 'bg-pop-gray'}}">
+        {% for item in fields.features %}
+          <div class="relative p-7 text-pop-black bg-pop-white ">
+            <div class="font-bold mb-4">{{ item.feature }}</div>
+            <div>{{ item.description }}</div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+  
+{% endif %}

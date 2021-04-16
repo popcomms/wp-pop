@@ -8,7 +8,7 @@
       <div class="relative px-8 py-12 pattern {{ fields.pattern.type }}-{{ fields.pattern.color }} {{ theme_text_color }}">
         <h4>{{ fields.title }}</h4>
       </div>
-      <div class="relative grid gap-0.5 grid-cols-2 grid-rows-4 sm:grid-cols-4 sm:grid-rows-2 border-2 {{ theme_border_color }} bg-pop-gray">
+      <div class="relative grid gap-0.5 grid-cols-2 grid-rows-4 sm:grid-cols-4 sm:grid-rows-2 border-2 {{ theme_border_color }} {{ theme == 'dark' ? 'bg-pop-black' : 'bg-pop-gray'}}">
   
         {% for item in fields.square_grid %}
           <div class="relative" style="padding-bottom: 100%;">

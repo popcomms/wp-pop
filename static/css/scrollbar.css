@@ -9,15 +9,11 @@ body::-webkit-scrollbar,
 html::-webkit-scrollbar-track.
 body::-webkit-scrollbar-track {
   @apply bg-pop-gray;
-
-  /* border-radius: 10px; */
 }
 
 html::-webkit-scrollbar-thumb,
 body::-webkit-scrollbar-thumb {
   @apply bg-pop-pink;
-
-  /* border-radius: 10px; */
 }
 
 html::-webkit-scrollbar-thumb:window-inactive,

@@ -91,6 +91,10 @@
     line-height: 180%;
   }
 
+  .text-block img {
+    @apply w-full;
+  }
+
   .banner-title > * {
     @apply my-5 font-normal;
 
