@@ -352,6 +352,22 @@ function custom_case_study_post_type() {
 }
 add_action('init', 'custom_case_study_post_type');
 
+function custom_portfolio_post_type() {
+	register_post_type('portfolio',
+			array(
+					'labels'      => array(
+							'name'          => __('Portfolio'),
+							'singular_name' => __('Portfolio Item'),
+					),
+					'supports' => array('title', 'editor', 'thumbnail', 'excerpt'),
+					'public' => true,
+					'has_archive' => true,
+					'show_in_rest' => true
+			)
+	);
+}
+add_action('init', 'custom_portfolio_post_type');
+
 function myprefix_enqueue_scripts() {
 	wp_enqueue_script( 'gsap', 'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.6.1/gsap.min.js', array(), true );
 	wp_enqueue_script( 'scrollTrigger', 'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.6.1/ScrollTrigger.min.js', array(), true );
