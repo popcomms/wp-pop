@@ -164,7 +164,13 @@ class StarterSite extends Timber\Site {
 
 }
 
-// Add google font
+// Prevent default WP JPEG compressions
+
+add_filter('jpeg_quality', function($arg) { return 100; });
+add_filter('wp_editor_set_quality', function($arg) { return 100; } );
+
+// Add Google font
+
 function wpb_add_google_fonts() {
 	wp_enqueue_style( 'wpb-google-fonts', 'https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap', false );
 }
