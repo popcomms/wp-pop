@@ -8,7 +8,7 @@
       {{ fields.video }}
     </div>
     <div class="w-full border-l-4 border-pop-{{ theme == 'dark' ? 'white' : 'black' }} pl-4 text-sm">
-      <p class="text-sm">{{ fields.caption }}</p>
+      <p class="text-sm {{ theme_text_color }}">{{ fields.caption }}</p>
     </div>
   </div>
 {% endif %}

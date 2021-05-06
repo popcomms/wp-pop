@@ -38,6 +38,7 @@ module.exports = {
         'pop-black-dark': '#272727',
         'pop-gray': '#DFDFDF',
         'pop-mid-gray': "#8E8E8E",
+        'pop-dark-gray': "#3C3B3B",
         'pop-navy': '#212363',
         'pop-green': '#64FFE3',
         'pop-green-pale': '#E8FDF5',
