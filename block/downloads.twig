@@ -3,26 +3,112 @@
 {% endif %}
 
 {% if not is_preview %}
-<div class="container-wide grid grid-cols-1 grid-rows-2 gap-0.5 sm:grid-cols-2 relative" >
-  <div class="row-span-2 hidden sm:block">
-    <img class="min-w-full min-h-full object-cover" src="{{ fields.image.url }}" alt="">
-  </div>
-  <div class="flex items-center p-6 bg-pop-{{ fields.accent_color }}">
-    <h3 class="text-pop-white">
-      {{ fields.title }}
-    </h3>
-  </div>
-  <div class="flex flex-col {{ theme_bg_color }}">
-    <div class="flex-grow p-6 {{ theme_text_color }}">
-      {{ fields.text }}
+
+<div is="downloads" inline-template class="container-wide relative" >
+  <div class="downloads overflow-hidden">
+
+    <div class="relative grid grid-cols-1 grid-rows-2 gap-0.5 sm:grid-cols-2">
+  
+        <div class="row-span-2 hidden sm:block">
+          <img class="min-w-full min-h-full object-cover" src="{{ fields.image.url }}" alt="">
+        </div>
+        
+        <div class="flex items-center p-6 bg-pop-{{ fields.accent_color }}">
+          <h3 class="text-pop-white">
+            {{ fields.title }}
+          </h3>
+        </div>
+      
+        <div class="flex flex-col {{ theme_bg_color }}">
+      
+          <div class="flex-grow p-6 {{ theme_text_color }}">
+            {{ fields.text }}
+          </div>
+      
+          <div class="self-end">
+              <div @click="nextStep()" class="link flex cursor-pointer">
+                {% if fields.link.text %}
+                  <div class="flex lowercase items-center px-8 py-2 {{ fields.link.background_color == 'black' ? 'bg-pop-black' : 'bg-pop-white' }}">
+                    <p class="link__text text-pop-white m-0 transform group-hover:text-xl {{ fields.link.background_color == 'black' ? 'text-pop-white' : 'text-pop-black' }}">
+                      {{ fields.link.text }}
+                    </p>
+                  </div>
+                {% endif %}
+                <div class="w-12 h-12 p-3 bg-pop-{{ fields.link.accent_color }}">
+                  <svg class="transform rotate-{{ fields.link.angle }}" width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path class="fill-current text-pop-{{ fields.link.arrow_color }}" d="M13.0607 0.625645C12.4749 0.0398579 11.5251 0.0398579 10.9393 0.625645L1.3934 10.1716C0.807611 10.7574 0.807611 11.7071 1.3934 12.2929C1.97919 12.8787 2.92893 12.8787 3.51472 12.2929L12 3.80762L20.4853 12.2929C21.0711 12.8787 22.0208 12.8787 22.6066 12.2929C23.1924 11.7071 23.1924 10.7574 22.6066 10.1716L13.0607 0.625645ZM13.5 24.3137V1.6863H10.5V24.3137H13.5Z" fill="#3A3EAB"/>
+                  </svg>
+                </div>
+              </div>
+          </div>
+      
+        </div>
     </div>
-    <div class="self-end">
-      {% include "/templates/partial/link.twig" with 
-        {
-          'link': fields.link,
-        }
-      %}
+    <div class="steps flex flex-col absolute top-0 left-0 w-full h-full z-30">
+      <div class="download_cover absolute top-0 -left-full w-full h-full {{ theme_bg_color}}"></div>
+      <div class="w-full opacity-100 px-11 pt-11" @click="prevStep">
+        <p class="text-sm mb-0 {{ theme_text_color}}">Step <span v-html="step"></span>/4</p>
+      </div>
+      <div class="flex-grow w-full">
+        <div ref="step_1" class="step_1 absolute top-0 left-0 w-full h-full px-11 pb-11">
+          <p class="text-sm {{ theme_text_color}}">On your way</p>
+          <div class="flex">
+            <div class="w-1/2">
+              <h4 class="{{ theme_text_color}}">You are on your way to getting your business ahead of the pack. We will just need an email and a name please? It’s all confidential, no spam.</h4>
+            </div>
+            <div class="w-1/2 {{ theme_text_color}}">
+              <input @click="nextStep" type="radio" id="no-problem" name="access" value="fine">
+              <label for="no-problem">No Problem</label>
+              <input @click="nextStep" type="radio" id="no" name="access" value="no">
+              <label for="no">No</label>
+            </div>
+          </div>
+        </div>
+        <div ref="step_2" class="step_2 absolute flex flex-col top-0 left-0 w-full h-full px-11 pb-11">
+          <p class="{{ theme_text_color}}">Your Email</p>
+          <div class="flex flex-grow items-center justify-center">
+            <input
+              class="w-full font-normal text-3xl border-b-2 {{ theme_text_color }} {{ theme_bg_color }} {{ theme == 'dark' ? 'border-pop-white' : 'border-pop-white' }}"
+              type="email"
+              v-model="email"
+              placeholder="Your email..."
+              @keydown="validateEmail"
+            >
+          </div>
+        </div>
+        <div ref="step_3" class="step_3 absolute flex flex-col top-0 left-0 w-full h-full px-11 pb-11">
+          <p class="{{ theme_text_color}}">Your name and surname</p>
+          <div class="flex flex-col flex-grow items-center justify-center">
+            <input
+              class="w-full mb-9 font-normal text-3xl border-b-2 {{ theme_text_color }} {{ theme_bg_color }} {{ theme == 'dark' ? 'border-pop-white' : 'border-pop-white' }}"
+              type="text"
+              v-model="firstName"
+              placeholder="Your Firstname"
+            >
+            <input
+              class="w-full font-normal text-3xl border-b-2 {{ theme_text_color }} {{ theme_bg_color }} {{ theme == 'dark' ? 'border-pop-white' : 'border-pop-white' }}"
+              type="text"
+              v-model="surName"
+              placeholder="Your Surname"
+              @keydown="validateName"
+            >
+          </div>
+        </div>
+        <div ref="step_4" class="step_4 absolute flex flex-col top-0 left-0 w-full h-full px-11 pb-11">
+          <p class="{{ theme_text_color}}">Your company</p>
+          <div class="flex flex-grow items-center justify-center">
+            <input
+              class="w-full font-normal text-3xl border-b-2 {{ theme_text_color }} {{ theme_bg_color }} {{ theme == 'dark' ? 'border-pop-white' : 'border-pop-white' }}"
+              type="text"
+              v-model="company"
+              placeholder="Your Company"
+              @keydown="validateCompany"
+            >
+          </div>
+        </div>
+      </div>
     </div>
-  </div>        
+  </div>
+
 </div>
 {% endif %}

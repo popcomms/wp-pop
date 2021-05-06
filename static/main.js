@@ -72,4 +72,135 @@ document.addEventListener("DOMContentLoaded", function() {
   //   },
   //   "-=0.5"
   // );
+  
+  Vue.component('downloads', {
+    data () {
+      return {
+        step: 0,
+        email: '',
+        firstName: '',
+        surName: '',
+        company: ''
+      }
+    },
+    methods: {
+      nextStep () {
+        this.tl.play();
+        this.step += 1
+      },
+      prevStep () {
+        if (this.step > 0 ) {
+          this.tl.reverse()
+          this.step -= 1
+        }
+      },
+      validateEmail: function(e) {
+        if (e.keyCode === 13) {
+          this.nextStep()
+        }
+      },
+      validateName: function(e) {
+        if (e.keyCode === 13) {
+          this.nextStep()
+        }
+      },
+      validateCompany: function(e) {
+        if (e.keyCode === 13) {
+          this.nextStep()
+        }
+      }
+    },
+    mounted () {
+      gsap.set(this.$refs.step_1, { opacity: 0 })
+      gsap.set('.steps', {pointerEvents: 'none'})
+      
+      this.tl = gsap
+      .timeline({ paused: true })
+      .to(
+        ".download_cover",
+        {
+          left: 0,
+          duration: 0.75
+        }
+      )
+      .fromTo(
+        '.steps',
+        {
+          pointerEvents: 'none'
+        },
+        {
+          pointerEvents: 'all',
+          duration: 0.5
+        }
+      )
+      .fromTo(
+        this.$refs.step_1,
+        {
+          opacity: 0,
+          pointerEvents: 'none'
+        },
+        {
+          pointerEvents: 'all',
+          opacity: 1,
+          duration: 1,
+          stagger: 0.5
+        },
+        "-=0.5"
+      )
+      .addPause()
+      .to(this.$refs.step_1, {duration: 1, opacity: 0, pointerEvents: 'none'})
+      .fromTo(
+        this.$refs.step_2,
+        {
+          opacity: 0,
+          pointerEvents: 'none'
+        },
+        {
+          pointerEvents: 'all',
+          opacity: 1,
+          duration: 1,
+          stagger: 0.5
+        },
+        "-=0.5"
+      )
+      .addPause()
+      .to(this.$refs.step_2, {duration: 1, opacity: 0, pointerEvents: 'none'})
+      .fromTo(
+        this.$refs.step_3,
+        {
+          opacity: 0,
+          pointerEvents: 'none'
+        },
+        {
+          pointerEvents: 'all',
+          opacity: 1,
+          duration: 1,
+          stagger: 0.5
+        },
+        "-=0.5"
+      )
+      .addPause()
+      .to(this.$refs.step_3, {duration: 1, opacity: 0, pointerEvents: 'none'})
+      .fromTo(
+        this.$refs.step_4,
+        {
+          opacity: 0,
+          pointerEvents: 'none'
+        },
+        {
+          pointerEvents: 'all',
+          opacity: 1,
+          duration: 1,
+          stagger: 0.5
+        },
+        "-=0.5"
+      )
+      .addPause()
+    }
+  })
+  
+  new Vue({
+    el: document.getElementById('site-wrapper')
+  })
 })
+
