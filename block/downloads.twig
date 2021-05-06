@@ -5,7 +5,7 @@
 {% if not is_preview %}
 <div class="container-wide grid grid-cols-1 grid-rows-2 gap-0.5 sm:grid-cols-2 relative" >
   <div class="row-span-2 hidden sm:block">
-    <img class="w-full object-cover" src="{{ fields.image.url }}" alt="">
+    <img class="min-w-full min-h-full object-cover" src="{{ fields.image.url }}" alt="">
   </div>
   <div class="flex items-center p-6 bg-pop-{{ fields.accent_color }}">
     <h3 class="text-pop-white">

@@ -1,5 +1,7 @@
+{% if link.url != null %}
 <a href="{{ link.url }}">
-  <div class="link flex">
+{% endif %}
+  <div class="link flex cursor-pointer">
     {% if link.text %}
       <div class="flex lowercase items-center px-8 py-2 {{ link.background_color == 'black' ? 'bg-pop-black' : 'bg-pop-white' }}">
         <p class="link__text text-pop-white m-0 transform group-hover:text-xl {{ link.background_color == 'black' ? 'text-pop-white' : 'text-pop-black' }}">
@@ -13,4 +15,6 @@
       </svg>
     </div>
   </div>
+{% if link.url != null %}
 </a>
+{% endif %}

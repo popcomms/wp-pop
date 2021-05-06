@@ -12,9 +12,15 @@
           }
         %}
       </div>
-      <div class="text-3xl font-medium px-8 py-12 pattern {{ fields.pattern.type }}-{{ fields.pattern.color }} {{ theme_text_color }}">
-        {{ fields.title }}
-      </div>
+      {% include "/templates/partial/component-title.twig" with 
+        {
+          'title': fields.title,
+          'subtitle': fields.subtitle,
+          'text_color': theme_text_color,
+          'pattern': fields.pattern.type,
+          'pattern_color': fields.pattern.color
+        }
+      %}
     </div>
     <div class="problems-list relative {{ fields.show_bg ? theme_bg_color : '' }}">
       {% for item in fields.problems %}

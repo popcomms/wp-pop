@@ -3,9 +3,12 @@
 {% endif %}
 
 {% if not is_preview %}
-  <div class="container-narrow relative flex flex-wrap md:flex-nowrap" >
+  <div class="container-narrow relative " >
     <div class="w-full embed-container">
       {{ fields.video }}
+    </div>
+    <div class="w-full border-l-4 border-pop-{{ theme == 'dark' ? 'white' : 'black' }} pl-4 text-sm">
+      <p class="text-sm">{{ fields.caption }}</p>
     </div>
   </div>
 {% endif %}

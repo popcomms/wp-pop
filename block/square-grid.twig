@@ -5,9 +5,15 @@
 {% if not is_preview %}
   <div class="container-wide" >
     <div class="md:border-16 md:{{ theme == 'dark' ? 'border-pop-black' : 'border-pop-white'}} {{ theme_bg_color }} md:shadow-md md:box-content">
-      <div class="relative px-8 py-12 pattern {{ fields.pattern.type }}-{{ fields.pattern.color }} {{ theme_text_color }}">
-        <h4>{{ fields.title }}</h4>
-      </div>
+      {% include "/templates/partial/component-title.twig" with 
+        {
+          'title': fields.title,
+          'subtitle': fields.subtitle,
+          'text_color': theme_text_color,
+          'pattern': fields.pattern.type,
+          'pattern_color': fields.pattern.color
+        }
+      %}
       <div class="relative grid gap-0.5 grid-cols-2 grid-rows-4 sm:grid-cols-4 sm:grid-rows-2 border-2 {{ theme_border_color }} {{ theme == 'dark' ? 'bg-pop-black' : 'bg-pop-gray'}}">
   
         {% for item in fields.square_grid %}

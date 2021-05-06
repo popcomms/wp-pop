@@ -3,7 +3,44 @@
 {% endif %}
 
 {% if not is_preview %}
-  <div class="container-narrow relative flex flex-wrap md:flex-nowrap" >
-    <img class="w-full object-cover" src="{{ fields.image.url }}" alt="">
+  <div class="container-narrow relative" >
+    {# Conditional logic for if image has link #}
+    <div class="relative w-full h-full ">
+
+      {% if fields.link != null %}
+      
+        <a href="{{ fields.link.url }}" target="{{ fields.link.target }}" >
+      {% endif %}
+        <img class="full-width-image w-full object-cover" src="{{ fields.image.url }}" alt="">
+      {% if fields.link != null %}
+        </a>
+      {% endif %}
+
+      <div class="image-magnify absolute top-0 right-0 w-12 h-12 p-3 bg-pop-black cursor-pointer">
+        <svg  width="25" height="25" viewBox="0 0 22 29" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle class="stroke-current text-pop-pink" cx="11.0001" cy="11.2123" r="9.48109" stroke-width="3"/>
+          <path class="stroke-current text-pop-pink" d="M15.6528 20.1655L19.9459 27.7689" stroke-width="3"/>
+        </svg>  
+      </div>
+
+    </div>
+
+    <div class="w-full border-l-4 border-pop-{{ theme == 'dark' ? 'white' : 'black' }} pl-4 text-sm">
+      <p class="text-sm">{{ fields.caption }}</p>
+    </div>
+    
+    {# PopUp Image #}
+    <div class="hidden opacity-0 full-width-image-popup fixed z-50 w-screen h-screen top-0 left-0 p-10">
+      <div class="absolute top-0 left-0 bg-pop-black-dark opacity-90 w-screen h-screen"></div>
+      <div class="relative w-full h-full bg-transparent bg-contain bg-no-repeat bg-center">
+        <img class="w-full max-h-full object-cover" src="{{ fields.image.url }}" alt="">
+        <div class="image-hide absolute top-0 right-0 w-12 h-12 p-3 bg-pop-black cursor-pointer">
+          <svg width="25" height="25" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path class="stroke-current text-pop-pink" d="M18.2189 1.5682L1.78125 17.9892" stroke-width="3"/>
+            <path class="stroke-current text-pop-pink" d="M18.2104 17.9975L1.78939 1.55987" stroke-width="3"/>
+          </svg>                        
+        </div>
+      </div>
+    </div>
   </div>
 {% endif %}

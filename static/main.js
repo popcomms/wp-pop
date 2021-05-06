@@ -2,7 +2,7 @@ console.log('JS Active');
 document.addEventListener("DOMContentLoaded", function() {
   gsap.registerPlugin(ScrollTrigger);
   
-  console.log('Document Loaded');
+  console.log('Document Loaded - V2');
 
   // Apply highlight color to text
   const problems = document.querySelectorAll('.problems-list__item');
@@ -13,6 +13,27 @@ document.addEventListener("DOMContentLoaded", function() {
         e.style.color = accentColor 
       });
     });
+  }
+
+  const magnifyImage = document.querySelectorAll('.image-magnify');
+  for (var i = 0; i < magnifyImage.length; i++) {
+    let index = i
+    magnifyImage[index].addEventListener("click", function() {
+      let popup = magnifyImage[index].closest('.container-narrow').querySelector('.full-width-image-popup');
+      popup.style.display = "block";
+      gsap.to(popup, { duration: 0.3, opacity: 1 })
+    })
+  }
+
+  const hideImage = document.querySelectorAll('.image-hide');
+  for (var i = 0; i < hideImage.length; i++) {
+    let index = i
+    hideImage[index].addEventListener("click", function() {
+        let popup = hideImage[index].closest('.container-narrow').querySelector('.full-width-image-popup');
+        gsap.to(popup, { duration: 0.3, opacity: 0, onComplete: function(){
+        popup.style.display = "none";
+      }})
+    })
   }
 
   // const highlights = problems.getElementsByTagName('strong');
