@@ -114,17 +114,17 @@ document.addEventListener("DOMContentLoaded", function() {
         }
       },
       validateEmail: function(e) {
-        if (e.keyCode === 13) {
+        if (e.keyCode === 13 || e.type === 'click') {
           this.nextStep()
         }
       },
       validateName: function(e) {
-        if (e.keyCode === 13) {
+        if (e.keyCode === 13 || e.type === 'click') {
           this.nextStep()
         }
       },
       validateCompany: function(e) {
-        if (e.keyCode === 13) {
+        if (e.keyCode === 13 || e.type === 'click') {
           this.nextStep()
         }
       },
@@ -170,7 +170,7 @@ document.addEventListener("DOMContentLoaded", function() {
       this.tl = gsap
       .timeline({ paused: true })
       .to(
-        ".download_cover",
+        ".downloads-cover",
         {
           left: 0,
           duration: 0.4
@@ -205,19 +205,19 @@ document.addEventListener("DOMContentLoaded", function() {
       .addPause("+=0.5")
       .call( this.hideInput, [this.$refs.step_2], "+=0.01" )
       
-      .to(this.$refs.step_2, {duration: 0.3, opacity: 0, pointerEvents: 'none'})
+      .to(this.$refs.step_2, {duration: 0.3, pointerEvents: 'none'})
       .set(this.$refs.step_3,{ pointerEvents: 'all'})
       .call( this.revealInput, [this.$refs.step_3], "-=0.01" )
       .addPause("+=0.5")
       .call( this.hideInput, [this.$refs.step_3], "+=0.01" )
       
-      .to(this.$refs.step_3, {duration: 0.3, opacity: 0, pointerEvents: 'none'})
+      .to(this.$refs.step_3, {duration: 0.3, pointerEvents: 'none'})
       .set(this.$refs.step_4,{ pointerEvents: 'all'})
       .call( this.revealInput, [this.$refs.step_4], "-=0.01" )
       .addPause("+=0.5")
       .call( this.hideInput, [this.$refs.step_4], "+=0.01" )
 
-      .to(this.$refs.step_4, {duration: 0.3, opacity: 0, pointerEvents: 'none'})
+      .to(this.$refs.step_4, {duration: 0.3, pointerEvents: 'none'})
       .fromTo(
         this.$refs.step_5,
         {
