@@ -196,6 +196,36 @@ function my_acf_block_render_callback( $block, $content = '', $is_preview = fals
 	Timber::render( 'block/' . $slug . '.twig', $context );
 }
 
+// COLOR SWATCHES FOR WYSIWYG
+
+function custom_wysiwyg_colors($init) {
+
+	$custom_colours = '
+		"F8F7EE", "Pop White",
+		"2D2D2D", "Pop Black",
+		"DFDFDF", "Pop Gray",
+		"8E8E8E", "Pop Gray Mid",
+		"3C3B3B", "Pop Gray Dark",
+		"212363", "Pop Navy",
+		"64FFE3", "Pop Green",
+		"E8FDF5", "Pop Pale Green",
+		"FF0088", "Pop Pink",
+		"CDF2F4", "Pop Pale Pink",
+		"3A3EAB", "Pop Blue",
+		"FFFF99", "Pop Yellow"
+	';
+
+	// build colour grid default+custom colors
+	$init['textcolor_map'] = '['.$custom_colours.']';
+
+	// change the number of rows in the grid if the number of colors changes
+	// 8 swatches per row
+	$init['textcolor_rows'] = 2;
+
+	return $init;
+}
+add_filter('tiny_mce_before_init', 'custom_wysiwyg_colors');
+
 // ACF INIT
 add_action('acf/init', 'my_acf_init');
 
