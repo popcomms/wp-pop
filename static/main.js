@@ -77,10 +77,29 @@ document.addEventListener("DOMContentLoaded", function() {
     data () {
       return {
         step: 0,
+        stepName: [
+          '',
+          'consent',
+          'email',
+          'name',
+          'Company'
+        ],
         email: '',
         firstName: '',
         surName: '',
         company: ''
+      }
+    },
+    computed: {
+      getStepName () {
+        return this.stepName[this.step]
+      },
+      getIntro () {
+        if (this.step < 5) {
+          return 'Your'
+        } else {
+          return 'All done!'
+        }
       }
     },
     methods: {
@@ -89,7 +108,7 @@ document.addEventListener("DOMContentLoaded", function() {
         this.step += 1
       },
       prevStep () {
-        if (this.step > 0 ) {
+        if (this.step > 0 && this.tl.paused() === true) {
           this.tl.reverse()
           this.step -= 1
         }
@@ -108,10 +127,44 @@ document.addEventListener("DOMContentLoaded", function() {
         if (e.keyCode === 13) {
           this.nextStep()
         }
+      },
+      revealInput(target) {
+        const swipes = target.getElementsByClassName('input-swipe')
+        const inputs = target.getElementsByClassName('input-box')
+
+        if (this.tl.reversed()) {
+          this.hideInputAnim(inputs, swipes)
+        } else {
+          this.revealInputAnim(inputs, swipes)
+        }
+      },
+      hideInput(target) {
+        const swipes = target.getElementsByClassName('input-swipe')
+        const inputs = target.getElementsByClassName('input-box')
+        if (this.tl.reversed()) {
+          this.revealInputAnim(inputs, swipes)
+        } else {
+          this.hideInputAnim(inputs, swipes)
+        }
+      },
+      hideInputAnim (inputs, swipes) {
+        gsap.timeline({
+        })
+        .to(swipes, {duration: 0.15, top: 0 + '%'})
+        .to(inputs, {duration: 0.15, opacity: 0})
+        .to(swipes, {duration: 0.15, top: 100 + '%'})
+        .set(swipes, {top: -100 + '%'})
+      },
+      revealInputAnim (inputs, swipes) {
+        gsap.timeline({
+        })
+        .to(swipes, {duration: 0.15, top: 0 + '%'})
+        .to(inputs, {duration: 0.15, opacity: 1})
+        .to(swipes, {duration: 0.15, top: 100 + '%'})
+        .set(swipes, {top: -100 + '%'})
       }
     },
     mounted () {
-      gsap.set(this.$refs.step_1, { opacity: 0 })
       gsap.set('.steps', {pointerEvents: 'none'})
       
       this.tl = gsap
@@ -120,19 +173,18 @@ document.addEventListener("DOMContentLoaded", function() {
         ".download_cover",
         {
           left: 0,
-          duration: 0.75
+          duration: 0.4
         }
       )
-      .fromTo(
-        '.steps',
+      .set('.steps',{ pointerEvents: 'all' })
+      .to(
+        [".download-steps", ".download-back"],
         {
-          pointerEvents: 'none'
-        },
-        {
-          pointerEvents: 'all',
-          duration: 0.5
+          opacity: 1,
+          duration: 0.3
         }
       )
+
       .fromTo(
         this.$refs.step_1,
         {
@@ -142,15 +194,32 @@ document.addEventListener("DOMContentLoaded", function() {
         {
           pointerEvents: 'all',
           opacity: 1,
-          duration: 1,
-          stagger: 0.5
-        },
-        "-=0.5"
+          duration: 0.3
+        }
       )
       .addPause()
-      .to(this.$refs.step_1, {duration: 1, opacity: 0, pointerEvents: 'none'})
+      
+      .to(this.$refs.step_1, {duration: 0.3, opacity: 0, pointerEvents: 'none'})
+      .call( this.revealInput, [this.$refs.step_2], "+=0.1" )
+      .set(this.$refs.step_2,{ pointerEvents: 'all'}, "-=0.01")
+      .addPause("+=0.5")
+      .call( this.hideInput, [this.$refs.step_2], "+=0.01" )
+      
+      .to(this.$refs.step_2, {duration: 0.3, opacity: 0, pointerEvents: 'none'})
+      .set(this.$refs.step_3,{ pointerEvents: 'all'})
+      .call( this.revealInput, [this.$refs.step_3], "-=0.01" )
+      .addPause("+=0.5")
+      .call( this.hideInput, [this.$refs.step_3], "+=0.01" )
+      
+      .to(this.$refs.step_3, {duration: 0.3, opacity: 0, pointerEvents: 'none'})
+      .set(this.$refs.step_4,{ pointerEvents: 'all'})
+      .call( this.revealInput, [this.$refs.step_4], "-=0.01" )
+      .addPause("+=0.5")
+      .call( this.hideInput, [this.$refs.step_4], "+=0.01" )
+
+      .to(this.$refs.step_4, {duration: 0.3, opacity: 0, pointerEvents: 'none'})
       .fromTo(
-        this.$refs.step_2,
+        this.$refs.step_5,
         {
           opacity: 0,
           pointerEvents: 'none'
@@ -158,44 +227,11 @@ document.addEventListener("DOMContentLoaded", function() {
         {
           pointerEvents: 'all',
           opacity: 1,
-          duration: 1,
-          stagger: 0.5
-        },
-        "-=0.5"
+          duration: 0.3
+        }
       )
       .addPause()
-      .to(this.$refs.step_2, {duration: 1, opacity: 0, pointerEvents: 'none'})
-      .fromTo(
-        this.$refs.step_3,
-        {
-          opacity: 0,
-          pointerEvents: 'none'
-        },
-        {
-          pointerEvents: 'all',
-          opacity: 1,
-          duration: 1,
-          stagger: 0.5
-        },
-        "-=0.5"
-      )
-      .addPause()
-      .to(this.$refs.step_3, {duration: 1, opacity: 0, pointerEvents: 'none'})
-      .fromTo(
-        this.$refs.step_4,
-        {
-          opacity: 0,
-          pointerEvents: 'none'
-        },
-        {
-          pointerEvents: 'all',
-          opacity: 1,
-          duration: 1,
-          stagger: 0.5
-        },
-        "-=0.5"
-      )
-      .addPause()
+
     }
   })
   

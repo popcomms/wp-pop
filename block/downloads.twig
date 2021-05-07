@@ -46,67 +46,118 @@
     </div>
     <div class="steps flex flex-col absolute top-0 left-0 w-full h-full z-30">
       <div class="download_cover absolute top-0 -left-full w-full h-full {{ theme_bg_color}}"></div>
-      <div class="w-full opacity-100 px-11 pt-11" @click="prevStep">
-        <p class="text-sm mb-0 {{ theme_text_color}}">Step <span v-html="step"></span>/4</p>
-      </div>
-      <div class="flex-grow w-full">
-        <div ref="step_1" class="step_1 absolute top-0 left-0 w-full h-full px-11 pb-11">
-          <p class="text-sm {{ theme_text_color}}">On your way</p>
-          <div class="flex">
-            <div class="w-1/2">
-              <h4 class="{{ theme_text_color}}">You are on your way to getting your business ahead of the pack. We will just need an email and a name please? It’s all confidential, no spam.</h4>
-            </div>
-            <div class="w-1/2 {{ theme_text_color}}">
-              <input @click="nextStep" type="radio" id="no-problem" name="access" value="fine">
-              <label for="no-problem">No Problem</label>
-              <input @click="nextStep" type="radio" id="no" name="access" value="no">
-              <label for="no">No</label>
-            </div>
-          </div>
+
+      <div ref="step_1" class="step_1 absolute flex top-0 left-0 w-full h-full px-11 py-24">
+        <div class="w-1/2">
+          <h4 class="m-0 {{ theme_text_color}}">You are on your way to getting your business ahead of the pack. We will just need an email and a name please? It’s all confidential, no spam.</h4>
         </div>
-        <div ref="step_2" class="step_2 absolute flex flex-col top-0 left-0 w-full h-full px-11 pb-11">
-          <p class="{{ theme_text_color}}">Your Email</p>
-          <div class="flex flex-grow items-center justify-center">
-            <input
-              class="w-full font-normal text-3xl border-b-2 {{ theme_text_color }} {{ theme_bg_color }} {{ theme == 'dark' ? 'border-pop-white' : 'border-pop-white' }}"
-              type="email"
-              v-model="email"
-              placeholder="Your email..."
-              @keydown="validateEmail"
-            >
+        <div class="w-1/2 flex flex-col justify-center p-11 {{ theme_text_color}}">
+          <div>
+            <input class="mr-4" @click="nextStep" type="radio" id="no-problem" name="access" value="fine">
+            <label class="text-xl" for="no-problem">No Problem</label>
           </div>
-        </div>
-        <div ref="step_3" class="step_3 absolute flex flex-col top-0 left-0 w-full h-full px-11 pb-11">
-          <p class="{{ theme_text_color}}">Your name and surname</p>
-          <div class="flex flex-col flex-grow items-center justify-center">
-            <input
-              class="w-full mb-9 font-normal text-3xl border-b-2 {{ theme_text_color }} {{ theme_bg_color }} {{ theme == 'dark' ? 'border-pop-white' : 'border-pop-white' }}"
-              type="text"
-              v-model="firstName"
-              placeholder="Your Firstname"
-            >
-            <input
-              class="w-full font-normal text-3xl border-b-2 {{ theme_text_color }} {{ theme_bg_color }} {{ theme == 'dark' ? 'border-pop-white' : 'border-pop-white' }}"
-              type="text"
-              v-model="surName"
-              placeholder="Your Surname"
-              @keydown="validateName"
-            >
+          <div>
+            <input class="mr-4" @click="nextStep" type="radio" id="no" name="access" value="no">
+            <label class="text-xl" for="no">No</label>
           </div>
-        </div>
-        <div ref="step_4" class="step_4 absolute flex flex-col top-0 left-0 w-full h-full px-11 pb-11">
-          <p class="{{ theme_text_color}}">Your company</p>
-          <div class="flex flex-grow items-center justify-center">
-            <input
-              class="w-full font-normal text-3xl border-b-2 {{ theme_text_color }} {{ theme_bg_color }} {{ theme == 'dark' ? 'border-pop-white' : 'border-pop-white' }}"
-              type="text"
-              v-model="company"
-              placeholder="Your Company"
-              @keydown="validateCompany"
-            >
+          <div class="flex justify-between items-center mt-8 w-full">
+            <a class="underline text-sm" href="">Check our privacy policy</a>
+            <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M36.3746 25.0607C36.9604 24.4749 36.9604 23.5251 36.3746 22.9393L26.8287 13.3934C26.2429 12.8076 25.2931 12.8076 24.7073 13.3934C24.1216 13.9792 24.1216 14.9289 24.7073 15.5147L33.1926 24L24.7073 32.4853C24.1216 33.0711 24.1216 34.0208 24.7073 34.6066C25.2931 35.1924 26.2429 35.1924 26.8287 34.6066L36.3746 25.0607ZM12.6865 25.5L35.3139 25.5L35.3139 22.5L12.6865 22.5L12.6865 25.5Z" fill="#F8F7EE"/>
+            </svg>
           </div>
         </div>
       </div>
+      <div ref="step_2" class="step_2 pointer-events-none absolute flex items-center justify-center top-0 left-0 w-full h-full px-11 py-24">
+          {% include "/templates/partial/input.twig" with 
+            {
+              'type': 'email',
+              'model': 'email',
+              'placeholder': 'Your email...',
+              'action': 'validateEmail',
+              'guide': true,
+              'arrow': true,
+              'text_color': theme_text_color,
+              'bg_color': theme_bg_color,
+              'border_color': theme == 'dark' ? 'border-pop-white' : 'border-pop-white'
+            }
+          %}
+      </div>
+      <div ref="step_3" class="step_3 pointer-events-none  absolute flex flex-col items-center justify-center top-0 left-0 w-full h-full px-11 py-24">
+        {% include "/templates/partial/input.twig" with 
+          {
+            'type': 'text',
+            'model': 'firstName',
+            'placeholder': 'Your Firstname',
+            'action': '',
+            'guide': false,
+            'text_color': theme_text_color,
+            'bg_color': theme_bg_color,
+            'border_color': theme == 'dark' ? 'border-pop-white' : 'border-pop-white'
+          }
+        %}
+        <div class="spacer h-9"></div>
+        {% include "/templates/partial/input.twig" with 
+          {
+            'type': 'text',
+            'model': 'surName',
+            'placeholder': 'Your Surname',
+            'action': 'validateName',
+            'guide': true,
+            'arrow': true,
+            'text_color': theme_text_color,
+            'bg_color': theme_bg_color,
+            'border_color': theme == 'dark' ? 'border-pop-white' : 'border-pop-white'
+          }
+        %}
+      </div>
+      <div ref="step_4" class="step_4 pointer-events-none absolute flex items-center justify-center top-0 left-0 w-full h-full px-11 py-24">
+        {% include "/templates/partial/input.twig" with 
+          {
+            'type': 'text',
+            'model': 'company',
+            'placeholder': 'Your Company',
+            'action': 'validateCompany',
+            'guide': true,
+            'arrow': true,
+            'text_color': theme_text_color,
+            'bg_color': theme_bg_color,
+            'border_color': theme == 'dark' ? 'border-pop-white' : 'border-pop-white'
+          }
+        %}
+      </div>
+
+
+      <div ref="step_5" class="step_5 absolute flex top-0 left-0 w-full h-full px-11 py-24">
+        <div class="w-1/2 flex items-center">
+          <h4 class="m-0 {{ theme_text_color}}">All done! Check your email to find our guide.</h4>
+        </div>
+        <div class="w-1/2">
+
+        </div>
+      </div>
+
+      {# Steps Guide #}
+      <div class="download-steps opacity-0 absolute top-0 left-0 w-full px-11 pt-4" @click="prevStep">
+        <p class="text-sm mb-0 {{ theme_text_color}}">Step <span v-html="step"></span>/5</p>
+        
+        <div class="text-sm mt-0 flex {{ theme_text_color}}">
+          <transition name="fade-Y" mode="out-in">
+            <div class="mr-1" v-bind:key="getIntro" v-html="getIntro"></div> 
+          </transition>
+          <transition name="fade-Y" mode="out-in">
+            <div class="text-pop-pink" v-bind:key="step" v-html="getStepName"></div>
+          </transition>
+        </div>
+      </div>
+
+      {# Back control #}
+      <div class="download-back opacity-0 absolute bottom-0 left-0 w-full px-11 pb-4" @click="prevStep">
+        <transition name="fade-Y" mode="out-in">
+          <div :show="step" class="text-pop-pink text-sm" >< back</div>
+        </transition>
+      </div>
+
     </div>
   </div>
 
