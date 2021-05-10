@@ -6,25 +6,19 @@
 
 <div is="downloads" inline-template class="container-wide relative" >
   <div class="downloads overflow-hidden">
-
     <div class="downloads-grid relative grid grid-cols-1 grid-rows-2 gap-0.5 sm:grid-cols-2">
-  
         <div class="row-span-2 hidden sm:block">
           <img class="min-w-full min-h-full object-cover" src="{{ fields.image.url }}" alt="">
         </div>
-        
         <div class="flex items-center p-6 bg-pop-{{ fields.accent_color }}">
           <h3 class="text-pop-white">
             {{ fields.title }}
           </h3>
         </div>
-      
         <div class="flex flex-col {{ theme_bg_color }}">
-      
           <div class="flex-grow p-6 {{ theme_text_color }}">
             {{ fields.text }}
           </div>
-      
           <div class="self-end">
               <div @click="nextStep()" class="link flex cursor-pointer">
                 {% if fields.link.text %}
@@ -41,13 +35,12 @@
                 </div>
               </div>
           </div>
-      
         </div>
     </div>
-    <div class="steps flex flex-col absolute top-0 left-0 w-full h-full z-30">
-      
-      <div class="downloads-cover absolute top-0 -left-full w-full h-full border-pop-pink border-2 {{ theme_bg_color}}"></div>
 
+    {# FORM #}
+    <div class="steps flex flex-col absolute top-0 left-0 w-full h-full z-30">
+      <div class="downloads-cover absolute top-0 -left-full w-full h-full border-pop-pink border-2 {{ theme_bg_color}}"></div>
       <div ref="step_1" class="step_1 absolute flex flex-col sm:flex-row  top-0 left-0 w-full h-5/6 sm:h-full p-6 sm:px-8 sm:py-20 md:px-11 md:py-24">
         <div class="w-full sm:w-1/2">
           <h4 class="text-base sm:text-xl md:text-3xl m-0 {{ theme_text_color}}">You are on your way to getting your business ahead of the pack. We will just need an email and a name please? It’s all confidential, no spam.</h4>
@@ -127,8 +120,6 @@
           }
         %}
       </div>
-
-
       <div ref="step_5" class="step_5 absolute flex top-0 left-0 w-full h-full p-6 sm:px-8 sm:py-20 md:px-11 md:py-24">
         <div class="w-full sm:w-1/2 flex items-center">
           <h4 class="m-0 {{ theme_text_color}}">All done! Check your email to find our guide.</h4>
@@ -141,7 +132,6 @@
       {# Steps Guide #}
       <div class="hidden sm:block download-steps opacity-0 absolute top-0 left-0 w-full px-11 pt-4">
         <p class="text-sm mb-0 {{ theme_text_color}}">Step <span v-html="step"></span>/5</p>
-        
         <div class="text-sm mt-0 flex {{ theme_text_color}}">
           <transition name="fade-Y" mode="out-in">
             <div class="mr-1" v-bind:key="getIntro" v-html="getIntro"></div> 
@@ -153,7 +143,7 @@
       </div>
 
       {# Back control #}
-      <div class="download-back opacity-0 absolute bottom-0 left-0 w-full px-11 pb-4" @click="prevStep">
+      <div class="download-back opacity-0 absolute bottom-0 left-0 px-11 pb-4" @click="prevStep">
         <transition name="fade-Y" mode="out-in">
           <div :show="step" class="text-pop-pink text-sm cursor-pointer" >< back</div>
         </transition>
