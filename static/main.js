@@ -104,14 +104,16 @@ document.addEventListener("DOMContentLoaded", function() {
     },
     methods: {
       nextStep () {
-        this.tl.play();
-        this.step += 1
+        if (this.downloadTl.paused() === true) {
+          this.downloadTl.play();
+          this.step += 1
+        }
       },
       prevStep () {
         console.log('prev')
-        if (this.step > 0 && this.tl.paused() === true) {
+        if (this.step > 0 && this.downloadTl.paused() === true) {
           console.log('prev active')
-          this.tl.reverse()
+          this.downloadTl.reverse()
           this.step -= 1
         }
       },
@@ -135,7 +137,7 @@ document.addEventListener("DOMContentLoaded", function() {
         const guides = step.getElementsByClassName('input-guide')
         const inputs = step.querySelectorAll('.input-content')
         
-        if (this.tl.reversed()) {
+        if (this.downloadTl.reversed()) {
           this.hideInputAnim(step, inputs, borders, guides)
         } else {
           this.revealInputAnim(step, inputs, borders, guides)
@@ -146,7 +148,7 @@ document.addEventListener("DOMContentLoaded", function() {
         const guides = step.getElementsByClassName('input-guide')
         const inputs = step.querySelectorAll('.input-content')
         
-        if (this.tl.reversed()) {
+        if (this.downloadTl.reversed()) {
           this.revealInputAnim(step, inputs, borders, guides)
         } else {
           this.hideInputAnim(step, inputs, borders, guides)
@@ -171,12 +173,12 @@ document.addEventListener("DOMContentLoaded", function() {
       },
     },
     mounted () {
-      gsap.set('.steps', {pointerEvents: 'none'})
+      gsap.set(this.$refs.steps, {pointerEvents: 'none'})
       
-      this.tl = gsap.timeline({ paused: true })
+      this.downloadTl = gsap.timeline({ paused: true })
       // Show form
-      .to(".downloads-cover",{left: 0, duration: 0.4})
-      .set('.steps',{ pointerEvents: 'all' })
+      .to(this.$refs.form_bg,{left: 0, duration: 0.4})
+      .set(this.$refs.steps,{ pointerEvents: 'all' })
       .to([".download-steps", ".download-back"], {opacity: 1,duration: 0.3})
       .fromTo(
         this.$refs.step_1,
@@ -245,8 +247,10 @@ document.addEventListener("DOMContentLoaded", function() {
     },
     methods: {
       nextStepContact () {
-        this.contactTl.play();
-        this.step += 1
+        if (this.contactTl.paused() === true) {
+          this.contactTl.play();
+          this.step += 1
+        }
       },
       prevStepContact () {
         if (this.step > 0 && this.contactTl.paused() === true) {
