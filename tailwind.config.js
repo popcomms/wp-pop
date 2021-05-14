@@ -58,7 +58,8 @@ module.exports = {
   },
   variants: {
     extend: {
-      fontSize: ['hover', 'focus']
+      fontSize: ['hover', 'focus'],
+      scale: ['group-hover']
     },
   },
   plugins: [],

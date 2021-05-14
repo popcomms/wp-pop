@@ -14,7 +14,7 @@
           'pattern_color': fields.pattern.color
         }
       %}
-      <div class="portfolio grid gap-0.5 grid-cols-1 sm:grid-cols-2 sm:grid-rows-4 relative border-2 {{ theme_border_color }} {{ theme_bg_color }}">
+      <div class="portfolio grid gap-0.5 grid-cols-1 sm:grid-cols-2  relative border-2 {{ theme_border_color }} {{ theme_bg_color }}">
         {% for item in fields.content %}
           {% set width = 'col-span-1' %}
           {% set height = 'row-span-1' %}
@@ -40,9 +40,18 @@
 
             {% elseif item.acf_fc_layout == 'Link Card' %}
               <div class="link-card absolute top-0 left-0 flex flex-col h-full w-full">
-                <a class="h-full" href="{{ item.link_card.url }}" >
-                  <div class="bg-pop-white flex flex-col justify-between h-full">
-                    <h4 class="p-6 m-0">{{ item.link_card.text }}</h4>
+                {% set link_post = function('get_post', item.link_card.link) %}
+                {% set featured_img = function('get_the_post_thumbnail_url', link_post.ID) %}
+                <a class="h-full relative" href="{{ link_post.guid }}" >
+                  <div class="group bg-pop-white flex flex-col justify-between h-full">
+                    <div class="absolute top-0 left-0 w-full h-full hover:opacity-100 transition-opacity overflow-hidden">
+                      <img class="w-full h-full object-cover origin-center transform group-hover:scale-110 transition-transform duration-500" src="{{ featured_img }}" alt="">
+                      <div class="absolute top-0 left-0 h-full w-full bg-pop-black opacity-40 group-hover:opacity-0 transition-opacity duration-500"></div>
+                    </div>
+
+                    <h4 class="group-hover:opacity-0 transition-opacity duration-500 p-6 m-0 text-pop-white {{ loop.index == 3 ? 'sm:w-3/4' : 'w-full'}}">{{ item.link_card.text }}</h4>
+                    {% if featured_img %}
+                    {% endif %}
                     <div class="self-end">
                       {% include "/templates/partial/arrow.twig" with 
                         {
