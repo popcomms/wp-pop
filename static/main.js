@@ -2,77 +2,8 @@ console.log('JS Active');
 document.addEventListener("DOMContentLoaded", function() {
   gsap.registerPlugin(ScrollTrigger);
   
-  console.log('Document Loaded - V2');
+  console.log('Document Loaded - V4');
 
-  // Apply highlight color to text
-  const problems = document.querySelectorAll('.problems-list__item');
-  if (problems.length > 0) {
-    const accentColor = getComputedStyle(problems[0]).borderColor;
-    problems.forEach(element => {
-      element.querySelectorAll('strong').forEach(e => {
-        e.style.color = accentColor 
-      });
-    });
-  }
-
-  const magnifyImage = document.querySelectorAll('.image-magnify');
-  for (var i = 0; i < magnifyImage.length; i++) {
-    let index = i
-    magnifyImage[index].addEventListener("click", function() {
-      let popup = magnifyImage[index].closest('.container-narrow').querySelector('.full-width-image-popup');
-      popup.style.display = "block";
-      gsap.to(popup, { duration: 0.3, opacity: 1 })
-    })
-  }
-
-  const hideImage = document.querySelectorAll('.image-hide');
-  for (var i = 0; i < hideImage.length; i++) {
-    let index = i
-    hideImage[index].addEventListener("click", function() {
-        let popup = hideImage[index].closest('.container-narrow').querySelector('.full-width-image-popup');
-        gsap.to(popup, { duration: 0.3, opacity: 0, onComplete: function(){
-        popup.style.display = "none";
-      }})
-    })
-  }
-
-  // const highlights = problems.getElementsByTagName('strong');
-  // console.log(highlights)
-  // gsap.set(".section__title", {
-  //   y: 100,
-  //   opacity: 0,
-  // })
-  // gsap.set(".section__item", {
-  //   y: 100,
-  //   opacity: 0,
-  // })
-  
-  // gsap
-  // .timeline({
-  //   scrollTrigger: {
-  //     trigger: ".section",
-  //     toggleActions: "play none none none"
-  //   },
-  // })
-  // .to(
-  //   ".section__title",
-  //   {
-  //     y: 0,
-  //     opacity: 1,
-  //     duration: 0.75
-  //   }
-  // )
-  // .to(
-  //   ".section__item",
-  //   {
-  //     y: 0,
-  //     opacity: 1,
-  //     duration: 1,
-  //     stagger: 0.5
-  //   },
-  //   "-=0.5"
-  // );
-  
   Vue.component('downloads', {
     data () {
       return {
@@ -313,6 +244,7 @@ document.addEventListener("DOMContentLoaded", function() {
       },
     },
     mounted () {
+      console.log('helllooo')
       gsap.set(this.$refs.steps, {pointerEvents: 'none'})
       
       this.contactTl = gsap.timeline({ paused: true })
@@ -365,8 +297,174 @@ document.addEventListener("DOMContentLoaded", function() {
     }
   })
 
+  Vue.component('MainMenu', {
+    data () {
+      return {
+        test: 'test',
+        menuActive: false,
+        activeChild: 'main',
+        showMenuTl: gsap.timeline({ paused: true })
+      }
+    },
+    methods:{
+      toggleMenu (item) {
+        if (this.menuActive) {
+          this.menuActive = false
+          document.querySelector('body').style.overflow = 'auto'
+          this.activeChild = 'main'
+        } else {
+          this.menuActive = true
+          document.querySelector('body').style.overflow = 'hidden'
+          this.activeChild = item
+        }
+      },
+      changeSubMenu (item) {
+        this.activeChild = item
+      },
+      enterMenu () {
+        this.showMenuTl.play()
+        gsap.timeline({})
+        .to(this.$refs.menuContainer, { duration: 0.3, opacity: 1, pointerEvents: 'auto' })
+      },
+      leaveMenu (el, done) {
+        gsap.timeline({})
+        .to(this.$refs.menuContainer, { opacity: 0, pointerEvents: 'none', duration: 0.3 })
+      }
+    },
+    mounted () {  
+      // --- BUTTON
+      const $ = (s, o = document) => o.querySelector(s);
+      const $$ = (s, o = document) => o.querySelectorAll(s);
+      
+      $$('.sub-item-container').forEach(el => el.addEventListener('mouseenter', function(e) {
+        let container = this.querySelectorAll('.sub-item')
+        
+        container.forEach(element => {
+          gsap.fromTo(element.children[1], {textShadow: '0px 0px 0 transparent, 0px 0px 0 transparent, 0px 0px 0 transparent, 0px 0px 0 transparent'}, {duration: 0.5, color: '#2D2D2D', textShadow: '-1px -1px 0 #F8F7EE, 1px -1px 0 #F8F7EE, -1px 1px 0 #F8F7EE, 1px 1px 0 #F8F7EE'})
+        });
+      }));
+      $$('.sub-item-container').forEach(el => el.addEventListener('mouseleave', function(e) {
+        let container = this.querySelectorAll('.sub-item')
+        
+        container.forEach(element => {
+          gsap.to(element.children[1], {duration: 0.5, color: '#F8F7EE', textShadow: '0px 0px 0 #F8F7EE'})
+        });
+      }));
+
+      $$('.sub-item').forEach(el => el.addEventListener('mousemove', function(e) {
+        const pos = this.getBoundingClientRect();
+        const mx = e.clientX - pos.left - pos.width/2; 
+        const my = e.clientY - pos.top - pos.height/2;
+        gsap.to(this, {duration: 0.5, x: mx * 0.15 +'px', y: my * 0.3 + 'px' })
+        gsap.to(this.children[1], {duration: 0.5, x: mx * 0.025 +'px', y: my * 0.075 + 'px', color: '#FF0088'})
+      }));
+
+      $$('.sub-item').forEach(el => el.addEventListener('mouseenter', function(e) {
+        const feDisplacementMapEl = this.querySelector('feDisplacementMap');
+        const feTurbulenceEl = this.querySelector('feTurbulence');
+        gsap.to(this.children[2], {duration: 0.5, width: 100 + '%'})
+        gsap.fromTo(this.children[0], {opacity: 0}, {duration: 0.5, opacity: 1})
+        gsap.fromTo(feDisplacementMapEl, { attr: {scale: 250}}, {duration: 1, attr: {scale: 0}, ease: Quad.easeOut})
+        gsap.fromTo(feTurbulenceEl, { attr: {baseFrequency: 0.007}}, {duration: 1, attr: {baseFrequency: 0}, ease: Quad.easeOut})
+      }));
+
+      $$('.sub-item').forEach(el => el.addEventListener('mouseleave', function() {
+        gsap.to(this, {duration: 0.5, x: 0, y: 0})
+        gsap.to(this.children[1], {duration: 0.5, x: 0, y: 0, color: '#2D2D2D'})
+        gsap.to(this.children[2], {duration: 0.5, width: 0 + '%'})
+        const feDisplacementMapEl = this.querySelector('feDisplacementMap');
+
+        gsap.to(feDisplacementMapEl, {duration: 0.5, attr: {scale: 100}, ease: Quad.easeOut})
+
+        const feTurbulenceEl = this.querySelector('feTurbulence');
+        gsap.to(feTurbulenceEl, {duration: 0.5, attr: {baseFrequency: 0.007}, ease: Quad.easeOut})
+        gsap.to(this.children[0], {duration: 0.5, opacity: 0})
+      }));
+
+      
+    }
+  })
+
+
   new Vue({
     el: document.getElementById('site-wrapper')
   })
+
+  new Vue({
+    el: document.getElementById('header')
+  })
+
+  // Apply highlight color to text
+  const problems = document.querySelectorAll('.problems-list__item');
+  if (problems.length > 0) {
+    const accentColor = getComputedStyle(problems[0]).borderColor;
+    problems.forEach(element => {
+      element.querySelectorAll('strong').forEach(e => {
+        e.style.color = accentColor 
+      });
+    });
+  }
+
+  const magnifyImage = document.querySelectorAll('.image-magnify');
+  for (var i = 0; i < magnifyImage.length; i++) {
+    let index = i
+    console.log(magnifyImage[0])
+    magnifyImage[index].addEventListener("click", function() {
+      console.log('mag')
+      let popup = magnifyImage[index].closest('.container-narrow').querySelector('.full-width-image-popup');
+      popup.style.display = "block";
+      gsap.to(popup, { duration: 0.3, opacity: 1 })
+    })
+  }
+
+  const hideImage = document.querySelectorAll('.image-hide');
+  for (var i = 0; i < hideImage.length; i++) {
+    let index = i
+    hideImage[index].addEventListener("click", function() {
+        let popup = hideImage[index].closest('.container-narrow').querySelector('.full-width-image-popup');
+        gsap.to(popup, { duration: 0.3, opacity: 0, onComplete: function(){
+        popup.style.display = "none";
+      }})
+    })
+  }
+
+  // const highlights = problems.getElementsByTagName('strong');
+  // console.log(highlights)
+  // gsap.set(".section__title", {
+  //   y: 100,
+  //   opacity: 0,
+  // })
+  // gsap.set(".section__item", {
+  //   y: 100,
+  //   opacity: 0,
+  // })
+  
+  // gsap
+  // .timeline({
+  //   scrollTrigger: {
+  //     trigger: ".section",
+  //     toggleActions: "play none none none"
+  //   },
+  // })
+  // .to(
+  //   ".section__title",
+  //   {
+  //     y: 0,
+  //     opacity: 1,
+  //     duration: 0.75
+  //   }
+  // )
+  // .to(
+  //   ".section__item",
+  //   {
+  //     y: 0,
+  //     opacity: 1,
+  //     duration: 1,
+  //     stagger: 0.5
+  //   },
+  //   "-=0.5"
+  // );
+  
+
 })
 

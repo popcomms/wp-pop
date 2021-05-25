@@ -6,7 +6,7 @@ body::-webkit-scrollbar,
   display: block !important;
 }
 
-html::-webkit-scrollbar-track.
+html::-webkit-scrollbar-track,
 body::-webkit-scrollbar-track {
   @apply bg-pop-gray;
 }

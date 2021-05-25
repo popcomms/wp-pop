@@ -59,7 +59,8 @@ module.exports = {
   variants: {
     extend: {
       fontSize: ['hover', 'focus'],
-      scale: ['group-hover']
+      scale: ['group-hover'],
+      translate: ['group-hover']
     },
   },
   plugins: [],

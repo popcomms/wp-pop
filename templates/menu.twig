@@ -1,8 +1,99 @@
-{% if menu %}
-	{% for item in items %}
-		<div class="mx-6  {{ item.classes | join(' ') }}">
-			<a class=" text-pop-pink" target="{{ item.target }}" href="{{ item.link }}">{{ item.title }}</a>
-			{% include "menu.twig" with {'items': item.children} %}
+<!-- <div v-show="menuActive" ref="'{{ item.title }}'" class="fixed bg-pop-black h-screen w-screen top-0 left-0"></div> -->
+<!-- Main Nav Headings -->
+{% for item in items %}
+	<div class="hidden sm:block mr-12">
+		{% if item.children %}
+		<a @click="toggleMenu( '{{ item.title }}'  )" class="text-pop-gray hover:text-pop-pink font-bold" target="{{ item.target }}" href="{{ item.link }}">{{ item.title }}</a>
+		{% else %}
+		<a class="text-pop-gray hover:text-pop-pink font-bold" target="{{ item.target }}" href="{{ item.link }}">{{ item.title }}</a>
+		{% endif %}
+	</div>
+{% endfor %}
+<!-- Children Pages -->
+<transition @enter="enterMenu" @leave="leaveMenu" mode="out-in">
+	<div ref="menuContainer" v-show="menuActive" class="fixed bg-pop-black h-screen w-screen top-0 left-0 opacity-0 pointer-events-none">
+		<div class="px-12 sm:px-32 box-border max-w-5xl w-full h-screen lg:mx-auto">
+			<div class="h-full w-full">
+				<div class="absolute top-1/3 left-1/2 transform -translate-x-1/2 -translate-y-10 w-full">
+					<transition name="fade">
+						<div v-if="activeChild !== 'main'" class="absolute -top-8 left-0 group text-pop-white cursor-pointer flex items-center" @click="changeSubMenu('main')">
+							<svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+								<path class="fill-current text-pop-white group-hover:text-pop-pink transition-colors" d="M14.5 16C14.5 15.1716 15.1716 14.5 16 14.5L29.5 14.5C30.3284 14.5 31 15.1716 31 16C31 16.8284 30.3284 17.5 29.5 17.5H17.5V29.5C17.5 30.3284 16.8284 31 16 31C15.1716 31 14.5 30.3284 14.5 29.5L14.5 16ZM30.9393 33.0607L14.9393 17.0607L17.0607 14.9393L33.0607 30.9393L30.9393 33.0607Z"/>
+							</svg>							
+							<div class="hidden sm:block ">
+								Main menu
+							</div>
+						</div>
+					</transition>
+					<transition-group name="nav" tag="div" mode="out-in" >
+						<div v-show="activeChild === 'main'" class="sub-item-container absolute top-12 left-0" :key="'{{ item.title }}'">
+							{% for item in items %}
+								<div class="sub-item mb-3 w-max mr-12 relative">
+									{% if item.children %}
+										<div class="absolute h-56 w-56 top-1/2 transform -translate-y-1/2 right-0 translate-x-1/2 opacity-0 pointer-events-none">
+											<svg viewBox="0 0 350 350">
+												<filter id="distortionFilter{{ item.ID }}">
+													<feTurbulence type="fractalNoise" baseFrequency="0.01 0.003" numOctaves="5" seed="2" stitchTiles="noStitch" x="0%" y="0%" width="100%" height="100%" result="noise"/>
+													<feDisplacementMap in="SourceGraphic" in2="noise" scale="1000" xChannelSelector="R" yChannelSelector="B" x="0%" y="0%" width="100%" height="100%" filterUnits="userSpaceOnUse"/>
+												</filter>
+												<g filter="url(#distortionFilter{{ item.ID }})">
+													<image class="" x="10%" y="10%" xlink:href="{{ item.master_object.thumbnail }}" width="80%" height="80%" preserveAspectRatio="xMidYMid slice"/>
+												</g>
+											</svg>
+										</div>
+										<a @click="changeSubMenu( '{{ item.title }}' )" class="text-2xl sm:text-5xl leading-tight text-pop-white font-bold" target="{{ item.target }}" href="{{ item.link }}">{{ item.title }}</a>
+										<div class="absolute bottom-0 left-0 h-1 bg-pop-pink"></div>
+									{% else %}
+										<div class="absolute h-56 w-56 top-1/2 transform -translate-y-1/2 right-0 translate-x-1/2 opacity-0 pointer-events-none">
+											<svg viewBox="0 0 350 350">
+												<filter id="distortionFilter{{ item.ID }}">
+													<feTurbulence type="fractalNoise" baseFrequency="0.01 0.003" numOctaves="5" seed="2" stitchTiles="noStitch" x="0%" y="0%" width="100%" height="100%" result="noise"/>
+													<feDisplacementMap in="SourceGraphic" in2="noise" scale="1000" xChannelSelector="R" yChannelSelector="B" x="0%" y="0%" width="100%" height="100%" filterUnits="userSpaceOnUse"/>
+												</filter>
+												<g filter="url(#distortionFilter{{ item.ID }})">
+													<image class="" x="10%" y="10%" xlink:href="{{ item.master_object.thumbnail }}" height="80%" width="80%" preserveAspectRatio="xMidYMid slice"/>
+												</g>
+											</svg>
+										</div>
+										<a class="text-2xl sm:text-5xl leading-tight text-pop-white font-bold" target="{{ item.target }}" href="{{ item.link }}">{{ item.title }}</a>
+										<div class="absolute bottom-0 left-0 h-1 bg-pop-pink"></div>
+									{% endif %}
+								</div>
+							{% endfor %}
+						</div>
+						{% for item in items %}
+							{% if item.children %}
+								<div v-show="activeChild === '{{ item.title }}'" class="sub-item-container absolute top-12 left-0" :key="'{{ item.title }}'">
+									{% for child in item.children %}
+										<div class="sub-item mb-3 w-max mr-12 relative">
+	
+											<div class="absolute h-56 w-56 top-1/2 transform -translate-y-1/2 right-0 translate-x-1/2 opacity-0 pointer-events-none">
+												<svg viewBox="0 0 350 350">
+													<filter id="childDistortionFilter{{ child.ID }}">
+														<feTurbulence type="fractalNoise" baseFrequency="0.01 0.003" numOctaves="5" seed="2" stitchTiles="noStitch" x="0%" y="0%" width="100%" height="100%" result="noise"/>
+														<feDisplacementMap in="SourceGraphic" in2="noise" scale="1000" xChannelSelector="R" yChannelSelector="B" x="0%" y="0%" width="100%" height="100%" filterUnits="userSpaceOnUse"/>
+													</filter>
+													<g filter="url(#childDistortionFilter{{ child.ID }})">
+														<image class="" x="10%" y="10%" xlink:href="{{ child.master_object.thumbnail }}" height="80%" width="80%" preserveAspectRatio="xMidYMid slice"/>
+													</g>
+												</svg>
+											</div>
+	
+											<a class="text-2xl sm:text-5xl leading-tight text-pop-white font-bold" target="{{ child.target }}" href="{{ child.link }}">{{ child.title }}</a>
+											<div class="absolute bottom-0 left-0 h-1 bg-pop-pink"></div>
+										</div>
+									{% endfor %}
+								</div>
+							{% endif %}
+						{% endfor %}
+					</transition-group>
+				</div>
+				<div class="absolute bottom-10 left-0 sm:left-1/2 transform sm:translate-x-6 md:right-0 flex flex-col">
+					<a class="text-base sm:text-2xl leading-tight text-pop-white hover:text-pop-pink transition-colors" href="www.linkedin.com">LinkedIn</a>
+					<a class="text-base sm:text-2xl leading-tight text-pop-white hover:text-pop-pink transition-colors" href="www.youtube.com">Youtube</a>
+					<a class="text-base sm:text-2xl leading-tight text-pop-white hover:text-pop-pink transition-colors" href="www.instagram.com">Instagram</a>
+				</div>
+			</div>
 		</div>
-	{% endfor %}
-{% endif %}
+	</div>
+</transition>

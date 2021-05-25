@@ -1,3 +1,61 @@
 .nav-container {
   max-width: 886px;
 }
+
+/* .nav-item {
+  display: inline-block;
+  margin-right: 10px;
+} */
+
+.nav-enter-active,
+.nav-leave-active {
+  transition: all 0.5s;
+}
+
+.nav-enter-active {
+  transition-delay: 0.5s;
+}
+
+.nav-enter,
+.nav-leave-to /* .list-leave-active below version 2.1.8 */ {
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: all 0.5s;
+}
+
+.fade-enter,
+.fade-leave-to /* .list-leave-active below version 2.1.8 */ {
+  opacity: 0;
+}
+
+.menu-button-enter-active,
+.menu-button-leave-active {
+  transition: all 0.15s;
+}
+
+.menu-button-enter,
+.menu-button-leave-to /* .list-leave-active below version 2.1.8 */ {
+  opacity: 0;
+}
+
+.sub-item:hover {
+  z-index: 500;
+
+  a {
+    text-shadow: none !important;
+  }
+}
+
+.distort {
+  position: absolute;
+  pointer-events: none;
+  will-change: transform;
+}
+
+.distort__img {
+  opacity: 0;
+}
