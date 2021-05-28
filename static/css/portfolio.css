@@ -4,7 +4,6 @@
     grid-row: span 1 / span 1;
     padding-bottom: 100%;
 
-    &--image,
     &--icon {
       background-size: 101%;
     }

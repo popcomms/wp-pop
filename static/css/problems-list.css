@@ -1,7 +1,11 @@
 .problems-list {
   &__item {
+    * {
+      @apply text-xl;
+    }
+
     strong {
-      @apply font-medium;
+      @apply font-bold;
     }
 
     svg {

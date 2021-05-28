@@ -1,4 +1,7 @@
-<div class="relative px-8 py-12 pattern {{ pattern }}-{{ pattern_color }} {{ text_color }}">
+{% if title|length > 0 %}
+<div class="relative px-8 py-12 {{ text_color }}">
+  <div class="absolute top-0 left-0 h-full w-full pattern {{ pattern }}-{{ pattern_color }} opacity-{{ pattern_opacity }}"></div>
   <h4 class="{{ subtitle == '' ? '' : 'mb-0'}}">{{ title }}</h4>
   <div>{{ subtitle }}</div>
 </div>
+{% endif %}

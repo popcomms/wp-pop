@@ -3,7 +3,7 @@
 {% endif %}
 
 {% if not is_preview %}
-  <div class="container-narrow relative" >
+  <div class="container-narrow image-container relative" >
     {# Conditional logic for if image has link #}
     <div class="relative w-full h-full ">
 
@@ -32,8 +32,8 @@
     {# PopUp Image #}
     <div class="hidden opacity-0 full-width-image-popup fixed z-50 w-screen h-screen top-0 left-0 p-10">
       <div class="absolute top-0 left-0 bg-pop-black-dark opacity-90 w-screen h-screen"></div>
-      <div class="relative w-full h-full bg-transparent bg-contain bg-no-repeat bg-center">
-        <img class="w-full max-h-full object-cover" src="{{ fields.image.url }}" alt="">
+      <div class="relative bg-pop-dark-gray w-full h-full bg-transparent bg-contain bg-no-repeat bg-center">
+        <img class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full max-h-full object-contain" src="{{ fields.image.url }}" alt="">
         <div class="image-hide absolute top-0 right-0 w-12 h-12 p-3 bg-pop-black cursor-pointer">
           <svg width="25" height="25" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path class="stroke-current text-pop-pink" d="M18.2189 1.5682L1.78125 17.9892" stroke-width="3"/>

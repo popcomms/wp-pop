@@ -120,16 +120,16 @@
     @apply px-4 xs:px-10 md:px-0 mx-auto;
   }
 
-  @media (min-width: 886px) {
+  @media (min-width: 985px) {
     .container-banner {
-      width: 886px;
+      width: 985px;
     }
   }
 
   .container-narrow {
     @apply px-4 xs:px-10 md:px-0 md:mx-auto xs:mb-20 sm:mb-0;
 
-    max-width: 886px;
+    max-width: 985px;
   }
 
   .container div > .container-narrow ~ .container-narrow {
@@ -143,13 +143,13 @@
   .container-wide {
     @apply md:px-0 md:mx-auto;
 
-    max-width: 985px;
+    max-width: 1050px;
   }
 
   .wp-block-video {
     @apply px-4 xs:px-10 md:px-0 md:mx-auto mb-40 mt-20 shadow-md !important;
 
-    max-width: 886px;
+    max-width: 985px;
   }
 
   input::-webkit-input-placeholder { /* Chrome/Opera/Safari */

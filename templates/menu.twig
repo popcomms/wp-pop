@@ -1,17 +1,20 @@
 <!-- <div v-show="menuActive" ref="'{{ item.title }}'" class="fixed bg-pop-black h-screen w-screen top-0 left-0"></div> -->
 <!-- Main Nav Headings -->
 {% for item in items %}
-	<div class="hidden sm:block mr-12">
+	<div class="hidden sm:flex items-center mr-12">
 		{% if item.children %}
-		<a @click="toggleMenu( '{{ item.title }}'  )" class="text-pop-gray hover:text-pop-pink font-bold" target="{{ item.target }}" href="{{ item.link }}">{{ item.title }}</a>
+		<a @click="toggleMenu( '{{ item.title }}'  )" class="text-pop-mid-gray hover:text-pop-pink font-bold" target="{{ item.target }}" href="{{ item.link }}">{{ item.title }}</a>
 		{% else %}
-		<a class="text-pop-gray hover:text-pop-pink font-bold" target="{{ item.target }}" href="{{ item.link }}">{{ item.title }}</a>
+		<a class="text-pop-mid-gray hover:text-pop-pink font-bold" target="{{ item.target }}" href="{{ item.link }}">{{ item.title }}</a>
 		{% endif %}
 	</div>
 {% endfor %}
 <!-- Children Pages -->
 <transition @enter="enterMenu" @leave="leaveMenu" mode="out-in">
 	<div ref="menuContainer" v-show="menuActive" class="fixed bg-pop-black h-screen w-screen top-0 left-0 opacity-0 pointer-events-none">
+		<div @click="toggleMenu( 'main'  )" class="fixed top-5 right-8 text-pop-white cursor-pointer hover:text-pop-pink">
+			Close
+		</div>
 		<div class="px-12 sm:px-32 box-border max-w-5xl w-full h-screen lg:mx-auto">
 			<div class="h-full w-full">
 				<div class="absolute top-1/3 left-1/2 transform -translate-x-1/2 -translate-y-10 w-full">
@@ -45,7 +48,7 @@
 										<div class="absolute bottom-0 left-0 h-1 bg-pop-pink"></div>
 									{% else %}
 										<div class="absolute h-56 w-56 top-1/2 transform -translate-y-1/2 right-0 translate-x-1/2 opacity-0 pointer-events-none">
-											<svg viewBox="0 0 350 350">
+											{# <svg viewBox="0 0 350 350">
 												<filter id="distortionFilter{{ item.ID }}">
 													<feTurbulence type="fractalNoise" baseFrequency="0.01 0.003" numOctaves="5" seed="2" stitchTiles="noStitch" x="0%" y="0%" width="100%" height="100%" result="noise"/>
 													<feDisplacementMap in="SourceGraphic" in2="noise" scale="1000" xChannelSelector="R" yChannelSelector="B" x="0%" y="0%" width="100%" height="100%" filterUnits="userSpaceOnUse"/>
@@ -53,7 +56,7 @@
 												<g filter="url(#distortionFilter{{ item.ID }})">
 													<image class="" x="10%" y="10%" xlink:href="{{ item.master_object.thumbnail }}" height="80%" width="80%" preserveAspectRatio="xMidYMid slice"/>
 												</g>
-											</svg>
+											</svg> #}
 										</div>
 										<a class="text-2xl sm:text-5xl leading-tight text-pop-white font-bold" target="{{ item.target }}" href="{{ item.link }}">{{ item.title }}</a>
 										<div class="absolute bottom-0 left-0 h-1 bg-pop-pink"></div>
@@ -68,7 +71,7 @@
 										<div class="sub-item mb-3 w-max mr-12 relative">
 	
 											<div class="absolute h-56 w-56 top-1/2 transform -translate-y-1/2 right-0 translate-x-1/2 opacity-0 pointer-events-none">
-												<svg viewBox="0 0 350 350">
+												{# <svg viewBox="0 0 350 350">
 													<filter id="childDistortionFilter{{ child.ID }}">
 														<feTurbulence type="fractalNoise" baseFrequency="0.01 0.003" numOctaves="5" seed="2" stitchTiles="noStitch" x="0%" y="0%" width="100%" height="100%" result="noise"/>
 														<feDisplacementMap in="SourceGraphic" in2="noise" scale="1000" xChannelSelector="R" yChannelSelector="B" x="0%" y="0%" width="100%" height="100%" filterUnits="userSpaceOnUse"/>
@@ -76,7 +79,7 @@
 													<g filter="url(#childDistortionFilter{{ child.ID }})">
 														<image class="" x="10%" y="10%" xlink:href="{{ child.master_object.thumbnail }}" height="80%" width="80%" preserveAspectRatio="xMidYMid slice"/>
 													</g>
-												</svg>
+												</svg> #}
 											</div>
 	
 											<a class="text-2xl sm:text-5xl leading-tight text-pop-white font-bold" target="{{ child.target }}" href="{{ child.link }}">{{ child.title }}</a>
@@ -89,9 +92,9 @@
 					</transition-group>
 				</div>
 				<div class="absolute bottom-10 left-0 sm:left-1/2 transform sm:translate-x-6 md:right-0 flex flex-col">
-					<a class="text-base sm:text-2xl leading-tight text-pop-white hover:text-pop-pink transition-colors" href="www.linkedin.com">LinkedIn</a>
-					<a class="text-base sm:text-2xl leading-tight text-pop-white hover:text-pop-pink transition-colors" href="www.youtube.com">Youtube</a>
-					<a class="text-base sm:text-2xl leading-tight text-pop-white hover:text-pop-pink transition-colors" href="www.instagram.com">Instagram</a>
+					<a class="text-base sm:text-2xl leading-tight text-pop-white hover:text-pop-pink transition-colors" href="https://www.linkedin.com">LinkedIn</a>
+					<a class="text-base sm:text-2xl leading-tight text-pop-white hover:text-pop-pink transition-colors" href="https://www.youtube.com">Youtube</a>
+					<a class="text-base sm:text-2xl leading-tight text-pop-white hover:text-pop-pink transition-colors" href="https://www.instagram.com">Instagram</a>
 				</div>
 			</div>
 		</div>

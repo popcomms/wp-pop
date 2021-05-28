@@ -302,7 +302,7 @@ document.addEventListener("DOMContentLoaded", function() {
       return {
         test: 'test',
         menuActive: false,
-        activeChild: 'main',
+        activeChild: '',
         showMenuTl: gsap.timeline({ paused: true })
       }
     },
@@ -311,7 +311,7 @@ document.addEventListener("DOMContentLoaded", function() {
         if (this.menuActive) {
           this.menuActive = false
           document.querySelector('body').style.overflow = 'auto'
-          this.activeChild = 'main'
+          this.activeChild = ''
         } else {
           this.menuActive = true
           document.querySelector('body').style.overflow = 'hidden'
@@ -331,8 +331,7 @@ document.addEventListener("DOMContentLoaded", function() {
         .to(this.$refs.menuContainer, { opacity: 0, pointerEvents: 'none', duration: 0.3 })
       }
     },
-    mounted () {  
-      // --- BUTTON
+    mounted () {
       const $ = (s, o = document) => o.querySelector(s);
       const $$ = (s, o = document) => o.querySelectorAll(s);
       
@@ -360,24 +359,23 @@ document.addEventListener("DOMContentLoaded", function() {
       }));
 
       $$('.sub-item').forEach(el => el.addEventListener('mouseenter', function(e) {
-        const feDisplacementMapEl = this.querySelector('feDisplacementMap');
-        const feTurbulenceEl = this.querySelector('feTurbulence');
-        gsap.to(this.children[2], {duration: 0.5, width: 100 + '%'})
+        // gsap.to(this.children[2], {duration: 0.5, width: 100 + '%'})
         gsap.fromTo(this.children[0], {opacity: 0}, {duration: 0.5, opacity: 1})
-        gsap.fromTo(feDisplacementMapEl, { attr: {scale: 250}}, {duration: 1, attr: {scale: 0}, ease: Quad.easeOut})
-        gsap.fromTo(feTurbulenceEl, { attr: {baseFrequency: 0.007}}, {duration: 1, attr: {baseFrequency: 0}, ease: Quad.easeOut})
+        // const feDisplacementMapEl = this.querySelector('feDisplacementMap');
+        // const feTurbulenceEl = this.querySelector('feTurbulence');
+        // gsap.fromTo(feDisplacementMapEl, { attr: {scale: 250}}, {duration: 1, attr: {scale: 0}, ease: Quad.easeOut})
+        // gsap.fromTo(feTurbulenceEl, { attr: {baseFrequency: 0.007}}, {duration: 1, attr: {baseFrequency: 0}, ease: Quad.easeOut})
       }));
 
       $$('.sub-item').forEach(el => el.addEventListener('mouseleave', function() {
         gsap.to(this, {duration: 0.5, x: 0, y: 0})
         gsap.to(this.children[1], {duration: 0.5, x: 0, y: 0, color: '#2D2D2D'})
-        gsap.to(this.children[2], {duration: 0.5, width: 0 + '%'})
-        const feDisplacementMapEl = this.querySelector('feDisplacementMap');
+        // gsap.to(this.children[2], {duration: 0.5, width: 0 + '%'})
+        // const feDisplacementMapEl = this.querySelector('feDisplacementMap');
+        // gsap.to(feDisplacementMapEl, {duration: 0.5, attr: {scale: 100}, ease: Quad.easeOut})
 
-        gsap.to(feDisplacementMapEl, {duration: 0.5, attr: {scale: 100}, ease: Quad.easeOut})
-
-        const feTurbulenceEl = this.querySelector('feTurbulence');
-        gsap.to(feTurbulenceEl, {duration: 0.5, attr: {baseFrequency: 0.007}, ease: Quad.easeOut})
+        // const feTurbulenceEl = this.querySelector('feTurbulence');
+        // gsap.to(feTurbulenceEl, {duration: 0.5, attr: {baseFrequency: 0.007}, ease: Quad.easeOut})
         gsap.to(this.children[0], {duration: 0.5, opacity: 0})
       }));
 
@@ -411,7 +409,7 @@ document.addEventListener("DOMContentLoaded", function() {
     console.log(magnifyImage[0])
     magnifyImage[index].addEventListener("click", function() {
       console.log('mag')
-      let popup = magnifyImage[index].closest('.container-narrow').querySelector('.full-width-image-popup');
+      let popup = magnifyImage[index].closest('.image-container').querySelector('.full-width-image-popup');
       popup.style.display = "block";
       gsap.to(popup, { duration: 0.3, opacity: 1 })
     })
@@ -421,7 +419,7 @@ document.addEventListener("DOMContentLoaded", function() {
   for (var i = 0; i < hideImage.length; i++) {
     let index = i
     hideImage[index].addEventListener("click", function() {
-        let popup = hideImage[index].closest('.container-narrow').querySelector('.full-width-image-popup');
+        let popup = hideImage[index].closest('.image-container').querySelector('.full-width-image-popup');
         gsap.to(popup, { duration: 0.3, opacity: 0, onComplete: function(){
         popup.style.display = "none";
       }})

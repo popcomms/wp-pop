@@ -226,6 +226,77 @@ function custom_wysiwyg_colors($init) {
 }
 add_filter('tiny_mce_before_init', 'custom_wysiwyg_colors');
 
+// ADD POP COLORS GUTENBURG COLOR PALETTE
+
+// Adds support for editor color palette.
+add_theme_support( 'editor-color-palette', array(
+	array(
+		'name' => __('pop-white'),
+		'slug' => 'pop-white',
+		'color' => '#F8F7EE'
+	),
+	array(
+		'name' => __('pop-black'),
+		'slug' => 'pop-black',
+		'color' => '#2D2D2D'
+	),
+	array(
+		'name' => __('pop-black-dark'),
+		'slug' => 'pop-black-dark',
+		'color' => '#272727'
+	),
+	array(
+		'name' => __('pop-gray'),
+		'slug' => 'pop-gray',
+		'color' => '#DFDFDF'
+	),
+	array(
+		'name' => __('pop-mid-gray'),
+		'slug' => 'pop-mid-gray',
+		'color' => "#8E8E8E"
+	),
+	array(
+		'name' => __('pop-dark-gray'),
+		'slug' => 'pop-dark-gray',
+		'color' => "#3C3B3B"
+	),
+	array(
+		'name' => __('pop-navy'),
+		'slug' => 'pop-navy',
+		'color' => '#212363'
+	),
+	array(
+		'name' => __('pop-green'),
+		'slug' => 'pop-green',
+		'color' => '#64FFE3'
+	),
+	array(
+		'name' => __('pop-green-pale'),
+		'slug' => 'pop-green-pale',
+		'color' => '#E8FDF5'
+	),
+	array(
+		'name' => __('pop-pink'),
+		'slug' => 'pop-pink',
+		'color' => '#FF0088'
+	),
+	array(
+		'name' => __('pop-pink-pale'),
+		'slug' => 'pop-pink-pale',
+		'color' => '#CDF2F4'
+	),
+	array(
+		'name' => __('pop-blue'),
+		'slug' => 'pop-blue',
+		'color' => '#3A3EAB'
+	),
+	array(
+		'name' => __('pop-yellow'),
+		'slug' => 'pop-yellow',
+		'color' => '#FFFF99'
+	)
+) );
+
 // ACF INIT
 add_action('acf/init', 'my_acf_init');
 

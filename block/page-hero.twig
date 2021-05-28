@@ -12,9 +12,10 @@
 
 {% if not is_preview %}
 
-<div class="relative h-screen overflow-hidden flex justify-center bg-pop-{{ fields.bg_color }}" >
-  <div class="absolute top-1/2 left-1/2 transform -translate-y-1/2 w-auto h-2/3 bg-center bg-cover no-repeat pb-12 px-12 pt-12" style="background-image: url();">
-    <img class="h-full" src="{{ fields.background_image.url }}" alt="">
+<div class="page-hero relative h-screen overflow-hidden flex justify-center" >
+  <div class="absolute top-0 left-0 w-full h-full bg-center bg-cover no-repeat pb-12 px-12 pt-12" style="background-image: url({{ fields.background_image.url }});">
+    {{ fields.overlay_end }}
+    <div class="absolute top-0 left-0 w-full h-full" style="background: radial-gradient(50% 50% at 50% 50%, transparent {{ fields.overlay_start }}%, {{ fields.overlay_color }} {{ fields.overlay_end }}%"></div>
   </div>
   
   <div class="container-narrow relative h-full flex justify-center items-center">

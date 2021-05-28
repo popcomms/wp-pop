@@ -5,15 +5,18 @@
 {% if not is_preview %}
   <div class="container-wide" >
     <div class="md:border-16 md:{{ theme == 'dark' ? 'border-pop-black' : 'border-pop-white'}} {{ theme_bg_color }} md:shadow-md md:box-content">
+      {% if fields.show_title %}
       {% include "/templates/partial/component-title.twig" with 
         {
           'title': fields.title,
           'subtitle': fields.subtitle,
           'text_color': theme_text_color,
           'pattern': fields.pattern.type,
-          'pattern_color': fields.pattern.color
+          'pattern_color': fields.pattern.color,
+          'pattern_opacity': fields.pattern.opacity
         }
       %}
+      {% endif %}
       <div class="portfolio grid gap-0.5 grid-cols-1 sm:grid-cols-2  relative border-2 {{ theme_border_color }} {{ theme_bg_color }}">
         {% for item in fields.content %}
           {% set width = 'col-span-1' %}
@@ -25,11 +28,30 @@
             {% set height = 'row-span-1 sm:row-span-2' %}
           {% endif %}
 
-          <div class="portfolio__item relative">
+          <div class="portfolio__item image-container relative">
             {% if item.acf_fc_layout == 'Image' %}
               <div
-                class="portfolio__item--image absolute top-0 left-0 flex flex-col h-full w-full bg-cover bg-no-repeat bg-center"
-                style="background-image: url({{ item.image.url }});">
+              class="portfolio__item--image absolute top-0 left-0 flex flex-col h-full w-full bg-cover bg-no-repeat bg-center"
+              style="background-image: url({{ item.image.url }});">
+                <div class="image-magnify absolute top-0 right-0 w-12 h-12 p-3 bg-pop-black cursor-pointer">
+                  <svg  width="25" height="25" viewBox="0 0 22 29" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle class="stroke-current text-pop-pink" cx="11.0001" cy="11.2123" r="9.48109" stroke-width="3"/>
+                    <path class="stroke-current text-pop-pink" d="M15.6528 20.1655L19.9459 27.7689" stroke-width="3"/>
+                  </svg>  
+                </div>
+                {# PopUp Image #}
+                <div class="hidden opacity-0 full-width-image-popup fixed z-50 w-screen h-screen top-0 left-0 p-10">
+                  <div class="absolute top-0 left-0 bg-pop-black-dark opacity-90 w-screen h-screen"></div>
+                  <div class="relative bg-pop-dark-gray w-full h-full bg-transparent bg-contain bg-no-repeat bg-center">
+                    <img class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full max-h-full object-contain" src="{{ item.image.url }}" alt="">
+                    <div class="image-hide absolute top-0 right-0 w-12 h-12 p-3 bg-pop-black cursor-pointer">
+                      <svg width="25" height="25" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path class="stroke-current text-pop-pink" d="M18.2189 1.5682L1.78125 17.9892" stroke-width="3"/>
+                        <path class="stroke-current text-pop-pink" d="M18.2104 17.9975L1.78939 1.55987" stroke-width="3"/>
+                      </svg>                        
+                    </div>
+                  </div>
+                </div>
               </div>
               
             {% elseif item.acf_fc_layout == 'Icon' %}
