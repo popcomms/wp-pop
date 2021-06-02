@@ -15,10 +15,10 @@
           'pattern_opacity': fields.pattern.opacity
         }
       %}
-      <div class="relative flex flex-wrap items-center justify-start {{ theme == 'dark' ? 'bg-pop-black' : 'bg-pop-white'}}">
+      <div class="relative grid  grid-cols-4 gap-3 items-center justify-start {{ theme == 'dark' ? 'bg-pop-black' : 'bg-pop-white'}}">
         <!-- grid grid-flow-col grid-cols-4 gap-0.5 -->
         {% for item in fields.logos %}
-          <div class="{{ theme == 'dark' ? 'logos-light' : 'logos-dark'}} h-full w-1/4 flex justify-center items-center">
+          <div class="{{ theme == 'dark' ? 'logos-light' : 'logos-dark'}} h-full w-full flex justify-center items-center">
             {% if item.url %}
               <a href="{{ item.url }}">
             {% endif %}

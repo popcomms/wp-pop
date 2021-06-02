@@ -2,20 +2,20 @@
   <div class="relative overflow-hidden">
     <div class="input-content transform translate-y-full">
       <input
-        class=" w-full font-normal text-xl sm:text-2xl md:text-3xl {{ text_color }} {{ bg_color }} "
+        class=" w-full font-normal text-xl sm:text-2xl md:text-3xl {{ text_color }} {{ bg_color }} {{ text_color == 'text-pop-white' ? 'placeholder-pop-white' : 'placeholder-pop-black'}} "
         type="{{type}}"
         v-model="{{model}}"
         placeholder="{{placeholder}}"
         @keydown="{{action}}"
       >
       {% if arrow %}
-      <svg @click="{{action}}" class="absolute h-8 sm:h-auto top-0 right-0 cursor-pointer fill-current text-pop-gray hover:text-pop-pink transition-colors" width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <svg @click="{{action}}" class="absolute h-8 sm:h-auto top-0 right-0 cursor-pointer fill-current {{ text_color }} hover:text-pop-pink transition-colors" width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M36.3746 25.0607C36.9604 24.4749 36.9604 23.5251 36.3746 22.9393L26.8287 13.3934C26.2429 12.8076 25.2931 12.8076 24.7073 13.3934C24.1216 13.9792 24.1216 14.9289 24.7073 15.5147L33.1926 24L24.7073 32.4853C24.1216 33.0711 24.1216 34.0208 24.7073 34.6066C25.2931 35.1924 26.2429 35.1924 26.8287 34.6066L36.3746 25.0607ZM12.6865 25.5L35.3139 25.5L35.3139 22.5L12.6865 22.5L12.6865 25.5Z"/>
       </svg>
       {% endif %}
     </div>
   </div>
-  <div class="input-border absolute top-full left-0 bg-pop-white w-0" style="height: 2px;"></div>
+  <div class="input-border absolute top-full left-0 {{ text_color == 'text-pop-white' ? 'bg-pop-white' : 'bg-pop-black'}} w-0" style="height: 2px;"></div>
   {% if guide %}
     <div class="input-guide opacity-0 absolute -bottom-2 right-0 text-sm pt-1 text-right transform translate-y-full {{ text_color }}">click or hit enter</div>
   {% endif %}

@@ -1,11 +1,11 @@
-  {% if post.post_type == 'page' %}
+{% if post.post_type == 'page' %}
   {% set bg = 'black' %}
   {% set color = 'white' %}
 {% endif %}
 
-{% if post.post_type == 'post' %}
-  {% set bg = post.post_options_theme == 'white' ? 'white' : 'black' %}
-  {% set color = post.post_options_theme == 'white' ? 'black' : 'white' %}
+{% if post.post_type != 'page' %}
+  {% set bg = post.hero_theme == 'white' ? 'white' : 'black' %}
+  {% set color = post.hero_theme == 'white' ? 'black' : 'white' %}
 {% endif %}
 
 

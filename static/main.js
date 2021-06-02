@@ -167,19 +167,10 @@ document.addEventListener("DOMContentLoaded", function() {
         showInput: 'email'
       }
     },
-    computed: {
-      activeForm () {
-        if (this.showInput === 'email') {
-          return 'text-pop-yellow'
-        } else {
-          return 'text-pop-white'
-        }
-      }
-    },
     methods: {
       nextStepContact () {
         if (this.contactTl.paused() === true) {
-          this.contactTl.play();
+          this.contactTl.tweenFromTo(`${this.step}`, `${this.step + 1}`)
           this.step += 1
         }
       },
@@ -223,6 +214,17 @@ document.addEventListener("DOMContentLoaded", function() {
           this.hideInputAnim(step, inputs, borders, guides, text)
         }
       },
+      restartTL () {
+        this.contactTl.tweenFromTo(`${this.step}`, "0")
+        console.log('restart')
+        this.step = 0
+      },
+      // leaveTL () {
+      //   for (let i = 0; i < this.step; i++) {
+      //     this.contactTl.reverse()
+      //   }
+      //   this.step = 0
+      // },
       hideInputAnim (step, inputs, borders, guides, text) {
         gsap.timeline({
         })
@@ -244,11 +246,14 @@ document.addEventListener("DOMContentLoaded", function() {
       },
     },
     mounted () {
-      console.log('helllooo')
+
       gsap.set(this.$refs.steps, {pointerEvents: 'none'})
       
       this.contactTl = gsap.timeline({ paused: true })
       // Show form
+
+      .addLabel("0")
+      .set(this.$refs.steps, {opacity: 1})
       .to(this.$refs.form_bg,{opacity: 1, duration: 0.4})
       .set(this.$refs.steps,{ pointerEvents: 'all' })
       .to([".contact-steps", ".contact-back"], {opacity: 1,duration: 0.3})
@@ -264,18 +269,21 @@ document.addEventListener("DOMContentLoaded", function() {
           duration: 0.3
         }
       )
-      .addPause()
+      // .addPause()
+      .addLabel("1")
       // Change step 1 -> 2
       .to(this.$refs.step_1, {duration: 0.3, opacity: 0, pointerEvents: 'none'})
       .to(this.$refs.step_2.querySelectorAll('h4'), {duration: 0.3, opacity: 1})
       .call( this.revealInput, [this.$refs.email_input], "-=0.3" )
-      .addPause("+=0.2")
+      // .addPause("+=0.2")
+      .addLabel("2")
       // switch inputs
       .call( this.hideInput, [this.$refs.email_input], "+=0.1" )
-      .to(this.$refs.email_text, {duration: 0.3, color: '#FFFFFF'})
+      // .to(this.$refs.email_text, {duration: 0.3, color: this.baseColor})
       .call( this.revealInput, [this.$refs.name_input], "+=0.3" )
-      .to(this.$refs.name_text, {duration: 0.3, color: '#FFFF99'})
-      .addPause("+=0.2")
+      // .to(this.$refs.name_text, {duration: 0.3, color: this.highlightColor})
+      // .addPause("+=0.2")
+      .addLabel("3")
       // Change step 2 -> 3
       .to(this.$refs.step_2.querySelectorAll('h4'), {duration: 0.3, opacity: 0})
       .call( this.hideInput, [this.$refs.name_input], "-=0.29" )
@@ -293,7 +301,8 @@ document.addEventListener("DOMContentLoaded", function() {
         "+=0.6"
       )
       // Stop before end so can reverse
-      .addPause()
+      // .addPause()
+      .addLabel("4")
     }
   })
 
@@ -303,7 +312,8 @@ document.addEventListener("DOMContentLoaded", function() {
         test: 'test',
         menuActive: false,
         activeChild: '',
-        showMenuTl: gsap.timeline({ paused: true })
+        showMenuTl: gsap.timeline({ paused: true }),
+        contactActive: false
       }
     },
     methods:{
@@ -317,6 +327,16 @@ document.addEventListener("DOMContentLoaded", function() {
           document.querySelector('body').style.overflow = 'hidden'
           this.activeChild = item
         }
+      },
+      showContactForm () {
+        this.contactActive = true
+        this.$refs.contactForm.step = 0
+        this.$refs.contactForm.nextStepContact()
+      },
+      hideContactForm () {
+        // this.contactActive = false
+        this.contactActive = false
+        this.$refs.contactForm.restartTL()
       },
       changeSubMenu (item) {
         this.activeChild = item
@@ -402,6 +422,26 @@ document.addEventListener("DOMContentLoaded", function() {
       });
     });
   }
+
+  // Scroll to
+  const scrollButtons = document.querySelectorAll('.scroll-button')
+  console.log(scrollButtons)
+  for (var i = 0; i < scrollButtons.length; i++) {
+    console.log('scroll')
+    scrollButtons[i].addEventListener('click', function () {
+      el = document.getElementById('content');
+      var rect = el.getBoundingClientRect(),
+      scrollLeft = window.pageXOffset || document.documentElement.scrollLeft,
+      scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+      // return { top: rect.top + scrollTop, left: rect.left + scrollLeft }
+      window.scrollTo({ 
+        left: 0,
+        top: rect.top + scrollTop,
+        behavior: 'smooth'
+      })
+    })
+  }
+  
 
   const magnifyImage = document.querySelectorAll('.image-magnify');
   for (var i = 0; i < magnifyImage.length; i++) {

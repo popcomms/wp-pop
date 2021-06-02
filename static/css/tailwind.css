@@ -27,6 +27,16 @@
     line-height: 120%;
   }
 
+  h1 *,
+  h2 *,
+  h3 *,
+  h4 *,
+  h5 *,
+  h6 * {
+    display: inline-block;
+    line-height: 120%;
+  }
+
   h1 {
     @apply my-5 text-3xl md:text-6xl font-semibold;
   }
