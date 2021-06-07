@@ -5,6 +5,9 @@
 {% if not is_preview %}
   <div class="container-wide {{ fields.show_bg ? theme_bg_color ~ ' sm:shadow-md' : '' }}">
     <div class="relative">
+
+      <!-- {% set currentPath = app.request.attributes.get('_route') %} -->
+
       <div class="z-10 absolute bottom-0 right-0 sm:bottom-auto sm:top-0 sm:left-0 sm:transform sm:-translate-y-full">
         {% include "/templates/partial/link.twig" with 
           {
@@ -16,7 +19,8 @@
         {
           'title': fields.title,
           'subtitle': fields.subtitle,
-          'text_color': theme_text_color,
+          'theme_text_color': theme_text_color,
+          'title_color': fields.title_color,
           'pattern': fields.pattern.type,
           'pattern_color': fields.pattern.color,
           'pattern_opacity': fields.pattern.opacity

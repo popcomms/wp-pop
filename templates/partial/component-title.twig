@@ -1,5 +1,6 @@
+{% set title_color_class = 'text-pop-' ~ title_color %}
 {% if title|length > 0 %}
-<div class="relative px-8 py-12 {{ text_color }}">
+<div class="relative px-8 py-12 {{ title_color != 'theme' ? title_color_class : theme_text_color }}">
   <div class="absolute top-0 left-0 h-full w-full pattern {{ pattern }}-{{ pattern_color }} opacity-{{ pattern_opacity }}"></div>
   <h4 class="{{ subtitle == '' ? '' : 'mb-0'}}">{{ title }}</h4>
   <div>{{ subtitle }}</div>

@@ -425,15 +425,12 @@ document.addEventListener("DOMContentLoaded", function() {
 
   // Scroll to
   const scrollButtons = document.querySelectorAll('.scroll-button')
-  console.log(scrollButtons)
   for (var i = 0; i < scrollButtons.length; i++) {
-    console.log('scroll')
     scrollButtons[i].addEventListener('click', function () {
       el = document.getElementById('content');
       var rect = el.getBoundingClientRect(),
       scrollLeft = window.pageXOffset || document.documentElement.scrollLeft,
       scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-      // return { top: rect.top + scrollTop, left: rect.left + scrollLeft }
       window.scrollTo({ 
         left: 0,
         top: rect.top + scrollTop,
@@ -448,7 +445,6 @@ document.addEventListener("DOMContentLoaded", function() {
     let index = i
     console.log(magnifyImage[0])
     magnifyImage[index].addEventListener("click", function() {
-      console.log('mag')
       let popup = magnifyImage[index].closest('.image-container').querySelector('.full-width-image-popup');
       popup.style.display = "block";
       gsap.to(popup, { duration: 0.3, opacity: 1 })

@@ -3,9 +3,9 @@
 {% for item in items %}
 <div class="hidden sm:flex items-center mr-12">
 	{% if item.children %}
-	<a @click="toggleMenu( '{{ item.title }}'  )" class="text-pop-mid-gray hover:text-pop-pink font-bold" target="{{ item.target }}" href="{{ item.link }}">{{ item.title }}</a>
+	<a @click="toggleMenu( '{{ item.title }}'  )" class="text-pop-mid-gray hover:text-pop-white " target="{{ item.target }}" href="{{ item.link }}">{{ item.title }}</a>
 	{% else %}
-	<a class="text-pop-mid-gray hover:text-pop-pink font-bold" target="{{ item.target }}" href="{{ item.link }}">{{ item.title }}</a>
+	<a class="text-pop-mid-gray hover:text-pop-white" target="{{ item.target }}" href="{{ item.link }}">{{ item.title }}</a>
 	{% endif %}
 </div>
 {% endfor %}
