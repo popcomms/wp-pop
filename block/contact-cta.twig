@@ -28,7 +28,7 @@
         <div ref="form_bg" class="absolute top-0 left-0 opacity-0 w-full h-full border-pop-pink border-2 {{ theme_bg_color}}"></div>
         <div ref="step_1" class="step_1 absolute flex flex-col sm:flex-row flex-wrap top-0 left-0 w-full h-5/6 sm:h-full p-6 sm:px-8 sm:py-20 md:px-11 md:py-24">
           <div class="w-full sm:w-1/2">
-            <h4 class="text-base sm:text-xl md:text-3xl m-0 {{ theme_text_color}}">What type of thing are you looking for?</h4>
+            <h5 class="text-base sm:text-xl md:text-3xl m-0 {{ theme_text_color}}">What type of thing are you looking for?</h5>
           </div>
           <div class="relative w-full sm:w-1/2 flex flex-row sm:flex-col flex-wrap sm:flex-nowrap justify-center p-4 sm:p-11 {{ theme_text_color}}">
             <div>
@@ -53,7 +53,7 @@
         </div>
         <div ref="step_2" class="step_2 pointer-events-none  absolute flex flex-col items-center justify-center top-0 left-0 w-full h-full p-6 sm:px-8 sm:py-20 md:px-11 md:py-24">
           <div class="w-1/2 self-start">
-            <h4 class="opacity-0 text-base sm:text-xl md:text-3xl m-0 {{ theme_text_color}}">Noted. Please just type your 
+            <h5 class="opacity-0 text-base sm:text-xl md:text-3xl m-0 {{ theme_text_color}}">Noted. Please just type your 
               <span ref="email_text" class="transition-colors duration-500" :class="{
                 'text-pop-white': '{{theme}}'  === 'dark',
                 'text-pop-yellow': '{{theme}}'  === 'dark' && step === 2,
@@ -68,7 +68,7 @@
                 'text-pop-pink': '{{theme}}'  === 'light' && step === 3
               }">name </span>
               and we will get in touch.
-            </h4>
+            </h5>
           </div>
           <div class="relative w-full flex-grow">
             <div class="absolute top-1/2 transform -translate-y-1/2 left-0 w-full" ref="email_input">
@@ -106,11 +106,11 @@
   
         <div ref="step_3" class="step_3 absolute flex top-0 left-0 w-full h-full p-6 sm:px-8 sm:py-20 md:px-11 md:py-24">
           <div class="w-full md:w-1/2 flex items-center">
-            <h4 class="text-base sm:text-xl md:text-3xl m-0 {{ theme_text_color}}">Nice, you’re done.
+            <h5 class="text-base sm:text-xl md:text-3xl m-0 {{ theme_text_color}}">Nice, you’re done.
               We will get in touch as soon as possible.
               <br/><br/>
               No time to waste?
-              Call us 🤙 <a class="{{ theme == 'dark' ? 'hover:text-pop-pink text-pop-yellow' : 'hover:text-pop-blue text-pop-pink'}} transition-colors" href="tel:07637388373">07637388373</a></h4>
+              Call us 🤙 <a class="{{ theme == 'dark' ? 'hover:text-pop-pink text-pop-yellow' : 'hover:text-pop-blue text-pop-pink'}} transition-colors" href="tel:07637388373">07637388373</a></h5>
           </div>
         </div>
   

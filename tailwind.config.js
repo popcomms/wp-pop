@@ -46,6 +46,7 @@ module.exports = {
         'pop-pink-pale': '#CDF2F4',
         'pop-blue': '#3A3EAB',
         'pop-yellow': '#FFFF99',
+        'pop-purple': '#6F62FF'
       },
       borderWidth: {
         '1': '0.5px',

@@ -1,9 +1,38 @@
 {% extends "tease.twig" %}
 
 {% block content %}
-	<h2 class="h2"><a href="{{post.link}}">{{post.title}}</a></h2>
-		<p>{{post.preview.length(25)}}</p>
-		{% if post.thumbnail.src %}
-			<img src="{{post.thumbnail.src}}" />
-		{% endif %}
+<a href="{{post.link}}">
+	<div class="grid grid-cols-2 grid-rows-1" style="box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);">
+		<div class="relative row-span-1" style="padding-bottom: 100%;">
+			{% if post.thumbnail.src %}
+				<img class="absolute top-0 left-0 min-w-full min-h-full  object-cover" src="{{post.thumbnail.src}}" />
+				{% else %}
+				{#  #}
+			{% endif %}
+		</div>
+		<div class="relative flex flex-col items-start justify-center p-7">
+			<div class="flex items-center space-x-4">
+				{# <p>{{post.preview.length(25)}}</p> #}
+				<div class="rounded-full w-6 h-6 bg-pop-mid-gray"></div>
+				<p class="text-pop-pink text-base underline">{{post.author.first_name}} {{post.author.last_name}}</p>
+				<p class="text-pop-purple text-base">{{post.date}}</p>
+			</div>
+			<h5 class="">{{post.title}}</h5>
+			<div class="absolute bottom-0 right-0 ">
+				{% include "/templates/partial/link.twig" with 
+					{
+						'link': {
+							url: post.uid,
+							text: 'read more',
+							background_color: 'black',
+							accent_color: 'yellow',
+							arrow_color: 'blue',
+							angle: 45
+						},
+					}
+				%}
+			</div>
+		</div>
+	</div>
+</a>
 {% endblock %}

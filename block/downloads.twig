@@ -7,8 +7,8 @@
   <div is="downloads" inline-template class="container-wide relative" >
     <div class="downloads overflow-hidden">
       <div class="downloads-grid relative grid grid-cols-1 grid-rows-2 gap-0.5 sm:grid-cols-2">
-          <div class="row-span-2 hidden sm:block">
-            <img class="min-w-full min-h-full object-cover" src="{{ fields.image.url }}" alt="">
+          <div class="relative row-span-2 hidden sm:block"  style="padding-bottom: 100%;">
+            <img class="absolute top-0 left-0 min-w-full min-h-full object-cover" src="{{ fields.image.url }}" alt="">
           </div>
           <div class="flex items-center p-6 bg-pop-{{ fields.accent_color }}">
             <h3 class="text-pop-white">
@@ -41,7 +41,7 @@
         <div ref="form_bg" class="absolute top-0 -left-full w-full h-full border-pop-pink border-2 {{ theme_bg_color}}"></div>
         <div ref="step_1" class="step_1 absolute flex flex-col sm:flex-row  top-0 left-0 w-full h-5/6 sm:h-full p-6 sm:px-8 sm:py-20 md:px-11 md:py-24">
           <div class="w-full sm:w-1/2">
-            <h4 class="text-base sm:text-xl md:text-3xl m-0 {{ theme_text_color}}">You are on your way to getting your business ahead of the pack. We will just need an email and a name please? It’s all confidential, no spam.</h4>
+            <h5 class="text-base sm:text-xl md:text-3xl m-0 {{ theme_text_color}}">You are on your way to getting your business ahead of the pack. We will just need an email and a name please? It’s all confidential, no spam.</h5>
           </div>
           <div class="w-full sm:w-1/2 flex flex-row sm:flex-col flex-wrap sm:flex-nowrap justify-center p-4 sm:p-11 {{ theme_text_color}}">
             <div>
@@ -120,7 +120,7 @@
         </div>
         <div ref="step_5" class="step_5 absolute flex top-0 left-0 w-full h-full p-6 sm:px-8 sm:py-20 md:px-11 md:py-24">
           <div class="w-full sm:w-1/2 flex items-center">
-            <h4 class="m-0 {{ theme_text_color}}">All done! Check your email to find our guide.</h4>
+            <h5 class="m-0 {{ theme_text_color}}">All done! Check your email to find our guide.</h5>
           </div>
           <div class="w-1/2">
 
