@@ -11,13 +11,16 @@
 	{% block content %}
 		<a href="{{post.link}}">
 			<div class="grid grid-cols-2 grid-rows-1" style="box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);">
-				<div class="relative row-span-1" style="padding-bottom: 100%;">
-					{% if post.thumbnail.src %}
+				{% if post.thumbnail.src != '' %}
+					<div class="relative row-span-1" style="padding-bottom: 100%;">
 						<img class="absolute top-0 left-0 min-w-full min-h-full  object-cover" src="{{post.thumbnail.src}}" />
-						{% else %}
-						{#  #}
-					{% endif %}
-				</div>
+					</div>
+				{% endif %}
+				{% if post.thumbnail.src == null %}
+					<div class="relative row-span-1 w-full h-full bg-pop-pink flex items-center justify-center">
+						<p>placeholder</p>
+					</div>
+				{% endif %}
 				<div class="relative flex flex-col items-start justify-center p-7">
 					<div class="flex items-center space-x-4">
 						{# <p>{{post.preview.length(25)}}</p> #}
