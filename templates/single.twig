@@ -2,12 +2,15 @@
 
 {% block content %}
 	<div class="relative content-wrapper">
-		{% include "/templates/partial/post-hero.twig" with 
+		{% include "/templates/partial/post-hero.twig" with
 			{
 				'fields': hero,
 			}
 		%}
-		<article class="pop-container bg-pop-{{ content.theme }} post-type-{{ post.post_type }}" id="post-{{ post.ID }}">
+		<article
+      id="post-{{ post.ID }}"
+      class="pop-container bg-pop-{{ content.theme }} post-type-{{ post.post_type }}"
+    >
 			<div class="relative py-12" >
 				<div class="bg-pop-{{ content.theme }} absolute top-0 left-0 w-full h-full bg-center bg-cover no-repeat pb-12 px-6 sm:px-12 pt-12">
 					{% if content.show_pop %}
@@ -39,22 +42,9 @@
 					<div class="container-narrow text-pop-{{ content.theme == 'black' ? 'white' : 'black' }}">
 						{{ post.content }}
 					</div>
-					<div class="my-20 container-narrow text-pop-{{ content.theme == 'black' ? 'white' : 'black' }}">
-						<div class="w-1/3">
-							{{ post.author.avatar_override }}
-						</div>
-						<div class="w-2/3 flex flex-col">
-							<h6 class="mb-2">
-								{{ post.author.display_name }}
-							</h6>
-							<a href="tel:	+44 (0)117 329 1712">+44 (0)117 329 1712</a>
-							<a class="text-pop-pink" href="mailto:{{post.author.user_email}}">{{post.author.user_email}}</a>
-						</div>
-					</div>
+          {% include "/templates/partial/author.twig" %}
 				</div>
 			</div>
 		</article>
-		<!-- user_email
-		avatar_override -->
 	</div>
 {% endblock %}
