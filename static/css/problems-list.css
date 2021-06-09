@@ -4,6 +4,10 @@
       @apply text-xl;
     }
 
+    &-number {
+      font-size: 5rem !important;
+    }
+
     strong {
       @apply font-bold;
     }

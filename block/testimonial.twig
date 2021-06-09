@@ -4,28 +4,21 @@
 
 {% if not is_preview %}
 <div class="container-narrow relative {{ theme_text_color }}" >
-    <div class="z-0 absolute top-0 left-14 md:left-0 opacity-90 transform -translate-x-1/2 ">
+    <div class="z-0 absolute -top-4 left-14 md:left-0 opacity-90 transform -translate-x-1/2 ">
       <svg class="" width="100" height="80" viewBox="0 0 62 44" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path class="fill-current text-pop-pink" d="M19.9651 43.0856H0.674805L18.8304 0.155334H31.1232L19.9651 43.0856ZM50.6026 43.0856H31.3123L49.4678 0.155334H61.7607L50.6026 43.0856Z" fill="black"/>
       </svg>
     </div>
-    <div class="z-0 absolute -bottom-8 right-0 transform translate-y-16 text-pop-pink opacity-90" style="font-size: 20rem; line-height: 16rem;">
+    <div class="z-0 absolute bottom-12 sm:bottom-8 md:bottom-4 right-0 text-pop-pink opacity-90" style="font-size: 20rem; line-height: 5rem;">
       "
     </div>
-    <h5 class="pl-6 md:pl-0">
+    <h3 class="pl-6 md:pl-0 mb-6">
       {{ fields.testimonial }}
-    </h5>
+    </h3>
     {% if fields.quotee|length > 0 %}
       <h6 class="font-normal">
-        <span class="font-bold">
-          {{ fields.quotee }}
-        </span>
-        
-        {% if fields.quotee_role|length > 0 %}
-          <span class="inline italic">
-            , {{ fields.quotee_role }}
-          </span>
-        {% endif %}
+        <!-- One long line only way to remove space before comma -->
+        <span class="font-bold">{{ fields.quotee }}</span>{% if fields.quotee_role|length > 0 %}<span class="inline italic">, {{ fields.quotee_role }}</span>{% endif %}
       </h6>
     {% endif %}
   </div>

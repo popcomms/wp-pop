@@ -35,17 +35,20 @@ document.addEventListener("DOMContentLoaded", function() {
     },
     methods: {
       nextStep () {
-        if (this.downloadTl.paused() === true) {
+        if (this.downloadTl.paused() === true || this.downloadTl.progress() == 0) {
+          console.log('next')
           this.downloadTl.play();
           this.step += 1
         }
       },
       prevStep () {
-        console.log('prev')
-        if (this.step > 0 && this.downloadTl.paused() === true) {
+        if (this.step > 0 && this.step < 5 && this.downloadTl.paused() === true) {
           console.log('prev active')
           this.downloadTl.reverse()
           this.step -= 1
+        } else if (this.step === 5 && this.downloadTl.paused() === true) {
+          this.downloadTl.play('restartPoint')
+          this.step = 1
         }
       },
       validateEmail: function(e) {
@@ -109,6 +112,7 @@ document.addEventListener("DOMContentLoaded", function() {
       this.downloadTl = gsap.timeline({ paused: true })
       // Show form
       .to(this.$refs.form_bg,{left: 0, duration: 0.4})
+      .addLabel('restartPoint')
       .set(this.$refs.steps,{ pointerEvents: 'all' })
       .to([".download-steps", ".download-back"], {opacity: 1,duration: 0.3})
       .fromTo(
@@ -359,14 +363,15 @@ document.addEventListener("DOMContentLoaded", function() {
         let container = this.querySelectorAll('.sub-item')
         
         container.forEach(element => {
-          gsap.fromTo(element.children[1], {textShadow: '0px 0px 0 transparent, 0px 0px 0 transparent, 0px 0px 0 transparent, 0px 0px 0 transparent'}, {duration: 0.5, color: '#2D2D2D', textShadow: '-1px -1px 0 #F8F7EE, 1px -1px 0 #F8F7EE, -1px 1px 0 #F8F7EE, 1px 1px 0 #F8F7EE'})
+          // gsap.fromTo(element.children[1], {textShadow: '0px 0px 0 transparent, 0px 0px 0 transparent, 0px 0px 0 transparent, 0px 0px 0 transparent'}, {duration: 0.5, color: '#2D2D2D', textShadow: '-1px -1px 0 #F8F7EE, 1px -1px 0 #F8F7EE, -1px 1px 0 #F8F7EE, 1px 1px 0 #F8F7EE'})
+          // gsap.fromTo(element.children[1], {}, {duration: 0.5, color: '#2D2D2D', })
         });
       }));
       $$('.sub-item-container').forEach(el => el.addEventListener('mouseleave', function(e) {
         let container = this.querySelectorAll('.sub-item')
         
         container.forEach(element => {
-          gsap.to(element.children[1], {duration: 0.5, color: '#F8F7EE', textShadow: '0px 0px 0 #F8F7EE'})
+          // gsap.to(element.children[1], {duration: 0.5, color: '#F8F7EE', textShadow: '0px 0px 0 #F8F7EE'})
         });
       }));
 
@@ -389,7 +394,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
       $$('.sub-item').forEach(el => el.addEventListener('mouseleave', function() {
         gsap.to(this, {duration: 0.5, x: 0, y: 0})
-        gsap.to(this.children[1], {duration: 0.5, x: 0, y: 0, color: '#2D2D2D'})
+        gsap.to(this.children[1], {duration: 0.5, x: 0, y: 0, color: '#F8F7EE'})
         // gsap.to(this.children[2], {duration: 0.5, width: 0 + '%'})
         // const feDisplacementMapEl = this.querySelector('feDisplacementMap');
         // gsap.to(feDisplacementMapEl, {duration: 0.5, attr: {scale: 100}, ease: Quad.easeOut})
