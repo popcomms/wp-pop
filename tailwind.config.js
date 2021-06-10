@@ -25,12 +25,12 @@ module.exports = {
       '5xl': '3.5rem',
       '6xl': '4rem'
     },
-    boxShadow: {
-      'sm': '0px 1px 1px rgba(0, 0, 0, 0.25)',
-      'md': '0px 4px 4px rgba(0, 0, 0, 0.25)',
-      'inset': 'inset 0 0 0 1.5px #DFDFDF',
-      none: 'none',
-    },
+    // boxShadow: {
+    //   'sm': '0px 1px 1px rgba(0, 0, 0, 0.25)',
+    //   'md': '0px 4px 4px rgba(0, 0, 0, 0.25)',
+    //   'inset': 'inset 0 0 0 1.5px #DFDFDF',
+    //   none: 'none',
+    // },
     extend: {
       colors: {
         'pop-white': '#F8F7EE',
