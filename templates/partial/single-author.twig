@@ -1,0 +1,14 @@
+<div>
+  {% if post.author.meta('avatar') %}
+    <div
+    class="inline-block align-middle w-8 h-8 rounded-full bg-cover mr-4"
+    style="background-image: url({{ Image(post.author.meta('avatar')).src }})"
+    ></div>
+  {% endif %}
+  <div class="inline-block align-middle text-pop-pink mr-8">
+    {{ post.author.display_name }}
+  </div>
+  <div class="inline-block align-middle text-pop-purple">
+    {{ post.date }}
+  </div>
+</div>

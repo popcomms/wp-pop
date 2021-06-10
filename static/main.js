@@ -1,7 +1,7 @@
 console.log('JS Active');
 document.addEventListener("DOMContentLoaded", function() {
   gsap.registerPlugin(ScrollTrigger);
-  
+
   console.log('Document Loaded - V4');
 
   Vue.component('downloads', {
@@ -70,7 +70,7 @@ document.addEventListener("DOMContentLoaded", function() {
         const borders = step.getElementsByClassName('input-border')
         const guides = step.getElementsByClassName('input-guide')
         const inputs = step.querySelectorAll('.input-content')
-        
+
         if (this.downloadTl.reversed()) {
           this.hideInputAnim(step, inputs, borders, guides)
         } else {
@@ -81,7 +81,7 @@ document.addEventListener("DOMContentLoaded", function() {
         const borders = step.getElementsByClassName('input-border')
         const guides = step.getElementsByClassName('input-guide')
         const inputs = step.querySelectorAll('.input-content')
-        
+
         if (this.downloadTl.reversed()) {
           this.revealInputAnim(step, inputs, borders, guides)
         } else {
@@ -108,7 +108,7 @@ document.addEventListener("DOMContentLoaded", function() {
     },
     mounted () {
       gsap.set(this.$refs.steps, {pointerEvents: 'none'})
-      
+
       this.downloadTl = gsap.timeline({ paused: true })
       // Show form
       .to(this.$refs.form_bg,{left: 0, duration: 0.4})
@@ -159,13 +159,13 @@ document.addEventListener("DOMContentLoaded", function() {
       .addPause()
     }
   })
-  
+
 
   Vue.component('contact-form', {
     data () {
       return {
         step: 0,
-        enquiry: '', 
+        enquiry: '',
         email: '',
         name: '',
         showInput: 'email'
@@ -199,7 +199,7 @@ document.addEventListener("DOMContentLoaded", function() {
         const guides = step.getElementsByClassName('input-guide')
         const inputs = step.querySelectorAll('.input-content')
         const text = step.querySelectorAll('h4')
-        
+
         if (this.contactTl.reversed()) {
           this.hideInputAnim(step, inputs, borders, guides, text)
         } else {
@@ -211,7 +211,7 @@ document.addEventListener("DOMContentLoaded", function() {
         const guides = step.getElementsByClassName('input-guide')
         const inputs = step.querySelectorAll('.input-content')
         const text = step.querySelectorAll('h4')
-        
+
         if (this.contactTl.reversed()) {
           this.revealInputAnim(step, inputs, borders, guides, text)
         } else {
@@ -252,7 +252,7 @@ document.addEventListener("DOMContentLoaded", function() {
     mounted () {
 
       gsap.set(this.$refs.steps, {pointerEvents: 'none'})
-      
+
       this.contactTl = gsap.timeline({ paused: true })
       // Show form
 
@@ -358,10 +358,10 @@ document.addEventListener("DOMContentLoaded", function() {
     mounted () {
       const $ = (s, o = document) => o.querySelector(s);
       const $$ = (s, o = document) => o.querySelectorAll(s);
-      
+
       $$('.sub-item-container').forEach(el => el.addEventListener('mouseenter', function(e) {
         let container = this.querySelectorAll('.sub-item')
-        
+
         container.forEach(element => {
           // gsap.fromTo(element.children[1], {textShadow: '0px 0px 0 transparent, 0px 0px 0 transparent, 0px 0px 0 transparent, 0px 0px 0 transparent'}, {duration: 0.5, color: '#2D2D2D', textShadow: '-1px -1px 0 #F8F7EE, 1px -1px 0 #F8F7EE, -1px 1px 0 #F8F7EE, 1px 1px 0 #F8F7EE'})
           // gsap.fromTo(element.children[1], {}, {duration: 0.5, color: '#2D2D2D', })
@@ -369,7 +369,7 @@ document.addEventListener("DOMContentLoaded", function() {
       }));
       $$('.sub-item-container').forEach(el => el.addEventListener('mouseleave', function(e) {
         let container = this.querySelectorAll('.sub-item')
-        
+
         container.forEach(element => {
           // gsap.to(element.children[1], {duration: 0.5, color: '#F8F7EE', textShadow: '0px 0px 0 #F8F7EE'})
         });
@@ -377,7 +377,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
       $$('.sub-item').forEach(el => el.addEventListener('mousemove', function(e) {
         const pos = this.getBoundingClientRect();
-        const mx = e.clientX - pos.left - pos.width/2; 
+        const mx = e.clientX - pos.left - pos.width/2;
         const my = e.clientY - pos.top - pos.height/2;
         gsap.to(this, {duration: 0.5, x: mx * 0.15 +'px', y: my * 0.3 + 'px' })
         gsap.to(this.children[1], {duration: 0.5, x: mx * 0.025 +'px', y: my * 0.075 + 'px', color: '#FF0088'})
@@ -404,7 +404,7 @@ document.addEventListener("DOMContentLoaded", function() {
         gsap.to(this.children[0], {duration: 0.5, opacity: 0})
       }));
 
-      
+
     }
   })
 
@@ -423,7 +423,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const accentColor = getComputedStyle(problems[0]).borderColor;
     problems.forEach(element => {
       element.querySelectorAll('strong').forEach(e => {
-        e.style.color = accentColor 
+        e.style.color = accentColor
       });
     });
   }
@@ -436,14 +436,14 @@ document.addEventListener("DOMContentLoaded", function() {
       var rect = el.getBoundingClientRect(),
       scrollLeft = window.pageXOffset || document.documentElement.scrollLeft,
       scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-      window.scrollTo({ 
+      window.scrollTo({
         left: 0,
         top: rect.top + scrollTop,
         behavior: 'smooth'
       })
     })
   }
-  
+
   const pageScrollButtons = document.querySelectorAll('.scroll-button-page')
   for (var i = 0; i < pageScrollButtons.length; i++) {
     pageScrollButtons[i].addEventListener('click', function () {
@@ -451,14 +451,14 @@ document.addEventListener("DOMContentLoaded", function() {
       var rect = el.getBoundingClientRect(),
       scrollLeft = window.pageXOffset || document.documentElement.scrollLeft,
       scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-      window.scrollTo({ 
+      window.scrollTo({
         left: 0,
         top: rect.top + scrollTop,
         behavior: 'smooth'
       })
     })
   }
-  
+
 
   const magnifyImage = document.querySelectorAll('.image-magnify');
   for (var i = 0; i < magnifyImage.length; i++) {
@@ -482,6 +482,26 @@ document.addEventListener("DOMContentLoaded", function() {
     })
   }
 
+  // Social Media Sharing
+
+  function shareFB(url){
+    const link = 'https://www.facebook.com/sharer/sharer.php?u=' + url + '&t=your message';
+    window.open(link, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');
+    return false;
+  }
+
+  function shareTwitter(url){
+    const link = 'https://twitter.com/intent/tweet?url=' + url + '&via=getboldify&text=yourtext';
+    TwitterWindow = window.open(link, 'TwitterWindow', width=600, height=300);
+    return false;
+  }
+
+  function shareLinkedin(url){
+    const link = 'https://plus.google.com/share?url=' + url;
+    window.open(link, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=480');
+    return false;
+  }
+
   // const highlights = problems.getElementsByTagName('strong');
   // console.log(highlights)
   // gsap.set(".section__title", {
@@ -492,7 +512,7 @@ document.addEventListener("DOMContentLoaded", function() {
   //   y: 100,
   //   opacity: 0,
   // })
-  
+
   // gsap
   // .timeline({
   //   scrollTrigger: {
@@ -518,7 +538,7 @@ document.addEventListener("DOMContentLoaded", function() {
   //   },
   //   "-=0.5"
   // );
-  
+
 
 })
 
