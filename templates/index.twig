@@ -2,27 +2,42 @@
 
 {% block content %}
 <div class="relative content-wrapper">
-	<div class="relative overflow-hidden flex flex-column items-end" style="height: 50vh;">
-		<div class="absolute top-0 left-0 w-full h-full bg-center bg-cover no-repeat " style="background-image: url({{ theme.link }}/static/images/blogs-bg.png);">
-		</div>
-		
+	<div class="relative flex flex-column items-end pt-48 pb-16">
+
+    <div
+      class="absolute top-0 left-0 w-full h-full bg-center bg-cover no-repeat"
+      style="background-image: url({{ theme.link }}/static/images/blogs-bg.png);"
+    ></div>
+
 		<div class="container-banner flex flex-col justify-between z-10 h-3/4 sm:h-1/2">
 			<div>
-				<div class="input-box relative w-full bg-pop-white">
-					<div>
-						<form class="mb-2 w-full" method="get" role="search" action="{{ site.url }}">
-							<input class="h3 text-2xl text-pop-purple underline w-full" type="text" placeholder="Find Ideas" name="s">
+				<div class="input-box relative w-full bg-white">
+					<div class="p-6">
+						<form
+              class="w-full border-b border-pop-purple flex mb-1"
+              method="get"
+              role="search"
+              action="{{ site.url }}"
+            >
+							<input
+                class="h3 text-2xl text-pop-purple w-11/12 "
+                type="text"
+                placeholder="Find Ideas"
+                name="s"
+              >
 							<input type="hidden" name="post_type" value="post">
-							<input class="bg-transparent text-pop-white text-sm my-0" type="submit" value="Search">
+							<input class="bg-transparent text-pop-purple w-1/12" type="submit" value="&rarr;">
 						</form>
+            <div class="text-pop-purple text-sm text-right">
+              click or hit enter
+            </div>
 					</div>
-					<div class="flex flex-wrap w-1/2">
+					<div class="flex flex-wrap p-4">
 						{% for cat in categories %}
-							<form class="mb-2 mr-2 py-2 px-4 rounded-3xl bg-pop-pink" method="get" role="search" action="{{ site.url }}">
-								<input class="hidden" type="text" placeholder="Enter Keywords..." name="s" value="{{ cat.name }}">
-								<input type="hidden" name="post_type" value="post">
-								<input class="bg-transparent text-pop-white text-sm my-0" type="submit" value="{{ cat.name }}">
-							</form>
+
+							<a href="" class="m-1 py-2 px-4 rounded-3xl bg-pop-pink text-white whitespace-nowrap">
+                {{ cat.name }}
+              </a>
 						{% endfor %}
 					</div>
 				</div>
@@ -31,7 +46,7 @@
 	</div>
 
 	<div class="container-narrow mb-20">
-		<h3 class="my-8">Recent Blogs</h3>
+		<h3 class="my-8">Recent Blog Posts</h3>
 		{% for post in posts %}
 			<div class="mb-8">
 				{% include ['tease-'~post.post_type~'.twig', 'tease.twig'] %}
@@ -39,7 +54,7 @@
 		{% endfor %}
 	</div>
 </div>
-	
+
 	<!-- Pagination -->
 	<!-- {% include 'partial/pagination.twig' with { pagination: posts.pagination({show_all: false, mid_size: 3, end_size: 2}) } %} -->
 {% endblock %}

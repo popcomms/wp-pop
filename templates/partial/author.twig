@@ -1,25 +1,25 @@
 <div class="w-full">
   <div class="my-20 container-narrow text-pop-{{ content.theme == 'black' ? 'white' : 'black' }}">
-    <div class="flex items-center justify-start">
+    <div class="flex items-center justify-start space-x-4">
       <div
-        class="w-32 h-32 rounded-full bg-cover mr-4"
+        class="w-32 h-32 rounded-full bg-cover"
         style="background-image: url({{ post.author.avatar }})"
       ></div>
       <div class="text-base">
         <div class="text-xl font-semibold">
           {{ post.author.display_name }}
         </div>
-        <div class="mb-4">
+        <div class="text-sm mb-4 text-gray-500">
           {{ post.author.job }}
         </div>
-        <div>
-          <a href="tel:+441173291712">
-            +44 (0)117 329 1712
-          </a>
-        </div>
-        <div>
+        <div class="text-sm mb-1">
           <a class="text-pop-pink" href="mailto:{{ post.author.user_email }}">
             {{ post.author.user_email }}
+          </a>
+        </div>
+        <div class="text-sm">
+          <a href="tel:+441173291712">
+            +44 (0)117 329 1712
           </a>
         </div>
       </div>
