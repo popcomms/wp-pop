@@ -444,6 +444,21 @@ document.addEventListener("DOMContentLoaded", function() {
     })
   }
   
+  const pageScrollButtons = document.querySelectorAll('.scroll-button-page')
+  for (var i = 0; i < pageScrollButtons.length; i++) {
+    pageScrollButtons[i].addEventListener('click', function () {
+      el = document.querySelector('.pop-container');
+      var rect = el.getBoundingClientRect(),
+      scrollLeft = window.pageXOffset || document.documentElement.scrollLeft,
+      scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+      window.scrollTo({ 
+        left: 0,
+        top: rect.top + scrollTop,
+        behavior: 'smooth'
+      })
+    })
+  }
+  
 
   const magnifyImage = document.querySelectorAll('.image-magnify');
   for (var i = 0; i < magnifyImage.length; i++) {

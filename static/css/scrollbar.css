@@ -1,7 +1,7 @@
 html::-webkit-scrollbar,
 body::-webkit-scrollbar,
 .back-card-content::-webkit-scrollbar {
-  width: 5px;
+  width: 8px;
   overflow: visible;
   display: block !important;
 }

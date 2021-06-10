@@ -60,6 +60,7 @@ module.exports = {
   variants: {
     extend: {
       fontSize: ['hover', 'focus'],
+      flex: ['group-hover'],
       scale: ['group-hover'],
       translate: ['group-hover']
     },

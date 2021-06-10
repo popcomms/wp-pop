@@ -1,0 +1,28 @@
+{% if is_preview %}
+  <p><strong>Text Block</strong> - I will only appear in the editor.</p>
+{% endif %}
+
+{% if not is_preview %}
+{# {{dump(fields)}} #}
+  <div class="container-narrow relative grid grid-cols-4 grid-rows-auto" >
+
+    {% for item in fields.grid_copy %}
+      {% if item.acf_fc_layout == 'staff' %}
+        <div>
+          <h3>{{item.name}}</h3>
+          <p class="bold">{{item.position}}</p>
+          <p>{{item.description}}</p>
+        </div>
+      {% endif %}
+      {% if item.acf_fc_layout == 'image' %}
+        <div class="relative bg-cover bg-no-repeat bg-center" style="background-image: url({{ item.image }});">
+          <div class="absolute top-0 left-0 w-full h-full opacity-30 bg-pop-{{item.overlay}}"></div>
+        </div>
+
+      {% endif %}
+      {% if item.acf_fc_layout == 'blank' %}
+        <div></div>
+      {% endif %}
+    {% endfor %}
+  </div>
+{% endif %}
