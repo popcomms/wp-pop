@@ -453,11 +453,13 @@ function custom_case_study_post_type() {
 					'supports' => array('title', 'editor', 'thumbnail', 'excerpt'),
 					'public' => true,
 					'has_archive' => true,
-					'show_in_rest' => true
+					'show_in_rest' => true,
+					'taxonomies'  => array( 'category' )
 			)
 	);
 }
 add_action('init', 'custom_case_study_post_type');
+
 
 function custom_portfolio_post_type() {
 	register_post_type('portfolio',
@@ -475,36 +477,17 @@ function custom_portfolio_post_type() {
 }
 add_action('init', 'custom_portfolio_post_type');
 
-add_action( 'show_user_profile', 'extra_user_profile_fields' );
-add_action( 'edit_user_profile', 'extra_user_profile_fields' );
+add_action('admin_menu', 'register_my_custom_submenu_page');
 
-function extra_user_profile_fields( $user ) { ?>
-    <h3><?php _e("Extra profile information", "blank"); ?></h3>
+function register_my_custom_submenu_page() {
+  add_submenu_page( 'edit.php?post_type=post', 'My Custom Submenu Page', 'My Custom Submenu Page', 'manage_options', 'my-custom-submenu-page', 'my_custom_submenu_page_callback' ); 
+}
 
-    <table class="form-table">
-    <tr>
-        <th><label for="address"><?php _e("Address"); ?></label></th>
-        <td>
-            <input type="text" name="address" id="address" value="<?php echo esc_attr( get_the_author_meta( 'address', $user->ID ) ); ?>" class="regular-text" /><br />
-            <span class="description"><?php _e("Please enter your address."); ?></span>
-        </td>
-    </tr>
-    <tr>
-        <th><label for="city"><?php _e("City"); ?></label></th>
-        <td>
-            <input type="text" name="city" id="city" value="<?php echo esc_attr( get_the_author_meta( 'city', $user->ID ) ); ?>" class="regular-text" /><br />
-            <span class="description"><?php _e("Please enter your city."); ?></span>
-        </td>
-    </tr>
-    <tr>
-    <th><label for="postalcode"><?php _e("Postal Code"); ?></label></th>
-        <td>
-            <input type="text" name="postalcode" id="postalcode" value="<?php echo esc_attr( get_the_author_meta( 'postalcode', $user->ID ) ); ?>" class="regular-text" /><br />
-            <span class="description"><?php _e("Please enter your postal code."); ?></span>
-        </td>
-    </tr>
-    </table>
-<?php }
+function my_custom_submenu_page_callback() {
+	echo '<div class="wrap"><div id="icon-tools" class="icon32"></div>';
+		echo '<h2>My Custom Submenu Page</h2>';
+	echo '</div>';
+}
 
 function myprefix_enqueue_scripts() {
 	wp_enqueue_script( 'gsap', 'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.6.1/gsap.min.js', array(), true );

@@ -87,7 +87,9 @@
 
   h4,
   .h4 {
-    font-weight: 400;
+    font-weight: 300;
+    font-size: 28px;
+    line-height: 1.8rem;
   }
 
   h5,

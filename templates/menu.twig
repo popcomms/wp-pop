@@ -1,14 +1,32 @@
 <!-- <div v-show="menuActive" ref="'{{ item.title }}'" class="fixed bg-pop-black h-screen w-screen top-0 left-0"></div> -->
 <!-- Main Nav Headings -->
-{% for item in items %}
-<div class="hidden sm:flex items-center mr-12">
-	{% if item.children %}
-	<a @click="toggleMenu( '{{ item.title }}'  )" class="text-pop-mid-gray hover:text-pop-white " target="{{ item.target }}" href="{{ item.link }}">{{ item.title }}</a>
-	{% else %}
-	<a class="text-pop-mid-gray hover:text-pop-white" target="{{ item.target }}" href="{{ item.link }}">{{ item.title }}</a>
-	{% endif %}
+
+
+<div class="flex h-full items-center">
+
+	{% for item in items %}
+		{% if item.children %}
+			<div class="nav-parent group hidden h-full sm:flex items-center px-6 text-pop-mid-gray hover:text-pop-mid-gray hover:bg-pop-green-pale" style="cursor: default;">
+			{# @click="toggleMenu( '{{ item.title }}'  )" #}
+			{# <a class="text-pop-mid-gray hover:text-pop-mid-gray " target="{{ item.target }}" href="{{ item.link }}">{{ item.title }}</a> #}
+			{# <div class="relative flex items-center h-full text-pop-mid-gray hover:text-pop-mid-gray hover:bg-pop-green-pale"> #}
+				{{ item.title }}
+				<div class="nav-child absolute top-full left-0  flex-col w-max group-hover:bg-pop-green-pale py-2">
+					{% for child in item.children %}
+						<a class="text-pop-mid-gray hover:text-pop-pink px-6 underline cursor-pointer" target="{{ child.target }}" href="{{ child.link }}">{{ child.title }}</a>
+					{% endfor %}
+				{# </div> #}
+				</div>
+			</div>
+			{% else %}
+				<div class="nav-parent group hidden h-full sm:flex items-center cursor-pointer">
+					<a class="text-pop-mid-gray group-hover:text-pop-white px-6" target="{{ item.target }}" href="{{ item.link }}">{{ item.title }}</a>
+				</div>
+			{% endif %}
+	{% endfor %}
+
 </div>
-{% endfor %}
+
 <!-- Children Pages -->
 <transition @enter="enterMenu" @leave="leaveMenu" mode="out-in">
 	<div ref="menuContainer" v-show="menuActive" class="fixed bg-pop-black h-screen w-screen top-0 left-0 opacity-0 pointer-events-none">

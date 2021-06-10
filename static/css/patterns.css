@@ -5,43 +5,67 @@
 }
 
 .pattern.polka-pink {
-  background-image: radial-gradient(circle, #fb0 5%, transparent 5%), radial-gradient(circle, #f1f 5%, transparent 5%);
+  background-image: radial-gradient(circle, #f1f 5%, transparent 5%), radial-gradient(circle, #f1f 5%, transparent 5%);
   background-size: 20px 20px;
   background-position: 0 0, 0 0;
 }
 
-.pattern.polka-pale-pink {
-  background-image: radial-gradient(circle, #ffd 5%, transparent 5%), radial-gradient(circle, #ffd 5%, transparent 5%);
+.pattern.polka-green {
+  background-image: radial-gradient(circle, #64FFE3 5%, transparent 5%), radial-gradient(circle, #64FFE3 5%, transparent 5%);
+  background-size: 20px 20px;
+  background-position: 0 0, 0 0;
+}
+
+.pattern.polka-yellow {
+  background-image: radial-gradient(circle, #FFFF99 5%, transparent 5%), radial-gradient(circle, #FFFF99 5%, transparent 5%);
+  background-size: 20px 20px;
+  background-position: 0 0, 0 0;
+}
+
+.pattern.polka-purple {
+  background-image: radial-gradient(circle, #6F62FF 5%, transparent 5%), radial-gradient(circle, #6F62FF 5%, transparent 5%);
+  background-size: 20px 20px;
+  background-position: 0 0, 0 0;
+}
+
+.pattern.polka-navy {
+  background-image: radial-gradient(circle, #212363 5%, transparent 5%), radial-gradient(circle, #212363 5%, transparent 5%);
   background-size: 20px 20px;
   background-position: 0 0, 0 0;
 }
 
 .pattern.polka-gray {
-  background-image: radial-gradient(circle, #dfd 5%, transparent 5%), radial-gradient(circle, #dfd 5%, transparent 5%);
+  background-image: radial-gradient(circle, #8E8E8E 5%, transparent 5%), radial-gradient(circle, #8E8E8E 5%, transparent 5%);
   background-size: 20px 20px;
   background-position: 0 0, 0 0;
 }
 
 .pattern.stripe-blue {
-  background:
-    repeating-linear-gradient(
-      315deg,
-      #3a3eab50,
-      #3a3eab50 1px,
-      #3330 2px,
-      #3330 8px
-    )
+  background: repeating-linear-gradient(315deg, #3a3eab50, #3a3eab50 1px, #3330 2px, #3330 8px)
 }
 
 .pattern.stripe-pink {
-  background:
-    repeating-linear-gradient(
-      315deg,
-      #f08,
-      #f08 1px,
-      #3330 2px,
-      #3330 8px
-    )
+  background: repeating-linear-gradient(315deg, #f08, #f08 1px, #3330 2px, #3330 8px)
+}
+
+.pattern.stripe-green {
+  background: repeating-linear-gradient(315deg, #64FFE3, #64FFE3 1px, #3330 2px, #3330 8px)
+}
+
+.pattern.stripe-yellow {
+  background: repeating-linear-gradient(315deg, #FFFF99, #FFFF99 1px, #3330 2px, #3330 8px)
+}
+
+.pattern.stripe-purple {
+  background: repeating-linear-gradient(315deg, #6F62FF, #6F62FF 1px, #3330 2px, #3330 8px)
+}
+
+.pattern.stripe-navy {
+  background: repeating-linear-gradient(315deg, #212363, #212363 1px, #3330 2px, #3330 8px)
+}
+
+.pattern.stripe-gray {
+  background: repeating-linear-gradient(315deg, #8E8E8E, #8E8E8E 1px, #3330 2px, #3330 8px)
 }
 
 /* .pattern.crosses-blue {
