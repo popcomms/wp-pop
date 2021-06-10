@@ -479,19 +479,6 @@ function custom_portfolio_post_type() {
 }
 add_action('init', 'custom_portfolio_post_type');
 
-<<<<<<< HEAD
-add_action('admin_menu', 'register_my_custom_submenu_page');
-
-function register_my_custom_submenu_page() {
-  add_submenu_page( 'edit.php?post_type=post', 'My Custom Submenu Page', 'My Custom Submenu Page', 'manage_options', 'my-custom-submenu-page', 'my_custom_submenu_page_callback' ); 
-}
-
-function my_custom_submenu_page_callback() {
-	echo '<div class="wrap"><div id="icon-tools" class="icon32"></div>';
-		echo '<h2>My Custom Submenu Page</h2>';
-	echo '</div>';
-}
-=======
 // Client Taxonomy
 
 // Register Client Taxonomy
@@ -568,7 +555,6 @@ function extra_user_profile_fields( $user ) { ?>
       </tr> */?>
     </table>
 <?php }
->>>>>>> 2a22993ce62f9452336d22429f4aa75286dce160
 
 add_action('show_user_profile', 'extra_user_profile_fields' );
 add_action('edit_user_profile', 'extra_user_profile_fields' );
