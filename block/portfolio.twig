@@ -61,7 +61,7 @@
                 style="background-image: url({{ item.icon }});">
               </div>
 
-            {% elseif item.acf_fc_layout == 'Link Card' %}
+              {% elseif item.acf_fc_layout == 'Link Card' %}
               <div class="link-card absolute top-0 left-0 flex flex-col h-full w-full">
                 {% set link_post = function('get_post', item.link_card.link) %}
                 {% set featured_img = function('get_the_post_thumbnail_url', link_post.ID) %}
@@ -69,6 +69,29 @@
                   <div class="group bg-pop-white flex flex-col justify-between h-full">
                     <div class="absolute top-0 left-0 w-full h-full hover:opacity-100 transition-opacity overflow-hidden">
                       <img class="w-full h-full object-cover origin-center transform group-hover:scale-110 transition-transform duration-500" src="{{ featured_img }}" alt="">
+                      <div class="absolute top-0 left-0 h-full w-full bg-pop-black opacity-40 group-hover:opacity-0 transition-opacity duration-500"></div>
+                    </div>
+
+                    <h3 class="group-hover:opacity-0 transition-opacity duration-500 p-6 m-0 text-pop-white {{ loop.index == 3 ? 'sm:w-3/4' : 'w-full'}}">{{ item.link_card.text }}</h3>
+                    {% if featured_img %}
+                    {% endif %}
+                    <div class="self-end">
+                      {% include "/templates/partial/arrow.twig" with 
+                        {
+                          'arrow': fields.arrow,
+                        }
+                      %}
+                    </div>
+                  </div>
+                </a>
+              </div>
+            {% elseif item.acf_fc_layout == 'Custom Image Link Card' %}
+              <div class="link-card absolute top-0 left-0 flex flex-col h-full w-full">
+                {% set link_post = function('get_post', item.link_card.link) %}
+                <a class="h-full relative" href="{{ link_post.guid }}" >
+                  <div class="group bg-pop-white flex flex-col justify-between h-full">
+                    <div class="absolute top-0 left-0 w-full h-full hover:opacity-100 transition-opacity overflow-hidden">
+                      <img class="w-full h-full object-cover origin-center transform group-hover:scale-110 transition-transform duration-500" src="{{ item.link_card.image }}" alt="">
                       <div class="absolute top-0 left-0 h-full w-full bg-pop-black opacity-40 group-hover:opacity-0 transition-opacity duration-500"></div>
                     </div>
 
