@@ -6,8 +6,8 @@
 	</head>
 {% endblock %}
 
-	<body id="site" class="font-default slider-content" data-template="base.twig">
-		
+	<body id="site" class="font-default slider-content antialiased" data-template="base.twig">
+
 		{% include 'partial/nav.twig' %}
 
 		<div id="site-wrapper">
@@ -22,7 +22,7 @@
 
 		{% block footer %}
 			<footer id="footer">
-				{% include 'footer.twig' with 
+				{% include 'footer.twig' with
 					{
 						'fields': content,
 					}

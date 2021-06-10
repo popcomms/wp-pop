@@ -1,0 +1,16 @@
+<div class="my-20 border-t-4 border-gray-200 container-narrow text-pop-{{ content.theme == 'black' ? 'white' : 'black' }}">
+
+  <h3 class="my-10">Other Reads</h3>
+
+  <div class="grid grid-cols-4">
+  {% for post in related %}
+    <a
+      rel="external"
+      href="{{ post.link }}"
+      class="text-base p-8 border border-gray-200 transition-all hover:bg-yellow-100"
+    >
+      {{ post.title }}
+    </a>
+  {% endfor %}
+  </div>
+</div>
