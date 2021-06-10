@@ -40,7 +40,8 @@
         {% endfor %}
       </div>
     {% endif %}
-    <h1 class="px-8 flex-grow flex items-center text-pop-{{fields.title_color}}">{{ post.title }}</h1>
+
+    <h1 class="px-8 flex-grow flex items-center text-pop-{{fields.title_color}}">{{ fields.title != null ? fields.title : post.title }}</h1>
     
     {% if fields.link.url != null %}
       <a href="{{ fields.link.url }}">

@@ -42,7 +42,7 @@
     </div>
     <div class="problems-list relative {{ fields.show_bg ? theme_bg_color : '' }} ">
       {% for item in fields.problems %}
-        <a class="relative" href="{{ item.url }}" >
+        <a class="relative" href="{{ item.link }}" >
           <div class="problems-list__item relative flex flex-col sm:flex-row sm:justify-between items-start sm:items-center mt-6 sm:mt-0 border-pop-{{ fields.accent_color}} {{ loop.last ? '' : 'sm:border-b-1' }} ">
             <div class="problems-list__item-bg absolute w-full h-full bg-pop-{{ fields.accent_color }}"></div>
             <p class="hidden sm:block px-6 {{ theme_text_color }}">0{{ loop.index }}</p>

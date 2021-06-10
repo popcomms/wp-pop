@@ -3,26 +3,45 @@
 {% endif %}
 
 {% if not is_preview %}
-{# {{dump(fields)}} #}
-  <div class="container-narrow relative grid grid-cols-4 grid-rows-auto" >
+  {% set intro_text_color = 'text-pop-white' %}
+  {% if person.background_color == 'green' or person.background_color == 'yellow' %}
+    {% set intro_text_color = 'text-pop-black' %}
+  {% endif %}
 
-    {% for item in fields.grid_copy %}
-      {% if item.acf_fc_layout == 'staff' %}
-        <div>
-          <h3>{{item.name}}</h3>
-          <p class="bold">{{item.position}}</p>
-          <p>{{item.description}}</p>
-        </div>
-      {% endif %}
-      {% if item.acf_fc_layout == 'image' %}
-        <div class="relative bg-cover bg-no-repeat bg-center" style="background-image: url({{ item.image }});">
-          <div class="absolute top-0 left-0 w-full h-full opacity-30 bg-pop-{{item.overlay}}"></div>
-        </div>
-
-      {% endif %}
-      {% if item.acf_fc_layout == 'blank' %}
-        <div></div>
-      {% endif %}
-    {% endfor %}
+  <div class="container-narrow relative -mt-72" >
+    <div class=" px-16 py-36 bg-pop-{{ fields.intro_background_color }} {{intro_text_color}}">
+      {{ fields.intro_text }}
+    </div>
+    <div class="grid grid-cols-3 grid-rows-auto">
+      {% for item in fields.grid %}
+        {% for persons in item %}
+          {% for person in persons %}
+            {% if person.acf_fc_layout == 'information' %}
+  
+              {% set text_color = 'text-pop-white' %}
+              {% if person.background_color == 'green' or person.background_color == 'yellow' %}
+                {% set text_color = 'text-pop-black' %}
+              {% endif %}
+  
+              <div class="px-6 py-16 bg-pop-{{ person.background_color }}">
+                <h3 class="mb-6 text-3xl {{ text_color }}">{{person.name}}</h3>
+                <p class="mb-6 font-bold text-lg {{ text_color }}">{{person.position}}</p>
+                <p class="text-lg {{ text_color }}">{{person.description}}</p>
+              </div>
+            {% endif %}
+            {% if person.acf_fc_layout == 'photo' %}
+              <div class="relative">
+                <img src="{{person.photo}}" alt="">
+              </div>
+  
+            {% endif %}
+            {% if person.acf_fc_layout == 'icon' %}
+              <div class="relative bg-cover bg-no-repeat bg-center" style="background-image: url({{ person.icon }});">
+              </div>
+            {% endif %}
+          {% endfor %}
+        {% endfor %}
+      {% endfor %}
+    </div>
   </div>
 {% endif %}
