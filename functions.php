@@ -463,13 +463,14 @@ add_action('init', 'custom_case_study_post_type');
 function custom_portfolio_post_type() {
 	register_post_type('portfolio',
     array(
-      'labels'      => array(
+      'labels'       => array(
         'name'          => __('Portfolio'),
         'singular_name' => __('Portfolio Item'),
       ),
-      'supports' => array('title', 'editor', 'thumbnail', 'excerpt'),
-      'public' => true,
-      'has_archive' => true,
+      'supports'     => array('title', 'editor', 'thumbnail', 'excerpt'),
+      'taxonomies'   => array('client'),
+      'public'       => true,
+      'has_archive'  => true,
       'show_in_rest' => true
     )
 	);

@@ -12,12 +12,20 @@
 $timber_post     = Timber::get_post();
 $context         = Timber::context();
 $context['post'] = $timber_post;
+
 $all_acf = get_field_objects($context["post"]->ID);
 if (!empty($all_acf["post_options"])) {
 	$context["content"] = $all_acf["post_options"]["value"];
 }
 $context["hero"] = $all_acf["hero"]["value"];
 
+$categories = wp_get_post_categories($timber_post->ID);
+$context["related"] = Timber::get_posts([
+  'category__in'   => $categories,
+  'post__not_in'   => array($timber_post->ID),
+  'posts_per_page' => 4,
+  'orderby'        => 'rand'
+]);
 
 if ( post_password_required( $timber_post->ID ) ) {
 	Timber::render( 'single-password.twig', $context );
