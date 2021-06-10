@@ -3,7 +3,7 @@
 {% endif %}
   <div class="link flex cursor-pointer">
     {% if link.text %}
-      <div class="flex lowercase items-center px-8 py-2 {{ link.background_color == 'black' ? 'bg-pop-black' : 'bg-pop-white' }}">
+      <div class="flex items-center px-8 py-2 {{ link.background_color == 'black' ? 'bg-pop-black' : 'bg-pop-white' }}">
         <p class="link__text text-pop-white m-0 transform group-hover:text-xl {{ link.background_color == 'black' ? 'text-pop-white' : 'text-pop-black' }}">
           {{ link.text }}
         </p>

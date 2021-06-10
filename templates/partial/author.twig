@@ -3,14 +3,14 @@
     <div class="flex items-center justify-start space-x-4">
       <div
         class="w-32 h-32 rounded-full bg-cover"
-        style="background-image: url({{ post.author.avatar }})"
+        style="background-image: url({{ Image(post.author.meta('avatar')).src }})"
       ></div>
       <div class="text-base">
         <div class="text-xl font-semibold">
           {{ post.author.display_name }}
         </div>
         <div class="text-sm mb-4 text-gray-500">
-          {{ post.author.job }}
+          {{ post.author.meta('job_title') }}
         </div>
         <div class="text-sm mb-1">
           <a class="text-pop-pink" href="mailto:{{ post.author.user_email }}">

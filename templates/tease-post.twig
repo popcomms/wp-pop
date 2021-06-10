@@ -19,7 +19,9 @@
 				<a href="#" class="text-pop-pink text-base underline">{{ post.author.display_name }}</a>
 				<p class="text-pop-purple text-base">{{ post.date }}</p>
 			</div>
-			<h5 class="leading-9">{{ post.title }}</h5>
+      <a href="{{ post.link }}">
+        <h5 class="leading-9">{{ post.title }}</h5>
+      </a>
 			<div class="absolute bottom-0 right-0 ">
 				{% include "/templates/partial/link.twig" with
 					{
