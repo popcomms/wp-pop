@@ -481,7 +481,6 @@ add_action('init', 'custom_portfolio_post_type');
 
 // Client Taxonomy
 
-// Register Client Taxonomy
 function custom_client_taxonomy() {
 
 	$labels = array(

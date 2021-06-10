@@ -5,7 +5,6 @@
 @layer base {
   * {
     @apply leading-normal;
-
     position: relative;
     box-sizing: border-box;
   }
@@ -206,13 +205,13 @@
       font-size: 64px;
     }
 
-    p {
+    article p {
       font-size: 21px;
     }
   }
 
   @media only screen and (min-width: 1920px) {
-    p {
+    article p {
       font-size: 21px;
     }
 
@@ -230,8 +229,7 @@
   li,
   pre {
     @apply text-lg font-normal;
-
-    line-height: 180%;
+    line-height: 150%;
   }
 
   ul li {
@@ -261,7 +259,7 @@
   ul {
     @apply my-3;
 
-    line-height: 180%;
+    line-height: 150%;
   }
 
   .text-block img {
