@@ -187,7 +187,7 @@
       font-size: 28px;
     }
 
-    p {
+    article p {
       font-size: 18px;
     }
   }
@@ -225,9 +225,9 @@
     }
   }
 
-  p,
-  li,
-  pre {
+  article p,
+  article li,
+  article pre {
     @apply text-lg font-normal;
     line-height: 150%;
   }
@@ -258,7 +258,6 @@
   p,
   ul {
     @apply my-3;
-
     line-height: 150%;
   }
 
