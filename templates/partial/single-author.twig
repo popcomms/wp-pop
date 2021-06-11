@@ -1,14 +1,16 @@
-<div>
-  {% if post.author.meta('avatar') %}
-    <div
-    class="inline-block align-middle w-8 h-8 rounded-full bg-cover mr-4"
-    style="background-image: url({{ Image(post.author.meta('avatar')).src }})"
-    ></div>
-  {% endif %}
-  <div class="inline-block align-middle text-pop-pink mr-8">
-    {{ post.author.display_name }}
+<div class="flex flex-col md:flex-row md:items-center">
+  <div class="my-2">
+    {% if post.author.meta('avatar') %}
+      <div
+      class="inline-block align-middle w-8 h-8 rounded-full bg-cover mr-2"
+      style="background-image: url({{ Image(post.author.meta('avatar')).src }})"
+      ></div>
+    {% endif %}
+    <div class="inline-block align-middle text-pop-pink mr-8">
+      {{ post.author.display_name }}
+    </div>
   </div>
-  <div class="inline-block align-middle text-pop-purple">
+  <div class="my-2 text-pop-purple">
     {{ post.date }}
   </div>
 </div>

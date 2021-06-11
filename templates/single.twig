@@ -9,12 +9,13 @@
   {% else %}
   <div
     class="aspect-w-16 aspect-h-9 bg-cover bg-pop-green"
+    style="background-image: url({{ theme.link }}/static/images/blogs-bg.png)"
   ></div>
   {% endif %}
 	<div class="relative content-wrapper">
 		{# {% include "/templates/partial/post-hero.twig" with { 'fields': hero } %} #}
 
-    <div class="relative container-narrow -mt-48 bg-white">
+    <div class="relative container-narrow md:-mt-48 bg-white">
 
       {% for path in icons %}
         <img
@@ -23,15 +24,14 @@
         />
       {% endfor %}
 
-      <div class="p-16">
-        <h1 class="font-medium text-5xl">
+      <div class="py-8 lg:p-16">
+        <h1 class="font-medium sm:text-4xl lg:text-5xl">
           {{ post.title }}
         </h1>
       </div>
-      <div class="px-16 flex items-center justify-between">
-          {% include "/templates/partial/single-author.twig" %}
-          {% include "/templates/partial/single-share.twig" %}
-        </div>
+      <div class="lg:px-16 flex flex-col md:flex-row md:items-center justify-between">
+        {% include "/templates/partial/single-author.twig" %}
+        {% include "/templates/partial/single-share.twig" %}
       </div>
     </div>
 
