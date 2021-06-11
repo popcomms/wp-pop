@@ -36,8 +36,9 @@
   
             {% endif %}
             {% if person.acf_fc_layout == 'icon' %}
-              <div class="relative bg-cover bg-no-repeat bg-center" style="background-image: url({{ person.icon }});">
-              </div>
+            <div class="relative h-full w-full">
+              <img class="w-full absolute {{person.alignment}}-0 left-0" src="{{person.icon}}" alt="">
+            </div>
             {% endif %}
           {% endfor %}
         {% endfor %}
