@@ -5,7 +5,6 @@
 @layer base {
   * {
     @apply leading-normal;
-
     position: relative;
     box-sizing: border-box;
   }
@@ -67,14 +66,12 @@
   h1,
   .h1 {
     line-height: 1.2em !important;
-    letter-spacing: -0.2rem;
     font-weight: 900;
   }
 
   h2,
   .h2 {
     line-height: 1.25em !important;
-    letter-spacing: -0.03em;
     font-weight: 900;
   }
 
@@ -188,7 +185,7 @@
       font-size: 28px;
     }
 
-    p {
+    article p {
       font-size: 18px;
     }
   }
@@ -206,13 +203,13 @@
       font-size: 64px;
     }
 
-    p {
+    article p {
       font-size: 21px;
     }
   }
 
   @media only screen and (min-width: 1920px) {
-    p {
+    article p {
       font-size: 21px;
     }
 
@@ -226,12 +223,11 @@
     }
   }
 
-  p,
-  li,
-  pre {
+  article p,
+  article li,
+  article pre {
     @apply text-lg font-normal;
-
-    line-height: 180%;
+    line-height: 150%;
   }
 
   ul li {
@@ -260,8 +256,7 @@
   p,
   ul {
     @apply my-3;
-
-    line-height: 180%;
+    line-height: 150%;
   }
 
   .text-block img {

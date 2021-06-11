@@ -2,26 +2,26 @@
 
 {% block content %}
 <a href="{{post.link}}">
-	<div class="grid grid-cols-2 grid-rows-1 shadow-lg">
-		{% if post.thumbnail.src != '' %}
-		<div class="relative row-span-1" style="padding-bottom: 100%;">
-			<img class="absolute top-0 left-0 min-w-full min-h-full  object-cover" src="{{post.thumbnail.src}}" />
+	<div class="grid grid-cols-1 sm:grid-cols-2 grid-rows-2 sm:grid-rows-1 border border-gray-200 shadow-md">
+		{% if post.thumbnail.src %}
+		<div class="relative row-span-1" style="padding-bottom: 100%; font-size: 0">
+			<img
+        class="absolute inset-0 min-w-full min-h-full object-cover"
+        src="{{post.thumbnail.src}}"
+        style="font-size: 0"
+      />
 		</div>
-	{% endif %}
-	{% if post.thumbnail.src == null %}
+	{% else %}
 	<div class="relative row-span-1 bg-pop-pink" style="padding-bottom: 100%;">
 		<div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">placeholder</div>
 	</div>
 	{% endif %}
-		<div class="relative flex flex-col items-start justify-center p-7">
-			<div class="flex items-center space-x-4 mb-4">
-				<div class="rounded-full w-8 h-8 bg-pop-mid-gray"></div>
-				<a href="#" class="text-pop-pink text-base underline">{{ post.author.display_name }}</a>
-				<p class="text-pop-purple text-base">{{ post.date }}</p>
-			</div>
+		<div class="relative flex flex-col items-start sm:justify-center p-7">
       <a href="{{ post.link }}">
-        <h5 class="leading-9">{{ post.title }}</h5>
+        <h5 class="font-medium">{{ post.title }}</h5>
       </a>
+      <br>
+      {% include "/templates/partial/single-author.twig" %}
 			<div class="absolute bottom-0 right-0 ">
 				{% include "/templates/partial/link.twig" with
 					{

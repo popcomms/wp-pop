@@ -1,64 +1,37 @@
 {% extends "base.twig" %}
 
 {% block content %}
+  {% if post.thumbnail.src %}
   <div
-    class="aspect-w-16 aspect-h-9 bg-cover"
+    class="aspect-w-16 aspect-h-9 bg-cover bg-pop-green"
     style="background-image: url({{ post.thumbnail.src }})"
   ></div>
+  {% else %}
+  <div
+    class="aspect-w-16 aspect-h-9 bg-cover bg-pop-green"
+    style="background-image: url({{ theme.link }}/static/images/blogs-bg.png)"
+  ></div>
+  {% endif %}
 	<div class="relative content-wrapper">
 		{# {% include "/templates/partial/post-hero.twig" with { 'fields': hero } %} #}
 
-    <div class="relative container-narrow -mt-48 bg-pop-{{ content.theme }}">
-      <img
-        src="{{ theme.link }}/static/icons/pop/original/01.svg"
-        class="inline-block w-12"
-      />
-      <img
-        src="{{ theme.link }}/static/icons/pop/original/02.svg"
-        class="inline-block w-12"
-      />
+    <div class="relative container-narrow md:-mt-48 bg-white">
 
-      <div class="p-16">
-        <h1 class="font-medium text-5xl">
+      {% for path in icons %}
+        <img
+          src="{{ path }}"
+          class="inline-block w-12"
+        />
+      {% endfor %}
+
+      <div class="py-8 lg:p-16">
+        <h1 class="font-medium sm:text-4xl lg:text-5xl">
           {{ post.title }}
         </h1>
       </div>
-      <div class="px-16 flex justify-between">
-        <div>
-          <div
-          class="inline-block align-middle w-8 h-8 rounded-full bg-cover mr-4"
-          style="background-image: url({{ Image(post.author.meta('avatar')).src }})"
-          ></div>
-          <div class="inline-block align-middle text-pop-pink mr-8">
-            {{ post.author.display_name }}
-          </div>
-          <div class="inline-block align-middle text-pop-purple">
-            {{ post.date }}
-          </div>
-        </div>
-        <div class="flex items-center">
-          <a href="https://www.linkedin.com/company/popcomms" title="Share on LinkedIn" class="inline-block align-middle">
-            <img
-              src="{{ theme.link }}/static/icons/linkedin-brands.svg"
-              alt="Showpad"
-              class="inline-block w-6 mr-2"
-            >
-          </a>
-          <a href="https://www.youtube.com/user/popcomms" title="Share on Twitter" class="inline-block align-middle">
-            <img
-              src="{{ theme.link }}/static/icons/twitter-square-brands.svg"
-              alt="Showpad"
-              class="inline-block w-6 mr-2"
-            >
-          </a>
-          <a href="https://www.instagram.com/wearepopcomms/" title="Share on Facebook" class="inline-block align-middle">
-            <img
-              src="{{ theme.link }}/static/icons/facebook-square-brands.svg"
-              alt="Showpad"
-              class="inline-block w-6"
-            >
-          </a>
-        </div>
+      <div class="lg:px-16 flex flex-col md:flex-row md:items-center justify-between">
+        {% include "/templates/partial/single-author.twig" %}
+        {% include "/templates/partial/single-share.twig" %}
       </div>
     </div>
 
