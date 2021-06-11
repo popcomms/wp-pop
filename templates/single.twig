@@ -15,14 +15,13 @@
 		{# {% include "/templates/partial/post-hero.twig" with { 'fields': hero } %} #}
 
     <div class="relative container-narrow -mt-48 bg-white">
-      <img
-        src="{{ theme.link }}/static/icons/pop/original/12.svg"
-        class="inline-block w-12"
-      />
-      <img
-        src="{{ theme.link }}/static/icons/pop/original/23.svg"
-        class="inline-block w-12"
-      />
+
+      {% for path in icons %}
+        <img
+          src="{{ path }}"
+          class="inline-block w-12"
+        />
+      {% endfor %}
 
       <div class="p-16">
         <h1 class="font-medium text-5xl">

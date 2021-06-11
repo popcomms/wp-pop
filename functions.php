@@ -519,6 +519,22 @@ function custom_client_taxonomy() {
 }
 add_action( 'init', 'custom_client_taxonomy', 0 );
 
+// Return N Random icons
+
+function get_random_icons($count, $theme='original') {
+
+  $collection = [];
+  $path = get_template_directory_uri().'/static/icons/pop/'.$theme.'/' ;
+
+  for ($i=0; $i < $count; $i++) {
+    $target = rand(1,47);
+    $value = $path . str_pad((string)$target, 2, '0', STR_PAD_LEFT) . '.svg';
+    array_push($collection, $value);
+  }
+  return $collection;
+
+}
+
 function pop_enqueue_scripts() {
 	wp_enqueue_script( 'gsap', 'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.6.1/gsap.min.js', array(), true );
 	wp_enqueue_script( 'scrollTrigger', 'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.6.1/ScrollTrigger.min.js', array(), true );

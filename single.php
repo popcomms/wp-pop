@@ -19,6 +19,8 @@ if (!empty($all_acf["post_options"])) {
 }
 $context["hero"] = $all_acf["hero"]["value"];
 
+// Related Posts
+
 $categories = wp_get_post_categories($timber_post->ID);
 $context["related"] = Timber::get_posts([
   'category__in'   => $categories,
@@ -26,6 +28,12 @@ $context["related"] = Timber::get_posts([
   'posts_per_page' => 4,
   'orderby'        => 'rand'
 ]);
+
+// Icons
+
+$context["icons"] = get_random_icons(2);
+
+// Output
 
 if ( post_password_required( $timber_post->ID ) ) {
 	Timber::render( 'single-password.twig', $context );
