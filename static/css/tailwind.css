@@ -38,6 +38,8 @@
 
   strong {
     @apply font-bold;
+
+    font-weight: bold;
   }
 
   /*
