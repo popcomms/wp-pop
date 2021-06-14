@@ -1,0 +1,23 @@
+<div class="w-1/2 mb-12 leading-tight text-base sm:text-xl md:text-3xl">
+  Brill. Are you a human?
+  Prove it by simply entering the answer to <span class="text-pop-yellow" v-html="captcha.a"></span> <span class="text-pop-yellow">+</span> <span class="text-pop-yellow" v-html="captcha.b"></span>
+</div>
+<div class="my-4">
+  {% include "/templates/partial/input.twig" with
+    {
+      'type': 'text',
+      'model': 'form.captcha.value',
+      'placeholder': 'Enter your answer',
+      'action': 'validateCaptcha',
+      'guide': true,
+      'arrow': true,
+      'text_color': 'text-pop-white',
+      'bg_color': 'bg-pop-black',
+      'border_color': 'border-pop-white'
+    }
+  %}
+  <input
+    v-show="form.captcha.valid"
+    type="submit"
+  >
+</div>

@@ -1,0 +1,35 @@
+<div class="w-1/2 mb-12 leading-tight text-base sm:text-xl md:text-3xl">
+  Please provide your <span class="text-pop-yellow">name</span>  &amp; <span class="text-pop-yellow">email</span>.
+</div>
+<div class="my-4">
+  {% include "/templates/partial/input.twig" with
+    {
+      'type': 'text',
+      'model': 'form.name.value',
+      'placeholder': 'Your name *',
+      'action': 'validateName',
+      'guide': false,
+      'arrow': false,
+      'text_color': 'text-pop-white',
+      'bg_color': 'bg-pop-black',
+      'border_color': 'border-pop-white',
+      'valid': 'form.name.valid'
+    }
+  %}
+</div>
+<div class="my-4">
+  {% include "/templates/partial/input.twig" with
+    {
+      'type': 'email',
+      'model': 'form.email.value',
+      'placeholder': 'Your email *',
+      'action': "validateEmail",
+      'guide': true,
+      'arrow': true,
+      'text_color': 'text-pop-white',
+      'bg_color': 'bg-pop-black',
+      'border_color': 'border-pop-white',
+      'valid': 'form.email.valid'
+    }
+  %}
+</div>

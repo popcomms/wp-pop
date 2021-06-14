@@ -1,0 +1,37 @@
+<div class="grid grid-cols-2 space-x-12">
+  <div class="mb-6 leading-tight text-base sm:text-xl md:text-3xl">
+    We take your privacy seriously and need your consent to store the personal data you’ve provided so we can send you the content.
+  </div>
+  <div class="flex flex-col justify-center">
+    <div class="my-2 text-pop-yellow">
+      If you’re OK with that, please tick the boxes below:
+    </div>
+    <div class="flex my-2">
+      <input
+        id="gdpr-1"
+        type="checkbox"
+        v-model="form.gdpr.one"
+        value="true"
+        class="mt-2"
+        @change="validateGDPR()"
+      >
+      <label for="gdpr-1" class="pl-4">
+        I agree to receive content from POPcomms
+      </label>
+    </div>
+
+    <div class="flex my-2">
+      <input
+        id="gdpr-2"
+        type="checkbox"
+        v-model="form.gdpr.two"
+        value="false"
+        class="mt-2"
+        @change="validateGDPR()"
+      >
+      <label for="gdpr-2" class="pl-4">
+        I agree to allow POPcomms to store and process my personal data.
+      </label>
+    </div>
+  </div>
+</div>

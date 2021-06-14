@@ -160,78 +160,143 @@ document.addEventListener("DOMContentLoaded", function() {
     }
   })
 
-
   Vue.component('contact-form', {
     data () {
       return {
-        step: 0,
-        enquiry: '',
-        email: '',
-        name: '',
-        showInput: 'email'
+        step: 1,
+        form: null,
+        captcha: {
+          a: this.calcCaptcha(),
+          b: this.calcCaptcha()
+        }
       }
     },
     methods: {
-      nextStepContact () {
-        if (this.contactTl.paused() === true) {
-          this.contactTl.tweenFromTo(`${this.step}`, `${this.step + 1}`)
-          this.step += 1
-        }
+      contactNextStep () {
+        const current = this.$refs['contactFormStep' + this.step]
+        this.hideInput (current)
+
+        setTimeout(() => {
+          this.step = this.step + 1
+          const next = this.$refs['contactFormStep' + this.step]
+          this.revealInput (next)
+        }, 1000)
+        // if (this.contactTl.paused() === true) {
+        //   this.contactTl.tweenFromTo(`${this.step}`, `${this.step + 1}`)
+        //   this.step += 1
+        // }
       },
-      prevStepContact () {
-        if (this.step > 0 && this.contactTl.paused() === true) {
-          this.contactTl.reverse()
-          this.step -= 1
-        }
-      },
-      validateEmail (e) {
-        if (e.keyCode === 13 || e.type === 'click') {
-          this.nextStepContact()
-        }
+  //     prevStepContact () {
+  //       if (this.step > 0 && this.contactTl.paused() === true) {
+  //         this.contactTl.reverse()
+  //         this.step -= 1
+  //       }
+  //     },
+      calcCaptcha () {
+        const min = Math.ceil(1)
+        const max = Math.floor(10)
+        return Math.floor(Math.random() * (max - min) + min)
       },
       validateName (e) {
         if (e.keyCode === 13 || e.type === 'click') {
-          this.nextStepContact()
+          if (this.form.name.value.length > 3) {
+            this.form.name.valid = true
+          }
         }
       },
-      revealInput(step) {
+      validateEmail (e) {
+        const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+
+        if (e.keyCode === 13 || e.type === 'click') {
+          if (re.test(this.form.email.value.toLowerCase())) {
+            this.form.email.valid = false
+            this.contactNextStep()
+          } else {
+            this.form.email.valid = false
+          }
+        }
+      },
+      validateGDPR (e) {
+        if (this.form.gdpr.one && this.form.gdpr.two) {
+          this.contactNextStep()
+        }
+      },
+      validateCaptcha (e) {
+        if (e.keyCode === 13 || e.type === 'click') {
+          if (this.captcha.a + this.captcha.b === parseInt(this.form.captcha.value)) {
+            this.form.captcha.valid = true
+          } else {
+            return false
+          }
+        }
+      },
+      reset () {
+        this.form = {
+          name: {
+            valid: null,
+            value: ''
+          },
+          email: {
+            valid: null,
+            value: ''
+          },
+          company: {
+            valid: null,
+            value: ''
+          },
+          phone: {
+            valid: null,
+            value: ''
+          },
+          message: '',
+          newsletter: '',
+          captcha: {
+            valid: null,
+            value: ''
+          },
+          gdpr: {
+            one: false,
+            two: false
+          }
+        }
+      },
+      revealInput (step) {
         const borders = step.getElementsByClassName('input-border')
         const guides = step.getElementsByClassName('input-guide')
         const inputs = step.querySelectorAll('.input-content')
         const text = step.querySelectorAll('h4')
 
-        if (this.contactTl.reversed()) {
-          this.hideInputAnim(step, inputs, borders, guides, text)
-        } else {
+        // if (this.contactTl.reversed()) {
+        //   this.hideInputAnim(step, inputs, borders, guides, text)
+        // } else {
           this.revealInputAnim(step, inputs, borders, guides, text)
-        }
+        // }
       },
-      hideInput(step) {
+      hideInput (step) {
         const borders = step.getElementsByClassName('input-border')
         const guides = step.getElementsByClassName('input-guide')
         const inputs = step.querySelectorAll('.input-content')
         const text = step.querySelectorAll('h4')
 
-        if (this.contactTl.reversed()) {
-          this.revealInputAnim(step, inputs, borders, guides, text)
-        } else {
+        // if (this.contactTl.reversed()) {
+        //   this.revealInputAnim(step, inputs, borders, guides, text)
+        // } else {
           this.hideInputAnim(step, inputs, borders, guides, text)
-        }
+        // }
       },
-      restartTL () {
-        this.contactTl.tweenFromTo(`${this.step}`, "0")
-        console.log('restart')
-        this.step = 0
-      },
-      // leaveTL () {
-      //   for (let i = 0; i < this.step; i++) {
-      //     this.contactTl.reverse()
-      //   }
-      //   this.step = 0
-      // },
+  //     restartTL () {
+  //       this.contactTl.tweenFromTo(`${this.step}`, "0")
+  //       console.log('restart')
+  //       this.step = 0
+  //     },
+  //     // leaveTL () {
+  //     //   for (let i = 0; i < this.step; i++) {
+  //     //     this.contactTl.reverse()
+  //     //   }
+  //     //   this.step = 0
+  //     // },
       hideInputAnim (step, inputs, borders, guides, text) {
-        gsap.timeline({
-        })
+        gsap.timeline({})
         .to(borders, {duration: 0.5, width: 0 + '%'})
         .to(text, {duration: 0.5, opacity: 0}, "-0.5")
         .to(inputs, {duration: 0.5, translateY: -100 + '%', opacity: 1,  ease: "power3.in"}, "-=0.5")
@@ -240,8 +305,7 @@ document.addEventListener("DOMContentLoaded", function() {
         .set(step, {pointerEvents: 'none'})
       },
       revealInputAnim (step, inputs, borders, guides, text) {
-        gsap.timeline({
-        })
+        gsap.timeline({})
         .to(borders, {duration: 0.5, width: 100 + '%'})
         .to(text, {duration: 0.5, opacity: 1}, "-0.5")
         .to(inputs, {duration: 0.5, translateY: 0 + '%', opacity: 1, ease: "power3.out"}, "-=0.5")
@@ -249,64 +313,68 @@ document.addEventListener("DOMContentLoaded", function() {
         .set(step,{ pointerEvents: 'all'}, "-=0.01")
       },
     },
+    created () {
+      this.reset()
+    },
     mounted () {
 
-      gsap.set(this.$refs.steps, {pointerEvents: 'none'})
 
-      this.contactTl = gsap.timeline({ paused: true })
-      // Show form
+  //     gsap.set(this.$refs.steps, {pointerEvents: 'none'})
 
-      .addLabel("0")
-      .set(this.$refs.steps, {opacity: 1})
-      .to(this.$refs.form_bg,{opacity: 1, duration: 0.4})
-      .set(this.$refs.steps,{ pointerEvents: 'all' })
-      .to([".contact-steps", ".contact-back"], {opacity: 1,duration: 0.3})
-      .fromTo(
-        this.$refs.step_1,
-        {
-          opacity: 0,
-          pointerEvents: 'none'
-        },
-        {
-          pointerEvents: 'all',
-          opacity: 1,
-          duration: 0.3
-        }
-      )
-      // .addPause()
-      .addLabel("1")
-      // Change step 1 -> 2
-      .to(this.$refs.step_1, {duration: 0.3, opacity: 0, pointerEvents: 'none'})
-      .to(this.$refs.step_2.querySelectorAll('h4'), {duration: 0.3, opacity: 1})
-      .call( this.revealInput, [this.$refs.email_input], "-=0.3" )
-      // .addPause("+=0.2")
-      .addLabel("2")
-      // switch inputs
-      .call( this.hideInput, [this.$refs.email_input], "+=0.1" )
-      // .to(this.$refs.email_text, {duration: 0.3, color: this.baseColor})
-      .call( this.revealInput, [this.$refs.name_input], "+=0.3" )
-      // .to(this.$refs.name_text, {duration: 0.3, color: this.highlightColor})
-      // .addPause("+=0.2")
-      .addLabel("3")
-      // Change step 2 -> 3
-      .to(this.$refs.step_2.querySelectorAll('h4'), {duration: 0.3, opacity: 0})
-      .call( this.hideInput, [this.$refs.name_input], "-=0.29" )
-      .fromTo(
-        this.$refs.step_3,
-        {
-          opacity: 0,
-          pointerEvents: 'none'
-        },
-        {
-          pointerEvents: 'all',
-          opacity: 1,
-          duration: 0.3
-        },
-        "+=0.6"
-      )
-      // Stop before end so can reverse
-      // .addPause()
-      .addLabel("4")
+  //     this.contactTl = gsap.timeline({ paused: true })
+  //     // Show form
+
+  //     .addLabel("0")
+  //     .set(this.$refs.steps, {opacity: 1})
+  //     .to(this.$refs.form_bg,{opacity: 1, duration: 0.4})
+  //     .set(this.$refs.steps,{ pointerEvents: 'all' })
+  //     .to([".contact-steps", ".contact-back"], {opacity: 1,duration: 0.3})
+  //     .fromTo(
+  //       this.$refs.step_1,
+  //       {
+  //         opacity: 0,
+  //         pointerEvents: 'none'
+  //       },
+  //       {
+  //         pointerEvents: 'all',
+  //         opacity: 1,
+  //         duration: 0.3
+  //       }
+  //     )
+  //     // .addPause()
+  //     .addLabel("1")
+  //     // Change step 1 -> 2
+  //     .to(this.$refs.step_1, {duration: 0.3, opacity: 0, pointerEvents: 'none'})
+  //     .to(this.$refs.step_2.querySelectorAll('h4'), {duration: 0.3, opacity: 1})
+  //     .call( this.revealInput, [this.$refs.email_input], "-=0.3" )
+  //     // .addPause("+=0.2")
+  //     .addLabel("2")
+  //     // switch inputs
+  //     .call( this.hideInput, [this.$refs.email_input], "+=0.1" )
+  //     // .to(this.$refs.email_text, {duration: 0.3, color: this.baseColor})
+  //     .call( this.revealInput, [this.$refs.name_input], "+=0.3" )
+  //     // .to(this.$refs.name_text, {duration: 0.3, color: this.highlightColor})
+  //     // .addPause("+=0.2")
+  //     .addLabel("3")
+  //     // Change step 2 -> 3
+  //     .to(this.$refs.step_2.querySelectorAll('h4'), {duration: 0.3, opacity: 0})
+  //     .call( this.hideInput, [this.$refs.name_input], "-=0.29" )
+  //     .fromTo(
+  //       this.$refs.step_3,
+  //       {
+  //         opacity: 0,
+  //         pointerEvents: 'none'
+  //       },
+  //       {
+  //         pointerEvents: 'all',
+  //         opacity: 1,
+  //         duration: 0.3
+  //       },
+  //       "+=0.6"
+  //     )
+  //     // Stop before end so can reverse
+  //     // .addPause()
+  //     .addLabel("4")
     }
   })
 
@@ -317,7 +385,9 @@ document.addEventListener("DOMContentLoaded", function() {
         menuActive: false,
         activeChild: '',
         showMenuTl: gsap.timeline({ paused: true }),
-        contactActive: false
+        show: {
+          contact: false
+        }
       }
     },
     methods:{
@@ -333,14 +403,17 @@ document.addEventListener("DOMContentLoaded", function() {
         }
       },
       showContactForm () {
-        this.contactActive = true
-        this.$refs.contactForm.step = 0
-        this.$refs.contactForm.nextStepContact()
+        this.show.contact = true
+        // this.$refs.contactForm.step = 0
+        // this.$refs.contactForm.nextStepContact()
       },
       hideContactForm () {
-        // this.contactActive = false
-        this.contactActive = false
-        this.$refs.contactForm.restartTL()
+        this.show.contact = false
+        if (this.$refs.contactForm.step === 8) {
+          this.$refs.contactForm.step = 0
+          this.$refs.contactForm.reset()
+        }
+        // this.$refs.contactForm.restartTL()
       },
       changeSubMenu (item) {
         this.activeChild = item

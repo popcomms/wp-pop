@@ -1,11 +1,80 @@
 <div
   inline-template
-  id="contact-form"
+  is="contact-form"
   ref="contactForm"
-  class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-5/6 overflow-hidden bg-white"
+  class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-5/6 bg-pop-black text-white shadow-md"
 >
+  <form>
+    <div
+      ref="contactFormStep1"
+      class="p-6"
+      v-show="step === 1"
+    >
+      <div class="text-sm mb-4">&nbsp;</div>
+      {% include "partial/forms/contact/intro.twig" %}
+    </div>
 
-  {% include 'partial/forms/contact/intro.twig' %}
-  {# {% include 'partial/pagination.twig' %} #}
+    <div
+      ref="contactFormStep2"
+      class="p-6"
+      v-show="step === 2"
+    >
+      <div class="text-sm mb-4">1 / 6</div>
+      {% include "partial/forms/contact/name-email.twig" %}
+    </div>
 
+    <div
+      ref="contactFormStep3"
+      class="p-6"
+      v-show="step === 3"
+    >
+      <div class="text-sm mb-4">2 / 6</div>
+      {% include "partial/forms/contact/company-phone.twig" %}
+    </div>
+
+    <div
+      ref="contactFormStep4"
+      class="p-6"
+      v-show="step === 4"
+    >
+      <div class="text-sm mb-4">3 / 6</div>
+      {% include "partial/forms/contact/message.twig" %}
+    </div>
+
+    <div
+      ref="contactFormStep5"
+      class="p-6"
+      v-show="step === 5"
+    >
+      <div class="text-sm mb-4">4 / 6</div>
+      {% include "partial/forms/contact/newsletter.twig" %}
+    </div>
+
+    <div
+      ref="contactFormStep6"
+      class="p-6"
+      v-show="step === 6"
+    >
+      <div class="text-sm mb-4">5 / 6</div>
+      {% include "partial/forms/contact/privacy.twig" %}
+    </div>
+
+    <div
+      ref="contactFormStep7"
+      class="p-6"
+      v-show="step === 7"
+    >
+      <div class="text-sm mb-4">6 / 6</div>
+      {% include "partial/forms/contact/captcha.twig" %}
+    </div>
+
+    <div
+      ref="contactFormStep8"
+      class="p-6"
+      v-show="step === 8"
+    >
+      <div class="text-sm mb-4">&nbsp;</div>
+      {% include "partial/forms/contact/thanks.twig" %}
+    </div>
+  </form>
 </div>

@@ -1,0 +1,18 @@
+<div class="w-1/2 mb-12 leading-tight text-base sm:text-xl md:text-3xl">
+  If you have a message or question, please enter it here below...
+</div>
+<div class="my-4">
+  {% include "/templates/partial/input.twig" with
+    {
+      'type': 'text',
+      'model': 'form.message',
+      'placeholder': '',
+      'action': 'contactNextStep',
+      'guide': false,
+      'arrow': true,
+      'text_color': 'text-pop-white',
+      'bg_color': 'bg-pop-black',
+      'border_color': 'border-pop-white'
+    }
+  %}
+</div>

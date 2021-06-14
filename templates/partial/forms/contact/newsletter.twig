@@ -1,0 +1,35 @@
+<div class="grid grid-cols-2 space-x-12">
+  <div class="mb-6 leading-tight">
+    <span class="text-pop-yellow leading-tight text-base sm:text-xl md:text-3xl">Would you like to receive our email newsletter?</span>
+    <br><br>
+    It’s bi-monthly with select and valuable content. No Spam, promise.
+  </div>
+  <div class="flex flex-col justify-center">
+
+    <div class="my-2">
+      <input
+        id="newsletter-true"
+        type="radio"
+        v-model="form.newsletter"
+        value="true"
+        @change="contactNextStep()"
+      >
+      <label for="newsletter-true" class="pl-2">
+        Yes! Please sign me up.
+      </label>
+    </div>
+
+    <div class="my-2">
+      <input
+        @change="contactNextStep()"
+        id="newsletter-false"
+        type="radio"
+        v-model="form.newsletter"
+        value="false"
+      >
+      <label for="newsletter-false" class="pl-2">
+        No thanks
+      </label>
+    </div>
+  </div>
+  </div>
