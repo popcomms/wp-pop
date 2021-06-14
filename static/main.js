@@ -539,6 +539,233 @@ document.addEventListener("DOMContentLoaded", function() {
   //   "-=0.5"
   // );
 
+  const canvases = document.querySelectorAll('.canvas');
+  canvases.forEach(c => {
+    const wrapper = c.parentElement;
 
+  let popColor;
+  switch (c.dataset.popColor) {
+    case 'green':
+      popColor = 169
+      break;
+    case 'yellow':
+      popColor = 60
+      break;
+    case 'pink':
+      popColor = 328
+      break;
+      
+    default:
+      popColor = 328
+      break;
+  }
+  const ctx = c.getContext('2d');
+  
+  // Variables
+  let [cw, ch] = [wrapper.clientWidth, wrapper.clientHeight];
+  let [lastX, lastY] = [null, null];
+  let dots = [];
+  let resizeTimer;
+  
+  // Settings
+  let [DOT_SMALL, DOT_LARGE] = [1, 4];
+  const HOVER_RADIUS = 400;
+  const DOT_DECAY = 0.05;
+  let [NUM_ROWS, NUM_COLS] = [Math.ceil(ch/DOT_SMALL), Math.ceil(cw/DOT_SMALL)];
+  
+  let NUM_DOTS = NUM_ROWS*NUM_COLS;
+  
+  // requestAnimationFrame fallback
+  window.requestAnimFrame = (function() {
+      return  window.requestAnimationFrame       ||
+              window.webkitRequestAnimationFrame ||
+              window.mozRequestAnimationFrame    ||
+              window.msRequestAnimationFrame     ||
+              function( callback ){
+                  window.setTimeout(callback, 1000 / 60);
+              };
+  })();
+  
+  
+  //--------------------------------------------------------------------
+  
+  
+  // Create a new dot
+  function Dot(radius, x, y, hue) {
+      this.radius = radius;
+      this.x = x;
+      this.y = y;
+      this.hue = hue;
+      this.lightness = 100
+      this.inHoverRadius = false;
+  }
+  
+  // Update a dot
+  Dot.prototype.update = function() {
+      // Draw the dot
+      ctx.beginPath();
+      ctx.arc(
+          this.x,
+          this.y,
+          this.radius,
+          0,
+          Math.PI * 2,
+          false
+      );
+      ctx.closePath();
+   
+      // Style it up
+      ctx.fillStyle = `hsl(${this.hue}, 100%, ${this.lightness}%)`;
+      
+  
+      // ctx.fillStyle = `#DFDFDF`;
+      ctx.fill();
+  
+      // Check the mouses proximity
+      this.checkProximity();
+  
+      // Decay the radius
+      this.decayRadius();
+  };
+  
+  // Check the dots proximity
+  Dot.prototype.checkProximity = function() {
+      let dist = DOT_SMALL;
+  
+      // Check if the mouse is on the canvas
+      if (lastX && lastY) {
+          // Get proximity
+          let dX = this.x - lastX;
+          let dY = this.y - lastY;
+          dist = Math.sqrt(Math.pow(dX, 2) + Math.pow(dY, 2));
+  
+          // Update dot radius
+          if (dist >= HOVER_RADIUS) {
+              this.radius = this.radius; 
+              this.inHoverRadius = false;
+              this.lightness = 100
+          } else {
+              // this.radius = DOT_SMALL/2 + ((DOT_LARGE*2) - (DOT_LARGE*(dist/100)));
+              this.radius = Math.min((DOT_SMALL + (DOT_LARGE - (DOT_LARGE*dist/HOVER_RADIUS))), DOT_SMALL + DOT_LARGE);
+              this.lightness = Math.max(100*(dist*0.002), 50)
+              // this.radius = DOT_SMALL/2 + (DOT_LARGE - (DOT_LARGE*dist/HOVER_RADIUS));
+              // this.radius = DOT_SMALL/2 + (DOT_LARGE*2 - (DOT_LARGE*dist/HOVER_RADIUS));
+              this.inHoverRadius = true;
+          }
+      } else {
+          this.inHoverRadius = false;
+      }
+  }
+  
+  // Check the dots radius decay
+  Dot.prototype.decayRadius = function() {
+      if (!this.inHoverRadius && this.radius > DOT_SMALL) {
+          this.radius = this.radius - DOT_DECAY;
+      }
+  }
+  
+  // Add a new dot
+  function addDot(radius, x, y, hue) {
+      radius = radius || DOT_SMALL/2;
+      x = x;
+      y = y;
+      // hue = hue || Math.floor(Math.random() * (360 - 1 + 1)) + 1;
+      hue = Math.floor(popColor);
+  
+      // Create the new dot
+      let dot = new Dot(radius, x, y, popColor);
+  
+      // Add the dot to the array
+      dots.push(dot);
+  }
+  
+  // Add our initial dots
+  function init() {
+    dots = [];
+    console.log('init')
+    // Add the dots
+    for (let row = DOT_LARGE*3; row <= ch; row += DOT_LARGE*6) {
+      for (let col = DOT_LARGE*3; col <= cw; col += DOT_LARGE*6) {
+              addDot(DOT_SMALL, col, row);
+          }
+      }
+      
+    draw();
+  }
+  
+  // Clear the canvas and draw the new frame
+  function draw() {
+      ctx.clearRect(0, 0, cw, ch);
+  
+      // Update the dots
+      for (let i = 0; i < dots.length; i++) {
+          dots[i].update();
+      }
+      
+      // Add helper text
+      // ctx.fillStyle = 'black';
+      // ctx.textAlign='center'; 
+      // ctx.font = '12px Arial';
+      // ctx.fillText('Move you mouse around and watch the dots change.', (cw / 2), 15);
+  
+      requestAnimFrame(draw);
+  }
+  
+  // Update the size of the canvas
+  function resizeCanvas() {
+      [cw, ch] = [wrapper.offsetWidth, wrapper.offsetHeight];
+      
+      // Update canvas size
+      [c.width, c.height] = [cw, ch];
+      
+      // Update rows, cols, and number of dots
+      [NUM_ROWS, NUM_COLS] = [Math.ceil(ch/(DOT_LARGE*2))+1, Math.ceil(cw/(DOT_LARGE*2))];
+      NUM_DOTS = NUM_ROWS*NUM_COLS;
+  
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(function() {
+          init();
+      }, 250);
+  }
+  
+  
+  //--------------------------------------------------------------------
+  
+  var rect = c.getBoundingClientRect();
+
+  // Set mouse coordinates
+  document.addEventListener('mousemove', (e) => {
+      // [lastX, lastY] = [e.clientX - rect.left, e.clientY - rect.top];
+      var rect = c.getBoundingClientRect(), // abs. size of element
+      scaleX = c.width / rect.width,    // relationship bitmap vs. element for X
+      scaleY = c.height / rect.height;  // relationship bitmap vs. element for Y
+    
+      [lastX, lastY] = [(e.clientX - rect.left) * scaleX, (e.clientY - rect.top) * scaleY]    // been adjusted to be relative to element
+  }, false);
+  
+  document.addEventListener('mouseout', (e) => {
+      [lastX, lastY] = [null, null];
+  }, false);
+  
+  // Click events
+  document.addEventListener('click', (e) => {
+      // Update the dots
+      for (let i = 0; i < dots.length; i++) {
+          dots[i].radius = DOT_LARGE/2;
+      }
+  }, false);
+  
+  // Window resize
+  window.addEventListener('resize', resizeCanvas, false);
+  
+  
+  //--------------------------------------------------------------------
+  
+  
+  // Initialize the fun
+  resizeCanvas();
+  init();
+  });
+  
+  
 })
-
