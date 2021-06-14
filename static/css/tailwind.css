@@ -36,6 +36,12 @@
     line-height: 120%;
   }
 
+  strong {
+    @apply font-bold;
+
+    font-weight: bold;
+  }
+
   /*
   h1 {
     @apply my-5 text-3xl md:text-6xl font-semibold;
