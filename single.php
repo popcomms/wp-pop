@@ -23,6 +23,7 @@ if (!empty($all_acf["post_options"])) {
 $categories = wp_get_post_categories($timber_post->ID);
 $context["related"] = Timber::get_posts([
   'category__in'   => $categories,
+  'post_type'      => $timber_post->post_type,
   'post__not_in'   => array($timber_post->ID),
   'posts_per_page' => 4,
   'orderby'        => 'rand'
