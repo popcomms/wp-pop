@@ -30,7 +30,9 @@
         </h1>
       </div>
       <div class="lg:px-16 flex flex-col md:flex-row md:items-center justify-between">
-        {% include "/templates/partial/single-author.twig" %}
+        <div class="text-pop-purple">
+          {{ post.date }}
+        </div>
         {% include "/templates/partial/single-share.twig" %}
       </div>
     </div>
@@ -44,9 +46,10 @@
 					<div class="container-narrow text-pop-{{ content.theme == 'black' ? 'white' : 'black' }}">
 						{{ post.content }}
 					</div>
-          {% include "/templates/partial/related.twig" %}
 				</div>
 			</div>
 		</article>
+    {% include "/templates/partial/author.twig" %}
+    {% include "/templates/partial/related.twig" %}
 	</div>
 {% endblock %}
