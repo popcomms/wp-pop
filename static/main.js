@@ -237,7 +237,10 @@ document.addEventListener("DOMContentLoaded", function() {
       validateCaptcha (e) {
         if (this.captcha.a + this.captcha.b === parseInt(this.form.captcha.value)) {
           this.form.captcha.valid = true
-          this.submit()
+          this.contactNextStep()
+          setTimeout(() => {
+            this.submit()
+          }, 3000)
         } else {
           this.form.captcha.valid = false
         }
