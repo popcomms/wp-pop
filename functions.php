@@ -535,6 +535,10 @@ function get_random_icons($count, $theme='original') {
 
 }
 
+function case_study_title ($title, $client, $category) {
+  return str_replace($client, $client.'. '.$category, $title);
+}
+
 function pop_enqueue_scripts() {
 	wp_enqueue_script(
     'gsap',
