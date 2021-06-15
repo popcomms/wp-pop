@@ -1,6 +1,7 @@
 {% extends "base.twig" %}
 
 {% block content %}
+
   {% if post.thumbnail.src %}
   <div
     class="aspect-w-16 aspect-h-9 bg-cover bg-pop-green"
@@ -12,6 +13,7 @@
     style="background-image: url({{ theme.link }}/static/images/blogs-bg.png)"
   ></div>
   {% endif %}
+
 	<div class="relative content-wrapper">
 		{# {% include "/templates/partial/post-hero.twig" with { 'fields': hero } %} #}
 
@@ -51,6 +53,7 @@
 		</article>
 
     {% include "/templates/partial/author.twig" %}
+    {% include "/templates/partial/single-categories.twig" %}
     {% include "/templates/partial/related.twig" %}
 
 	</div>

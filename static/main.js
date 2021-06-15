@@ -1,8 +1,18 @@
-console.log('JS Active');
 document.addEventListener("DOMContentLoaded", function() {
-  gsap.registerPlugin(ScrollTrigger);
 
-  console.log('Document Loaded - V4');
+  // Prevent Enter key from submitting <form>
+
+  const forms = document.querySelectorAll('form')
+  forms.forEach(element => {
+    console.log(element)
+    element.addEventListener('submit', (event) => {
+      console.log('Prevent Form Submission')
+      event.preventDefault()
+      window.history.back()
+    })
+  });
+
+  gsap.registerPlugin(ScrollTrigger);
 
   Vue.component('downloads', {
     data () {
@@ -199,30 +209,24 @@ document.addEventListener("DOMContentLoaded", function() {
         return Math.floor(Math.random() * (max - min) + min)
       },
       validateName (e) {
-        if (e.keyCode === 13 || e.type === 'click') {
-          if (this.form.name.value.length > 3) {
-            this.form.name.valid = true
-          }
+        if (this.form.name.value.length > 3) {
+          this.form.name.valid = true
         }
       },
       validateEmail (e) {
         const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
 
-        if (e.keyCode === 13 || e.type === 'click') {
-          if (re.test(this.form.email.value.toLowerCase())) {
-            this.form.email.valid = false
-            this.contactNextStep()
-          } else {
-            this.form.email.valid = false
-          }
+        if (re.test(this.form.email.value.toLowerCase())) {
+          this.form.email.valid = false
+          this.contactNextStep()
+        } else {
+          this.form.email.valid = false
         }
       },
       validateCompany (e) {
-        if (e.keyCode === 13 || e.type === 'click') {
-          if (this.form.company.value.length > 3) {
-            this.form.company.valid = true
-            this.contactNextStep()
-          }
+        if (this.form.company.value.length > 2) {
+          this.form.company.valid = true
+          this.contactNextStep()
         }
       },
       validateGDPR (e) {
@@ -231,12 +235,11 @@ document.addEventListener("DOMContentLoaded", function() {
         }
       },
       validateCaptcha (e) {
-        if (e.keyCode === 13 || e.type === 'click') {
-          if (this.captcha.a + this.captcha.b === parseInt(this.form.captcha.value)) {
-            this.form.captcha.valid = true
-          } else {
-            return false
-          }
+        if (this.captcha.a + this.captcha.b === parseInt(this.form.captcha.value)) {
+          this.form.captcha.valid = true
+          this.submit()
+        } else {
+          this.form.captcha.valid = false
         }
       },
       reset () {
@@ -269,30 +272,8 @@ document.addEventListener("DOMContentLoaded", function() {
           }
         }
       },
-      submit (e) {
-        e.preventDefault()
-        if (this.validate()) {
-          return true
-        }
-      },
-      validate () {
-        let valid = true
-        if (!this.form.name.valid) {
-          valid = false
-        }
-        if (!this.form.email.valid) {
-          valid = false
-        }
-        if (!this.form.company.valid) {
-          valid = false
-        }
-        if (!this.form.captcha.valid) {
-          valid = false
-        }
-        if (!this.form.gdpr.one || !this.form.gdpr.two) {
-          valid = false
-        }
-        return valid
+      submit () {
+        this.$refs.contactForm.submit()
       },
       revealInput (step) {
         const borders = step.getElementsByClassName('input-border')
@@ -351,8 +332,7 @@ document.addEventListener("DOMContentLoaded", function() {
       this.reset()
     },
     mounted () {
-
-
+      console.log(this.$refs.contactForm)
   //     gsap.set(this.$refs.steps, {pointerEvents: 'none'})
 
   //     this.contactTl = gsap.timeline({ paused: true })

@@ -1,10 +1,15 @@
 <div
   inline-template
   is="contact-form"
-  ref="contactForm"
-  class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-5/6 bg-pop-black text-white shadow-md"
 >
-  <form name="Contact Form" method="post" action="" onsubmit="return submit(event)">
+  <form
+    ref="contactForm"
+    name="Contact Form"
+    method="post"
+    action=""
+    onsubmit="return false"
+    class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-5/6 bg-pop-black text-white shadow-md"
+  >
     <div
       ref="contactFormStep1"
       class="p-6"
