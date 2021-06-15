@@ -4,12 +4,12 @@
 
   {% if post.thumbnail.src %}
   <div
-    class="aspect-w-16 aspect-h-9 bg-cover bg-pop-green"
+    class="aspect-w-16 aspect-h-9 bg-cover bg-pop-green max-h-screen"
     style="background-image: url({{ post.thumbnail.src }})"
   ></div>
   {% else %}
   <div
-    class="aspect-w-16 aspect-h-9 bg-cover bg-pop-green"
+    class="aspect-w-16 aspect-h-9 bg-cover bg-pop-green max-h-screen"
     style="background-image: url({{ theme.link }}/static/images/blogs-bg.png)"
   ></div>
   {% endif %}
