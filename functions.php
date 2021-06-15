@@ -519,20 +519,17 @@ function custom_client_taxonomy() {
 }
 add_action( 'init', 'custom_client_taxonomy', 0 );
 
-// Return N Random icons
+// Return $count Random icons
 
-function get_random_icons($count, $theme='original') {
-
+function get_random_icons($count=1, $theme='original') {
   $collection = [];
   $path = get_template_directory_uri().'/static/icons/pop/'.$theme.'/' ;
-
   for ($i=0; $i < $count; $i++) {
     $target = rand(1,47);
     $value = $path . str_pad((string)$target, 2, '0', STR_PAD_LEFT) . '.svg';
     array_push($collection, $value);
   }
   return $collection;
-
 }
 
 function case_study_title ($title, $client, $category) {

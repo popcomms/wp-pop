@@ -6,7 +6,7 @@
   {% include "/templates/partial/input.twig" with
     {
       'type': 'text',
-      'name': 'Captcha',
+      'name': 'captcha',
       'model': 'form.captcha.value',
       'placeholder': 'Enter your answer',
       'action': 'validateCaptcha',
@@ -17,8 +17,4 @@
       'border_color': 'border-pop-white'
     }
   %}
-  <input
-    v-show="form.captcha.valid"
-    type="submit"
-  >
 </div>

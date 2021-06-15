@@ -274,6 +274,7 @@ document.addEventListener("DOMContentLoaded", function() {
             two: false
           }
         }
+        this.$refs.contactForm.reset()
       },
       submit () {
         this.$refs.contactForm.submit()
