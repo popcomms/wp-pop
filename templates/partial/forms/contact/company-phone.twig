@@ -5,9 +5,10 @@
   {% include "/templates/partial/input.twig" with
     {
       'type': 'text',
-      'model': 'form.company.value',
-      'placeholder': 'Company Name *',
-      'action': 'validateName',
+      'name': 'Phone',
+      'model': 'form.phone.value',
+      'placeholder': 'Telephone',
+      'action': null,
       'guide': false,
       'arrow': false,
       'text_color': 'text-pop-white',
@@ -20,9 +21,10 @@
   {% include "/templates/partial/input.twig" with
     {
       'type': 'text',
-      'model': 'form.phone.value',
-      'placeholder': 'Telephone',
-      'action': "contactNextStep",
+      'name': 'Company',
+      'model': 'form.company.value',
+      'placeholder': 'Company Name *',
+      'action': 'validateCompany',
       'guide': true,
       'arrow': true,
       'text_color': 'text-pop-white',

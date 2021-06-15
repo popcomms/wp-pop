@@ -168,7 +168,8 @@ document.addEventListener("DOMContentLoaded", function() {
         captcha: {
           a: this.calcCaptcha(),
           b: this.calcCaptcha()
-        }
+        },
+        valid: false
       }
     },
     methods: {
@@ -216,6 +217,14 @@ document.addEventListener("DOMContentLoaded", function() {
           }
         }
       },
+      validateCompany (e) {
+        if (e.keyCode === 13 || e.type === 'click') {
+          if (this.form.company.value.length > 3) {
+            this.form.company.valid = true
+            this.contactNextStep()
+          }
+        }
+      },
       validateGDPR (e) {
         if (this.form.gdpr.one && this.form.gdpr.two) {
           this.contactNextStep()
@@ -259,6 +268,31 @@ document.addEventListener("DOMContentLoaded", function() {
             two: false
           }
         }
+      },
+      submit (e) {
+        e.preventDefault()
+        if (this.validate()) {
+          return true
+        }
+      },
+      validate () {
+        let valid = true
+        if (!this.form.name.valid) {
+          valid = false
+        }
+        if (!this.form.email.valid) {
+          valid = false
+        }
+        if (!this.form.company.valid) {
+          valid = false
+        }
+        if (!this.form.captcha.valid) {
+          valid = false
+        }
+        if (!this.form.gdpr.one || !this.form.gdpr.two) {
+          valid = false
+        }
+        return valid
       },
       revealInput (step) {
         const borders = step.getElementsByClassName('input-border')

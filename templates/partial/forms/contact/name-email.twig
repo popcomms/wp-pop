@@ -5,6 +5,7 @@
   {% include "/templates/partial/input.twig" with
     {
       'type': 'text',
+      'name': 'Name',
       'model': 'form.name.value',
       'placeholder': 'Your name *',
       'action': 'validateName',
@@ -21,6 +22,7 @@
   {% include "/templates/partial/input.twig" with
     {
       'type': 'email',
+      'name': 'Email',
       'model': 'form.email.value',
       'placeholder': 'Your email *',
       'action': "validateEmail",

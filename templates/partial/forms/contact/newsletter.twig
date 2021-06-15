@@ -9,9 +9,10 @@
     <div class="my-2">
       <input
         id="newsletter-true"
+        name="Newsletter"
         type="radio"
         v-model="form.newsletter"
-        value="true"
+        value="Yes"
         @change="contactNextStep()"
       >
       <label for="newsletter-true" class="pl-2">
@@ -23,9 +24,10 @@
       <input
         @change="contactNextStep()"
         id="newsletter-false"
+        name="Newsletter"
         type="radio"
         v-model="form.newsletter"
-        value="false"
+        value="No"
       >
       <label for="newsletter-false" class="pl-2">
         No thanks
