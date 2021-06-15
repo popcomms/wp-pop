@@ -1,0 +1,25 @@
+<div class="input-box relative w-full">
+  <div class="relative overflow-hidden">
+    <div class="input-content transform translate-y-full">
+      <textarea
+        name="{{ name }}"
+        class="w-full font-normal text-xl sm:text-2xl md:text-3xl {{ bg_color }} {{ valid == false ? 'text-pop-pink' : 'text-pop-white' }}"
+        type="{{ type }}"
+        v-model="{{ model }}"
+        placeholder="{{ placeholder }}"
+        rows="{{rows}}"
+      ></textarea>
+      {% if arrow %}
+      <svg @click="{{action}}" class="absolute h-8 sm:h-auto top-0 right-0 cursor-pointer fill-current {{ text_color }} hover:text-pop-pink transition-colors" width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M36.3746 25.0607C36.9604 24.4749 36.9604 23.5251 36.3746 22.9393L26.8287 13.3934C26.2429 12.8076 25.2931 12.8076 24.7073 13.3934C24.1216 13.9792 24.1216 14.9289 24.7073 15.5147L33.1926 24L24.7073 32.4853C24.1216 33.0711 24.1216 34.0208 24.7073 34.6066C25.2931 35.1924 26.2429 35.1924 26.8287 34.6066L36.3746 25.0607ZM12.6865 25.5L35.3139 25.5L35.3139 22.5L12.6865 22.5L12.6865 25.5Z"/>
+      </svg>
+      {% endif %}
+    </div>
+  </div>
+  <div
+    class="input-border absolute top-full left-0 {{ valid == false ? 'bg-pop-pink' : 'bg-pop-white' }}" style="height: 2px;"
+  ></div>
+  {% if guide %}
+    <div class="input-guide opacity-0 absolute -bottom-2 right-0 text-sm pt-1 text-right transform translate-y-full {{ text_color }}">click or hit enter</div>
+  {% endif %}
+</div>
