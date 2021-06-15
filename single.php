@@ -33,6 +33,11 @@ $context["related"] = Timber::get_posts([
 
 $context["icons"] = get_random_icons(2);
 
+// Hero
+if (!empty($all_acf["hero"])) {
+  $context["hero"] = $all_acf["hero"]["value"];
+}
+
 // Output
 
 if ( post_password_required( $timber_post->ID ) ) {
