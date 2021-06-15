@@ -6,7 +6,7 @@
   <div class="container-wide" >
     <div class="md:border-16 md:{{ theme == 'dark' ? 'border-pop-black' : 'border-pop-white'}} {{ theme_bg_color }} md:shadow-md md:box-content">
       {% if fields.show_title %}
-      {% include "/templates/partial/component-title.twig" with 
+      {% include "/templates/partial/component-title.twig" with
         {
           'title': fields.title,
           'subtitle': fields.subtitle,
@@ -22,7 +22,7 @@
         {% for item in fields.case_studies %}
           {% set width = 'col-span-1' %}
           {% set height = 'row-span-1' %}
-          
+
           {% if loop.index == 3 %}
             {% set width = 'col-span-1 sm:col-span-2' %}
           {% elseif loop.index == 4 %}
@@ -40,13 +40,14 @@
                     <img class="w-full h-full object-cover origin-center transform group-hover:scale-110 transition-transform duration-500" src="{{ case_study.thumbnail.src }}" alt="">
                     <div class="absolute top-0 left-0 h-full w-full bg-pop-black opacity-40 group-hover:opacity-0 transition-opacity duration-500"></div>
                   </div>
-                  
+
                     <h3 class="group-hover:opacity-0 transition-opacity duration-500 p-6 m-0 text-pop-white {{ loop.index == 3 ? 'sm:w-3/4' : 'w-full'}}">
-                      {{ case_study.post_title }}. {{ case_study.terms('category') | first}}. {{case_study.preview.length(15).read_more('')}}
+                      {# {{ case_study.post_title }}. {{ case_study.terms('category') | first}}. {{case_study.preview.length(15).read_more('')}} #}
+                      {{ case_study.terms('client') | first}}. {{ case_study.terms('category') | first}}. {{ case_study.post_title }}.
                     </h3>
 
                     <div class="self-end">
-                      {% include "/templates/partial/arrow.twig" with 
+                      {% include "/templates/partial/arrow.twig" with
                         {
                           'arrow': fields.arrow,
                         }
