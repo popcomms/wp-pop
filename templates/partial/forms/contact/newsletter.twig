@@ -13,7 +13,7 @@
         type="radio"
         v-model="form.newsletter"
         value="Yes"
-        @change="contactNextStep()"
+        @change="nextStep()"
       >
       <label for="newsletter-true" class="pl-2">
         Yes! Please sign me up.
@@ -22,7 +22,7 @@
 
     <div class="my-2">
       <input
-        @change="contactNextStep()"
+        @change="nextStep()"
         id="newsletter-false"
         name="marketing_consent"
         type="radio"

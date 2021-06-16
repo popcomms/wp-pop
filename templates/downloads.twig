@@ -1,0 +1,20 @@
+<div
+  inline-template
+  is="download-form"
+>
+  <form
+    ref="downloadForm"
+    name="download_form"
+    method="post"
+    action=""
+    onsubmit="return false"
+    class="w-full"
+  >
+    <div
+      ref="downloadFormStep1"
+      v-show="step === 1"
+    >
+      {% include "partial/forms/download/intro.twig" %}
+    </div>
+  </form>
+</div>

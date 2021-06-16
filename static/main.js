@@ -14,10 +14,10 @@ document.addEventListener("DOMContentLoaded", function() {
 
   gsap.registerPlugin(ScrollTrigger);
 
-  Vue.component('downloads', {
+  Vue.component('download-form', {
     data () {
       return {
-        step: 0,
+        step: 1,
         stepName: [
           '',
           'consent',
@@ -183,7 +183,7 @@ document.addEventListener("DOMContentLoaded", function() {
       }
     },
     methods: {
-      contactNextStep () {
+      nextStep () {
         const current = this.$refs['contactFormStep' + this.step]
         this.hideInput (current)
 
@@ -218,7 +218,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
         if (re.test(this.form.email.value.toLowerCase())) {
           this.form.email.valid = false
-          this.contactNextStep()
+          this.nextStep()
         } else {
           this.form.email.valid = false
         }
@@ -226,18 +226,18 @@ document.addEventListener("DOMContentLoaded", function() {
       validateCompany (e) {
         if (this.form.company.value.length > 2) {
           this.form.company.valid = true
-          this.contactNextStep()
+          this.nextStep()
         }
       },
       validateGDPR (e) {
         if (this.form.gdpr.one && this.form.gdpr.two) {
-          this.contactNextStep()
+          this.nextStep()
         }
       },
       validateCaptcha (e) {
         if (this.captcha.a + this.captcha.b === parseInt(this.form.captcha.value)) {
           this.form.captcha.valid = true
-          this.contactNextStep()
+          this.nextStep()
           setTimeout(() => {
             this.submit()
           }, 3000)
