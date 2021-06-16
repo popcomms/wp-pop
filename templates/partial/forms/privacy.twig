@@ -2,11 +2,9 @@
   <div class="mb-6 form-text opacity-0 leading-tight text-base sm:text-xl md:text-3xl">
     We take your privacy seriously and need your consent to store the personal data you’ve provided so we can send you the content.
   </div>
-  <div class="flex flex-col justify-center">
-    <div class="my-2 form-text text-pop-yellow">
-      If you’re OK with that, please tick the boxes below:
-    </div>
-    <div class="form-text opacity-0 flex my-2">
+  <div class="flex form-text opacity-0 flex-col justify-center">
+    Are you OK with that?
+    <div class="flex my-2">
       <input
         :id="form.id + '-gdpr-1'"
         type="checkbox"
@@ -16,12 +14,14 @@
         class="mt-2"
         @change="validateGDPR()"
       >
-      <label :for="form.id + '-gdpr-1'" class="pl-4">
+      <label :for="form.id + '-gdpr-1'" class="pl-4 text-pop-yellow">
         I agree to receive content from POPcomms
       </label>
     </div>
 
-    <div class="form-text opacity-0 flex my-2">
+    We’ll also need your consent to store the personal data you’ve provided so we can send you the content, if you’re OK with this please tick the box below.
+
+    <div class="flex my-2">
       <input
         :id="form.id + '-gdpr-2'"
         type="checkbox"
@@ -31,9 +31,13 @@
         class="mt-2"
         @change="validateGDPR()"
       >
-      <label :for="form.id + '-gdpr-2'" class="pl-4">
+      <label :for="form.id + '-gdpr-2'" class="pl-4 text-pop-yellow">
         I agree to allow POPcomms to store and process my personal data.
       </label>
     </div>
+    <br>
+    <a href="{{site.url}}/privacy-policy/" class="underline text-sm" target="_blank">
+      Review our Privacy Policy
+    </a>
   </div>
 </div>
