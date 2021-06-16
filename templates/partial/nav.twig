@@ -64,25 +64,26 @@
         <path d="M53.7071 8.70711C54.0976 8.31658 54.0976 7.68342 53.7071 7.29289L47.3431 0.928932C46.9526 0.538408 46.3195 0.538408 45.9289 0.928932C45.5384 1.31946 45.5384 1.95262 45.9289 2.34315L51.5858 8L45.9289 13.6569C45.5384 14.0474 45.5384 14.6805 45.9289 15.0711C46.3195 15.4616 46.9526 15.4616 47.3431 15.0711L53.7071 8.70711ZM0 9H53V7H0V9Z" fill="#FF0088"/>
       </svg>
     </div>
-
-    <div
-      v-show="show.contact"
-      class="fixed top-0 right-0 w-screen h-screen"
-    >
+    <transition name="fade">
       <div
-        class="absolute h-full w-full bg-pop-black opacity-30 cursor-pointer"
-        @click="hideContactForm()"
-      ></div>
-      {% include "templates/contact.twig" with
-        {
-          'fields': item,
-          'theme': fields.theme,
-          'theme_text_color': fields.theme == "dark" ? 'text-pop-white' : 'text-pop-black',
-          'theme_bg_color': fields.theme == "dark" ? 'bg-pop-black' : 'bg-pop-white',
-          'theme_border_color': fields.theme == "dark" ? 'border-pop-black-dark' : 'border-pop-gray'
-        }
-      %}
-    </div>
+        v-show="show.contact"
+        class="fixed top-0 right-0 w-screen h-screen"
+      >
+        <div
+          class="absolute h-full w-full bg-pop-black opacity-30 cursor-pointer"
+          @click="hideContactForm()"
+        ></div>
+        {% include "templates/contact.twig" with
+          {
+            'fields': item,
+            'theme': fields.theme,
+            'theme_text_color': fields.theme == "dark" ? 'text-pop-white' : 'text-pop-black',
+            'theme_bg_color': fields.theme == "dark" ? 'bg-pop-black' : 'bg-pop-white',
+            'theme_border_color': fields.theme == "dark" ? 'border-pop-black-dark' : 'border-pop-gray'
+          }
+        %}
+      </div>
+    </transition>
   </div>
 
   {% endblock %}

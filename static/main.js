@@ -184,14 +184,23 @@ document.addEventListener("DOMContentLoaded", function() {
     },
     methods: {
       contactNextStep () {
+        const container = this.$refs.contactForm
+        const heightContainer = container.clientHeight
+        gsap.set(container, {height: heightContainer})
         const current = this.$refs['contactFormStep' + this.step]
-        this.hideInput (current)
+        this.hideInput(current)
+        this.hideText(current)
 
         setTimeout(() => {
           this.step = this.step + 1
           const next = this.$refs['contactFormStep' + this.step]
-          this.revealInput (next)
-        }, 1000)
+          gsap.to(container, {duration: 0.5, height: 'auto', onComplete: () => {
+            this.revealInput(next)
+            this.revealText(next)
+          }
+          })
+          // this.revealInput(next)
+        }, 500)
         // if (this.contactTl.paused() === true) {
         //   this.contactTl.tweenFromTo(`${this.step}`, `${this.step + 1}`)
         //   this.step += 1
@@ -274,7 +283,7 @@ document.addEventListener("DOMContentLoaded", function() {
             two: false
           }
         }
-        this.$refs.contactForm.reset()
+        // this.$refs.contactForm.reset()
       },
       submit () {
         this.$refs.contactForm.submit()
@@ -302,6 +311,14 @@ document.addEventListener("DOMContentLoaded", function() {
         // } else {
           this.hideInputAnim(step, inputs, borders, guides, text)
         // }
+      },
+      hideText (step) {
+        const text = step.getElementsByClassName('form-text')
+        gsap.to(text, { duration: 0.5, translateY: -2.25 + 'rem', opacity: 0 })
+      },
+      revealText (step) {
+        const text = step.getElementsByClassName('form-text')
+        gsap.fromTo(text, {translateY: +2.25 + 'rem', opacity: 0}, {duration: 0.4, translateY: 0, opacity: 1})
       },
   //     restartTL () {
   //       this.contactTl.tweenFromTo(`${this.step}`, "0")
@@ -331,12 +348,29 @@ document.addEventListener("DOMContentLoaded", function() {
         .to(guides, {duration: 0.3, opacity: 1,  ease: "power3.in"}, "-=0.3")
         .set(step,{ pointerEvents: 'all'}, "-=0.01")
       },
+      movingEye () {
+        const eye1 = this.$refs.contactForm.querySelector('.iris');
+        const eye2 = this.$refs.contactForm.querySelector('.pupil');
+        // const eye2 = this.$refs.contactForm.querySelector('.eye-right')
+        window.addEventListener('mousemove', (evt) => {
+          // console.log('move')
+            const x = -(window.innerWidth / 2 - evt.pageX) / 10;
+            const y = -(window.innerHeight / 2 - evt.pageY) / 10;
+            // eye1.attr.x = x
+            eye1.setAttribute('cx', 247.653 - 20 + x)
+            eye1.setAttribute('cy', 121.806 + y)
+            eye2.setAttribute('cx', 244.924 + x)
+            eye2.setAttribute('cy', 78.2744 + y)
+            // eye2.style.transform = `translateY(${y}px) translateX(${x}px)`;
+        });  
+      }
     },
     created () {
       this.reset()
     },
     mounted () {
       console.log(this.$refs.contactForm)
+      this.movingEye()
   //     gsap.set(this.$refs.steps, {pointerEvents: 'none'})
 
   //     this.contactTl = gsap.timeline({ paused: true })
@@ -422,8 +456,6 @@ document.addEventListener("DOMContentLoaded", function() {
       },
       showContactForm () {
         this.show.contact = true
-        // this.$refs.contactForm.step = 0
-        // this.$refs.contactForm.nextStepContact()
       },
       hideContactForm () {
         this.show.contact = false

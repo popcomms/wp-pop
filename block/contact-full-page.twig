@@ -1,4 +1,4 @@
-{% if is_preview %}
+<!-- {% if is_preview %}
   <p><strong>Contact CTA</strong> - I will only appear in the editor.</p>
 {% endif %}
 {% if not is_preview %}
@@ -14,15 +14,15 @@
           </div>
           <div class="relative w-full sm:w-3/4 flex flex-row sm:flex-col flex-wrap sm:flex-nowrap justify-center p-4 sm:p-11 {{ theme_text_color}}">
             <div>
-              <input class="mr-1 sm:mr-4" @click="nextStepContact" type="radio" id="more-info" name="access" value="more-info">
+              <input class="mr-1 sm:mr-4"  type="radio" id="more-info" name="access" value="more-info">
               <label class="mr-4 text-base sm:text-xl" for="more-info">I need more information</label>
             </div>
             <div>
-              <input class="mr-1 sm:mr-4" @click="nextStepContact" type="radio" id="more-info" name="access" value="more-info">
+              <input class="mr-1 sm:mr-4"  type="radio" id="more-info" name="access" value="more-info">
               <label class="mr-4 text-base sm:text-xl" for="more-info">I need more information</label>
             </div>
           </div>
-          <div @click="nextStepContact()" class="absolute bottom-0.5 right-0.5 flex cursor-pointer">
+          <div  class="absolute bottom-0.5 right-0.5 flex cursor-pointer">
             <div class="flex lowercase items-center px-8 py-2">
               <p class="{{theme_text_color}} m-0 transform group-hover:text-xl">next</p>
             </div>
@@ -135,4 +135,4 @@
       
     </div>
   </div>
-{% endif %}
+{% endif %} -->
