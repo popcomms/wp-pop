@@ -63,6 +63,13 @@ document.addEventListener("DOMContentLoaded", function() {
         const current = this.$refs['contactFormStep' + this.step]
         this.hideInput(current)
         this.hideText(current)
+        this.hideEye(current)
+
+        const next = this.$refs['contactFormStep' + (this.step + 1)]
+        const eye = next.getElementsByClassName('eye-mask')
+        const lines = next.getElementsByClassName('lines')
+        gsap.set(eye, { scaleY: 0 })
+        gsap.set(lines, {opacity: 0})
 
         setTimeout(() => {
           this.step = this.step + 1
@@ -70,6 +77,7 @@ document.addEventListener("DOMContentLoaded", function() {
           gsap.to(container, {duration: 0.5, height: 'auto', onComplete: () => {
             this.revealInput(next)
             this.revealText(next)
+            this.revealEye(next)
           }
           })
           // this.revealInput(next)
@@ -236,6 +244,38 @@ document.addEventListener("DOMContentLoaded", function() {
         const text = step.getElementsByClassName('form-text')
         gsap.fromTo(text, {translateY: +2.25 + 'rem', opacity: 0}, {duration: 0.4, translateY: 0, opacity: 1})
       },
+      hideEye (step) {
+        const eye = step.getElementsByClassName('eye-mask')
+        const lines = step.getElementsByClassName('lines')
+        gsap.to(eye, { duration: 0.35, scaleY: 0 })
+        gsap.to(lines, {duration: 0.35, opacity: 0})
+
+        window.removeEventListener('mousemove', this.moveEye);
+      },
+      revealEye (step) {
+        const eye = step.getElementsByClassName('eye-mask')
+        const lines = step.getElementsByClassName('lines')
+        gsap.to(eye, { duration: 0.35, scaleY: 1 })
+        gsap.to(lines, {duration: 0.35, opacity: 1})
+        if(this.step === 7) {
+          gsap.to(eye, { duration: 0.35, transformOrigin: '50% 32%', delay: 1, scaleY: 0.5 })
+        }
+
+        window.addEventListener('mousemove', this.moveEye, false);
+      },
+      moveEye (evt) {
+        const current = this.$refs['contactFormStep' + this.step]
+        const iris = current.querySelector('.iris');
+        const pupil = current.querySelector('.pupil');
+
+        const x = -(window.innerWidth / 2 - evt.pageX) / 10;
+        const y = -(window.innerHeight / 2 - evt.pageY) / 10;
+
+        iris.setAttribute('cx', 247.653 - 20 + x)
+        iris.setAttribute('cy', 121.806 + y)
+        pupil.setAttribute('cx', 244.924 + x)
+        pupil.setAttribute('cy', 78.2744 + y)
+      },
   //     restartTL () {
   //       this.contactTl.tweenFromTo(`${this.step}`, "0")
   //       console.log('restart')
@@ -264,28 +304,14 @@ document.addEventListener("DOMContentLoaded", function() {
         .to(guides, {duration: 0.3, opacity: 1,  ease: "power3.in"}, "-=0.3")
         .set(step,{ pointerEvents: 'all'}, "-=0.01")
       },
-      movingEye () {
-        const eye1 = this.$refs.contactForm.querySelector('.iris');
-        const eye2 = this.$refs.contactForm.querySelector('.pupil');
-        // const eye2 = this.$refs.contactForm.querySelector('.eye-right')
-        window.addEventListener('mousemove', (evt) => {
-          // console.log('move')
-            const x = -(window.innerWidth / 2 - evt.pageX) / 10;
-            const y = -(window.innerHeight / 2 - evt.pageY) / 10;
-            // eye1.attr.x = x
-            eye1.setAttribute('cx', 247.653 - 20 + x)
-            eye1.setAttribute('cy', 121.806 + y)
-            eye2.setAttribute('cx', 244.924 + x)
-            eye2.setAttribute('cy', 78.2744 + y)
-            // eye2.style.transform = `translateY(${y}px) translateX(${x}px)`;
-        });
-      }
     },
     created () {
       this.reset()
     },
     mounted () {
-      this.movingEye()
+      console.log(this.$refs.contactForm)
+      window.addEventListener('mousemove', this.moveEye, false);
+      // this.movingEye()
   //     gsap.set(this.$refs.steps, {pointerEvents: 'none'})
 
   //     this.contactTl = gsap.timeline({ paused: true })

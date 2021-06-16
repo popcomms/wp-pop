@@ -2,6 +2,7 @@
   id="contact-form"
   inline-template
   is="contact-form"
+  class="max-w-4xl"
 >
   <transition name="fade">
     <div
@@ -27,7 +28,7 @@
 
         <div
           ref="contactFormStep2"
-          class="p-10"
+          class="relative p-10"
           v-show="step === 2"
         >
           <div class="text-sm mb-4">1 / 6</div>
@@ -36,7 +37,7 @@
 
         <div
           ref="contactFormStep3"
-          class="p-10"
+          class="relative p-10"
           v-show="step === 3"
         >
           <div class="text-sm mb-4">2 / 6</div>
@@ -45,7 +46,7 @@
 
         <div
           ref="contactFormStep4"
-          class="p-10"
+          class="relative p-10"
           v-show="step === 4"
         >
           <div class="text-sm mb-4">3 / 6</div>
@@ -54,7 +55,7 @@
 
         <div
           ref="contactFormStep5"
-          class="p-10"
+          class="relative p-10"
           v-show="step === 5"
         >
           <div class="text-sm mb-4">4 / 6</div>
@@ -63,7 +64,7 @@
 
         <div
           ref="contactFormStep6"
-          class="p-10"
+          class="relative p-10"
           v-show="step === 6"
         >
           <div class="text-sm mb-4">5 / 6</div>
@@ -72,7 +73,7 @@
 
         <div
           ref="contactFormStep7"
-          class="p-10"
+          class="relative p-10"
           v-show="step === 7"
         >
           <div class="text-sm mb-4">6 / 6</div>
@@ -81,7 +82,7 @@
 
         <div
           ref="contactFormStep8"
-          class="p-10"
+          class="relative p-10"
           v-show="step === 8"
         >
           <div class="text-sm mb-4">&nbsp;</div>
@@ -90,5 +91,4 @@
       </div>
     </div>
   </transition>
-
 </div>
