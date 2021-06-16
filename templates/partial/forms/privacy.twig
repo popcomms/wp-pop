@@ -8,7 +8,7 @@
     </div>
     <div class="flex my-2">
       <input
-        id="gdpr-1"
+        :id="form.id + '-gdpr-1'"
         type="checkbox"
         name="gdpr_receive"
         v-model="form.gdpr.one"
@@ -16,14 +16,14 @@
         class="mt-2"
         @change="validateGDPR()"
       >
-      <label for="gdpr-1" class="pl-4">
+      <label :for="form.id + '-gdpr-1'" class="pl-4">
         I agree to receive content from POPcomms
       </label>
     </div>
 
     <div class="flex my-2">
       <input
-        id="gdpr-2"
+        :id="form.id + '-gdpr-2'"
         type="checkbox"
         name="gdpr_store_process"
         v-model="form.gdpr.two"
@@ -31,7 +31,7 @@
         class="mt-2"
         @change="validateGDPR()"
       >
-      <label for="gdpr-2" class="pl-4">
+      <label :for="form.id + '-gdpr-2'" class="pl-4">
         I agree to allow POPcomms to store and process my personal data.
       </label>
     </div>

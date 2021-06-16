@@ -1,0 +1,37 @@
+<div class="mb-12 leading-tight text-base sm:text-xl md:text-3xl">
+  And now just your <span class="text-pop-yellow">email</span> &amp; <span class="text-pop-yellow">company name</span>, please.
+</div>
+<div class="my-4">
+  {% include "/templates/partial/input.twig" with
+    {
+      'type': 'email',
+      'name': 'email',
+      'model': 'form.email.value',
+      'placeholder': 'Your email *',
+      'action': 'validateEmail',
+      'guide': false,
+      'arrow': false,
+      'text_color': 'text-pop-white',
+      'bg_color': 'bg-pop-black',
+      'border_color': 'border-pop-white',
+      'valid': 'form.Email.valid'
+    }
+  %}
+</div>
+<div class="my-4">
+  {% include "/templates/partial/input.twig" with
+    {
+      'type': 'text',
+      'name': 'company',
+      'model': 'form.company.value',
+      'placeholder': 'Company *',
+      'action': "validateLastName",
+      'guide': true,
+      'arrow': true,
+      'text_color': 'text-pop-white',
+      'bg_color': 'bg-pop-black',
+      'border_color': 'border-pop-white',
+      'valid': 'form.company.valid'
+    }
+  %}
+</div>
