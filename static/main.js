@@ -1,9 +1,27 @@
 document.addEventListener("DOMContentLoaded", function() {
 
+  const hubspotKey = '8cfb74b2-b064-4d13-90fb-88713f582f81';
+
   function calcCaptcha () {
     const min = Math.ceil(1)
     const max = Math.floor(10)
     return Math.floor(Math.random() * (max - min) + min)
+  }
+
+  function getCookie(cname) {
+    var name = cname + "=";
+    var decodedCookie = decodeURIComponent(document.cookie);
+    var ca = decodedCookie.split(';');
+    for(var i = 0; i <ca.length; i++) {
+      var c = ca[i];
+      while (c.charAt(0) == ' ') {
+        c = c.substring(1);
+      }
+      if (c.indexOf(name) == 0) {
+        return c.substring(name.length, c.length);
+      }
+    }
+    return "";
   }
 
   // Prevent Enter key from submitting <form>
@@ -333,6 +351,7 @@ document.addEventListener("DOMContentLoaded", function() {
         if (this.captcha.a + this.captcha.b === parseInt(this.form.captcha.value)) {
           this.form.captcha.valid = true
           this.nextStep()
+          this.submit()
         } else {
           this.form.captcha.valid = false
         }
@@ -406,6 +425,64 @@ document.addEventListener("DOMContentLoaded", function() {
         .to(guides, {duration: 0.3, opacity: 1,  ease: "power3.in"}, "-=0.3")
         .set(step,{ pointerEvents: 'all'}, "-=0.01")
       },
+      submit () {
+        const xhr = new XMLHttpRequest();
+        const url = 'https://api.hsforms.com/submissions/v3/integration/submit/7620391/e9adc62c-c6d2-41ff-83a2-c777407f2dbe'
+
+        const data = {
+          "fields": [
+            {
+              "name": "email",
+              "value": this.form.email.value
+            },
+            {
+              "name": "firstname",
+              "value": this.form.firstName.value
+            },
+            {
+              "name": "lastname",
+              "value": this.form.lastName.value
+            },
+            {
+              "name": "company",
+              "value": this.form.company.value
+            }
+          ],
+          "context": {
+            "hutk": getCookie('hubspotutk'),
+            "pageUri": window.location.href,
+            "pageName": document.title
+          },
+          "legalConsentOptions":{
+            "consent":{
+              "consentToProcess": this.form.gdpr.two,
+              "text":"I agree to allow POPcomms to store and process my personal data.",
+              "communications":[
+                {
+                  "value": this.form.gdpr.one,
+                  "subscriptionTypeId":1,
+                  "text":"I agree to receive content from POPcomms."
+                }
+              ]
+            }
+          }
+        }
+
+        xhr.open('POST', url);
+        xhr.setRequestHeader('Content-Type', 'application/json');
+        xhr.onreadystatechange = function() {
+          if(xhr.readyState == 4 && xhr.status == 200) {
+              console.log(xhr.responseText); // Returns a 200 response if the submission is successful.
+          } else if (xhr.readyState == 4 && xhr.status == 400){
+              console.log(xhr.responseText); // Returns a 400 error the submission is rejected.
+          } else if (xhr.readyState == 4 && xhr.status == 403){
+              console.log(xhr.responseText); // Returns a 403 error if the portal isn't allowed to post submissions.
+          } else if (xhr.readyState == 4 && xhr.status == 404){
+              console.log(xhr.responseText); //Returns a 404 error if the formGuid isn't found
+          }
+        }
+        xhr.send(JSON.stringify(data))
+      }
     },
     created () {
       this.reset()
