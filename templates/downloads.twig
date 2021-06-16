@@ -1,0 +1,68 @@
+<div
+  inline-template
+  is="download-form"
+>
+  <form
+    ref="downloadForm"
+    name="download_form"
+    method="post"
+    action=""
+    onsubmit="return false"
+    class="w-full"
+  >
+    <div
+      ref="downloadFormStep1"
+      v-show="step === 1"
+    >
+      {% include "partial/forms/download/intro.twig" %}
+    </div>
+    <div
+      ref="downloadFormStep2"
+      v-show="step === 2"
+      class="p-6 bg-pop-black text-pop-white"
+    >
+      <div class="text-sm mb-4">1 / 5</div>
+      {% include "partial/forms/download/name.twig" %}
+    </div>
+    <div
+      ref="downloadFormStep3"
+      v-show="step === 3"
+      class="p-6 bg-pop-black text-pop-white"
+    >
+      <div class="text-sm mb-4">2 / 5</div>
+      {% include "partial/forms/download/email-company.twig" %}
+    </div>
+    <div
+      ref="downloadFormStep4"
+      v-show="step === 4"
+      class="p-6 bg-pop-black text-pop-white"
+    >
+      <div class="text-sm mb-4">3 / 5</div>
+      {% include "partial/forms/newsletter.twig" %}
+    </div>
+    <div
+      ref="downloadFormStep5"
+      v-show="step === 5"
+      class="p-6 bg-pop-black text-pop-white"
+    >
+      <div class="text-sm mb-4">4 / 5</div>
+      {% include "partial/forms/privacy.twig" %}
+    </div>
+    <div
+      ref="downloadFormStep6"
+      v-show="step === 6"
+      class="p-6 bg-pop-black text-pop-white"
+    >
+      <div class="text-sm mb-4">5 / 5</div>
+      {% include "partial/forms/captcha.twig" %}
+    </div>
+    <div
+      ref="downloadFormStep7"
+      v-show="step === 7"
+      class="bg-pop-black text-pop-white"
+    >
+      <div class="text-sm p-6">Complete</div>
+      {% include "partial/forms/download/thanks.twig" %}
+    </div>
+  </form>
+</div>

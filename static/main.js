@@ -1,10 +1,33 @@
 document.addEventListener("DOMContentLoaded", function() {
 
+  const hubspotKey = '8cfb74b2-b064-4d13-90fb-88713f582f81';
+
+  function calcCaptcha () {
+    const min = Math.ceil(1)
+    const max = Math.floor(10)
+    return Math.floor(Math.random() * (max - min) + min)
+  }
+
+  function getCookie(cname) {
+    var name = cname + "=";
+    var decodedCookie = decodeURIComponent(document.cookie);
+    var ca = decodedCookie.split(';');
+    for(var i = 0; i <ca.length; i++) {
+      var c = ca[i];
+      while (c.charAt(0) == ' ') {
+        c = c.substring(1);
+      }
+      if (c.indexOf(name) == 0) {
+        return c.substring(name.length, c.length);
+      }
+    }
+    return "";
+  }
+
   // Prevent Enter key from submitting <form>
 
   const forms = document.querySelectorAll('form')
   forms.forEach(element => {
-    console.log(element)
     element.addEventListener('submit', (event) => {
       console.log('Prevent Form Submission')
       event.preventDefault()
@@ -13,162 +36,6 @@ document.addEventListener("DOMContentLoaded", function() {
   });
 
   gsap.registerPlugin(ScrollTrigger);
-
-  Vue.component('downloads', {
-    data () {
-      return {
-        step: 0,
-        stepName: [
-          '',
-          'consent',
-          'email',
-          'name',
-          'Company'
-        ],
-        email: '',
-        firstName: '',
-        surName: '',
-        company: ''
-      }
-    },
-    computed: {
-      getStepName () {
-        return this.stepName[this.step]
-      },
-      getIntro () {
-        if (this.step < 5) {
-          return 'Your'
-        } else {
-          return 'All done!'
-        }
-      }
-    },
-    methods: {
-      nextStep () {
-        if (this.downloadTl.paused() === true || this.downloadTl.progress() == 0) {
-          console.log('next')
-          this.downloadTl.play();
-          this.step += 1
-        }
-      },
-      prevStep () {
-        if (this.step > 0 && this.step < 5 && this.downloadTl.paused() === true) {
-          console.log('prev active')
-          this.downloadTl.reverse()
-          this.step -= 1
-        } else if (this.step === 5 && this.downloadTl.paused() === true) {
-          this.downloadTl.play('restartPoint')
-          this.step = 1
-        }
-      },
-      validateEmail: function(e) {
-        if (e.keyCode === 13 || e.type === 'click') {
-          this.nextStep()
-        }
-      },
-      validateName: function(e) {
-        if (e.keyCode === 13 || e.type === 'click') {
-          this.nextStep()
-        }
-      },
-      validateCompany: function(e) {
-        if (e.keyCode === 13 || e.type === 'click') {
-          this.nextStep()
-        }
-      },
-      revealInput(step) {
-        const borders = step.getElementsByClassName('input-border')
-        const guides = step.getElementsByClassName('input-guide')
-        const inputs = step.querySelectorAll('.input-content')
-
-        if (this.downloadTl.reversed()) {
-          this.hideInputAnim(step, inputs, borders, guides)
-        } else {
-          this.revealInputAnim(step, inputs, borders, guides)
-        }
-      },
-      hideInput(step) {
-        const borders = step.getElementsByClassName('input-border')
-        const guides = step.getElementsByClassName('input-guide')
-        const inputs = step.querySelectorAll('.input-content')
-
-        if (this.downloadTl.reversed()) {
-          this.revealInputAnim(step, inputs, borders, guides)
-        } else {
-          this.hideInputAnim(step, inputs, borders, guides)
-        }
-      },
-      hideInputAnim (step, inputs, borders, guides) {
-        gsap.timeline({
-        })
-        .to(borders, {duration: 0.5, width: 0 + '%'})
-        .to(inputs, {duration: 0.5, translateY: -100 + '%', opacity: 1,  ease: "power3.in"}, "-=0.5")
-        .to(guides, {duration: 0.3, opacity: 0,  ease: "power3.in"}, "-=0.3")
-        .set(inputs, {translateY: 100 + '%'})
-        .set(step, {pointerEvents: 'none'})
-      },
-      revealInputAnim (step, inputs, borders, guides) {
-        gsap.timeline({
-        })
-        .to(borders, {duration: 0.5, width: 100 + '%'})
-        .to(inputs, {duration: 0.5, translateY: 0 + '%', opacity: 1, ease: "power3.out"}, "-=0.5")
-        .to(guides, {duration: 0.3, opacity: 1,  ease: "power3.in"}, "-=0.3")
-        .set(step,{ pointerEvents: 'all'}, "-=0.01")
-      },
-    },
-    mounted () {
-      gsap.set(this.$refs.steps, {pointerEvents: 'none'})
-
-      this.downloadTl = gsap.timeline({ paused: true })
-      // Show form
-      .to(this.$refs.form_bg,{left: 0, duration: 0.4})
-      .addLabel('restartPoint')
-      .set(this.$refs.steps,{ pointerEvents: 'all' })
-      .to([".download-steps", ".download-back"], {opacity: 1,duration: 0.3})
-      .fromTo(
-        this.$refs.step_1,
-        {
-          opacity: 0,
-          pointerEvents: 'none'
-        },
-        {
-          pointerEvents: 'all',
-          opacity: 1,
-          duration: 0.3
-        }
-      )
-      .addPause()
-      // Change step 1 -> 2
-      .to(this.$refs.step_1, {duration: 0.3, opacity: 0, pointerEvents: 'none'})
-      .call( this.revealInput, [this.$refs.step_2], "+=0.6" )
-      .addPause("+=0.2")
-      // Change step 2 -> 3
-      .call( this.hideInput, [this.$refs.step_2], "+=0.1" )
-      .call( this.revealInput, [this.$refs.step_3], "+=0.6" )
-      .addPause("+=0.2")
-      // Change step 3 -> 4
-      .call( this.hideInput, [this.$refs.step_3], "+=0.1" )
-      .call( this.revealInput, [this.$refs.step_4], "+=0.6" )
-      .addPause("+=0.2")
-      // Change step 4 -> 5
-      .call( this.hideInput, [this.$refs.step_4], "+=0.1" )
-      .fromTo(
-        this.$refs.step_5,
-        {
-          opacity: 0,
-          pointerEvents: 'none'
-        },
-        {
-          pointerEvents: 'all',
-          opacity: 1,
-          duration: 0.3
-        },
-        "+=0.6"
-      )
-      // Stop before end so can reverse
-      .addPause()
-    }
-  })
 
   Vue.component('contact-form', {
     data () {
@@ -183,10 +50,11 @@ document.addEventListener("DOMContentLoaded", function() {
       }
     },
     methods: {
-      contactNextStep () {
+      nextStep () {
         const container = this.$refs.contactForm
         const heightContainer = container.clientHeight
         gsap.set(container, {height: heightContainer})
+
         const current = this.$refs['contactFormStep' + this.step]
         this.hideInput(current)
         this.hideText(current)
@@ -226,8 +94,8 @@ document.addEventListener("DOMContentLoaded", function() {
         const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
 
         if (re.test(this.form.email.value.toLowerCase())) {
-          this.form.email.valid = false
-          this.contactNextStep()
+          this.form.email.valid = true
+          this.nextStep()
         } else {
           this.form.email.valid = false
         }
@@ -235,18 +103,18 @@ document.addEventListener("DOMContentLoaded", function() {
       validateCompany (e) {
         if (this.form.company.value.length > 2) {
           this.form.company.valid = true
-          this.contactNextStep()
+          this.nextStep()
         }
       },
       validateGDPR (e) {
         if (this.form.gdpr.one && this.form.gdpr.two) {
-          this.contactNextStep()
+          this.nextStep()
         }
       },
       validateCaptcha (e) {
         if (this.captcha.a + this.captcha.b === parseInt(this.form.captcha.value)) {
           this.form.captcha.valid = true
-          this.contactNextStep()
+          this.nextStep()
           setTimeout(() => {
             this.submit()
           }, 3000)
@@ -256,6 +124,7 @@ document.addEventListener("DOMContentLoaded", function() {
       },
       reset () {
         this.form = {
+          id: 'contact',
           name: {
             valid: null,
             value: ''
@@ -427,6 +296,283 @@ document.addEventListener("DOMContentLoaded", function() {
   //     // Stop before end so can reverse
   //     // .addPause()
   //     .addLabel("4")
+    }
+  })
+
+  Vue.component('download-form', {
+    data () {
+      return {
+        step: 1,
+        form: null,
+        captcha: {
+          a: calcCaptcha(),
+          b: calcCaptcha()
+        }
+      }
+    },
+    computed: {
+      getStepName () {
+        return this.stepName[this.step]
+      },
+      getIntro () {
+        if (this.step < 5) {
+          return 'Your'
+        } else {
+          return 'All done!'
+        }
+      }
+    },
+    methods: {
+      nextStep () {
+        const current = this.$refs['downloadFormStep' + this.step]
+        this.hideInput (current)
+        setTimeout(() => {
+          this.step = this.step + 1
+          const next = this.$refs['downloadFormStep' + this.step]
+          this.revealInput (next)
+        }, 1000)
+      },
+      prevStep () {
+        if (this.step > 0 && this.step < 5 && this.downloadTl.paused() === true) {
+          console.log('prev active')
+          this.downloadTl.reverse()
+          this.step -= 1
+        } else if (this.step === 5 && this.downloadTl.paused() === true) {
+          this.downloadTl.play('restartPoint')
+          this.step = 1
+        }
+      },
+      validateFirstName () {
+        if (this.form.firstName.value.length > 2) {
+          this.form.firstName.valid = true
+        } else {
+          this.form.firstName.valid = false
+        }
+      },
+      validateLastName () {
+        this.validateFirstName()
+        if (this.form.lastName.value.length > 2) {
+          this.form.lastName.valid = true
+        } else {
+          this.form.lastName.valid = false
+        }
+        if (this.form.firstName.valid && this.form.lastName.valid) {
+          this.nextStep()
+        }
+      },
+      validateEmail (e) {
+        const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+
+        if (re.test(this.form.email.value.toLowerCase())) {
+          this.form.email.valid = true
+        } else {
+          this.form.email.valid = false
+        }
+      },
+      validateCompany(e) {
+        if (this.form.company.value.length > 2) {
+          this.form.company.valid = true
+        }
+        if (this.form.email.valid && this.form.company.valid) {
+          this.nextStep()
+        }
+      },
+      validateGDPR (e) {
+        if (this.form.gdpr.one && this.form.gdpr.two) {
+          this.nextStep()
+        }
+      },
+      validateCaptcha (e) {
+        if (this.captcha.a + this.captcha.b === parseInt(this.form.captcha.value)) {
+          this.form.captcha.valid = true
+          this.nextStep()
+          this.submit()
+        } else {
+          this.form.captcha.valid = false
+        }
+      },
+      reset () {
+        this.form = {
+          id: 'download',
+          firstName: {
+            value: '',
+            valid: null
+          },
+          lastName: {
+            value: '',
+            valid: null
+          },
+          email: {
+            value: '',
+            valid: null
+          },
+          company: {
+            value: '',
+            valid: null
+          },
+          newsletter: '',
+          captcha: {
+            valid: null,
+            value: ''
+          },
+          gdpr: {
+            one: false,
+            two: false
+          }
+        }
+      },
+      revealInput(step) {
+        const borders = step.getElementsByClassName('input-border')
+        const guides = step.getElementsByClassName('input-guide')
+        const inputs = step.querySelectorAll('.input-content')
+
+        if (this.downloadTl.reversed()) {
+          this.hideInputAnim(step, inputs, borders, guides)
+        } else {
+          this.revealInputAnim(step, inputs, borders, guides)
+        }
+      },
+      hideInput(step) {
+        const borders = step.getElementsByClassName('input-border')
+        const guides = step.getElementsByClassName('input-guide')
+        const inputs = step.querySelectorAll('.input-content')
+
+        if (this.downloadTl.reversed()) {
+          this.revealInputAnim(step, inputs, borders, guides)
+        } else {
+          this.hideInputAnim(step, inputs, borders, guides)
+        }
+      },
+      hideInputAnim (step, inputs, borders, guides) {
+        gsap.timeline({
+        })
+        .to(borders, {duration: 0.5, width: 0 + '%'})
+        .to(inputs, {duration: 0.5, translateY: -100 + '%', opacity: 1,  ease: "power3.in"}, "-=0.5")
+        .to(guides, {duration: 0.3, opacity: 0,  ease: "power3.in"}, "-=0.3")
+        .set(inputs, {translateY: 100 + '%'})
+        .set(step, {pointerEvents: 'none'})
+      },
+      revealInputAnim (step, inputs, borders, guides) {
+        gsap.timeline({
+        })
+        .to(borders, {duration: 0.5, width: 100 + '%'})
+        .to(inputs, {duration: 0.5, translateY: 0 + '%', opacity: 1, ease: "power3.out"}, "-=0.5")
+        .to(guides, {duration: 0.3, opacity: 1,  ease: "power3.in"}, "-=0.3")
+        .set(step,{ pointerEvents: 'all'}, "-=0.01")
+      },
+      submit () {
+        const xhr = new XMLHttpRequest();
+        const url = 'https://api.hsforms.com/submissions/v3/integration/submit/7620391/e9adc62c-c6d2-41ff-83a2-c777407f2dbe'
+
+        const data = {
+          "fields": [
+            {
+              "name": "email",
+              "value": this.form.email.value
+            },
+            {
+              "name": "firstname",
+              "value": this.form.firstName.value
+            },
+            {
+              "name": "lastname",
+              "value": this.form.lastName.value
+            },
+            {
+              "name": "company",
+              "value": this.form.company.value
+            }
+          ],
+          "context": {
+            "hutk": getCookie('hubspotutk'),
+            "pageUri": window.location.href,
+            "pageName": document.title
+          },
+          "legalConsentOptions":{
+            "consent":{
+              "consentToProcess": this.form.gdpr.two,
+              "text":"I agree to allow POPcomms to store and process my personal data.",
+              "communications":[
+                {
+                  "value": this.form.gdpr.one,
+                  "subscriptionTypeId":1,
+                  "text":"I agree to receive content from POPcomms."
+                }
+              ]
+            }
+          }
+        }
+
+        xhr.open('POST', url);
+        xhr.setRequestHeader('Content-Type', 'application/json');
+        xhr.onreadystatechange = function() {
+          if(xhr.readyState == 4 && xhr.status == 200) {
+              console.log(xhr.responseText); // Returns a 200 response if the submission is successful.
+          } else if (xhr.readyState == 4 && xhr.status == 400){
+              console.log(xhr.responseText); // Returns a 400 error the submission is rejected.
+          } else if (xhr.readyState == 4 && xhr.status == 403){
+              console.log(xhr.responseText); // Returns a 403 error if the portal isn't allowed to post submissions.
+          } else if (xhr.readyState == 4 && xhr.status == 404){
+              console.log(xhr.responseText); //Returns a 404 error if the formGuid isn't found
+          }
+        }
+        xhr.send(JSON.stringify(data))
+      }
+    },
+    created () {
+      this.reset()
+    },
+    mounted () {
+      gsap.set(this.$refs.steps, {pointerEvents: 'none'})
+
+      this.downloadTl = gsap.timeline({ paused: true })
+      // Show form
+      .to(this.$refs.form_bg,{left: 0, duration: 0.4})
+      .addLabel('restartPoint')
+      .set(this.$refs.steps,{ pointerEvents: 'all' })
+      .to([".download-steps", ".download-back"], {opacity: 1,duration: 0.3})
+      .fromTo(
+        this.$refs.step_1,
+        {
+          opacity: 0,
+          pointerEvents: 'none'
+        },
+        {
+          pointerEvents: 'all',
+          opacity: 1,
+          duration: 0.3
+        }
+      )
+      .addPause()
+      // Change step 1 -> 2
+      .to(this.$refs.step_1, {duration: 0.3, opacity: 0, pointerEvents: 'none'})
+      .call( this.revealInput, [this.$refs.step_2], "+=0.6" )
+      .addPause("+=0.2")
+      // Change step 2 -> 3
+      .call( this.hideInput, [this.$refs.step_2], "+=0.1" )
+      .call( this.revealInput, [this.$refs.step_3], "+=0.6" )
+      .addPause("+=0.2")
+      // Change step 3 -> 4
+      .call( this.hideInput, [this.$refs.step_3], "+=0.1" )
+      .call( this.revealInput, [this.$refs.step_4], "+=0.6" )
+      .addPause("+=0.2")
+      // Change step 4 -> 5
+      .call( this.hideInput, [this.$refs.step_4], "+=0.1" )
+      .fromTo(
+        this.$refs.step_5,
+        {
+          opacity: 0,
+          pointerEvents: 'none'
+        },
+        {
+          pointerEvents: 'all',
+          opacity: 1,
+          duration: 0.3
+        },
+        "+=0.6"
+      )
+      // Stop before end so can reverse
+      .addPause()
     }
   })
 
