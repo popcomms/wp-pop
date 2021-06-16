@@ -1,12 +1,12 @@
 <div class="grid grid-cols-2 space-x-12">
-  <div class="mb-6 leading-tight text-base sm:text-xl md:text-3xl">
+  <div class="mb-6 form-text opacity-0 leading-tight text-base sm:text-xl md:text-3xl">
     We take your privacy seriously and need your consent to store the personal data you’ve provided so we can send you the content.
   </div>
   <div class="flex flex-col justify-center">
-    <div class="my-2 text-pop-yellow">
+    <div class="my-2 form-text text-pop-yellow">
       If you’re OK with that, please tick the boxes below:
     </div>
-    <div class="flex my-2">
+    <div class="form-text opacity-0 flex my-2">
       <input
         :id="form.id + '-gdpr-1'"
         type="checkbox"
@@ -21,7 +21,7 @@
       </label>
     </div>
 
-    <div class="flex my-2">
+    <div class="form-text opacity-0 flex my-2">
       <input
         :id="form.id + '-gdpr-2'"
         type="checkbox"
