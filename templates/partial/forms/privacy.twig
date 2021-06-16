@@ -3,9 +3,7 @@
     We take your privacy seriously and need your consent to store the personal data you’ve provided so we can send you the content.
   </div>
   <div class="flex flex-col justify-center">
-    <div class="my-2 text-pop-yellow">
-      If you’re OK with that, please tick the boxes below:
-    </div>
+    Are you OK with that?
     <div class="flex my-2">
       <input
         :id="form.id + '-gdpr-1'"
@@ -16,10 +14,12 @@
         class="mt-2"
         @change="validateGDPR()"
       >
-      <label :for="form.id + '-gdpr-1'" class="pl-4">
+      <label :for="form.id + '-gdpr-1'" class="pl-4 text-pop-yellow">
         I agree to receive content from POPcomms
       </label>
     </div>
+
+    We’ll also need your consent to store the personal data you’ve provided so we can send you the content, if you’re OK with this please tick the box below.
 
     <div class="flex my-2">
       <input
@@ -31,9 +31,13 @@
         class="mt-2"
         @change="validateGDPR()"
       >
-      <label :for="form.id + '-gdpr-2'" class="pl-4">
+      <label :for="form.id + '-gdpr-2'" class="pl-4 text-pop-yellow">
         I agree to allow POPcomms to store and process my personal data.
       </label>
     </div>
+    <br>
+    <a href="{{site.url}}/privacy-policy/" class="underline text-sm" target="_blank">
+      Review our Privacy Policy
+    </a>
   </div>
 </div>
