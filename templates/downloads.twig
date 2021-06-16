@@ -16,5 +16,13 @@
     >
       {% include "partial/forms/download/intro.twig" %}
     </div>
+    <div
+      ref="downloadFormStep1"
+      v-show="step === 2"
+      class="p-6"
+    >
+      <div class="text-sm mb-4">1 / 6</div>
+      {% include "partial/forms/download/intro.twig" %}
+    </div>
   </form>
 </div>
