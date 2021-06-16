@@ -8,9 +8,10 @@
 
 	<body id="site" class="font-default slider-content antialiased" data-template="base.twig">
 
-		{% include 'partial/nav.twig' %}
-
 		<div id="site-wrapper">
+
+      {% include 'partial/nav.twig' %}
+
 			<section role="main" class="content-wrapper">
 				<div class="wrapper">
 					{% block content %}
@@ -18,6 +19,15 @@
 					{% endblock %}
 				</div>
 			</section>
+
+      {% include "templates/contact.twig" with
+        {
+          'theme_text_color': 'text-pop-white',
+          'theme_bg_color': 'bg-pop-black',
+          'theme_border_color': 'border-pop-gray'
+        }
+      %}
+
 		</div>
 
 		{% block footer %}
