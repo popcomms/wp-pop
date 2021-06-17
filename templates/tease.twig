@@ -1,50 +1,46 @@
-<article class="tease tease-{{post.post_type}}" id="tease-{{post.ID}}">
-	{# {% block content %}
-		<h2 class="h2"><a href="{{post.link}}">{{post.title}}</a></h2>
-		<p>{{post.preview}}</p>
-		{% if post.get_thumbnail %}
-			<img src="{{post.thumbnail.src}}" />
-		{% endif %}
-	{% endblock %} #}
-	{# {% extends "tease.twig" %} #}
-
-	{% block content %}
-		<a href="{{post.link}}">
-			<div class="grid grid-cols-2 grid-rows-1" style="box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);">
-				{% if post.thumbnail.src != '' %}
-					<div class="relative row-span-1" style="padding-bottom: 100%;">
-						<img class="absolute top-0 left-0 min-w-full min-h-full  object-cover" src="{{post.thumbnail.src}}" />
-					</div>
-				{% endif %}
-				{% if post.thumbnail.src == null %}
-					<div class="relative row-span-1 w-full h-full bg-pop-pink flex items-center justify-center">
-						<p>placeholder</p>
-					</div>
-				{% endif %}
-				<div class="relative flex flex-col items-start justify-center p-7">
-					<div class="flex items-center space-x-4">
-						{# <p>{{post.preview.length(25)}}</p> #}
-						<div class="rounded-full w-6 h-6 bg-pop-mid-gray"></div>
-						<p class="text-pop-pink text-base underline">{{post.author.display_name}}</p>
-						<p class="text-pop-purple text-base">{{post.date}}</p>
-					</div>
-					<h5 class="">{{post.title}}</h5>
-					<div class="absolute bottom-0 right-0 ">
-						{% include "/templates/partial/link.twig" with 
-							{
-								'link': {
-									url: post.uid,
-									text: 'read more',
-									background_color: 'black',
-									accent_color: 'yellow',
-									arrow_color: 'blue',
-									angle: 45
-								},
-							}
-						%}
-					</div>
-				</div>
+{% block content %}
+<a class="block" href="{{ post.link }}">
+	<div class="grid grid-cols-1 sm:grid-cols-2 grid-rows-2 sm:grid-rows-1 border border-gray-200 shadow-md transition-opacity">
+		<div class="aspect-w-4 aspect-h-3 md:aspect-w-1 md:aspect-h-1">
+      {% if post.thumbnail.src %}
+			<img
+        class="object-cover"
+        src="{{ post.thumbnail.src }}"
+        style="font-size: 0"
+      />
+      {% else %}
+      <img
+        class="object-cover"
+        src="{{ theme.link }}/static/images/blogs-bg.png"
+        style="font-size: 0"
+      />
+      {% endif %}
+		</div>
+		<div class="relative flex flex-col items-start sm:justify-center p-6 pb-20">
+      <div class="my-2 text-pop-purple">
+        {{ post.date }}
+      </div>
+      <br>
+      <h5 class="font-medium leading-tight">
+        {{ post.title }}
+      </h5>
+      <br>
+      {% include "/templates/partial/archive-author.twig" %}
+			<div class="absolute bottom-0 right-0">
+				{% include "/templates/partial/link.twig" with
+					{
+						'link': {
+							url: post.uid,
+							text: 'Read',
+							background_color: 'black',
+							accent_color: 'yellow',
+							arrow_color: 'blue',
+							angle: 45
+						},
+					}
+				%}
 			</div>
-		</a>
-	{% endblock %}
-</article>
+		</div>
+	</div>
+</a>
+{% endblock %}
