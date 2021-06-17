@@ -1,7 +1,5 @@
 document.addEventListener("DOMContentLoaded", function() {
 
-  const hubspotKey = '8cfb74b2-b064-4d13-90fb-88713f582f81';
-
   function calcCaptcha () {
     const min = Math.ceil(1)
     const max = Math.floor(10)
@@ -43,13 +41,20 @@ document.addEventListener("DOMContentLoaded", function() {
         step: 1,
         form: null,
         captcha: {
-          a: this.calcCaptcha(),
-          b: this.calcCaptcha()
+          a: calcCaptcha(),
+          b: calcCaptcha()
         },
-        valid: false
+        show: false
       }
     },
     methods: {
+      hide () {
+        this.show = false
+        if (this.step === 8) {
+          this.step = 0
+          this.reset()
+        }
+      },
       nextStep () {
         const container = this.$refs.contactForm
         const heightContainer = container.clientHeight
@@ -88,11 +93,6 @@ document.addEventListener("DOMContentLoaded", function() {
   //         this.step -= 1
   //       }
   //     },
-      calcCaptcha () {
-        const min = Math.ceil(1)
-        const max = Math.floor(10)
-        return Math.floor(Math.random() * (max - min) + min)
-      },
       validateName (e) {
         if (this.form.name.value.length > 3) {
           this.form.name.valid = true
@@ -160,10 +160,57 @@ document.addEventListener("DOMContentLoaded", function() {
             two: false
           }
         }
-        // this.$refs.contactForm.reset()
       },
       submit () {
-        this.$refs.contactForm.submit()
+        const xhr = new XMLHttpRequest();
+        const url = 'https://api.hsforms.com/submissions/v3/integration/submit/7620391/e9adc62c-c6d2-41ff-83a2-c777407f2dbe'
+
+        const data = {
+          "fields": [
+            {
+              "name": "email",
+              "value": this.form.email.value
+            },
+            {
+              "name": "firstname",
+              "value": this.form.firstName.value
+            },
+            {
+              "name": "lastname",
+              "value": this.form.lastName.value
+            },
+            {
+              "name": "company",
+              "value": this.form.company.value
+            },
+            {
+              "name": "phone",
+              "value": this.form.phone.value
+            },
+            {
+              "name": "message",
+              "value": this.form.message
+            }
+          ],
+          "context": {
+            "hutk": getCookie('hubspotutk'),
+            "pageUri": window.location.href,
+            "pageName": document.title
+          },
+          "legalConsentOptions":{
+            "consent":{
+              "consentToProcess": this.form.gdpr.two,
+              "text": "I agree to allow POPcomms to store and process my personal data.",
+              "communications":[
+                {
+                  "value": this.form.gdpr.one,
+                  "subscriptionTypeId": 1,
+                  "text": "I agree to receive content from POPcomms."
+                }
+              ]
+            }
+          }
+        }
       },
       revealInput (step) {
         const borders = step.getElementsByClassName('input-border')
@@ -203,7 +250,7 @@ document.addEventListener("DOMContentLoaded", function() {
         gsap.to(eye, { duration: 0.35, scaleY: 0 })
         gsap.to(lines, {duration: 0.35, opacity: 0})
 
-        window.removeEventListener('mousemove', this.moveEye); 
+        window.removeEventListener('mousemove', this.moveEye);
       },
       revealEye (step) {
         const eye = step.getElementsByClassName('eye-mask')
@@ -214,7 +261,7 @@ document.addEventListener("DOMContentLoaded", function() {
           gsap.to(eye, { duration: 0.35, transformOrigin: '50% 32%', delay: 1, scaleY: 0.5 })
         }
 
-        window.addEventListener('mousemove', this.moveEye, false);          
+        window.addEventListener('mousemove', this.moveEye, false);
       },
       moveEye (evt) {
         const current = this.$refs['contactFormStep' + this.step]
@@ -263,7 +310,7 @@ document.addEventListener("DOMContentLoaded", function() {
     },
     mounted () {
       console.log(this.$refs.contactForm)
-      window.addEventListener('mousemove', this.moveEye, false);  
+      window.addEventListener('mousemove', this.moveEye, false);
       // this.movingEye()
   //     gsap.set(this.$refs.steps, {pointerEvents: 'none'})
 
@@ -357,16 +404,16 @@ document.addEventListener("DOMContentLoaded", function() {
           this.revealInput (next)
         }, 1000)
       },
-      prevStep () {
-        if (this.step > 0 && this.step < 5 && this.downloadTl.paused() === true) {
-          console.log('prev active')
-          this.downloadTl.reverse()
-          this.step -= 1
-        } else if (this.step === 5 && this.downloadTl.paused() === true) {
-          this.downloadTl.play('restartPoint')
-          this.step = 1
-        }
-      },
+      // prevStep () {
+      //   if (this.step > 0 && this.step < 5 && this.downloadTl.paused() === true) {
+      //     console.log('prev active')
+      //     this.downloadTl.reverse()
+      //     this.step -= 1
+      //   } else if (this.step === 5 && this.downloadTl.paused() === true) {
+      //     this.downloadTl.play('restartPoint')
+      //     this.step = 1
+      //   }
+      // },
       validateFirstName () {
         if (this.form.firstName.value.length > 2) {
           this.form.firstName.valid = true
@@ -487,7 +534,7 @@ document.addEventListener("DOMContentLoaded", function() {
       },
       submit () {
         const xhr = new XMLHttpRequest();
-        const url = 'https://api.hsforms.com/submissions/v3/integration/submit/7620391/e9adc62c-c6d2-41ff-83a2-c777407f2dbe'
+        const url = 'https://api.hsforms.com/submissions/v3/integration/submit/7620391/a80eef42-8cb7-432d-ad17-a1cb3d1ee17c'
 
         const data = {
           "fields": [
@@ -516,12 +563,12 @@ document.addEventListener("DOMContentLoaded", function() {
           "legalConsentOptions":{
             "consent":{
               "consentToProcess": this.form.gdpr.two,
-              "text":"I agree to allow POPcomms to store and process my personal data.",
+              "text": "I agree to allow POPcomms to store and process my personal data.",
               "communications":[
                 {
                   "value": this.form.gdpr.one,
-                  "subscriptionTypeId":1,
-                  "text":"I agree to receive content from POPcomms."
+                  "subscriptionTypeId": 1,
+                  "text": "I agree to receive content from POPcomms."
                 }
               ]
             }
@@ -608,9 +655,9 @@ document.addEventListener("DOMContentLoaded", function() {
         menuActive: false,
         activeChild: '',
         showMenuTl: gsap.timeline({ paused: true }),
-        show: {
-          contact: false
-        }
+        // show: {
+        //   contact: false
+        // }
       }
     },
     methods:{
@@ -626,16 +673,27 @@ document.addEventListener("DOMContentLoaded", function() {
         }
       },
       showContactForm () {
-        this.show.contact = true
+        const vueComponents = this.$parent
+        console.log(vueComponents)
+        vueComponents.$children.forEach((element) => {
+          if (element.$el.id === 'contact-form') {
+            element.show = true
+          }
+        })
       },
-      hideContactForm () {
-        this.show.contact = false
-        if (this.$refs.contactForm.step === 8) {
-          this.$refs.contactForm.step = 0
-          this.$refs.contactForm.reset()
-        }
-        // this.$refs.contactForm.restartTL()
-      },
+      // hideContactForm () {
+      //   const vueComponents = this.$parent
+      //   console.log(vueComponents)
+      //   vueComponents.$children.forEach((element) => {
+      //     if (element.$el.id === 'contact-form') {
+      //       element.show = false
+      //       if (target.step === 8) {
+      //         element.step = 0
+      //         element.reset()
+      //       }
+      //     }
+      //   })
+      // },
       changeSubMenu (item) {
         this.activeChild = item
       },
@@ -702,14 +760,13 @@ document.addEventListener("DOMContentLoaded", function() {
     }
   })
 
-
   new Vue({
     el: document.getElementById('site-wrapper')
   })
 
-  new Vue({
-    el: document.getElementById('header')
-  })
+  // new Vue({
+  //   el: document.getElementById('header')
+  // })
 
   // Apply highlight color to text
   const problems = document.querySelectorAll('.problems-list__item');
