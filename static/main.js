@@ -74,25 +74,17 @@ document.addEventListener("DOMContentLoaded", function() {
         setTimeout(() => {
           this.step = this.step + 1
           const next = this.$refs['contactFormStep' + this.step]
-          gsap.to(container, {duration: 0.5, height: 'auto', onComplete: () => {
-            this.revealInput(next)
-            this.revealText(next)
-            this.revealEye(next)
-          }
+          gsap.to(container, {
+            duration: 0.5,
+            height: 'auto',
+            onComplete: () => {
+              this.revealInput(next)
+              this.revealText(next)
+              this.revealEye(next)
+            }
           })
-          // this.revealInput(next)
         }, 500)
-        // if (this.contactTl.paused() === true) {
-        //   this.contactTl.tweenFromTo(`${this.step}`, `${this.step + 1}`)
-        //   this.step += 1
-        // }
       },
-  //     prevStepContact () {
-  //       if (this.step > 0 && this.contactTl.paused() === true) {
-  //         this.contactTl.reverse()
-  //         this.step -= 1
-  //       }
-  //     },
       validateName (e) {
         if (this.form.name.value.length > 3) {
           this.form.name.valid = true
@@ -276,17 +268,6 @@ document.addEventListener("DOMContentLoaded", function() {
         pupil.setAttribute('cx', 244.924 + x)
         pupil.setAttribute('cy', 78.2744 + y)
       },
-  //     restartTL () {
-  //       this.contactTl.tweenFromTo(`${this.step}`, "0")
-  //       console.log('restart')
-  //       this.step = 0
-  //     },
-  //     // leaveTL () {
-  //     //   for (let i = 0; i < this.step; i++) {
-  //     //     this.contactTl.reverse()
-  //     //   }
-  //     //   this.step = 0
-  //     // },
       hideInputAnim (step, inputs, borders, guides, text) {
         gsap.timeline({})
         .to(borders, {duration: 0.5, width: 0 + '%'})
@@ -655,9 +636,6 @@ document.addEventListener("DOMContentLoaded", function() {
         menuActive: false,
         activeChild: '',
         showMenuTl: gsap.timeline({ paused: true }),
-        // show: {
-        //   contact: false
-        // }
       }
     },
     methods:{
