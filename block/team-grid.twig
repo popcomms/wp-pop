@@ -14,7 +14,7 @@
     </div>
     <div class="grid grid-cols-2 md:grid-cols-3 grid-rows-auto">
       {% for item in fields.grid %}
-      {% set personLoopIndex = loop.index * 3 - 1 %}
+      {% set personLoopIndex = loop.index * 3 - 2 %}
         {% for persons in item %}
           {% for person in persons %}
             {% if person.acf_fc_layout == 'information' %}
@@ -24,7 +24,7 @@
                 {% set text_color = 'text-pop-black' %}
               {% endif %}
   
-              <div class="flex col-span-2 order-{{personLoopIndex + 2}} md:col-span-1 flex-col px-6 py-7 md:py-16 bg-pop-{{ person.background_color }}">
+              <div class="flex col-span-2 md:order-none order-{{personLoopIndex + 2}} md:col-span-1 flex-col px-6 py-7 md:py-16 bg-pop-{{ person.background_color }}">
                 <h3 class="mb-0 md:mb-6 text-3xl {{ text_color }}">{{person.name}}</h3>
                 <p class="mt-0 mb-6 md:font-bold text-lg {{ text_color }}">{{person.position}}</p>
                 <p class="hidden sm:block {{ text_color }}">{{person.description}}</p>
@@ -36,13 +36,13 @@
               </div>
             {% endif %}
             {% if person.acf_fc_layout == 'photo' %}
-              <div class="relative row-span-2 col-span-1 order-{{personLoopIndex + 1}}  md:col-start-auto md:col-span-1 md:row-span-1">
+              <div class="relative row-span-2 col-span-1 md:order-none order-{{personLoopIndex + 1}}  md:col-start-auto md:col-span-1 md:row-span-1">
                 <img class="w-full object-fill" src="{{person.photo}}" alt="">
               </div>
   
             {% endif %}
             {% if person.acf_fc_layout == 'icon' %}
-            <div class="relative row-span-2 col-span-1 order-{{personLoopIndex}}  md:col-start-auto md:col-span-1 md:row-span-1 h-full w-full">
+            <div class="relative row-span-2 col-span-1 md:order-none order-{{personLoopIndex}}  md:col-start-auto md:col-span-1 md:row-span-1 h-full w-full">
               <img class="w-full absolute {{person.alignment}}-0 left-0" src="{{person.icon}}" alt="">
             </div>
             {% endif %}
