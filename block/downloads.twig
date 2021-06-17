@@ -4,152 +4,74 @@
 
 {% if not is_preview %}
   {% if fields.show_block %}
-  <div is="downloads" inline-template class="container-wide relative" >
-    <div class="downloads overflow-hidden">
-      <div class="downloads-grid relative grid grid-cols-1 grid-rows-2 gap-0.5 sm:grid-cols-2">
-          <div class="relative row-span-2 hidden sm:block"  style="padding-bottom: 100%;">
-            <img class="absolute top-0 left-0 min-w-full min-h-full object-cover" src="{{ fields.image.url }}" alt="">
-          </div>
-          <div class="flex items-center p-6 bg-pop-{{ fields.accent_color }}">
-            <h2 class="text-pop-white">
-              {{ fields.title }}
-            </h2>
-          </div>
-          <div class="flex flex-col {{ theme_bg_color }}">
-            <div class="flex-grow p-6 text-xl {{ theme_text_color }}">
-              {{ fields.text }}
-            </div>
-            <div class="self-end">
-                <div @click="nextStep()" class="link flex cursor-pointer">
-                    <div class="flex lowercase items-center px-8 py-2 {{ fields.button.background_color == 'black' ? 'bg-pop-black' : 'bg-pop-white' }}">
-                      <p class="link__text text-pop-white m-0 transform group-hover:text-xl {{ fields.button.background_color == 'black' ? 'text-pop-white' : 'text-pop-black' }}">
-                        download
-                      </p>
-                    </div>
-                  <div class="w-12 h-12 p-3 bg-pop-{{ fields.button.accent_color }}">
-                    <svg class="transform rotate-90" width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path class="fill-current text-pop-{{ fields.button.arrow_color }}" d="M13.0607 0.625645C12.4749 0.0398579 11.5251 0.0398579 10.9393 0.625645L1.3934 10.1716C0.807611 10.7574 0.807611 11.7071 1.3934 12.2929C1.97919 12.8787 2.92893 12.8787 3.51472 12.2929L12 3.80762L20.4853 12.2929C21.0711 12.8787 22.0208 12.8787 22.6066 12.2929C23.1924 11.7071 23.1924 10.7574 22.6066 10.1716L13.0607 0.625645ZM13.5 24.3137V1.6863H10.5V24.3137H13.5Z" fill="#3A3EAB"/>
-                    </svg>
-                  </div>
-                </div>
-            </div>
-          </div>
-      </div>
-
-      {# FORM #}
-      <div ref="steps" class="flex flex-col absolute top-0 left-0 w-full h-full z-20">
-        <div ref="form_bg" class="absolute top-0 -left-full w-full h-full border-pop-pink border-2 {{ theme_bg_color}}"></div>
-        <div ref="step_1" class="step_1 absolute flex flex-col sm:flex-row  top-0 left-0 w-full h-5/6 sm:h-full p-6 sm:px-8 sm:py-20 md:px-11 md:py-24">
-          <div class="w-full sm:w-1/2">
-            <h5 class="text-base sm:text-xl md:text-3xl m-0 {{ theme_text_color}}">You are on your way to getting your business ahead of the pack. We will just need an email and a name please? It’s all confidential, no spam.</h5>
-          </div>
-          <div class="w-full sm:w-1/2 flex flex-row sm:flex-col flex-wrap sm:flex-nowrap justify-center p-4 sm:p-11 {{ theme_text_color}}">
-            <div>
-              <input class="mr-1 sm:mr-4" @click="nextStep" type="radio" id="no-problem" name="access" value="fine">
-              <label class="mr-4 text-base sm:text-xl" for="no-problem">No Problem</label>
-            </div>
-            <div>
-              <input class="mr-1 sm:mr-4" @click="nextStep" type="radio" id="no" name="access" value="no">
-              <label class="mr-4 text-base sm:text-xl" for="no">No</label>
-            </div>
-            <div class="flex justify-between items-center mt-4 sm:mt-8 w-full">
-              <a class="underline text-sm" href="">Check our privacy policy</a>
-              <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M36.3746 25.0607C36.9604 24.4749 36.9604 23.5251 36.3746 22.9393L26.8287 13.3934C26.2429 12.8076 25.2931 12.8076 24.7073 13.3934C24.1216 13.9792 24.1216 14.9289 24.7073 15.5147L33.1926 24L24.7073 32.4853C24.1216 33.0711 24.1216 34.0208 24.7073 34.6066C25.2931 35.1924 26.2429 35.1924 26.8287 34.6066L36.3746 25.0607ZM12.6865 25.5L35.3139 25.5L35.3139 22.5L12.6865 22.5L12.6865 25.5Z" fill="#F8F7EE"/>
-              </svg>
-            </div>
-          </div>
-        </div>
-        <div ref="step_2" class="step_2 pointer-events-none absolute flex items-center justify-center top-0 left-0 w-full h-full p-6 sm:px-8 sm:py-20 md:px-11 md:py-24">
-            {% include "/templates/partial/input.twig" with 
-              {
-                'type': 'email',
-                'model': 'email',
-                'placeholder': 'Your email...',
-                'action': 'validateEmail',
-                'guide': true,
-                'arrow': true,
-                'text_color': theme_text_color,
-                'bg_color': theme_bg_color,
-                'border_color': theme == 'dark' ? 'border-pop-white' : 'border-pop-white'
-              }
-            %}
-        </div>
-        <div ref="step_3" class="step_3 pointer-events-none  absolute flex flex-col items-center justify-center top-0 left-0 w-full h-full p-6 sm:px-8 sm:py-20 md:px-11 md:py-24">
-          {% include "/templates/partial/input.twig" with 
-            {
-              'type': 'text',
-              'model': 'firstName',
-              'placeholder': 'Your Firstname',
-              'action': '',
-              'guide': false,
-              'text_color': theme_text_color,
-              'bg_color': theme_bg_color,
-              'border_color': theme == 'dark' ? 'border-pop-white' : 'border-pop-white'
-            }
-          %}
-          <div class="spacer h-9"></div>
-          {% include "/templates/partial/input.twig" with 
-            {
-              'type': 'text',
-              'model': 'surName',
-              'placeholder': 'Your Surname',
-              'action': 'validateName',
-              'guide': true,
-              'arrow': true,
-              'text_color': theme_text_color,
-              'bg_color': theme_bg_color,
-              'border_color': theme == 'dark' ? 'border-pop-white' : 'border-pop-white'
-            }
-          %}
-        </div>
-        <div ref="step_4" class="step_4 pointer-events-none absolute flex items-center justify-center top-0 left-0 w-full h-full p-6 sm:px-8 sm:py-20 md:px-11 md:py-24">
-          {% include "/templates/partial/input.twig" with 
-            {
-              'type': 'text',
-              'model': 'company',
-              'placeholder': 'Your Company',
-              'action': 'validateCompany',
-              'guide': true,
-              'arrow': true,
-              'text_color': theme_text_color,
-              'bg_color': theme_bg_color,
-              'border_color': theme == 'dark' ? 'border-pop-white' : 'border-pop-white'
-            }
-          %}
-        </div>
-        <div ref="step_5" class="step_5 absolute flex top-0 left-0 w-full h-full p-6 sm:px-8 sm:py-20 md:px-11 md:py-24">
-          <div class="w-full sm:w-1/2 flex items-center">
-            <h5 class="m-0 {{ theme_text_color}}">All done! Check your email to find our guide.</h5>
-          </div>
-          <div class="w-1/2">
-
-          </div>
-        </div>
-
-        {# Steps Guide #}
-        <div class="hidden sm:block download-steps opacity-0 absolute top-0 left-0 w-full px-11 pt-4">
-          <p class="text-sm mb-0 {{ theme_text_color}}">Step <span v-html="step"></span>/5</p>
-          <div class="text-sm mt-0 flex {{ theme_text_color}}">
-            <transition name="fade-Y" mode="out-in">
-              <div class="mr-1" v-bind:key="getIntro" v-html="getIntro"></div> 
-            </transition>
-            <transition name="fade-Y" mode="out-in">
-              <div class="text-pop-pink" v-bind:key="step" v-html="getStepName"></div>
-            </transition>
-          </div>
-        </div>
-
-        {# Back control #}
-        <div class="download-back opacity-0 absolute bottom-0 left-0 px-11 pb-4" @click="prevStep">
-          <transition name="fade-Y" mode="out-in">
-            <div :show="step" class="text-pop-pink text-sm cursor-pointer" v-html="this.step !== 5 ? '< back' : '< restart'"></div>
-          </transition>
-        </div>
-
-      </div>
+  <div
+  inline-template
+  is="download-form"
+>
+  <div
+    ref="downloadForm"
+    name="download_form"
+    method="post"
+    action=""
+    onsubmit="return false"
+    class="w-full"
+  >
+    <div
+      ref="downloadFormStep1"
+      v-show="step === 1"
+    >
+      {% include "partial/forms/download/intro.twig" %}
     </div>
-
+    <div
+      ref="downloadFormStep2"
+      v-show="step === 2"
+      class="p-6 bg-pop-black text-pop-white"
+    >
+      <div class="text-sm mb-4">1 / 5</div>
+      {% include "partial/forms/download/name.twig" %}
+    </div>
+    <div
+      ref="downloadFormStep3"
+      v-show="step === 3"
+      class="p-6 bg-pop-black text-pop-white"
+    >
+      <div class="text-sm mb-4">2 / 5</div>
+      {% include "partial/forms/download/email-company.twig" %}
+    </div>
+    <div
+      ref="downloadFormStep4"
+      v-show="step === 4"
+      class="p-6 bg-pop-black text-pop-white"
+    >
+      <div class="text-sm mb-4">3 / 5</div>
+      {% include "partial/forms/newsletter.twig" %}
+    </div>
+    <div
+      ref="downloadFormStep5"
+      v-show="step === 5"
+      class="p-6 bg-pop-black text-pop-white"
+    >
+      <div class="text-sm mb-4">4 / 5</div>
+      {% include "partial/forms/privacy.twig" %}
+    </div>
+    <div
+      ref="downloadFormStep6"
+      v-show="step === 6"
+      class="p-6 bg-pop-black text-pop-white"
+    >
+      <div class="text-sm mb-4">5 / 5</div>
+      {% include "partial/forms/captcha.twig" %}
+    </div>
+    <div
+      ref="downloadFormStep7"
+      v-show="step === 7"
+      class="bg-pop-black text-pop-white"
+    >
+      <div class="text-sm p-6">Complete</div>
+      {% include "partial/forms/download/thanks.twig" %}
+    </div>
   </div>
+</div>
+
   {% endif %}
 {% endif %}
