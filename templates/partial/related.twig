@@ -1,7 +1,13 @@
 <div class="py-20  bg-pop-{{ content.theme == 'black' ? 'black' : 'white' }}">
   <div class="container-narrow border-t border-gray-300 text-pop-{{ content.theme == 'black' ? 'white' : 'black' }}">
 
-    <h3 class="my-12">Related Posts</h3>
+    <h3 class="my-12">
+      {% if post.type == 'case-studies' %}
+        Related Case Studies
+      {% else %}
+        Related Posts
+      {% endif %}
+    </h3>
 
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 mb-16">
     {% for post in related %}
