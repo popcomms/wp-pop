@@ -317,6 +317,16 @@ function my_acf_init() {
 		'keywords'			=> array( 'hero' ),
 	));
 
+	acf_register_block(array(
+		'name'				=> 'page-video-hero',
+		'title'				=> __('Page Video Hero'),
+		'description'		=> __('A custom video-hero block.'),
+		'render_callback'	=> 'my_acf_block_render_callback',
+		'category'			=> 'layout',
+		'icon'				=> 'cover-image',
+		'keywords'			=> array( 'hero' ),
+	));
+
 	// acf_register_block(array(
 	// 	'name'				=> 'post-banner',
 	// 	'title'				=> __('Post Banner'),

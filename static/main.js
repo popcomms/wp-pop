@@ -306,6 +306,7 @@ document.addEventListener("DOMContentLoaded", function() {
         const pupilY = -(pupilTop / 2 - evt.screenY) / 4;
 
         iris.setAttribute('cx', (247.653 / 2) + 45 + irisX)
+        // iris.setAttribute('rx', Math.min(101.771, (101.771 / 10) + 45 + irisX))
         iris.setAttribute('cy', (121.806 / 2) + irisY)
         pupil.setAttribute('cx', (274.924 / 2) + pupilX)
         pupil.setAttribute('cy', (1 / 2) + pupilY)
