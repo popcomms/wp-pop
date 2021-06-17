@@ -47,7 +47,17 @@ document.addEventListener("DOMContentLoaded", function() {
         show: false
       }
     },
+    computed: {
+
+    },
     methods: {
+      validationHighlight (el) {
+        if (el === true) {
+          return 'bg-pop-white'
+        } else {
+          return 'bg-pop-pink'
+        }
+      },
       hide () {
         this.show = false
         document.querySelector('body').style.overflow = 'auto'
@@ -92,10 +102,6 @@ document.addEventListener("DOMContentLoaded", function() {
                 this.revealEye(next)
               }
               if (this.step === 8) {
-                // const fingers = next.querySelectorAll('.finger')
-                // const hand = next.querySelectorAll('.hand')
-                // gsap.set(hand, {translateY: 100 + '%'})
-                // gsap.set(fingers, {translateY: 100 + '%'})
                 this.revealFingers(next)
               }
             }
@@ -105,6 +111,12 @@ document.addEventListener("DOMContentLoaded", function() {
       validateName (e) {
         if (this.form.name.value.length > 3) {
           this.form.name.valid = true
+
+          if(e.keyCode === 13 && this.form.email.valid === true) {
+            this.nextStep()
+          }
+        } else {
+          this.form.name.valid = false
         }
       },
       validateEmail (e) {
@@ -112,7 +124,10 @@ document.addEventListener("DOMContentLoaded", function() {
 
         if (re.test(this.form.email.value.toLowerCase())) {
           this.form.email.valid = true
-          this.nextStep()
+
+          if(e.keyCode === 13 && this.form.name.valid === true) {
+            this.nextStep()
+          }
         } else {
           this.form.email.valid = false
         }
@@ -120,7 +135,9 @@ document.addEventListener("DOMContentLoaded", function() {
       validateCompany (e) {
         if (this.form.company.value.length > 2) {
           this.form.company.valid = true
-          this.nextStep()
+          if(e.keyCode === 13) {
+            this.nextStep()
+          }
         }
       },
       validateGDPR (e) {
@@ -143,25 +160,25 @@ document.addEventListener("DOMContentLoaded", function() {
         this.form = {
           id: 'contact',
           name: {
-            valid: null,
+            valid: false,
             value: ''
           },
           email: {
-            valid: null,
+            valid: false,
             value: ''
           },
           company: {
-            valid: null,
+            valid: false,
             value: ''
           },
           phone: {
-            valid: null,
+            valid: false,
             value: ''
           },
           message: '',
           newsletter: '',
           captcha: {
-            valid: null,
+            valid: false,
             value: ''
           },
           gdpr: {
@@ -227,11 +244,7 @@ document.addEventListener("DOMContentLoaded", function() {
         const inputs = step.querySelectorAll('.input-content')
         const text = step.querySelectorAll('h4')
 
-        // if (this.contactTl.reversed()) {
-        //   this.hideInputAnim(step, inputs, borders, guides, text)
-        // } else {
-          this.revealInputAnim(step, inputs, borders, guides, text)
-        // }
+        this.revealInputAnim(step, inputs, borders, guides, text)
       },
       hideInput (step) {
         const borders = step.getElementsByClassName('input-border')
@@ -239,11 +252,7 @@ document.addEventListener("DOMContentLoaded", function() {
         const inputs = step.querySelectorAll('.input-content')
         const text = step.querySelectorAll('h4')
 
-        // if (this.contactTl.reversed()) {
-        //   this.revealInputAnim(step, inputs, borders, guides, text)
-        // } else {
-          this.hideInputAnim(step, inputs, borders, guides, text)
-        // }
+        this.hideInputAnim(step, inputs, borders, guides, text)
       },
       hideText (step) {
         const text = step.getElementsByClassName('form-text')
@@ -282,7 +291,7 @@ document.addEventListener("DOMContentLoaded", function() {
         const current = this.$refs['contactFormStep' + this.step]
         const iris = current.querySelector('.iris');
         const pupil = current.querySelector('.pupil');
-        // console.log(iris)
+
         var irisBB = iris.getBoundingClientRect();
         var irisTop = irisBB.top + irisBB.height / 2;
         var irisLeft = irisBB.left + irisBB.width / 2;
@@ -323,65 +332,7 @@ document.addEventListener("DOMContentLoaded", function() {
       this.reset()
     },
     mounted () {
-      console.log(this.$refs.contactForm)
       window.addEventListener('mousemove', this.moveEye, false);
-      // this.movingEye()
-  //     gsap.set(this.$refs.steps, {pointerEvents: 'none'})
-
-  //     this.contactTl = gsap.timeline({ paused: true })
-  //     // Show form
-
-  //     .addLabel("0")
-  //     .set(this.$refs.steps, {opacity: 1})
-  //     .to(this.$refs.form_bg,{opacity: 1, duration: 0.4})
-  //     .set(this.$refs.steps,{ pointerEvents: 'all' })
-  //     .to([".contact-steps", ".contact-back"], {opacity: 1,duration: 0.3})
-  //     .fromTo(
-  //       this.$refs.step_1,
-  //       {
-  //         opacity: 0,
-  //         pointerEvents: 'none'
-  //       },
-  //       {
-  //         pointerEvents: 'all',
-  //         opacity: 1,
-  //         duration: 0.3
-  //       }
-  //     )
-  //     // .addPause()
-  //     .addLabel("1")
-  //     // Change step 1 -> 2
-  //     .to(this.$refs.step_1, {duration: 0.3, opacity: 0, pointerEvents: 'none'})
-  //     .to(this.$refs.step_2.querySelectorAll('h4'), {duration: 0.3, opacity: 1})
-  //     .call( this.revealInput, [this.$refs.email_input], "-=0.3" )
-  //     // .addPause("+=0.2")
-  //     .addLabel("2")
-  //     // switch inputs
-  //     .call( this.hideInput, [this.$refs.email_input], "+=0.1" )
-  //     // .to(this.$refs.email_text, {duration: 0.3, color: this.baseColor})
-  //     .call( this.revealInput, [this.$refs.name_input], "+=0.3" )
-  //     // .to(this.$refs.name_text, {duration: 0.3, color: this.highlightColor})
-  //     // .addPause("+=0.2")
-  //     .addLabel("3")
-  //     // Change step 2 -> 3
-  //     .to(this.$refs.step_2.querySelectorAll('h4'), {duration: 0.3, opacity: 0})
-  //     .call( this.hideInput, [this.$refs.name_input], "-=0.29" )
-  //     .fromTo(
-  //       this.$refs.step_3,
-  //       {
-  //         opacity: 0,
-  //         pointerEvents: 'none'
-  //       },
-  //       {
-  //         pointerEvents: 'all',
-  //         opacity: 1,
-  //         duration: 0.3
-  //       },
-  //       "+=0.6"
-  //     )
-  //     // Stop before end so can reverse
-  //     // .addPause()
-  //     .addLabel("4")
     }
   })
 

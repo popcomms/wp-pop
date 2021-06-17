@@ -7,7 +7,7 @@
         type="{{ type }}"
         v-model="{{ model }}"
         placeholder="{{ placeholder }}"
-        @keyup.enter.prevent="{{ action }}"
+        @keyup.prevent="{{ action }}"
       >
       {% if arrow %}
       <svg @click="{{action}}" class="absolute h-8 sm:h-auto top-0 right-0 cursor-pointer fill-current {{ text_color }} hover:text-pop-pink transition-colors" width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -16,8 +16,10 @@
       {% endif %}
     </div>
   </div>
+  <!-- {{ valid == false ? 'bg-pop-pink' : 'bg-pop-white' }} -->
+
   <div
-    class="input-border absolute top-full left-0 {{ valid == false ? 'bg-pop-pink' : 'bg-pop-white' }}" style="height: 2px;"
+    class="input-border absolute top-full left-0 transition-colors duration-300" :class="{{ valid }}" style="height: 2px;"
   ></div>
   {% if guide %}
     <div class="input-guide opacity-0 absolute -bottom-2 right-0 text-sm pt-1 text-right transform translate-y-full {{ text_color }}">click or hit enter</div>
