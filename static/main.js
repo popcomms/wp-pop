@@ -50,6 +50,7 @@ document.addEventListener("DOMContentLoaded", function() {
     methods: {
       hide () {
         this.show = false
+        document.querySelector('body').style.overflow = 'auto'
         if (this.step === 8) {
           this.step = 0
           this.reset()
@@ -71,6 +72,13 @@ document.addEventListener("DOMContentLoaded", function() {
         gsap.set(eye, { scaleY: 0 })
         gsap.set(lines, {opacity: 0})
 
+        if (this.step === 7) {
+          const fingers = next.querySelectorAll('.finger')
+          const hand = next.querySelectorAll('.hand')
+          gsap.set(hand, {translateY: 100 + '%'})
+          gsap.set(fingers, {translateY: 100 + '%'})
+        }
+
         setTimeout(() => {
           this.step = this.step + 1
           const next = this.$refs['contactFormStep' + this.step]
@@ -80,7 +88,16 @@ document.addEventListener("DOMContentLoaded", function() {
             onComplete: () => {
               this.revealInput(next)
               this.revealText(next)
-              this.revealEye(next)
+              if (next.getElementsByClassName('eye-mask').length !== 0) {
+                this.revealEye(next)
+              }
+              if (this.step === 8) {
+                // const fingers = next.querySelectorAll('.finger')
+                // const hand = next.querySelectorAll('.hand')
+                // gsap.set(hand, {translateY: 100 + '%'})
+                // gsap.set(fingers, {translateY: 100 + '%'})
+                this.revealFingers(next)
+              }
             }
           })
         }, 500)
@@ -239,7 +256,7 @@ document.addEventListener("DOMContentLoaded", function() {
       hideEye (step) {
         const eye = step.getElementsByClassName('eye-mask')
         const lines = step.getElementsByClassName('lines')
-        gsap.to(eye, { duration: 0.35, scaleY: 0 })
+        gsap.to(eye, { duration: 0.35, translateY: this.step > 1 ? 40 : 0, scaleY: 0 })
         gsap.to(lines, {duration: 0.35, opacity: 0})
 
         window.removeEventListener('mousemove', this.moveEye);
@@ -250,23 +267,39 @@ document.addEventListener("DOMContentLoaded", function() {
         gsap.to(eye, { duration: 0.35, scaleY: 1 })
         gsap.to(lines, {duration: 0.35, opacity: 1})
         if(this.step === 7) {
-          gsap.to(eye, { duration: 0.35, transformOrigin: '50% 32%', delay: 1, scaleY: 0.5 })
+          gsap.to(eye, { duration: 0.35, delay: 1, translateY: 10, scaleY: 0.5 })
         }
 
         window.addEventListener('mousemove', this.moveEye, false);
+      },
+      revealFingers (step) {
+        const fingers = step.querySelectorAll('.finger')
+        const hand = step.querySelectorAll('.hand')
+        gsap.to(fingers, { duration: 0.7, translateY: 0 + '%', stagger: 0.1, ease: Elastic.easeOut.config(1, 1) })
+        gsap.to(hand, { duration: 0.3, translateY: 0 + '%', delay: 0.25 })
       },
       moveEye (evt) {
         const current = this.$refs['contactFormStep' + this.step]
         const iris = current.querySelector('.iris');
         const pupil = current.querySelector('.pupil');
+        // console.log(iris)
+        var irisBB = iris.getBoundingClientRect();
+        var irisTop = irisBB.top + irisBB.height / 2;
+        var irisLeft = irisBB.left + irisBB.width / 2;
 
-        const x = -(window.innerWidth / 2 - evt.pageX) / 10;
-        const y = -(window.innerHeight / 2 - evt.pageY) / 10;
+        var pupilBB = pupil.getBoundingClientRect();
+        var pupilTop = pupilBB.top + pupilBB.height / 2;
+        var pupilLeft = pupilBB.left + pupilBB.width / 2;
 
-        iris.setAttribute('cx', 247.653 - 20 + x)
-        iris.setAttribute('cy', 121.806 + y)
-        pupil.setAttribute('cx', 244.924 + x)
-        pupil.setAttribute('cy', 78.2744 + y)
+        const irisX = -(irisLeft / 2 - evt.screenX) / 5;
+        const irisY = -(irisTop / 2 - evt.screenY) / 5;
+        const pupilX = -(pupilLeft / 2 - evt.screenX) / 4;
+        const pupilY = -(pupilTop / 2 - evt.screenY) / 4;
+
+        iris.setAttribute('cx', (247.653 / 2) + 45 + irisX)
+        iris.setAttribute('cy', (121.806 / 2) + irisY)
+        pupil.setAttribute('cx', (274.924 / 2) + pupilX)
+        pupil.setAttribute('cy', (1 / 2) + pupilY)
       },
       hideInputAnim (step, inputs, borders, guides, text) {
         gsap.timeline({})
@@ -652,12 +685,12 @@ document.addEventListener("DOMContentLoaded", function() {
       },
       showContactForm () {
         const vueComponents = this.$parent
-        console.log(vueComponents)
         vueComponents.$children.forEach((element) => {
           if (element.$el.id === 'contact-form') {
             element.show = true
           }
         })
+        document.querySelector('body').style.overflow = 'hidden'
       },
       // hideContactForm () {
       //   const vueComponents = this.$parent

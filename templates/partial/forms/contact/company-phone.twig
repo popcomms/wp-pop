@@ -1,4 +1,4 @@
-<div class="w-1/2 form-text opacity-0 pr-3 mb-12 leading-tight text-base sm:text-xl md:text-3xl">
+<div class="w-full sm:w-1/2 form-text opacity-0 pr-3 mb-12 leading-tight text-base sm:text-xl md:text-3xl">
   We'd also love to know your
 </div>
 <div class="my-4">
@@ -33,13 +33,15 @@
     }
   %}
 </div>
-<div class="absolute top-0 right-0 w-1/2 pointer-events-none">
+<div class="hidden sm:block absolute top-0 right-0 w-1/2 pointer-events-none">
   <svg class="watching-eye w-full" preserveAspectRatio="xMidYMid meet"  viewBox="0 0 496 369" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
     <rect class="lines" y="-123.89" width="496" height="245.916" fill="url(#pattern3)"/>
     <clipPath id="irisclipPath3">
       <path class="eye-mask" style="transform-origin: 50% 32%;" d="M0 122.813C58.13 49.7951 147.621 3.01562 248 3.01562C348.379 3.01562 437.87 49.7951 496 122.813C437.87 195.83 348.379 242.61 248 242.61C147.621 242.61 58.13 195.83 0 122.813Z" fill="black"/>
     </clipPath>
-    <path style="clip-path: url(#irisclipPath3)" d="M0 122.813C58.13 49.7951 147.621 3.01562 248 3.01562C348.379 3.01562 437.87 49.7951 496 122.813C437.87 195.83 348.379 242.61 248 242.61C147.621 242.61 58.13 195.83 0 122.813Z" fill="white"/>
+    <rect fill="white" style="clip-path: url(#irisclipPath3)" class="lines" y="0" width="496" height="245.916"/>
+
+    <!-- <path style="clip-path: url(#irisclipPath3)" d="M0 122.813C58.13 49.7951 147.621 3.01562 248 3.01562C348.379 3.01562 437.87 49.7951 496 122.813C437.87 195.83 348.379 242.61 248 242.61C147.621 242.61 58.13 195.83 0 122.813Z" fill="white"/> -->
     <ellipse class="iris" style="clip-path: url(#irisclipPath3)" cx="247.653" cy="121.806" rx="101.771" ry="102.118" fill="#6F62FF"/>
     <ellipse class="pupil" style="clip-path: url(#irisclipPath3)" cx="244.924" cy="78.2744" rx="35.4286" ry="35.4286" fill="#F8F7EE"/>
     <defs>
