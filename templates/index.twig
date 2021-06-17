@@ -9,51 +9,49 @@
       style="background-image: url({{ theme.link }}/static/images/blogs-bg.png);"
     ></div>
 
-		<div class="container-banner flex flex-col justify-between z-10 h-3/4 sm:h-1/2">
-			<div>
-				<div class="input-box relative w-full bg-white border border-gray-200 shadow-md">
-					<div class="pt-4 px-6">
-						<form
-              class="search-form w-full border-b border-pop-purple border-opacity-50 flex justify-between mb-1"
-              method="get"
-              role="search"
-              action="{{ site.url }}"
+		<div class="px-4 flex flex-col justify-between z-10 h-3/4 sm:h-1/2 max-w-full lg:max-w-screen-lg mx-auto">
+      <div class="input-box relative w-full bg-white border border-gray-200 shadow-md">
+        <div class="pt-4 px-6">
+          <form
+            class="search-form w-full border-b border-pop-purple border-opacity-50 flex justify-between mb-1"
+            method="get"
+            role="search"
+            action="{{ site.url }}"
+          >
+            <input
+              class="search-input h3 text-lg lg:text-3xl text-pop-blue w-11/12 py-2"
+              type="text"
+              placeholder="Search Insights"
+              name="s"
+              value=""
             >
-							<input
-                class="search-input h3 text-3xl text-pop-blue w-11/12 py-2"
-                type="text"
-                placeholder="Search Insights"
-                name="s"
-                value=""
-              >
-							<input
-                class="bg-transparent text-pop-purple w-8"
-                type="image"
-                src="{{ theme.link }}/static/icons/search-arrow.svg"
-                alt="Submit"
-              >
-              <input type="hidden" name="post_type" value="post">
-						</form>
-            <div class="text-pop-purple text-sm text-right">
-              click or hit enter
-            </div>
-					</div>
-					<div class="flex flex-wrap p-4">
-						{% for cat in categories %}
-							<a
-                href="{{ site.url }}/{{ cat.taxonomy }}/{{ cat.slug }}/"
-                class="m-1 py-2 px-4 rounded-3xl bg-pop-{{ function('get_random_colour') }} text-white whitespace-nowrap text-base font-medium transition-opacity hover:opacity-50"
-              >
-                {{ cat.name }}
-              </a>
-						{% endfor %}
-					</div>
-				</div>
-			</div>
+            <input
+              class="bg-transparent text-pop-purple w-6 lg:w-8"
+              type="image"
+              src="{{ theme.link }}/static/icons/search-arrow.svg"
+              alt="Submit"
+            >
+            <input type="hidden" name="post_type" value="post">
+          </form>
+          <div class="text-pop-purple text-sm text-right">
+            click or hit enter
+          </div>
+        </div>
+        <div class="flex lg:flex-wrap p-4 overflow-x-auto w-full">
+          {% for cat in categories %}
+            <a
+              href="{{ site.url }}/{{ cat.taxonomy }}/{{ cat.slug }}/"
+              class="m-1 py-2 px-4 rounded-3xl bg-pop-{{ function('get_random_colour') }} text-white whitespace-nowrap text-sm lg:text-base font-medium transition-opacity hover:opacity-50"
+            >
+              {{ cat.name }}
+            </a>
+          {% endfor %}
+        </div>
+      </div>
 		</div>
 	</div>
 
-	<div class="container-narrow mb-20">
+	<div class="px-4 md:mx-auto xs:mb-20 sm:mb-0 mb-20 max-w-screen-lg">
 
 		<h3 class="my-8">
       {% if title %}

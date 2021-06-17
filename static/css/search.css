@@ -1,8 +1,6 @@
 .search-form input {
   &::-webkit-input-placeholder {
-    color: red;
     @apply text-pop-blue;
-    @apply opacity-70;
   }
   &::-moz-placeholder {
     @apply text-pop-blue;
