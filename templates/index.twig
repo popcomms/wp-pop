@@ -14,19 +14,25 @@
 				<div class="input-box relative w-full bg-white border border-gray-200 shadow-md">
 					<div class="pt-4 px-6">
 						<form
-              class="w-full border-b border-pop-purple border-opacity-50 flex mb-1"
+              class="search-form w-full border-b border-pop-purple border-opacity-50 flex justify-between mb-1"
               method="get"
               role="search"
               action="{{ site.url }}"
             >
 							<input
-                class="h3 text-3xl text-pop-purple w-11/12 py-2"
+                class="search-input h3 text-3xl text-pop-blue w-11/12 py-2"
                 type="text"
-                placeholder="Find Ideas"
+                placeholder="Search Insights"
                 name="s"
+                value=""
               >
-							<input type="hidden" name="post_type" value="post">
-							<input class="bg-transparent text-pop-purple w-1/12" type="submit" value="&rarr;">
+							<input
+                class="bg-transparent text-pop-purple w-8"
+                type="image"
+                src="{{ theme.link }}/static/icons/search-arrow.svg"
+                alt="Submit"
+              >
+              <input type="hidden" name="post_type" value="post">
 						</form>
             <div class="text-pop-purple text-sm text-right">
               click or hit enter
@@ -36,7 +42,7 @@
 						{% for cat in categories %}
 							<a
                 href="{{ site.url }}/{{ cat.taxonomy }}/{{ cat.slug }}/"
-                class="m-1 py-2 px-4 rounded-3xl bg-pop-pink text-white whitespace-nowrap"
+                class="m-1 py-2 px-4 rounded-3xl bg-pop-{{ function('get_random_colour') }} text-white whitespace-nowrap text-base font-medium transition-opacity hover:opacity-50"
               >
                 {{ cat.name }}
               </a>

@@ -532,9 +532,22 @@ function get_random_icons($count=1, $theme='original') {
   return $collection;
 }
 
+function get_random_colour () {
+  $colours = [
+    // 'green',
+    'pink',
+    'blue',
+    // 'yellow',
+    'purple'
+  ];
+  $i = rand(0, count($colours) - 1);
+  return $colours[$i];
+}
+
 function case_study_title ($title, $client, $category) {
   return str_replace($client, $client.'. '.$category, $title);
 }
+
 
 function pop_enqueue_scripts() {
 	wp_enqueue_script(
