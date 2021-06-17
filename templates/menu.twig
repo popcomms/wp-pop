@@ -13,7 +13,7 @@
 				{{ item.title }}
 				<div class="nav-child absolute top-full left-0  flex-col w-max group-hover:bg-pop-green-pale py-2">
 					{% for child in item.children %}
-						<a class="text-pop-mid-gray hover:text-pop-pink px-6 underline cursor-pointer" target="{{ child.target }}" href="{{ child.link }}">{{ child.title }}</a>
+						<a class="text-pop-mid-gray hover:text-pop-pink px-6 cursor-pointer" target="{{ child.target }}" href="{{ child.link }}">{{ child.title }}</a>
 					{% endfor %}
 				{# </div> #}
 				</div>

@@ -12,8 +12,9 @@
     <div class=" px-16 py-36 bg-pop-{{ fields.intro_background_color }} {{intro_text_color}}">
       {{ fields.intro_text }}
     </div>
-    <div class="grid grid-cols-3 grid-rows-auto">
+    <div class="grid grid-cols-2 md:grid-cols-3 grid-rows-auto">
       {% for item in fields.grid %}
+      {% set personLoopIndex = loop.index * 3 - 1 %}
         {% for persons in item %}
           {% for person in persons %}
             {% if person.acf_fc_layout == 'information' %}
@@ -23,20 +24,25 @@
                 {% set text_color = 'text-pop-black' %}
               {% endif %}
   
-              <div class="px-6 py-16 bg-pop-{{ person.background_color }}">
-                <h3 class="mb-6 text-3xl {{ text_color }}">{{person.name}}</h3>
-                <p class="mb-6 font-bold text-lg {{ text_color }}">{{person.position}}</p>
-                <p class="text-lg {{ text_color }}">{{person.description}}</p>
+              <div class="flex col-span-2 order-{{personLoopIndex + 2}} md:col-span-1 flex-col px-6 py-7 md:py-16 bg-pop-{{ person.background_color }}">
+                <h3 class="mb-0 md:mb-6 text-3xl {{ text_color }}">{{person.name}}</h3>
+                <p class="mt-0 mb-6 md:font-bold text-lg {{ text_color }}">{{person.position}}</p>
+                <p class="hidden sm:block {{ text_color }}">{{person.description}}</p>
+                <a class="mt-auto ml-1 text-base md:text-2xl leading-tight text-pop-white" target="_blank" href="{{person.linkedin}}">
+                  <svg class="inline-block w-6 mr-3 hover:opacity-50 transform scale-100 md:scale-125" width="30" height="30" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path class="fill-current {{text_color}}" fill-rule="evenodd" clip-rule="evenodd" d="M30 0C13.4315 0 0 13.4315 0 30C0 46.5685 13.4315 60 30 60C46.5685 60 60 46.5685 60 30C60 13.4315 46.5685 0 30 0ZM14.402 24.8473H21.2007V45.2745H14.402V24.8473ZM21.6485 18.5284C21.6043 16.5255 20.1721 15 17.8463 15C15.5205 15 14 16.5255 14 18.5284C14 20.4898 15.4756 22.0592 17.758 22.0592H17.8015C20.1721 22.0592 21.6485 20.4898 21.6485 18.5284ZM37.8914 24.3676C42.3652 24.3676 45.7192 27.2878 45.7192 33.5622L45.719 45.2745H38.9206V34.3459C38.9206 31.6009 37.9368 29.7278 35.4756 29.7278C33.5974 29.7278 32.4786 30.9905 31.9872 32.2102C31.8075 32.6473 31.7633 33.2563 31.7633 33.8668V45.275H24.9639C24.9639 45.275 25.0535 26.7646 24.9639 24.8479H31.7633V27.7412C32.6657 26.3503 34.2818 24.3676 37.8914 24.3676Z" />
+                  </svg>   					
+                </a>
               </div>
             {% endif %}
             {% if person.acf_fc_layout == 'photo' %}
-              <div class="relative">
-                <img src="{{person.photo}}" alt="">
+              <div class="relative row-span-2 col-span-1 order-{{personLoopIndex + 1}}  md:col-start-auto md:col-span-1 md:row-span-1">
+                <img class="w-full object-fill" src="{{person.photo}}" alt="">
               </div>
   
             {% endif %}
             {% if person.acf_fc_layout == 'icon' %}
-            <div class="relative h-full w-full">
+            <div class="relative row-span-2 col-span-1 order-{{personLoopIndex}}  md:col-start-auto md:col-span-1 md:row-span-1 h-full w-full">
               <img class="w-full absolute {{person.alignment}}-0 left-0" src="{{person.icon}}" alt="">
             </div>
             {% endif %}

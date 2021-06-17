@@ -120,6 +120,10 @@
     h5 {
       font-size: 28px;
     }
+
+    article p {
+      font-size: 18px;
+    }
   }
 
   /* Responsive mobile */
@@ -192,7 +196,7 @@
     }
 
     article p {
-      font-size: 18px;
+      font-size: 21px;
     }
   }
 
@@ -232,7 +236,8 @@
   article p,
   article li,
   article pre {
-    @apply text-lg font-normal;
+    @apply text-xl font-normal;
+
     line-height: 150%;
   }
 
@@ -259,9 +264,14 @@
     @apply border-4 border-pop-pink rounded-2xl p-8 my-10 overflow-auto;
   }
 
+  p {
+    @apply text-lg sm:text-xl;
+  }
+
   p,
   ul {
     @apply my-3;
+
     line-height: 150%;
   }
 
