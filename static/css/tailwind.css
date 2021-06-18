@@ -237,8 +237,7 @@
   article li,
   article pre {
     @apply text-xl font-normal;
-
-    line-height: 150%;
+    line-height: 140%;
   }
 
   ul li {
@@ -247,7 +246,6 @@
 
   ul li::before {
     @apply absolute top-4 left-0 transform -translate-y-1/2 w-2 h-2 bg-pop-pink rounded;
-
     content: '';
   }
 
@@ -271,7 +269,6 @@
   p,
   ul {
     @apply my-3;
-
     line-height: 150%;
   }
 
@@ -281,7 +278,6 @@
 
   .banner-title > * {
     @apply my-5 font-normal;
-
     font-size: 5rem;
     line-height: 4rem;
   }
@@ -293,7 +289,11 @@
   }
 
   blockquote {
-    @apply my-4 px-8 border-l-4 border-gray-200;
+    @apply my-4 px-8 border-l-4 border-pop-black border-opacity-50;
+
+    p {
+      @apply leading-tight;
+    }
   }
 
   hr {
@@ -312,7 +312,6 @@
 
   .container-narrow {
     @apply px-4 xs:px-10 md:px-0 md:mx-auto xs:mb-20 sm:mb-0;
-
     max-width: 985px;
   }
 
@@ -326,13 +325,11 @@
 
   .container-wide {
     @apply md:px-0 md:mx-auto;
-
     max-width: 1050px;
   }
 
   .wp-block-video {
     @apply px-4 xs:px-10 md:px-0 md:mx-auto mb-40 mt-20 shadow-md !important;
-
     max-width: 985px;
   }
 
