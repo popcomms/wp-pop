@@ -7,6 +7,7 @@
   <div
   inline-template
   is="download-form"
+  class="container-wide"
 >
   <div
     ref="downloadForm"
@@ -20,7 +21,10 @@
       ref="downloadFormStep1"
       v-show="step === 1"
     >
-      {% include "partial/forms/download/intro.twig" %}
+      {% include "partial/forms/download/intro.twig" with
+      {
+        'fields': fields
+      } %}
     </div>
     <div
       ref="downloadFormStep2"

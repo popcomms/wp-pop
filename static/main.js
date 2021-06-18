@@ -565,6 +565,7 @@ document.addEventListener("DOMContentLoaded", function() {
     },
     created () {
       this.reset()
+      console.log(this.form.company)
     },
     mounted () {
       gsap.set(this.$refs.steps, {pointerEvents: 'none'})
