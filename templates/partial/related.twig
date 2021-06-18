@@ -1,16 +1,24 @@
-<div class="my-20 border-t-4 border-gray-200 container-narrow text-pop-{{ content.theme == 'black' ? 'white' : 'black' }}">
+<div class="py-20  bg-pop-{{ content.theme == 'black' ? 'black' : 'white' }}">
+  <div class="container-narrow border-t border-gray-300 text-pop-{{ content.theme == 'black' ? 'white' : 'black' }}">
 
-  <h3 class="my-10">Related Posts</h3>
+    <h3 class="my-12">
+      {% if post.type == 'case-studies' %}
+        Related Case Studies
+      {% else %}
+        Related Posts
+      {% endif %}
+    </h3>
 
-  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
-  {% for post in related %}
-    <a
-      rel="external"
-      href="{{ post.link }}"
-      class="text-base p-8 border border-gray-200 transition-all hover:bg-pop-yellow"
-    >
-      {{ post.title }}
-    </a>
-  {% endfor %}
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 mb-16">
+    {% for post in related %}
+      <a
+        rel="external"
+        href="{{ post.link }}"
+        class="text-base p-8 border border-gray-200 transition-all hover:bg-pop-yellow"
+      >
+        {{ post.title }}
+      </a>
+    {% endfor %}
+    </div>
   </div>
 </div>

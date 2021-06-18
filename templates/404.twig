@@ -1,5 +1,21 @@
 {% extends "base.twig" %}
 
 {% block content %}
-	Sorry, we couldn't find what you're looking for.
+  <div class="bg-pop-gray py-32 px-4">
+    <div class="mx-auto max-w-screen-lg text-center">
+      <img
+        src="{{ theme.link }}/static/images/404.png"
+        alt="404"
+        class="inline-block max-w-2xl"
+      >
+      <div class="text-2xl font-medium mt-16 mb-6">
+        Whoops!
+      </div>
+      <div class="max-w-xl mx-auto leading-tight">
+        It looks like you've headed to a strange or ancient page and subsequently found yourself here.
+        <br><br>
+        Let's take you <a href="{{ site.url }}" class="text-pop-pink underline">back home</a> before things get any weirder.
+      </div>
+    </div>
+  </div>
 {% endblock %}

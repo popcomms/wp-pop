@@ -20,8 +20,9 @@ if ( is_home() ) {
 	array_unshift( $templates, 'front-page.twig', 'home.twig' );
 }
 $cat_args = array(
-	'orderby' => 'name',
-	'order' => 'ASC'
+  'hide_empty' => true,
+	'orderby'    => 'name',
+	'order'      => 'ASC'
 );
 $context['categories'] = get_categories($cat_args);
 Timber::render( $templates, $context );

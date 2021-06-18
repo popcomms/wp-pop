@@ -1,0 +1,17 @@
+.search-form input {
+  &::-webkit-input-placeholder {
+    @apply text-pop-blue;
+  }
+  &::-moz-placeholder {
+    @apply text-pop-blue;
+    @apply opacity-70;
+  }
+  &:-ms-input-placeholder {
+    @apply text-pop-blue;
+    @apply opacity-70;
+  }
+  &:-moz-placeholder {
+    @apply text-pop-blue;
+    @apply opacity-70;
+  }
+}

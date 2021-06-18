@@ -1,6 +1,6 @@
 /*!
- * Theme Name: WP-Pop
- * Description: Bespoke WordPress theme for POPcomms 
+ * Theme Name: WP-P
+ * Description: Bespoke WordPress theme for POPcomms
  * Author: @popcomms
 */
 @import 'tailwind.css';
@@ -18,3 +18,4 @@
 @import 'downloads.css';
 @import 'wp-colors.css';
 @import 'forms.css';
+@import 'search.css';
