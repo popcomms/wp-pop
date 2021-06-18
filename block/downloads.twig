@@ -17,9 +17,12 @@
     onsubmit="return false"
     class="w-full relative"
   >
+    <transition name="fade">
+      <div v-show="step !== 1" class="absolute flex flex-col top-0 left-0 w-full h-full shadow-md bg-pop-black" style="z-index: 1;"></div>
+    </transition>
     <div
       ref="downloadFormStep1"
-      >
+    >
       <!-- v-show="step === 1" -->
       {% include "partial/forms/download/intro.twig" with
       {
@@ -29,7 +32,7 @@
     <div
       ref="downloadFormStep2"
       v-show="step === 2"
-      class="absolute top-0 left-0 w-full h-full p-10 bg-pop-black text-pop-white"
+      class="absolute flex flex-col top-0 left-0 w-full h-full p-10  text-pop-white z-10"
     >
       <div class="text-sm mb-4">1 / 5</div>
       {% include "partial/forms/download/name.twig" %}
@@ -37,7 +40,7 @@
     <div
       ref="downloadFormStep3"
       v-show="step === 3"
-      class="absolute top-0 left-0 w-full h-full p-10 bg-pop-black text-pop-white"
+      class="absolute top-0 left-0 w-full h-full p-10 bg-pop-black text-pop-white z-10"
     >
       <div class="text-sm mb-4">2 / 5</div>
       {% include "partial/forms/download/email-company.twig" %}
@@ -45,7 +48,7 @@
     <div
       ref="downloadFormStep4"
       v-show="step === 4"
-      class="absolute top-0 left-0 w-full h-full p-10 bg-pop-black text-pop-white"
+      class="absolute flex flex-col top-0 left-0 w-full h-full p-10 bg-pop-black text-pop-white z-10"
     >
       <div class="text-sm mb-4">3 / 5</div>
       {% include "partial/forms/newsletter.twig" %}
@@ -53,7 +56,7 @@
     <div
       ref="downloadFormStep5"
       v-show="step === 5"
-      class="flex flex-col absolute top-0 left-0 w-full h-full p-10 bg-pop-black text-pop-white"
+      class="flex flex-col absolute top-0 left-0 w-full h-full p-10 bg-pop-black text-pop-white z-10"
     >
       <div class="text-sm mb-4">4 / 5</div>
       {% include "partial/forms/privacy.twig" %}
@@ -61,7 +64,7 @@
     <div
       ref="downloadFormStep6"
       v-show="step === 6"
-      class="absolute top-0 left-0 w-full h-full p-10 bg-pop-black text-pop-white"
+      class="absolute flex flex-col top-0 left-0 w-full h-full p-10 bg-pop-black text-pop-white z-10"
     >
       <div class="text-sm mb-4">5 / 5</div>
       {% include "partial/forms/download/captcha.twig" %}
@@ -69,7 +72,7 @@
     <div
       ref="downloadFormStep7"
       v-show="step === 7"
-      class="absolute top-0 left-0 w-full h-full bg-pop-black text-pop-white"
+      class="absolute top-0 left-0 w-full h-full p-10 bg-pop-black text-pop-white z-10"
     >
       <div class="text-sm p-10">Complete</div>
       {% include "partial/forms/download/thanks.twig" %}

@@ -2,22 +2,24 @@
   Brill! Are you a human?
   Prove it by simply entering the answer to <span class="text-pop-yellow" v-html="captcha.a"></span> <span class="text-pop-yellow">+</span> <span class="text-pop-yellow" v-html="captcha.b"></span>
 </div>
-<div class="my-4">
-  {% include "/templates/partial/input.twig" with
-    {
-      'type': 'text',
-      'name': 'captcha',
-      'model': 'form.captcha.value',
-      'placeholder': 'Enter your answer',
-      'action': 'validateCaptcha',
-      'guide': true,
-      'arrow': true,
-      'text_color': 'text-pop-white',
-      'bg_color': 'bg-pop-black',
-      'border_color': 'border-pop-white',
-      'valid': 'validationHighlight(form.captcha.valid)'
-    }
-  %}
+<div class="flex-grow flex flex-col justify-center">
+  <div class="my-4">
+    {% include "/templates/partial/input.twig" with
+      {
+        'type': 'text',
+        'name': 'captcha',
+        'model': 'form.captcha.value',
+        'placeholder': 'Enter your answer',
+        'action': 'validateCaptcha',
+        'guide': true,
+        'arrow': true,
+        'text_color': 'text-pop-white',
+        'bg_color': 'bg-pop-black',
+        'border_color': 'border-pop-white',
+        'valid': 'validationHighlight(form.captcha.valid)'
+      }
+    %}
+  </div>
 </div>
 <div class="absolute top-0 right-0 w-1/2 pointer-events-none">
   <svg class="watching-eye w-full" preserveAspectRatio="xMidYMid meet"  viewBox="0 0 496 369" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">

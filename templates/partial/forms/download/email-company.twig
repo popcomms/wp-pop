@@ -1,37 +1,39 @@
-<div class="mb-12 w-4/6 leading-tight text-base sm:text-xl md:text-3xl">
+<div class="mb-12 form-text w-4/6 leading-tight text-base sm:text-xl md:text-3xl">
   And now just your <span class="text-pop-yellow">email</span> &amp; <span class="text-pop-yellow">company name</span>, please.
 </div>
-<div class="my-4">
-  {% include "/templates/partial/input.twig" with
-    {
-      'type': 'email',
-      'name': 'email',
-      'model': 'form.email.value',
-      'placeholder': 'Your email *',
-      'action': 'validateEmail',
-      'guide': false,
-      'arrow': false,
-      'text_color': 'text-pop-white',
-      'bg_color': 'bg-pop-black',
-      'border_color': 'border-pop-white',
-      'valid': 'validationHighlight(form.email.valid)'
-    }
-  %}
-</div>
-<div class="my-4">
-  {% include "/templates/partial/input.twig" with
-    {
-      'type': 'text',
-      'name': 'company',
-      'model': 'form.company.value',
-      'placeholder': 'Company *',
-      'action': "validateCompany",
-      'guide': true,
-      'arrow': true,
-      'text_color': 'text-pop-white',
-      'bg_color': 'bg-pop-black',
-      'border_color': 'border-pop-white',
-      'valid': 'validationHighlight(form.company.valid)'
-    }
-  %}
+<div class="flex flex-col justify-center">
+  <div class="my-4">
+    {% include "/templates/partial/input.twig" with
+      {
+        'type': 'email',
+        'name': 'email',
+        'model': 'form.email.value',
+        'placeholder': 'Your email *',
+        'action': 'validateEmail',
+        'guide': false,
+        'arrow': false,
+        'text_color': 'text-pop-white',
+        'bg_color': 'bg-pop-black',
+        'border_color': 'border-pop-white',
+        'valid': 'validationHighlight(form.email.valid)'
+      }
+    %}
+  </div>
+  <div class="my-4">
+    {% include "/templates/partial/input.twig" with
+      {
+        'type': 'text',
+        'name': 'company',
+        'model': 'form.company.value',
+        'placeholder': 'Company *',
+        'action': "validateCompany",
+        'guide': true,
+        'arrow': true,
+        'text_color': 'text-pop-white',
+        'bg_color': 'bg-pop-black',
+        'border_color': 'border-pop-white',
+        'valid': 'validationHighlight(form.company.valid)'
+      }
+    %}
+  </div>
 </div>
