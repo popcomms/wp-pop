@@ -42,24 +42,29 @@
 
     }
     .wp-block-image {
-      @apply mt-12 mb-12;
+      @apply my-12;
 
       figcaption {
         @apply border-pop-black border-l-4 border-opacity-50 pl-3 text-sm;
       }
     }
     .wp-block-quote {
-      @apply mt-12 mb-12;
+      @apply my-12;
 
       &.is-large,
       &.is-style-large {
-        @apply mt-12 mb-12;
+        @apply my-12;
 
         p {
           @apply leading-tight;
         }
       }
     }
+
+    .wp-block-separator {
+      @apply my-12;
+    }
+
     .wp-block-embed.wp-embed-aspect-1-1,
     .wp-block-embed.wp-embed-aspect-1-2,
     .wp-block-embed.wp-embed-aspect-4-3,
@@ -67,7 +72,7 @@
     .wp-block-embed.wp-embed-aspect-16-9,
     .wp-block-embed.wp-embed-aspect-18-9,
     .wp-block-embed.wp-embed-aspect-21-9 {
-      @apply mt-12 mb-12;
+      @apply my-12;
 
       .wp-block-embed__wrapper {
         position: relative;
