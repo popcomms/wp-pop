@@ -24,14 +24,14 @@ document.addEventListener("DOMContentLoaded", function() {
 
   // Prevent Enter key from submitting <form>
 
-  const forms = document.querySelectorAll('form')
-  forms.forEach(element => {
-    element.addEventListener('submit', (event) => {
-      console.log('Prevent Form Submission')
-      event.preventDefault()
-      window.history.back()
-    })
-  });
+  // const forms = document.querySelectorAll('form')
+  // forms.forEach(element => {
+  //   element.addEventListener('submit', (event) => {
+  //     console.log('Prevent Form Submission')
+  //     event.preventDefault()
+  //     window.history.back()
+  //   })
+  // });
 
   gsap.registerPlugin(ScrollTrigger);
 
@@ -149,9 +149,10 @@ document.addEventListener("DOMContentLoaded", function() {
         if (this.captcha.a + this.captcha.b === parseInt(this.form.captcha.value)) {
           this.form.captcha.valid = true
           this.nextStep()
+          this.submit()
           setTimeout(() => {
-            this.submit()
-          }, 3000)
+            this.hide()
+          }, 4000)
         } else {
           this.form.captcha.valid = false
         }
@@ -237,6 +238,20 @@ document.addEventListener("DOMContentLoaded", function() {
             }
           }
         }
+        xhr.open('POST', url);
+        xhr.setRequestHeader('Content-Type', 'application/json');
+        xhr.onreadystatechange = function() {
+          if(xhr.readyState == 4 && xhr.status == 200) {
+              console.log(xhr.responseText); // Returns a 200 response if the submission is successful.
+          } else if (xhr.readyState == 4 && xhr.status == 400){
+              console.log(xhr.responseText); // Returns a 400 error the submission is rejected.
+          } else if (xhr.readyState == 4 && xhr.status == 403){
+              console.log(xhr.responseText); // Returns a 403 error if the portal isn't allowed to post submissions.
+          } else if (xhr.readyState == 4 && xhr.status == 404){
+              console.log(xhr.responseText); //Returns a 404 error if the formGuid isn't found
+          }
+        }
+        xhr.send(JSON.stringify(data))
       },
       revealInput (step) {
         const borders = step.getElementsByClassName('input-border')
