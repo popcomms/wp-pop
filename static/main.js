@@ -292,24 +292,30 @@ document.addEventListener("DOMContentLoaded", function() {
         const iris = current.querySelector('.iris');
         const pupil = current.querySelector('.pupil');
 
-        var irisBB = iris.getBoundingClientRect();
-        var irisTop = irisBB.top + irisBB.height / 2;
-        var irisLeft = irisBB.left + irisBB.width / 2;
+        // var irisBB = current.querySelector('svg').getBoundingClientRect();
+        // var irisTop = irisBB.top + irisBB.height / 2;
+        // var irisLeft = irisBB.left + irisBB.width / 2;
 
-        var pupilBB = pupil.getBoundingClientRect();
-        var pupilTop = pupilBB.top + pupilBB.height / 2;
-        var pupilLeft = pupilBB.left + pupilBB.width / 2;
+        var svg = current.querySelector('.watching-eye').getBoundingClientRect();
+        var irisTop = svg.top + svg.height / 2;
+        var irisLeft = svg.left + svg.width / 2;
 
-        const irisX = -(irisLeft / 2 - evt.screenX) / 5;
-        const irisY = -(irisTop / 2 - evt.screenY) / 5;
-        const pupilX = -(pupilLeft / 2 - evt.screenX) / 4;
-        const pupilY = -(pupilTop / 2 - evt.screenY) / 4;
+        
+        const irisX = ((evt.screenX - irisLeft) / 5) + 247.653;
+        const irisY = ((evt.screenY - irisTop) / 3) + 102;
+        
+        iris.setAttribute('cx', Math.min(400, Math.max(100, irisX)))
+        iris.setAttribute('cy', Math.min(200, Math.max(50, irisY)))
 
-        iris.setAttribute('cx', (247.653 / 2) + 45 + irisX)
-        // iris.setAttribute('rx', Math.min(101.771, (101.771 / 10) + 45 + irisX))
-        iris.setAttribute('cy', (121.806 / 2) + irisY)
-        pupil.setAttribute('cx', (274.924 / 2) + pupilX)
-        pupil.setAttribute('cy', (1 / 2) + pupilY)
+        // var pupilBB = pupil.getBoundingClientRect();
+        var pupilTop = svg.top + svg.height / 2;
+        var pupilLeft = svg.left + svg.width / 2;
+
+        const pupilX = ((evt.screenX - pupilLeft) / 4) + 247.5
+        const pupilY = ((evt.screenY - pupilTop) / 2) + 100;
+
+        pupil.setAttribute('cx', Math.min(450, Math.max(50, pupilX)))
+        pupil.setAttribute('cy', Math.min(225, Math.max(25, pupilY)))
       },
       hideInputAnim (step, inputs, borders, guides, text) {
         gsap.timeline({})
