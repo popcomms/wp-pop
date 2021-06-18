@@ -13,8 +13,9 @@
         v-model="form.newsletter"
         value="Yes"
         @change="nextStep()"
+        class="cursor-pointer"
       >
-      <label :for="form.id + '-newsletter-true'" class="pl-2 text-xl">
+      <label :for="form.id + '-newsletter-true'" class="pl-2 text-xl cursor-pointer">
         Yes! Please sign me up.
       </label>
     </div>
@@ -27,8 +28,9 @@
         v-model="form.newsletter"
         value="No"
         @change="nextStep()"
+        class="cursor-pointer"
       >
-      <label :for="form.id + '-newsletter-false'" class="pl-2 text-xl">
+      <label :for="form.id + '-newsletter-false'" class="pl-2 text-xl cursor-pointer">
         No, thanks.
       </label>
     </div>

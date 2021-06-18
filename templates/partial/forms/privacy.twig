@@ -6,34 +6,34 @@
   </div>
   <div class="flex form-text opacity-0 flex-col justify-center">
     Are you OK with that?
-    <div class="flex my-2">
+    <div class="flex my-2 cursor-pointer">
       <input
         :id="form.id + '-gdpr-1'"
         type="checkbox"
         name="gdpr_receive"
         v-model="form.gdpr.one"
         value="true"
-        class="mt-2"
+        class="mt-2 cursor-pointer"
         @change="validateGDPR()"
       >
-      <label :for="form.id + '-gdpr-1'" class="pl-4 text-pop-yellow">
+      <label :for="form.id + '-gdpr-1'" class="pl-4 text-pop-yellow cursor-pointer">
         I agree to receive content from POPcomms
       </label>
     </div>
 
     We’ll also need your consent to store the personal data you’ve provided so we can send you the content, if you’re OK with this please tick the box below.
 
-    <div class="flex my-2">
+    <div class="flex my-2 ">
       <input
         :id="form.id + '-gdpr-2'"
         type="checkbox"
         name="gdpr_store_process"
         v-model="form.gdpr.two"
         value="false"
-        class="mt-2"
+        class="mt-2 cursor-pointer"
         @change="validateGDPR()"
       >
-      <label :for="form.id + '-gdpr-2'" class="pl-4 text-pop-yellow">
+      <label :for="form.id + '-gdpr-2'" class="pl-4 text-pop-yellow cursor-pointer">
         I agree to allow POPcomms to store and process my personal data.
       </label>
     </div>

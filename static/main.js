@@ -82,7 +82,7 @@ document.addEventListener("DOMContentLoaded", function() {
         gsap.set(eye, { scaleY: 0 })
         gsap.set(lines, {opacity: 0})
 
-        if (this.step === 7) {
+        if (this.step === 6) {
           const fingers = next.querySelectorAll('.finger')
           const hand = next.querySelectorAll('.hand')
           gsap.set(hand, {translateY: 100 + '%'})
@@ -112,7 +112,7 @@ document.addEventListener("DOMContentLoaded", function() {
         if (this.form.name.value.length > 3) {
           this.form.name.valid = true
 
-          if(e.keyCode === 13 && this.form.email.valid === true) {
+          if(e.type === 'click' || (e.keyCode === 13 && this.form.email.valid === true)) {
             this.nextStep()
           }
         } else {
@@ -125,7 +125,7 @@ document.addEventListener("DOMContentLoaded", function() {
         if (re.test(this.form.email.value.toLowerCase())) {
           this.form.email.valid = true
 
-          if(e.keyCode === 13 && this.form.name.valid === true) {
+          if(e.type === 'click' || (e.keyCode === 13 && this.form.name.valid === true)) {
             this.nextStep()
           }
         } else {
@@ -383,13 +383,24 @@ document.addEventListener("DOMContentLoaded", function() {
           this.hideEye(current)
         }
 
+        const next = this.$refs['downloadFormStep' + (this.step + 1)]
+
         if (this.step === 5) {
-          const next = this.$refs['downloadFormStep' + (this.step + 1)]
           const eye = next.getElementsByClassName('eye-mask')
           const lines = next.getElementsByClassName('lines')
           gsap.set(eye, { scaleY: 0 })
           gsap.set(lines, {opacity: 0})
         }
+
+        if (this.step === 6) {
+          const fingers = next.querySelectorAll('.finger')
+          const hand = next.querySelectorAll('.hand')
+          gsap.set(hand, {translateX: 100 + '%'})
+          gsap.set(fingers, {translateX: 100 + '%'})
+        }
+
+        // Allow for bg to fade in before appears
+        const timeout = this.step !== 1 ? 1000 : 10
 
         setTimeout(() => {
           this.step = this.step + 1
@@ -399,7 +410,10 @@ document.addEventListener("DOMContentLoaded", function() {
           if (this.step === 6) {
             this.revealEye(next)
           }
-        }, 1000)
+          if (this.step === 7) {
+            this.revealFingers(next)
+          }
+        }, timeout)
       },
       // prevStep () {
       //   if (this.step > 0 && this.step < 5 && this.downloadTl.paused() === true) {
@@ -414,7 +428,7 @@ document.addEventListener("DOMContentLoaded", function() {
       validateFirstName (e) {
         if (this.form.firstName.value.length > 2) {
           this.form.firstName.valid = true
-          if(e.keyCode === 13 && this.form.lastName.valid === true) {
+          if(e.type === 'click' || (e.keyCode === 13 && this.form.lastName.valid === true)) {
             this.nextStep()
           }
         } else {
@@ -424,7 +438,7 @@ document.addEventListener("DOMContentLoaded", function() {
       validateLastName (e) {
         if (this.form.lastName.value.length > 2) {
           this.form.lastName.valid = true
-          if(e.keyCode === 13 && this.form.firstName.valid === true) {
+          if(e.type === 'click' || (e.keyCode === 13 && this.form.firstName.valid === true)) {
             this.nextStep()
           }
         } else {
@@ -436,7 +450,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
         if (re.test(this.form.email.value.toLowerCase())) {
           this.form.email.valid = true
-          if(e.keyCode === 13 && this.form.company.valid === true) {
+          if(e.type === 'click' || (e.keyCode === 13 && this.form.company.valid === true)) {
             this.nextStep()
           }
         } else {
@@ -446,7 +460,7 @@ document.addEventListener("DOMContentLoaded", function() {
       validateCompany(e) {
         if (this.form.company.value.length > 2) {
           this.form.company.valid = true
-          if(e.keyCode === 13 && this.form.email.valid === true) {
+          if(e.type === 'click' || (e.keyCode === 13 && this.form.email.valid === true)) {
             this.nextStep()
           }
         } else {
@@ -502,22 +516,16 @@ document.addEventListener("DOMContentLoaded", function() {
         const guides = step.getElementsByClassName('input-guide')
         const inputs = step.querySelectorAll('.input-content')
 
-        if (this.downloadTl.reversed()) {
-          this.hideInputAnim(step, inputs, borders, guides)
-        } else {
+
           this.revealInputAnim(step, inputs, borders, guides)
-        }
+        
       },
       hideInput(step) {
         const borders = step.getElementsByClassName('input-border')
         const guides = step.getElementsByClassName('input-guide')
         const inputs = step.querySelectorAll('.input-content')
 
-        if (this.downloadTl.reversed()) {
-          this.revealInputAnim(step, inputs, borders, guides)
-        } else {
           this.hideInputAnim(step, inputs, borders, guides)
-        }
       },
       hideText (step) {
         const text = step.getElementsByClassName('form-text')
@@ -525,7 +533,7 @@ document.addEventListener("DOMContentLoaded", function() {
       },
       revealText (step) {
         const text = step.getElementsByClassName('form-text')
-        gsap.fromTo(text, {translateY: +2.25 + 'rem', opacity: 0}, {duration: 0.4, translateY: 0, opacity: 1})
+        gsap.fromTo(text, {translateY: +2.25 + 'rem', opacity: 0}, {duration: 0.4, translateY: 0, opacity: 1, delay: this.step === 2 ? 0.5 : 0})
       },
       hideEye (step) {
         const eye = step.getElementsByClassName('eye-mask')
@@ -545,6 +553,81 @@ document.addEventListener("DOMContentLoaded", function() {
         }
 
         window.addEventListener('mousemove', this.moveEye, false);
+      },
+      revealFingers (step) {
+        const fingers = step.querySelectorAll('.finger')
+        const hand = step.querySelectorAll('.hand')
+        const waves = step.querySelectorAll('.waves')
+
+        gsap.to(fingers, { duration: 0.7, translateX: 0 + '%', stagger: 0.1, ease: Elastic.easeOut.config(1, 1) })
+        gsap.to(hand, { duration: 0.3, translateX: 0 + '%', delay: 0.25 })
+        gsap.timeline({})
+          .fromTo(waves, { 
+            scale: 0.8,
+            translateX: 1 + '%',
+            translateY: 1 + '%',
+            opacity: 0
+          },
+          {
+            duration: 0.5,
+            translateX: -1 + '%',
+            translateY: 1 + '%',
+            scale: 1.05,
+            opacity: 1,
+            delay: 0.5,
+            stagger: -0.2,
+            ease: Elastic.easeOut.config(1, 1)
+          }, "+=0.25")
+          .to(waves, {
+            duration: 1.25,
+            scale: 0.8,
+            translateX: 1 + '%',
+            translateY: 1 + '%',
+            opacity: 0,
+            stagger: -0.2,
+            ease: Elastic.easeOut.config(1, 1)
+          }, '+=0.5')
+
+        const repeatPulseAnim = gsap.timeline({ repeat: -1, paused: true })
+          .to(fingers[0], {
+            duration: 0.5,
+            translateX: 5 + '%'
+          })
+          .to(fingers[0], {
+            duration: 0.5,
+            translateX: 0 + '%',
+            ease: Elastic.easeOut.config(1, 1)
+          })
+          .fromTo(waves, { 
+            scale: 0.8,
+            translateX: 1 + '%',
+            translateY: 1 + '%',
+            opacity: 0
+          },
+          {
+            duration: 0.5,
+            translateX: -1 + '%',
+            translateY: 1 + '%',
+            scale: 1.05,
+            opacity: 1,
+            delay: 0.5,
+            stagger: -0.2,
+            ease: Elastic.easeOut.config(1, 1)
+          }, "-=0.5")
+          .to(waves, {
+            duration: 1.25,
+            scale: 0.8,
+            translateX: 1 + '%',
+            translateY: 1 + '%',
+            opacity: 0,
+            stagger: -0.2,
+            ease: Elastic.easeOut.config(1, 1)
+          }, '+=0.5')
+
+        setTimeout(() => {
+          repeatPulseAnim.play()
+        }, 3000);
+
       },
       moveEye (evt) {
         const current = this.$refs['downloadFormStep' + this.step]
@@ -588,7 +671,7 @@ document.addEventListener("DOMContentLoaded", function() {
       revealInputAnim (step, inputs, borders, guides) {
         gsap.timeline({
         })
-        .to(borders, {duration: 0.5, width: 100 + '%'})
+        .to(borders, {duration: 0.5, width: 100 + '%',  delay: this.step === 2 ? 0.5 : 0})
         .to(inputs, {duration: 0.5, translateY: 0 + '%', opacity: 1, ease: "power3.out"}, "-=0.5")
         .to(guides, {duration: 0.3, opacity: 1,  ease: "power3.in"}, "-=0.3")
         .set(step,{ pointerEvents: 'all'}, "-=0.01")
@@ -654,59 +737,9 @@ document.addEventListener("DOMContentLoaded", function() {
     },
     created () {
       this.reset()
-      console.log(this.form.company)
     },
     mounted () {
       gsap.set(this.$refs.steps, {pointerEvents: 'none'})
-
-      this.downloadTl = gsap.timeline({ paused: true })
-      // Show form
-      .to(this.$refs.form_bg,{left: 0, duration: 0.4})
-      .addLabel('restartPoint')
-      .set(this.$refs.steps,{ pointerEvents: 'all' })
-      .to([".download-steps", ".download-back"], {opacity: 1,duration: 0.3})
-      .fromTo(
-        this.$refs.step_1,
-        {
-          opacity: 0,
-          pointerEvents: 'none'
-        },
-        {
-          pointerEvents: 'all',
-          opacity: 1,
-          duration: 0.3
-        }
-      )
-      .addPause()
-      // Change step 1 -> 2
-      .to(this.$refs.step_1, {duration: 0.3, opacity: 0, pointerEvents: 'none'})
-      .call( this.revealInput, [this.$refs.step_2], "+=0.6" )
-      .addPause("+=0.2")
-      // Change step 2 -> 3
-      .call( this.hideInput, [this.$refs.step_2], "+=0.1" )
-      .call( this.revealInput, [this.$refs.step_3], "+=0.6" )
-      .addPause("+=0.2")
-      // Change step 3 -> 4
-      .call( this.hideInput, [this.$refs.step_3], "+=0.1" )
-      .call( this.revealInput, [this.$refs.step_4], "+=0.6" )
-      .addPause("+=0.2")
-      // Change step 4 -> 5
-      .call( this.hideInput, [this.$refs.step_4], "+=0.1" )
-      .fromTo(
-        this.$refs.step_5,
-        {
-          opacity: 0,
-          pointerEvents: 'none'
-        },
-        {
-          pointerEvents: 'all',
-          opacity: 1,
-          duration: 0.3
-        },
-        "+=0.6"
-      )
-      // Stop before end so can reverse
-      .addPause()
     }
   })
 

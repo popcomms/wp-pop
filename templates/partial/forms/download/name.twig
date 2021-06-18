@@ -1,37 +1,39 @@
-<div class="mb-12 w-4/6 leading-tight text-base sm:text-xl md:text-3xl">
+<div class="w-4/6 form-text leading-tight text-base sm:text-xl md:text-3xl">
   We just need some details to get you started. Please enter your <span class="text-pop-yellow">first name</span> and <span class="text-pop-yellow">surname</span>.
 </div>
-<div class="my-4">
-  {% include "/templates/partial/input.twig" with
-    {
-      'type': 'text',
-      'name': 'first_name',
-      'model': 'form.firstName.value',
-      'placeholder': 'First name *',
-      'action': 'validateFirstName',
-      'guide': false,
-      'arrow': false,
-      'text_color': 'text-pop-white',
-      'bg_color': 'bg-pop-black',
-      'border_color': 'border-pop-white',
-      'valid': 'validationHighlight(form.firstName.valid)'
-    }
-  %}
-</div>
-<div class="my-4">
-  {% include "/templates/partial/input.twig" with
-    {
-      'type': 'text',
-      'name': 'last_name',
-      'model': 'form.lastName.value',
-      'placeholder': 'Surname *',
-      'action': "validateLastName",
-      'guide': true,
-      'arrow': true,
-      'text_color': 'text-pop-white',
-      'bg_color': 'bg-pop-black',
-      'border_color': 'border-pop-white',
-      'valid': 'validationHighlight(form.lastName.valid)'
-    }
-  %}
+<div class="flex-grow flex flex-col justify-center">
+  <div class="my-4">
+    {% include "/templates/partial/input.twig" with
+      {
+        'type': 'text',
+        'name': 'first_name',
+        'model': 'form.firstName.value',
+        'placeholder': 'First name *',
+        'action': 'validateFirstName',
+        'guide': false,
+        'arrow': false,
+        'text_color': 'text-pop-white',
+        'bg_color': 'bg-pop-black',
+        'border_color': 'border-pop-white',
+        'valid': 'validationHighlight(form.firstName.valid)'
+      }
+    %}
+  </div>
+  <div class="my-4">
+    {% include "/templates/partial/input.twig" with
+      {
+        'type': 'text',
+        'name': 'last_name',
+        'model': 'form.lastName.value',
+        'placeholder': 'Surname *',
+        'action': "validateLastName",
+        'guide': true,
+        'arrow': true,
+        'text_color': 'text-pop-white',
+        'bg_color': 'bg-pop-black',
+        'border_color': 'border-pop-white',
+        'valid': 'validationHighlight(form.lastName.valid)'
+      }
+    %}
+  </div>
 </div>
