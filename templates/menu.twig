@@ -6,14 +6,14 @@
 
 	{% for item in items %}
 		{% if item.children %}
-			<div class="nav-parent group hidden h-full sm:flex items-center px-6 text-pop-white hover:text-pop-mid-gray hover:bg-pop-green-pale" style="cursor: default;">
+			<div class="nav-parent group hidden h-full sm:flex items-center px-6 text-pop-white hover:text-pop-mid-gray hover:bg-pop-black" style="cursor: default;">
 			{# @click="toggleMenu( '{{ item.title }}'  )" #}
 			{# <a class="text-pop-white hover:text-pop-mid-gray " target="{{ item.target }}" href="{{ item.link }}">{{ item.title }}</a> #}
-			{# <div class="relative flex items-center h-full text-pop-white hover:text-pop-mid-gray hover:bg-pop-green-pale"> #}
+			{# <div class="relative flex items-center h-full text-pop-white hover:text-pop-mid-gray hover:bg-pop-black"> #}
 				{{ item.title }}
-				<div class="nav-child absolute top-full left-0  flex-col w-max group-hover:bg-pop-green-pale py-2">
+				<div class="nav-child absolute top-full left-0  flex-col w-max group-hover:bg-pop-black py-2">
 					{% for child in item.children %}
-						<a class="text-pop-mid-gray hover:text-pop-pink px-6 cursor-pointer" target="{{ child.target }}" href="{{ child.link }}">{{ child.title }}</a>
+						<a class="text-pop-white hover:text-pop-mid-gray px-6 cursor-pointer" target="{{ child.target }}" href="{{ child.link }}">{{ child.title }}</a>
 					{% endfor %}
 				{# </div> #}
 				</div>
