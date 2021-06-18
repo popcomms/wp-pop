@@ -1,7 +1,6 @@
-<div class="grid grid-cols-2 space-x-12">
-  <div class="mb-6 form-text opacity-0 leading-tight">
-    <span class="text-pop-yellow leading-tight text-base sm:text-xl md:text-3xl">Would you like to receive our email newsletter?</span>
-    <br><br>
+<div class="w-full h-full flex flex-col">
+  <div class="mb-12 form-text opacity-0  w-4/6 leading-tight text-base sm:text-xl md:text-3xl">
+    <span class="text-pop-yellow leading-tight text-base sm:text-xl md:text-3xl">Would you like to receive our email newsletter? </span>
     It’s bi-monthly with select and valuable content. No Spam, promise.
   </div>
   <div class="flex flex-col form-text opacity-0 justify-center">
@@ -15,7 +14,7 @@
         value="Yes"
         @change="nextStep()"
       >
-      <label :for="form.id + '-newsletter-true'" class="pl-2">
+      <label :for="form.id + '-newsletter-true'" class="pl-2 text-xl">
         Yes! Please sign me up.
       </label>
     </div>
@@ -29,7 +28,7 @@
         value="No"
         @change="nextStep()"
       >
-      <label :for="form.id + '-newsletter-false'" class="pl-2">
+      <label :for="form.id + '-newsletter-false'" class="pl-2 text-xl">
         No, thanks.
       </label>
     </div>

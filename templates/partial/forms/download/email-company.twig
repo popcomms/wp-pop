@@ -1,4 +1,4 @@
-<div class="mb-12 leading-tight text-base sm:text-xl md:text-3xl">
+<div class="mb-12 w-4/6 leading-tight text-base sm:text-xl md:text-3xl">
   And now just your <span class="text-pop-yellow">email</span> &amp; <span class="text-pop-yellow">company name</span>, please.
 </div>
 <div class="my-4">
@@ -14,7 +14,7 @@
       'text_color': 'text-pop-white',
       'bg_color': 'bg-pop-black',
       'border_color': 'border-pop-white',
-      'valid': 'form.Email.valid'
+      'valid': 'validationHighlight(form.email.valid)'
     }
   %}
 </div>
@@ -25,13 +25,13 @@
       'name': 'company',
       'model': 'form.company.value',
       'placeholder': 'Company *',
-      'action': "validateLastName",
+      'action': "validateCompany",
       'guide': true,
       'arrow': true,
       'text_color': 'text-pop-white',
       'bg_color': 'bg-pop-black',
       'border_color': 'border-pop-white',
-      'valid': 'form.company.valid'
+      'valid': 'validationHighlight(form.company.valid)'
     }
   %}
 </div>

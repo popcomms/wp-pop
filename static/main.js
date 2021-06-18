@@ -307,24 +307,30 @@ document.addEventListener("DOMContentLoaded", function() {
         const iris = current.querySelector('.iris');
         const pupil = current.querySelector('.pupil');
 
-        var irisBB = iris.getBoundingClientRect();
-        var irisTop = irisBB.top + irisBB.height / 2;
-        var irisLeft = irisBB.left + irisBB.width / 2;
+        // var irisBB = current.querySelector('svg').getBoundingClientRect();
+        // var irisTop = irisBB.top + irisBB.height / 2;
+        // var irisLeft = irisBB.left + irisBB.width / 2;
 
-        var pupilBB = pupil.getBoundingClientRect();
-        var pupilTop = pupilBB.top + pupilBB.height / 2;
-        var pupilLeft = pupilBB.left + pupilBB.width / 2;
+        var svg = current.querySelector('.watching-eye').getBoundingClientRect();
+        var irisTop = svg.top + svg.height / 2;
+        var irisLeft = svg.left + svg.width / 2;
 
-        const irisX = -(irisLeft / 2 - evt.screenX) / 5;
-        const irisY = -(irisTop / 2 - evt.screenY) / 5;
-        const pupilX = -(pupilLeft / 2 - evt.screenX) / 4;
-        const pupilY = -(pupilTop / 2 - evt.screenY) / 4;
+        
+        const irisX = ((evt.screenX - irisLeft) / 5) + 247.653;
+        const irisY = ((evt.screenY - irisTop) / 3) + 102;
+        
+        iris.setAttribute('cx', Math.min(400, Math.max(100, irisX)))
+        iris.setAttribute('cy', Math.min(200, Math.max(50, irisY)))
 
-        iris.setAttribute('cx', (247.653 / 2) + 45 + irisX)
-        // iris.setAttribute('rx', Math.min(101.771, (101.771 / 10) + 45 + irisX))
-        iris.setAttribute('cy', (121.806 / 2) + irisY)
-        pupil.setAttribute('cx', (274.924 / 2) + pupilX)
-        pupil.setAttribute('cy', (1 / 2) + pupilY)
+        // var pupilBB = pupil.getBoundingClientRect();
+        var pupilTop = svg.top + svg.height / 2;
+        var pupilLeft = svg.left + svg.width / 2;
+
+        const pupilX = ((evt.screenX - pupilLeft) / 4) + 247.5
+        const pupilY = ((evt.screenY - pupilTop) / 2) + 100;
+
+        pupil.setAttribute('cx', Math.min(450, Math.max(50, pupilX)))
+        pupil.setAttribute('cy', Math.min(225, Math.max(25, pupilY)))
       },
       hideInputAnim (step, inputs, borders, guides, text) {
         gsap.timeline({})
@@ -376,13 +382,38 @@ document.addEventListener("DOMContentLoaded", function() {
       }
     },
     methods: {
+      validationHighlight (el) {
+        if (el === true) {
+          return 'bg-pop-white'
+        } else {
+          return 'bg-pop-pink'
+        }
+      },
       nextStep () {
         const current = this.$refs['downloadFormStep' + this.step]
         this.hideInput (current)
+        this.hideText(current)
+
+        if (this.step === 6) {
+          this.hideEye(current)
+        }
+
+        if (this.step === 5) {
+          const next = this.$refs['downloadFormStep' + (this.step + 1)]
+          const eye = next.getElementsByClassName('eye-mask')
+          const lines = next.getElementsByClassName('lines')
+          gsap.set(eye, { scaleY: 0 })
+          gsap.set(lines, {opacity: 0})
+        }
+
         setTimeout(() => {
           this.step = this.step + 1
           const next = this.$refs['downloadFormStep' + this.step]
           this.revealInput (next)
+          this.revealText(next)
+          if (this.step === 6) {
+            this.revealEye(next)
+          }
         }, 1000)
       },
       // prevStep () {
@@ -395,22 +426,24 @@ document.addEventListener("DOMContentLoaded", function() {
       //     this.step = 1
       //   }
       // },
-      validateFirstName () {
+      validateFirstName (e) {
         if (this.form.firstName.value.length > 2) {
           this.form.firstName.valid = true
+          if(e.keyCode === 13 && this.form.lastName.valid === true) {
+            this.nextStep()
+          }
         } else {
           this.form.firstName.valid = false
         }
       },
-      validateLastName () {
-        this.validateFirstName()
+      validateLastName (e) {
         if (this.form.lastName.value.length > 2) {
           this.form.lastName.valid = true
+          if(e.keyCode === 13 && this.form.firstName.valid === true) {
+            this.nextStep()
+          }
         } else {
           this.form.lastName.valid = false
-        }
-        if (this.form.firstName.valid && this.form.lastName.valid) {
-          this.nextStep()
         }
       },
       validateEmail (e) {
@@ -418,6 +451,9 @@ document.addEventListener("DOMContentLoaded", function() {
 
         if (re.test(this.form.email.value.toLowerCase())) {
           this.form.email.valid = true
+          if(e.keyCode === 13 && this.form.company.valid === true) {
+            this.nextStep()
+          }
         } else {
           this.form.email.valid = false
         }
@@ -425,9 +461,11 @@ document.addEventListener("DOMContentLoaded", function() {
       validateCompany(e) {
         if (this.form.company.value.length > 2) {
           this.form.company.valid = true
-        }
-        if (this.form.email.valid && this.form.company.valid) {
-          this.nextStep()
+          if(e.keyCode === 13 && this.form.email.valid === true) {
+            this.nextStep()
+          }
+        } else {
+          this.form.company.valid = false
         }
       },
       validateGDPR (e) {
@@ -449,23 +487,23 @@ document.addEventListener("DOMContentLoaded", function() {
           id: 'download',
           firstName: {
             value: '',
-            valid: null
+            valid: false
           },
           lastName: {
             value: '',
-            valid: null
+            valid: false
           },
           email: {
             value: '',
-            valid: null
+            valid: false
           },
           company: {
             value: '',
-            valid: null
+            valid: false
           },
           newsletter: '',
           captcha: {
-            valid: null,
+            valid: false,
             value: ''
           },
           gdpr: {
@@ -495,6 +533,63 @@ document.addEventListener("DOMContentLoaded", function() {
         } else {
           this.hideInputAnim(step, inputs, borders, guides)
         }
+      },
+      hideText (step) {
+        const text = step.getElementsByClassName('form-text')
+        gsap.to(text, { duration: 0.5, translateY: -2.25 + 'rem', opacity: 0 })
+      },
+      revealText (step) {
+        const text = step.getElementsByClassName('form-text')
+        gsap.fromTo(text, {translateY: +2.25 + 'rem', opacity: 0}, {duration: 0.4, translateY: 0, opacity: 1})
+      },
+      hideEye (step) {
+        const eye = step.getElementsByClassName('eye-mask')
+        const lines = step.getElementsByClassName('lines')
+        gsap.to(eye, { duration: 0.35, translateY: this.step > 1 ? 40 : 0, scaleY: 0 })
+        gsap.to(lines, {duration: 0.35, opacity: 0})
+
+        window.removeEventListener('mousemove', this.moveEye);
+      },
+      revealEye (step) {
+        const eye = step.getElementsByClassName('eye-mask')
+        const lines = step.getElementsByClassName('lines')
+        gsap.to(eye, { duration: 0.35, scaleY: 1 })
+        gsap.to(lines, {duration: 0.35, opacity: 1})
+        if(this.step === 7) {
+          gsap.to(eye, { duration: 0.35, delay: 1, translateY: 10, scaleY: 0.5 })
+        }
+
+        window.addEventListener('mousemove', this.moveEye, false);
+      },
+      moveEye (evt) {
+        const current = this.$refs['downloadFormStep' + this.step]
+        const iris = current.querySelector('.iris');
+        const pupil = current.querySelector('.pupil');
+
+        // var irisBB = current.querySelector('svg').getBoundingClientRect();
+        // var irisTop = irisBB.top + irisBB.height / 2;
+        // var irisLeft = irisBB.left + irisBB.width / 2;
+
+        var svg = current.querySelector('.watching-eye').getBoundingClientRect();
+        var irisTop = svg.top + svg.height / 2;
+        var irisLeft = svg.left + svg.width / 2;
+
+        
+        const irisX = ((evt.screenX - irisLeft) / 5) + 247.653;
+        const irisY = ((evt.screenY - irisTop) / 3) + 102;
+        
+        iris.setAttribute('cx', Math.min(400, Math.max(100, irisX)))
+        iris.setAttribute('cy', Math.min(200, Math.max(50, irisY)))
+
+        // var pupilBB = pupil.getBoundingClientRect();
+        var pupilTop = svg.top + svg.height / 2;
+        var pupilLeft = svg.left + svg.width / 2;
+
+        const pupilX = ((evt.screenX - pupilLeft) / 4) + 247.5
+        const pupilY = ((evt.screenY - pupilTop) / 2) + 100;
+
+        pupil.setAttribute('cx', Math.min(450, Math.max(50, pupilX)))
+        pupil.setAttribute('cy', Math.min(225, Math.max(25, pupilY)))
       },
       hideInputAnim (step, inputs, borders, guides) {
         gsap.timeline({
@@ -574,6 +669,7 @@ document.addEventListener("DOMContentLoaded", function() {
     },
     created () {
       this.reset()
+      console.log(this.form.company)
     },
     mounted () {
       gsap.set(this.$refs.steps, {pointerEvents: 'none'})
