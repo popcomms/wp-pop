@@ -15,7 +15,7 @@
 <div class="page-hero relative h-screen overflow-hidden flex justify-center" >
   <div class="absolute top-0 left-0 w-full h-full bg-center {{ fields.title != '' ? 'bg-cover' : 'bg-contain'}} bg-no-repeat pb-12 px-12 pt-12">
     
-    <video class="absolute top-0 left-0 min-w-full min-h-full object-cover object-center " autoplay muted loop id="myVideo">
+    <video class="absolute top-0 left-0 min-w-full min-h-full object-cover object-center " playsinline autoplay muted loop id="myVideo">
       <source src="{{theme.link}}/static/video/pop-web-indent-comp.mp4" type="video/mp4">
     </video>
    

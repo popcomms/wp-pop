@@ -135,7 +135,7 @@ document.addEventListener("DOMContentLoaded", function() {
       validateCompany (e) {
         if (this.form.company.value.length > 2) {
           this.form.company.valid = true
-          if(e.keyCode === 13) {
+          if(e.type === 'click' || (e.keyCode === 13)) {
             this.nextStep()
           }
         }

@@ -1,11 +1,15 @@
-<div class="flex-grow grid grid-cols-2 space-x-12">
-  <div class="flex h-full items-center">
-    <div class="mb-6 form-text opacity-0 leading-tight text-base sm:text-xl md:text-3xl justify-center">
+<div class="flex-grow sm:grid sm:grid-cols-2 sm:space-x-12">
+
+  <div class="flex sm:h-full items-center">
+    <div class="sm:mb-6 form-text opacity-0 leading-tight text-sm sm:text-xl md:text-3xl justify-center">
       We take your privacy seriously and need your consent to store the personal data you’ve provided so we can send you the content.
     </div>
   </div>
+
   <div class="flex form-text opacity-0 flex-col justify-center">
-    Are you OK with that?
+    <div class="hidden sm:block">
+      Are you OK with that?
+    </div>
     <div class="flex my-2 cursor-pointer">
       <input
         :id="form.id + '-gdpr-1'"
@@ -13,16 +17,16 @@
         name="gdpr_receive"
         v-model="form.gdpr.one"
         value="true"
-        class="mt-2 cursor-pointer"
+        class="mt-1 sm:mt-2 cursor-pointer"
         @change="validateGDPR()"
       >
-      <label :for="form.id + '-gdpr-1'" class="pl-4 text-pop-yellow cursor-pointer">
+      <label :for="form.id + '-gdpr-1'" class="text-sm sm:text-base pl-4 text-pop-yellow cursor-pointer">
         I agree to receive content from POPcomms
       </label>
     </div>
-
-    We’ll also need your consent to store the personal data you’ve provided so we can send you the content, if you’re OK with this please tick the box below.
-
+    <div class="hidden sm:block">
+      We’ll also need your consent to store the personal data you’ve provided so we can send you the content, if you’re OK with this please tick the box below.
+    </div>
     <div class="flex my-2 ">
       <input
         :id="form.id + '-gdpr-2'"
@@ -30,14 +34,13 @@
         name="gdpr_store_process"
         v-model="form.gdpr.two"
         value="false"
-        class="mt-2 cursor-pointer"
+        class="mt-1 sm:mt-2 cursor-pointer"
         @change="validateGDPR()"
       >
-      <label :for="form.id + '-gdpr-2'" class="pl-4 text-pop-yellow cursor-pointer">
+      <label :for="form.id + '-gdpr-2'" class="text-sm sm:text-base pl-4 text-pop-yellow cursor-pointer">
         I agree to allow POPcomms to store and process my personal data.
       </label>
     </div>
-    <br>
     <a href="{{site.url}}/privacy-policy/" class="underline text-sm" target="_blank">
       Review our Privacy Policy
     </a>
