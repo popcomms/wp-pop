@@ -781,11 +781,23 @@ document.addEventListener("DOMContentLoaded", function() {
       },
       showContactForm () {
         const vueComponents = this.$parent
-        vueComponents.$children.forEach((element) => {
-          if (element.$el.id === 'contact-form') {
-            element.show = true
-          }
-        })
+        if (window.innerWidth < 575 ) {
+          console.log('small!', vueComponents)
+          vueComponents.$children.forEach((element) => {
+            if (element.$el.id === 'contact-form' && element.step === 1) {
+              element.nextStep()
+            }
+            setTimeout(() => {
+              element.show = true
+            }, 500);
+          })
+        } else {
+          vueComponents.$children.forEach((element) => {
+            if (element.$el.id === 'contact-form') {
+              element.show = true
+            }
+          })
+        }
         document.querySelector('body').style.overflow = 'hidden'
       },
       // hideContactForm () {
