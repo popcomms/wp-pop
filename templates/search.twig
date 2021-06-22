@@ -26,17 +26,22 @@
 		</div>
 	</div>
 
+	{% if posts|length > 0 %}
 	<div class="container-narrow mb-20">
-		<h3 class="my-8">Search results for &ldquo; {{ s }} &rdquo;</h3>
-
-    {% for post in posts %}
-      <div class="mb-8">
-        {% include ['tease-'~post.post_type~'.twig', 'tease.twig'] %}
-      </div>
-    {% endfor %}
-
-      {% include 'partial/pagination.twig' with { pagination: posts.pagination({show_all: false, mid_size: 3, end_size: 2}) } %}
+			<h3 class="my-8">Search results for &ldquo; {{ s }} &rdquo;</h3>
+			{% for post in posts %}
+				<div class="mb-8">
+					{% include ['tease-'~post.post_type~'.twig', 'tease.twig'] %}
+				</div>
+    	{% endfor %}
+			{% include 'partial/pagination.twig' with { pagination: posts.pagination({show_all: false, mid_size: 3, end_size: 2}) } %}
 	</div>
+	{% endif %}
+	{% if posts|length == 0 %}
+	<div class="container-narrow py-20 px-12 ">
+		<h3>Sorry, there are no insights on {{ s }} 😊, try another topic or clear your filters to start again.</h3>
+	</div>
+	{% endif %}
 
 
 </div>
