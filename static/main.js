@@ -149,12 +149,19 @@ document.addEventListener("DOMContentLoaded", function() {
         }
       },
       validateGDPR (e) {
-        if (this.form.gdpr.one && this.form.gdpr.two) {
+        // if (this.form.gdpr.one && this.form.gdpr.two) {
+        //   this.nextStep()
+        // }
+        if (this.form.gdpr && this.captcha.a + this.captcha.b === parseInt(this.form.captcha.value)) {
           this.nextStep()
+          this.submit()
+          setTimeout(() => {
+            this.hide()
+          }, 4000)
         }
       },
       validateCaptcha (e) {
-        if (this.captcha.a + this.captcha.b === parseInt(this.form.captcha.value)) {
+        if (this.captcha.a + this.captcha.b === parseInt(this.form.captcha.value) && this.form.gdpr) {
           this.form.captcha.valid = true
           this.nextStep()
           this.submit()
@@ -190,10 +197,11 @@ document.addEventListener("DOMContentLoaded", function() {
             valid: false,
             value: ''
           },
-          gdpr: {
-            one: false,
-            two: false
-          }
+          // gdpr: {
+          //   one: false,
+          //   two: false
+          // }
+          gdpr: false
         }
       },
       submit () {
@@ -227,20 +235,21 @@ document.addEventListener("DOMContentLoaded", function() {
             "hutk": getCookie('hubspotutk'),
             "pageUri": window.location.href,
             "pageName": document.title
+          },
+          "legalConsentOptions":{
+            // "consent":{
+            //   "consentToProcess": this.form.gdpr.two,
+            //   "text": "I agree to allow POPcomms to store and process my personal data.",
+            //   "communications":[
+            //     {
+            //       "value": this.form.gdpr.one,
+            //       "subscriptionTypeId": 1,
+            //       "text": "I agree to receive content from POPcomms."
+            //     }
+            //   ]
+            // }
+          "consent": this.form.gdpr
           }
-          // "legalConsentOptions":{
-          //   "consent":{
-          //     "consentToProcess": this.form.gdpr.two,
-          //     "text": "I agree to allow POPcomms to store and process my personal data.",
-          //     "communications":[
-          //       {
-          //         "value": this.form.gdpr.one,
-          //         "subscriptionTypeId": 1,
-          //         "text": "I agree to receive content from POPcomms."
-          //       }
-          //     ]
-          //   }
-          // }
         }
         xhr.open('POST', url);
         xhr.setRequestHeader('Content-Type', 'application/json');
@@ -256,7 +265,6 @@ document.addEventListener("DOMContentLoaded", function() {
           }
         }
         xhr.send(JSON.stringify(data))
-        this.reset()
       },
       revealInput (step) {
         const borders = step.getElementsByClassName('input-border')
@@ -430,16 +438,6 @@ document.addEventListener("DOMContentLoaded", function() {
           }
         }, timeout)
       },
-      // prevStep () {
-      //   if (this.step > 0 && this.step < 5 && this.downloadTl.paused() === true) {
-      //     console.log('prev active')
-      //     this.downloadTl.reverse()
-      //     this.step -= 1
-      //   } else if (this.step === 5 && this.downloadTl.paused() === true) {
-      //     this.downloadTl.play('restartPoint')
-      //     this.step = 1
-      //   }
-      // },
       validateFirstName (e) {
         if (this.form.firstName.value.length > 2) {
           this.form.firstName.valid = true
@@ -483,12 +481,19 @@ document.addEventListener("DOMContentLoaded", function() {
         }
       },
       validateGDPR (e) {
-        if (this.form.gdpr.one && this.form.gdpr.two) {
+        // if (this.form.gdpr.one && this.form.gdpr.two) {
+        //   this.nextStep()
+        // }
+        if (this.form.gdpr && this.captcha.a + this.captcha.b === parseInt(this.form.captcha.value)) {
           this.nextStep()
+          this.submit()
+          setTimeout(() => {
+            this.hide()
+          }, 4000)
         }
       },
       validateCaptcha (e) {
-        if (this.captcha.a + this.captcha.b === parseInt(this.form.captcha.value)) {
+        if (this.captcha.a + this.captcha.b === parseInt(this.form.captcha.value) && this.form.gdpr) {
           this.form.captcha.valid = true
           this.nextStep()
           this.submit()
@@ -520,10 +525,7 @@ document.addEventListener("DOMContentLoaded", function() {
             valid: false,
             value: ''
           },
-          gdpr: {
-            one: false,
-            two: false
-          }
+          gdpr: false
         }
       },
       revealInput(step) {
@@ -720,17 +722,18 @@ document.addEventListener("DOMContentLoaded", function() {
             "pageName": document.title
           },
           "legalConsentOptions":{
-            "consent":{
-              "consentToProcess": this.form.gdpr.two,
-              "text": "I agree to allow POPcomms to store and process my personal data.",
-              "communications":[
-                {
-                  "value": this.form.gdpr.one,
-                  "subscriptionTypeId": 1,
-                  "text": "I agree to receive content from POPcomms."
-                }
-              ]
-            }
+            // "consent":{
+            //   "consentToProcess": this.form.gdpr.two,
+            //   "text": "I agree to allow POPcomms to store and process my personal data.",
+            //   "communications":[
+            //     {
+            //       "value": this.form.gdpr.one,
+            //       "subscriptionTypeId": 1,
+            //       "text": "I agree to receive content from POPcomms."
+            //     }
+            //   ]
+            // }
+            "consent": this.form.gdpr
           }
         }
 
