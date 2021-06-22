@@ -6,7 +6,7 @@
 
 	{% for item in items %}
 		{% if item.children %}
-			<div class="nav-parent group hidden h-full sm:flex items-center px-6 text-pop-white hover:text-pop-mid-gray hover:bg-pop-black" style="cursor: default;">
+			<div class="nav-parent group hidden h-full sm:flex items-center px-6 {{ invert == 1 ? 'text-pop-pink hover:text-pop-mid-gray' : 'text-pop-white hover:text-pop-mid-gray' }} hover:bg-pop-black" style="cursor: default;">
 			{# @click="toggleMenu( '{{ item.title }}'  )" #}
 			{# <a class="text-pop-white hover:text-pop-mid-gray " target="{{ item.target }}" href="{{ item.link }}">{{ item.title }}</a> #}
 			{# <div class="relative flex items-center h-full text-pop-white hover:text-pop-mid-gray hover:bg-pop-black"> #}
@@ -20,7 +20,7 @@
 			</div>
 			{% else %}
 				<div class="nav-parent group hidden h-full sm:flex items-center cursor-pointer">
-					<a class="text-pop-white group-hover:text-pop-mid-gray px-6" target="{{ item.target }}" href="{{ item.link }}">{{ item.title }}</a>
+					<a class="{{ invert == 1 ? 'text-pop-pink hover:text-pop-mid-gray' : 'text-pop-white hover:text-pop-mid-gray' }} px-6" target="{{ item.target }}" href="{{ item.link }}">{{ item.title }}</a>
 				</div>
 			{% endif %}
 	{% endfor %}

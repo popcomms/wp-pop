@@ -1,15 +1,19 @@
 {% set menuItems = menu.get_items|json_encode() %}
 <!-- menu='{{ menuItems }}'  -->
+{% set invertNav = fields.custom.invert %}
 <header
   id="header"
   is="MainMenu"
   class="z-30 nav fixed w-screen"
   inline-template
 >
-  {% block header %}
-  <div class="wrapper h-20 flex justify-between items-center p-4 sm:px-8">
+
+{% block header %}
+<div class="wrapper h-20 flex justify-between items-center p-4 sm:px-8">
+    
     {# blur #}
     <div class="absolute h-full w-full bg-blue top-0 left-0 backdrop-filter backdrop-blur"></div>
+    <!-- style="background: rgba(0, 0, 0, 0.2);" -->
 
       <a v-show="!menuActive" class="hdr-logo-link" href="{{site.url}}" rel="home">
         <svg class="transform scale-75 sm:scale-100 h-full sm:h-3/4" width="105" height="51" viewBox="0 0 105 51" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -48,7 +52,7 @@
             <line class="text-pop-gray stroke-current transform group-hover:translate-x-1 transition-transform delay-100" :class="{'translate-x-1': menuActive}" x1="10" y1="23.5" x2="34" y2="23.5" stroke-width="2"/>
           </svg>
         </div>
-        {% include "menu.twig" with {'items': menu.get_items} %}
+        {% include "menu.twig" with {'items': menu.get_items, 'invert': invertNav} %}
       </nav>
 
     <div
@@ -57,7 +61,7 @@
       class="fixed bottom-0 right-0 w-1/2 min-w-min whitespace-nowrap sm:w-auto z-50 sm:z-0 sm:relative flex items-center transition-opacity cursor-pointer bg-pop-pink sm:bg-transparent"
       :class="menuActive ? 'opacity-0' : 'opacity-100'"
     >
-      <div class="flex-grow text-center h-full px-3 py-2 sm:p-0 {{fields.theme}} text-pop-white sm:text-pop-pink sm:font-bold sm:mr-2">
+      <div class="flex-grow text-center h-full px-3 py-2 sm:p-0 text-pop-white sm:text-pop-pink sm:font-bold sm:mr-2">
         Get in Touch
       </div>
       <svg class="hidden sm:block" width="54" height="16" viewBox="0 0 54 16" fill="none" xmlns="http://www.w3.org/2000/svg">
