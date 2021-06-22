@@ -61,7 +61,7 @@ document.addEventListener("DOMContentLoaded", function() {
       hide () {
         this.show = false
         document.querySelector('body').style.overflow = 'auto'
-        if (this.step === 8) {
+        if (this.step === 6) {
           this.step = 0
           this.reset()
         }
@@ -82,7 +82,7 @@ document.addEventListener("DOMContentLoaded", function() {
         gsap.set(eye, { scaleY: 0 })
         gsap.set(lines, {opacity: 0})
 
-        if (this.step === 6) {
+        if (this.step === 5) {
           const fingers = next.querySelectorAll('.finger')
           const hand = next.querySelectorAll('.hand')
           gsap.set(hand, {translateY: 100 + '%'})
@@ -101,7 +101,7 @@ document.addEventListener("DOMContentLoaded", function() {
               if (next.getElementsByClassName('eye-mask').length !== 0) {
                 this.revealEye(next)
               }
-              if (this.step === 8) {
+              if (this.step === 6) {
                 this.revealFingers(next)
               }
             }
@@ -135,7 +135,15 @@ document.addEventListener("DOMContentLoaded", function() {
       validateCompany (e) {
         if (this.form.company.value.length > 2) {
           this.form.company.valid = true
-          if(e.type === 'click' || (e.keyCode === 13)) {
+          if(e.type === 'click' || (e.keyCode === 13) && this.form.phone.valid) {
+            this.nextStep()
+          }
+        }
+      },
+      validatePhone (e) {
+        if (!isNaN(this.form.phone.value)) {
+          this.form.phone.valid = true
+          if(e.type === 'click' || (e.keyCode === 13) && this.form.company.valid) {
             this.nextStep()
           }
         }
@@ -199,12 +207,8 @@ document.addEventListener("DOMContentLoaded", function() {
               "value": this.form.email.value
             },
             {
-              "name": "firstname",
-              "value": this.form.firstName.value
-            },
-            {
-              "name": "lastname",
-              "value": this.form.lastName.value
+              "name": "name",
+              "value": this.form.name.value
             },
             {
               "name": "company",
@@ -223,20 +227,20 @@ document.addEventListener("DOMContentLoaded", function() {
             "hutk": getCookie('hubspotutk'),
             "pageUri": window.location.href,
             "pageName": document.title
-          },
-          "legalConsentOptions":{
-            "consent":{
-              "consentToProcess": this.form.gdpr.two,
-              "text": "I agree to allow POPcomms to store and process my personal data.",
-              "communications":[
-                {
-                  "value": this.form.gdpr.one,
-                  "subscriptionTypeId": 1,
-                  "text": "I agree to receive content from POPcomms."
-                }
-              ]
-            }
           }
+          // "legalConsentOptions":{
+          //   "consent":{
+          //     "consentToProcess": this.form.gdpr.two,
+          //     "text": "I agree to allow POPcomms to store and process my personal data.",
+          //     "communications":[
+          //       {
+          //         "value": this.form.gdpr.one,
+          //         "subscriptionTypeId": 1,
+          //         "text": "I agree to receive content from POPcomms."
+          //       }
+          //     ]
+          //   }
+          // }
         }
         xhr.open('POST', url);
         xhr.setRequestHeader('Content-Type', 'application/json');
@@ -252,6 +256,7 @@ document.addEventListener("DOMContentLoaded", function() {
           }
         }
         xhr.send(JSON.stringify(data))
+        this.reset()
       },
       revealInput (step) {
         const borders = step.getElementsByClassName('input-border')
@@ -290,7 +295,7 @@ document.addEventListener("DOMContentLoaded", function() {
         const lines = step.getElementsByClassName('lines')
         gsap.to(eye, { duration: 0.35, scaleY: 1 })
         gsap.to(lines, {duration: 0.35, opacity: 1})
-        if(this.step === 7) {
+        if(this.step === 5) {
           gsap.to(eye, { duration: 0.35, delay: 1, translateY: 10, scaleY: 0.5 })
         }
 
@@ -307,10 +312,6 @@ document.addEventListener("DOMContentLoaded", function() {
         const iris = current.querySelector('.iris');
         const pupil = current.querySelector('.pupil');
 
-        // var irisBB = current.querySelector('svg').getBoundingClientRect();
-        // var irisTop = irisBB.top + irisBB.height / 2;
-        // var irisLeft = irisBB.left + irisBB.width / 2;
-
         var svg = current.querySelector('.watching-eye').getBoundingClientRect();
         var irisTop = svg.top + svg.height / 2;
         var irisLeft = svg.left + svg.width / 2;
@@ -322,7 +323,6 @@ document.addEventListener("DOMContentLoaded", function() {
         iris.setAttribute('cx', Math.min(400, Math.max(100, irisX)))
         iris.setAttribute('cy', Math.min(200, Math.max(50, irisY)))
 
-        // var pupilBB = pupil.getBoundingClientRect();
         var pupilTop = svg.top + svg.height / 2;
         var pupilLeft = svg.left + svg.width / 2;
 
@@ -374,7 +374,7 @@ document.addEventListener("DOMContentLoaded", function() {
         return this.stepName[this.step]
       },
       getIntro () {
-        if (this.step < 5) {
+        if (this.step < 3) {
           return 'Your'
         } else {
           return 'All done!'
@@ -394,20 +394,20 @@ document.addEventListener("DOMContentLoaded", function() {
         this.hideInput (current)
         this.hideText(current)
 
-        if (this.step === 6) {
+        if (this.step === 4) {
           this.hideEye(current)
         }
 
         const next = this.$refs['downloadFormStep' + (this.step + 1)]
 
-        if (this.step === 5) {
+        if (this.step === 3) {
           const eye = next.getElementsByClassName('eye-mask')
           const lines = next.getElementsByClassName('lines')
           gsap.set(eye, { scaleY: 0 })
           gsap.set(lines, {opacity: 0})
         }
 
-        if (this.step === 6) {
+        if (this.step === 4) {
           const fingers = next.querySelectorAll('.finger')
           const hand = next.querySelectorAll('.hand')
           gsap.set(hand, {translateX: 100 + '%'})
@@ -422,10 +422,10 @@ document.addEventListener("DOMContentLoaded", function() {
           const next = this.$refs['downloadFormStep' + this.step]
           this.revealInput (next)
           this.revealText(next)
-          if (this.step === 6) {
+          if (this.step === 4) {
             this.revealEye(next)
           }
-          if (this.step === 7) {
+          if (this.step === 5) {
             this.revealFingers(next)
           }
         }, timeout)
@@ -563,7 +563,7 @@ document.addEventListener("DOMContentLoaded", function() {
         const lines = step.getElementsByClassName('lines')
         gsap.to(eye, { duration: 0.35, scaleY: 1 })
         gsap.to(lines, {duration: 0.35, opacity: 1})
-        if(this.step === 7) {
+        if(this.step === 5) {
           gsap.to(eye, { duration: 0.35, delay: 1, translateY: 10, scaleY: 0.5 })
         }
 

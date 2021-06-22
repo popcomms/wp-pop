@@ -31,7 +31,7 @@
           class="relative p-6 sm:p-10"
           v-show="step === 2"
         >
-          <div class="text-sm mb-4">1 / 6</div>
+          <div class="text-sm mb-4">1 / 4</div>
           {% include "partial/forms/contact/name-email.twig" %}
         </div>
 
@@ -40,7 +40,7 @@
           class="relative p-6 sm:p-10"
           v-show="step === 3"
         >
-          <div class="text-sm mb-4">2 / 6</div>
+          <div class="text-sm mb-4">2 / 4</div>
           {% include "partial/forms/contact/company-phone.twig" %}
         </div>
 
@@ -49,16 +49,16 @@
           class="relative p-6 sm:p-10"
           v-show="step === 4"
         >
-          <div class="text-sm mb-4">3 / 6</div>
+          <div class="text-sm mb-4">3 / 4</div>
           {% include "partial/forms/contact/message.twig" %}
         </div>
 
-        <div
+        <!-- <div
           ref="contactFormStep5"
           class="relative p-6 sm:p-10"
           v-show="step === 5"
         >
-          <div class="text-sm mb-4">4 / 6</div>
+          <div class="text-sm mb-4">4 / 4</div>
           {% include "partial/forms/newsletter.twig" %}
         </div>
 
@@ -67,23 +67,23 @@
           class="relative p-6 sm:p-10"
           v-show="step === 6"
         >
-          <div class="text-sm mb-4">5 / 6</div>
+          <div class="text-sm mb-4">5 / 4</div>
           {% include "partial/forms/privacy.twig" %}
-        </div>
+        </div> -->
 
         <div
-          ref="contactFormStep7"
+          ref="contactFormStep5"
           class="relative p-6 sm:p-10"
-          v-show="step === 7"
+          v-show="step === 5"
         >
-          <div class="text-sm mb-4">6 / 6</div>
+          <div class="text-sm mb-4">4 / 4</div>
           {% include "partial/forms/contact/captcha.twig" %}
         </div>
 
         <div
-          ref="contactFormStep8"
+          ref="contactFormStep6"
           class="relative p-6 sm:p-10"
-          v-show="step === 8"
+          v-show="step === 6"
         >
           <div class="text-sm mb-4">&nbsp;</div>
           {% include "partial/forms/contact/thanks.twig" %}

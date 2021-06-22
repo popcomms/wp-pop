@@ -34,7 +34,7 @@
       v-show="step === 2"
       class="absolute flex flex-col top-0 left-0 w-full h-full p-3 sm:p-10  text-pop-white z-10"
     >
-      <div class="text-sm mb-4">1 / 5</div>
+      <div class="text-sm mb-4">1 / 3</div>
       {% include "partial/forms/download/name.twig" %}
     </div>
     <div
@@ -42,15 +42,15 @@
       v-show="step === 3"
       class="absolute flex flex-col top-0 left-0 w-full h-full p-3 sm:p-10 bg-pop-black text-pop-white z-10"
     >
-      <div class="text-sm mb-4">2 / 5</div>
+      <div class="text-sm mb-4">2 / 3</div>
       {% include "partial/forms/download/email-company.twig" %}
     </div>
-    <div
+    <!-- <div
       ref="downloadFormStep4"
       v-show="step === 4"
       class="absolute flex flex-col top-0 left-0 w-full h-full p-3 sm:p-10 bg-pop-black text-pop-white z-10"
     >
-      <div class="text-sm mb-4">3 / 5</div>
+      <div class="text-sm mb-4">3 / 3</div>
       {% include "partial/forms/newsletter.twig" %}
     </div>
     <div
@@ -58,20 +58,20 @@
       v-show="step === 5"
       class="flex flex-col absolute top-0 left-0 w-full h-full p-3 sm:p-10 bg-pop-black text-pop-white z-10"
     >
-      <div class="text-sm mb-4">4 / 5</div>
+      <div class="text-sm mb-4">4 / 3</div>
       {% include "partial/forms/privacy.twig" %}
-    </div>
+    </div> -->
     <div
-      ref="downloadFormStep6"
-      v-show="step === 6"
+      ref="downloadFormStep4"
+      v-show="step === 4"
       class="absolute flex flex-col top-0 left-0 w-full h-full p-3 sm:p-10 bg-pop-black text-pop-white z-10"
     >
-      <div class="text-sm mb-4">5 / 5</div>
+      <div class="text-sm mb-4">3 / 3</div>
       {% include "partial/forms/download/captcha.twig" %}
     </div>
     <div
-      ref="downloadFormStep7"
-      v-show="step === 7"
+      ref="downloadFormStep5"
+      v-show="step === 5"
       class="absolute top-0 left-0 w-full h-full p-3 sm:p-10 bg-pop-black text-pop-white z-10"
     >
       <div class="text-sm p-3 sm:p-10">Complete</div>
