@@ -11,7 +11,7 @@
   {% set theme = 'dark' %}
 {% endif %}
 
- <div class="container-wide" >
+ <div class="container-wide block-container" >
     <div class="md:border-16 md:{{ theme == 'dark' ? 'border-pop-black' : 'border-pop-white'}} {{ theme == 'dark' ? 'bg-pop-black' : 'bg-pop-white'}} md:shadow-md md:box-content">
       {% include "/templates/partial/component-title.twig" with 
         {

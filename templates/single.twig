@@ -17,7 +17,7 @@
 	<div class="relative content-wrapper">
 		{# {% include "/templates/partial/post-hero.twig" with { 'fields': hero } %} #}
 
-    <div class="relative container-narrow md:-mt-48 bg-pop-white">
+    <div class="relative container-narrow block-container md:-mt-48 bg-pop-white">
 
       {% for path in icons %}
         <img
@@ -45,7 +45,7 @@
     >
 			<div class="relative py-12" >
 				<div id="content" class="article-body pop-container my-12">
-					<div class="container-narrow text-pop-{{ content.theme == 'black' ? 'white' : 'black' }}">
+					<div class="container-narrow block-container text-pop-{{ content.theme == 'black' ? 'white' : 'black' }}">
 						{{ post.content }}
 					</div>
 				</div>
