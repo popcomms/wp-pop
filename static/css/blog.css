@@ -10,6 +10,12 @@
     li {
       @apply mt-2 mb-2;
     }
+    a {
+      @apply underline;
+      &:hover {
+        @apply text-blue-500;
+      }
+    }
     h2 {
       @apply block;
       @apply text-3xl;
