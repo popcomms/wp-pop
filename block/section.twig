@@ -3,13 +3,13 @@
 {% endif %}
 
 {% if not is_preview %}
-<div class="section relative mb-40">
-  <div class="section__title {{ theme_bg_color }} py-2 px-8 shadow-md z-20 absolute -top-24 left-1/2 sm:flex items-center transform -translate-x-1/2 -translate-y-1/2" style="width: 90%">
+<div class="section relative">
+  <div class="section__title {{ theme_bg_color }} py-2 px-8 shadow-md z-20 absolute -top-24 left-1/2 flex items-center transform -translate-x-1/2 -translate-y-1/2" style="width: 90%">
     <p class="text-pop-mid-gray text-xs m-0 mr-4">{{ fields.title }}</p>
     <div class="bg-pop-mid-gray flex-grow" style="height: 1px"></div>
   </div>
   {% for sub_item in item.content %}
-    <div class="section__item mb-0 sm:mb-20">
+    <div class="section__item {{ loop.last ? '' : 'mb-0 sm:mb-40' }}">
       {% set path = "/block/" ~ sub_item.acf_fc_layout ~ ".twig" %}
       {% include path with 
         {

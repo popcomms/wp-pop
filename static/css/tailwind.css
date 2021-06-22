@@ -5,7 +5,6 @@
 @layer base {
   * {
     @apply leading-normal;
-
     position: relative;
     box-sizing: border-box;
   }
@@ -238,7 +237,6 @@
   article li,
   article pre {
     @apply text-xl font-normal;
-
     line-height: 140%;
   }
 
@@ -248,7 +246,6 @@
 
   ul li::before {
     @apply absolute top-4 left-0 transform -translate-y-1/2 w-2 h-2 bg-pop-pink rounded;
-
     content: '';
   }
 
@@ -272,7 +269,6 @@
   p,
   ul {
     @apply my-3;
-
     line-height: 150%;
   }
 
@@ -282,7 +278,6 @@
 
   .banner-title > * {
     @apply my-5 font-normal;
-
     font-size: 5rem;
     line-height: 4rem;
   }
@@ -317,7 +312,6 @@
 
   .container-narrow {
     @apply px-4 xs:px-10 md:px-0 md:mx-auto xs:mb-20 sm:mb-0;
-
     max-width: 985px;
   }
 
@@ -331,18 +325,12 @@
 
   .container-wide {
     @apply md:px-0 md:mx-auto;
-
     max-width: 1050px;
   }
 
   .wp-block-video {
     @apply px-4 xs:px-10 md:px-0 md:mx-auto mb-40 mt-20 shadow-md !important;
-
     max-width: 985px;
-  }
-
-  .pop-container-inner > div:last-of-type {
-    margin-bottom: 0 !important;
   }
 
   input::-webkit-input-placeholder { /* Chrome/Opera/Safari */
