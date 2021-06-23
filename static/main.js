@@ -7,19 +7,19 @@ document.addEventListener("DOMContentLoaded", function() {
   }
 
   function getCookie(cname) {
-    var name = cname + "=";
-    var decodedCookie = decodeURIComponent(document.cookie);
-    var ca = decodedCookie.split(';');
-    for(var i = 0; i <ca.length; i++) {
+    var name = cname + '='
+    var decodedCookie = decodeURIComponent(document.cookie)
+    var ca = decodedCookie.split(';')
+    for(var i = 0; i < ca.length; i++) {
       var c = ca[i];
       while (c.charAt(0) == ' ') {
-        c = c.substring(1);
+        c = c.substring(1)
       }
       if (c.indexOf(name) == 0) {
-        return c.substring(name.length, c.length);
+        return c.substring(name.length, c.length)
       }
     }
-    return "";
+    return ''
   }
 
   // Prevent Enter key from submitting <form>
@@ -148,26 +148,21 @@ document.addEventListener("DOMContentLoaded", function() {
           }
         }
       },
-      validateGDPR (e) {
-        // if (this.form.gdpr.one && this.form.gdpr.two) {
-        //   this.nextStep()
-        // }
-        if (this.form.gdpr && this.captcha.a + this.captcha.b === parseInt(this.form.captcha.value)) {
-          this.nextStep()
-          this.submit()
-          setTimeout(() => {
-            this.hide()
-          }, 4000)
-        }
-      },
+      // validateGDPR (e) {
+      //   // if (this.form.gdpr.one && this.form.gdpr.two) {
+      //   //   this.nextStep()
+      //   // }
+      //   if (this.form.gdpr && this.captcha.a + this.captcha.b === parseInt(this.form.captcha.value)) {
+      //     this.nextStep()
+      //     this.submit()
+      //     setTimeout(() => {
+      //       this.hide()
+      //     }, 4000)
+      //   }
+      // },
       validateCaptcha (e) {
-        if (this.captcha.a + this.captcha.b === parseInt(this.form.captcha.value) && this.form.gdpr) {
+        if (this.captcha.a + this.captcha.b === parseInt(this.form.captcha.value)) {
           this.form.captcha.valid = true
-          this.nextStep()
-          this.submit()
-          setTimeout(() => {
-            this.hide()
-          }, 4000)
         } else {
           this.form.captcha.valid = false
         }
@@ -196,75 +191,72 @@ document.addEventListener("DOMContentLoaded", function() {
           captcha: {
             valid: false,
             value: ''
-          },
-          // gdpr: {
-          //   one: false,
-          //   two: false
-          // }
-          gdpr: false
+          }
         }
       },
       submit () {
-        const xhr = new XMLHttpRequest();
-        const url = 'https://api.hsforms.com/submissions/v3/integration/submit/7620391/e9adc62c-c6d2-41ff-83a2-c777407f2dbe'
+        if (this.form.captcha.valid) {
+          this.nextStep()
 
-        const data = {
-          "fields": [
-            {
-              "name": "email",
-              "value": this.form.email.value
+          const xhr = new XMLHttpRequest();
+          const url = 'https://api.hsforms.com/submissions/v3/integration/submit/7620391/e9adc62c-c6d2-41ff-83a2-c777407f2dbe'
+
+          const data = {
+            "fields": [
+              {
+                "name": "email",
+                "value": this.form.email.value
+              },
+              {
+                "name": "name",
+                "value": this.form.name.value
+              },
+              {
+                "name": "company",
+                "value": this.form.company.value
+              },
+              {
+                "name": "phone",
+                "value": this.form.phone.value
+              },
+              {
+                "name": "message",
+                "value": this.form.message
+              }
+            ],
+            "context": {
+              "hutk": getCookie('hubspotutk'),
+              "pageUri": window.location.href,
+              "pageName": document.title
             },
-            {
-              "name": "name",
-              "value": this.form.name.value
-            },
-            {
-              "name": "company",
-              "value": this.form.company.value
-            },
-            {
-              "name": "phone",
-              "value": this.form.phone.value
-            },
-            {
-              "name": "message",
-              "value": this.form.message
+            "legalConsentOptions":{
+              "legitimateInterest": {
+                "value": true,
+                "subscriptionTypeId": 1,
+                "legalBasis": "LEAD",
+                "text": "By submitting this form you agree to (i) The POPcomms Privacy Policy (ii) Receive occassional, valuable information regarding POPcomms and our services. You may unsubscribe from these communications at any time."
+              }
             }
-          ],
-          "context": {
-            "hutk": getCookie('hubspotutk'),
-            "pageUri": window.location.href,
-            "pageName": document.title
-          },
-          "legalConsentOptions":{
-            // "consent":{
-            //   "consentToProcess": this.form.gdpr.two,
-            //   "text": "I agree to allow POPcomms to store and process my personal data.",
-            //   "communications":[
-            //     {
-            //       "value": this.form.gdpr.one,
-            //       "subscriptionTypeId": 1,
-            //       "text": "I agree to receive content from POPcomms."
-            //     }
-            //   ]
-            // }
-          "consent": this.form.gdpr
           }
-        }
-        xhr.open('POST', url);
-        xhr.setRequestHeader('Content-Type', 'application/json');
-        xhr.onreadystatechange = function() {
-          if(xhr.readyState == 4 && xhr.status == 200) {
-              console.log(xhr.responseText); // Returns a 200 response if the submission is successful.
-          } else if (xhr.readyState == 4 && xhr.status == 400){
-              console.log(xhr.responseText); // Returns a 400 error the submission is rejected.
-          } else if (xhr.readyState == 4 && xhr.status == 403){
-              console.log(xhr.responseText); // Returns a 403 error if the portal isn't allowed to post submissions.
-          } else if (xhr.readyState == 4 && xhr.status == 404){
-              console.log(xhr.responseText); //Returns a 404 error if the formGuid isn't found
+          xhr.open('POST', url);
+          xhr.setRequestHeader('Content-Type', 'application/json');
+          xhr.onreadystatechange = function() {
+            if(xhr.readyState == 4 && xhr.status == 200) {
+                console.log(xhr.responseText); // Returns a 200 response if the submission is successful.
+            } else if (xhr.readyState == 4 && xhr.status == 400){
+                console.log(xhr.responseText); // Returns a 400 error the submission is rejected.
+            } else if (xhr.readyState == 4 && xhr.status == 403){
+                console.log(xhr.responseText); // Returns a 403 error if the portal isn't allowed to post submissions.
+            } else if (xhr.readyState == 4 && xhr.status == 404){
+                console.log(xhr.responseText); //Returns a 404 error if the formGuid isn't found
+            }
           }
+          xhr.send(JSON.stringify(data))
+          setTimeout(() => {
+            this.hide()
+            this.reset()
+          }, 4000)
         }
-        xhr.send(JSON.stringify(data))
       },
       revealInput (step) {
         const borders = step.getElementsByClassName('input-border')
@@ -324,10 +316,10 @@ document.addEventListener("DOMContentLoaded", function() {
         var irisTop = svg.top + svg.height / 2;
         var irisLeft = svg.left + svg.width / 2;
 
-        
+
         const irisX = ((evt.screenX - irisLeft) / 5) + 247.653;
         const irisY = ((evt.screenY - irisTop) / 3) + 102;
-        
+
         iris.setAttribute('cx', Math.min(400, Math.max(100, irisX)))
         iris.setAttribute('cy', Math.min(200, Math.max(50, irisY)))
 
@@ -535,7 +527,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
           this.revealInputAnim(step, inputs, borders, guides)
-        
+
       },
       hideInput(step) {
         const borders = step.getElementsByClassName('input-border')
@@ -579,7 +571,7 @@ document.addEventListener("DOMContentLoaded", function() {
         gsap.to(fingers, { duration: 0.7, translateX: 0 + '%', stagger: 0.1, ease: Elastic.easeOut.config(1, 1) })
         gsap.to(hand, { duration: 0.3, translateX: 0 + '%', delay: 0.25 })
         gsap.timeline({})
-          .fromTo(waves, { 
+          .fromTo(waves, {
             scale: 0.8,
             translateX: 1 + '%',
             translateY: 1 + '%',
@@ -615,7 +607,7 @@ document.addEventListener("DOMContentLoaded", function() {
             translateX: 0 + '%',
             ease: Elastic.easeOut.config(1, 1)
           })
-          .fromTo(waves, { 
+          .fromTo(waves, {
             scale: 0.8,
             translateX: 1 + '%',
             translateY: 1 + '%',
@@ -659,10 +651,10 @@ document.addEventListener("DOMContentLoaded", function() {
         var irisTop = svg.top + svg.height / 2;
         var irisLeft = svg.left + svg.width / 2;
 
-        
+
         const irisX = ((evt.screenX - irisLeft) / 5) + 247.653;
         const irisY = ((evt.screenY - irisTop) / 3) + 102;
-        
+
         iris.setAttribute('cx', Math.min(400, Math.max(100, irisX)))
         iris.setAttribute('cy', Math.min(200, Math.max(50, irisY)))
 

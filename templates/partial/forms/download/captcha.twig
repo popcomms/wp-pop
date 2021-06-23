@@ -22,22 +22,19 @@
   </div>
 </div>
 <div class="form-text flex mt-10 opacity-0">
-  <input
-  :id="form.id + '-gdpr-download'"
-  type="checkbox"
-  name="gdpr_receive"
-  v-model="form.gdpr"
-  value="true"
-  class="mt-1 cursor-pointer"
-  @change="validateGDPR()"
-  >
-  <label :for="form.id + '-gdpr-download'" class="text-sm sm:text-base pl-4 text-pop-yellow cursor-pointer">
-    <div>
-      By checking this box I agree to:<br>
-      i) the POPcomms’ privacy policy (www.popcomms.com/privacy-policy),<br>
-      ii) receive occassional, valuable information regarding POPcomms and our services. I understand that I can opt out at any time from these communications.
-    </div>
-  </label>
+  <div>
+    By submitting this you agree to:<br>
+    <ol style="list-style-type: lower-roman">
+      <li>The POPcomms <a href="{{ site.url }}/privacy-policy" target="_blank">Privacy Policy</a></li>
+      <li>Receive occassional, valuable information regarding POPcomms and our services. You may unsubscribe from these communications at any time.</li>
+  </div>
+  <div>
+    <button
+      @click=""
+    >
+      Submit
+    </button>
+  </div>
 </div>
 <div class="hidden sm:block absolute top-0 right-0 w-1/2 pointer-events-none">
   <svg class="watching-eye w-full" preserveAspectRatio="xMidYMid meet"  viewBox="0 0 496 369" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
