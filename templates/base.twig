@@ -10,7 +10,11 @@
 
 		<div id="site-wrapper">
 
-      {% include 'partial/nav.twig' %}
+      {% include 'partial/nav.twig' with
+				{
+					'fields': post,
+				}
+			%}
 
 			<section role="main" class="content-wrapper bg-pop-white">
 				<div class="wrapper">
