@@ -579,10 +579,17 @@ function pop_enqueue_scripts() {
     null,
     true
   );
+  wp_enqueue_script(
+    'contrast-js',
+    get_template_directory_uri().'/static/js/contrast.min.js',
+    null,
+    null,
+    true
+  );
 	wp_enqueue_script(
     'main',
-    get_template_directory_uri().'/static/main.js?v=0.1',
-    array('gsap', 'scrollTrigger', 'vue'),
+    get_template_directory_uri().'/static/main.js?v=0.2',
+    array('gsap', 'scrollTrigger', 'vue', 'contrast-js'),
     true
   );
 }
