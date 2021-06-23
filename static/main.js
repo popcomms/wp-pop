@@ -351,10 +351,12 @@ document.addEventListener("DOMContentLoaded", function() {
       },
     },
     created () {
+      this.show = false
       this.reset()
     },
     mounted () {
       window.addEventListener('mousemove', this.moveEye, false);
+      document.querySelector('#contact-form').classList.add('opacity-100')
     }
   })
 

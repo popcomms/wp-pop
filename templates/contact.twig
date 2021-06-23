@@ -2,7 +2,8 @@
   id="contact-form"
   inline-template
   is="contact-form"
-  class=""
+  class="opacity-0"
+  ref="container"
 >
   <transition name="fade">
     <div
@@ -10,7 +11,7 @@
       class="fixed top-0 right-0 w-screen h-screen z-50"
     >
       <div
-        class="absolute h-full w-full bg-pop-black-dark opacity-90 cursor-pointer transition-opacity hover:opacity-80"
+        class="absolute h-full w-full bg-pop-black-dark opacity-90 cursor-pointer transition-opacity duration-500 hover:opacity-80"
         @click="hide()"
       ></div>
       <div
