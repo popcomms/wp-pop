@@ -19,32 +19,8 @@ document.addEventListener("DOMContentLoaded", function() {
         return c.substring(name.length, c.length)
       }
     }
-    return ''
+    return null
   }
-
-//   let contrast = new Contrast({
-//     isCustomColors: false,    // Set to true if you want to prebuild light/dark colors
-//     customLight: "#bddfe0",   // dark color HEX if isCustomColors is set to true
-//     customDark: "#334054",    // light color HEX if isCustomColors is set to true
-//     backgroundSize: "cover",  // "cover" or "100%" based on the background-size property in css
-//     bgClass: "contrast-bg",   // Option to rename the class for the element containing bg image
-//     elementClass: "contrast-el",   // Option to rename the class for the target element
-//     isDiv: false,             // Set to true if the element is a div (to change it's background)
-//     isResponsive: true        // Turn this so the module runs on window resize
-//   });
-
-// contrast.launch();
-
-  // Prevent Enter key from submitting <form>
-
-  // const forms = document.querySelectorAll('form')
-  // forms.forEach(element => {
-  //   element.addEventListener('submit', (event) => {
-  //     console.log('Prevent Form Submission')
-  //     event.preventDefault()
-  //     window.history.back()
-  //   })
-  // });
 
   gsap.registerPlugin(ScrollTrigger);
 
@@ -75,7 +51,7 @@ document.addEventListener("DOMContentLoaded", function() {
         this.show = false
         document.querySelector('body').style.overflow = 'auto'
         if (this.step === 6) {
-          this.step = 0
+          this.step = 1
           this.reset()
         }
       },
@@ -214,6 +190,10 @@ document.addEventListener("DOMContentLoaded", function() {
           const xhr = new XMLHttpRequest();
           const url = 'https://api.hsforms.com/submissions/v3/integration/submit/7620391/e9adc62c-c6d2-41ff-83a2-c777407f2dbe'
 
+          const name = this.form.name.value.split(' ')
+          const firstname = name[0]
+          const lastname = this.form.name.value.replace(name[0] + ' ', '')
+
           const data = {
             "fields": [
               {
@@ -221,8 +201,12 @@ document.addEventListener("DOMContentLoaded", function() {
                 "value": this.form.email.value
               },
               {
-                "name": "name",
-                "value": this.form.name.value
+                "name": "firstname",
+                "value": firstname
+              },
+              {
+                "name": "lastname",
+                "value": lastname
               },
               {
                 "name": "company",
@@ -238,7 +222,6 @@ document.addEventListener("DOMContentLoaded", function() {
               }
             ],
             "context": {
-              "hutk": getCookie('hubspotutk'),
               "pageUri": window.location.href,
               "pageName": document.title
             },
@@ -251,6 +234,12 @@ document.addEventListener("DOMContentLoaded", function() {
               }
             }
           }
+
+          const hubspotTrackingId = getCookie('hubspotutk')
+          if (hubspotTrackingId) {
+            data.context.hutk = hubspotTrackingId
+          }
+
           xhr.open('POST', url);
           xhr.setRequestHeader('Content-Type', 'application/json');
           xhr.onreadystatechange = function() {
@@ -268,7 +257,7 @@ document.addEventListener("DOMContentLoaded", function() {
           setTimeout(() => {
             this.hide()
             this.reset()
-          }, 4000)
+          }, 5000)
         }
       },
       revealInput (step) {
@@ -487,23 +476,9 @@ document.addEventListener("DOMContentLoaded", function() {
           this.form.company.valid = false
         }
       },
-      validateGDPR (e) {
-        // if (this.form.gdpr.one && this.form.gdpr.two) {
-        //   this.nextStep()
-        // }
-        if (this.form.gdpr && this.captcha.a + this.captcha.b === parseInt(this.form.captcha.value)) {
-          this.nextStep()
-          this.submit()
-          setTimeout(() => {
-            this.hide()
-          }, 4000)
-        }
-      },
       validateCaptcha (e) {
-        if (this.captcha.a + this.captcha.b === parseInt(this.form.captcha.value) && this.form.gdpr) {
+        if (this.captcha.a + this.captcha.b === parseInt(this.form.captcha.value)) {
           this.form.captcha.valid = true
-          this.nextStep()
-          this.submit()
         } else {
           this.form.captcha.valid = false
         }
@@ -532,24 +507,20 @@ document.addEventListener("DOMContentLoaded", function() {
             valid: false,
             value: ''
           },
-          gdpr: false
         }
       },
       revealInput(step) {
         const borders = step.getElementsByClassName('input-border')
         const guides = step.getElementsByClassName('input-guide')
         const inputs = step.querySelectorAll('.input-content')
-
-
-          this.revealInputAnim(step, inputs, borders, guides)
+        this.revealInputAnim(step, inputs, borders, guides)
 
       },
       hideInput(step) {
         const borders = step.getElementsByClassName('input-border')
         const guides = step.getElementsByClassName('input-guide')
         const inputs = step.querySelectorAll('.input-content')
-
-          this.hideInputAnim(step, inputs, borders, guides)
+        this.hideInputAnim(step, inputs, borders, guides)
       },
       hideText (step) {
         const text = step.getElementsByClassName('form-text')
@@ -658,10 +629,6 @@ document.addEventListener("DOMContentLoaded", function() {
         const iris = current.querySelector('.iris');
         const pupil = current.querySelector('.pupil');
 
-        // var irisBB = current.querySelector('svg').getBoundingClientRect();
-        // var irisTop = irisBB.top + irisBB.height / 2;
-        // var irisLeft = irisBB.left + irisBB.width / 2;
-
         var svg = current.querySelector('.watching-eye').getBoundingClientRect();
         var irisTop = svg.top + svg.height / 2;
         var irisLeft = svg.left + svg.width / 2;
@@ -673,7 +640,6 @@ document.addEventListener("DOMContentLoaded", function() {
         iris.setAttribute('cx', Math.min(400, Math.max(100, irisX)))
         iris.setAttribute('cy', Math.min(200, Math.max(50, irisY)))
 
-        // var pupilBB = pupil.getBoundingClientRect();
         var pupilTop = svg.top + svg.height / 2;
         var pupilLeft = svg.left + svg.width / 2;
 
@@ -701,70 +667,76 @@ document.addEventListener("DOMContentLoaded", function() {
         .set(step,{ pointerEvents: 'all'}, "-=0.01")
       },
       submit () {
-        const xhr = new XMLHttpRequest();
-        const url = 'https://api.hsforms.com/submissions/v3/integration/submit/7620391/a80eef42-8cb7-432d-ad17-a1cb3d1ee17c'
+        if (this.form.captcha.valid) {
+          this.nextStep()
 
-        const data = {
-          "fields": [
-            {
-              "name": "email",
-              "value": this.form.email.value
+          const xhr = new XMLHttpRequest();
+          const url = 'https://api.hsforms.com/submissions/v3/integration/submit/7620391/a80eef42-8cb7-432d-ad17-a1cb3d1ee17c'
+
+          const data = {
+            "fields": [
+              {
+                "name": "email",
+                "value": this.form.email.value
+              },
+              {
+                "name": "firstname",
+                "value": this.form.firstName.value
+              },
+              {
+                "name": "lastname",
+                "value": this.form.lastName.value
+              },
+              {
+                "name": "company",
+                "value": this.form.company.value
+              }
+            ],
+            "context": {
+              "pageUri": window.location.href,
+              "pageName": document.title
             },
-            {
-              "name": "firstname",
-              "value": this.form.firstName.value
-            },
-            {
-              "name": "lastname",
-              "value": this.form.lastName.value
-            },
-            {
-              "name": "company",
-              "value": this.form.company.value
+            "legalConsentOptions":{
+              "legitimateInterest": {
+                "value": true,
+                "subscriptionTypeId": 1,
+                "legalBasis": "LEAD",
+                "text": "By submitting this form you agree to (i) The POPcomms Privacy Policy (ii) Receive occassional, valuable information regarding POPcomms and our services. You may unsubscribe from these communications at any time."
+              }
             }
-          ],
-          "context": {
-            "hutk": getCookie('hubspotutk'),
-            "pageUri": window.location.href,
-            "pageName": document.title
-          },
-          "legalConsentOptions":{
-            // "consent":{
-            //   "consentToProcess": this.form.gdpr.two,
-            //   "text": "I agree to allow POPcomms to store and process my personal data.",
-            //   "communications":[
-            //     {
-            //       "value": this.form.gdpr.one,
-            //       "subscriptionTypeId": 1,
-            //       "text": "I agree to receive content from POPcomms."
-            //     }
-            //   ]
-            // }
-            "consent": this.form.gdpr
           }
-        }
 
-        xhr.open('POST', url);
-        xhr.setRequestHeader('Content-Type', 'application/json');
-        xhr.onreadystatechange = function() {
-          if(xhr.readyState == 4 && xhr.status == 200) {
-              console.log(xhr.responseText); // Returns a 200 response if the submission is successful.
-          } else if (xhr.readyState == 4 && xhr.status == 400){
-              console.log(xhr.responseText); // Returns a 400 error the submission is rejected.
-          } else if (xhr.readyState == 4 && xhr.status == 403){
-              console.log(xhr.responseText); // Returns a 403 error if the portal isn't allowed to post submissions.
-          } else if (xhr.readyState == 4 && xhr.status == 404){
-              console.log(xhr.responseText); //Returns a 404 error if the formGuid isn't found
+          const hubspotTrackingId = getCookie('hubspotutk')
+          if (hubspotTrackingId) {
+            data.context.hutk = hubspotTrackingId
           }
+
+          xhr.open('POST', url);
+          xhr.setRequestHeader('Content-Type', 'application/json');
+          xhr.onreadystatechange = function() {
+            if(xhr.readyState == 4 && xhr.status == 200) {
+              console.log(xhr.responseText); // Returns a 200 response if the submission is successful.
+            } else if (xhr.readyState == 4 && xhr.status == 400){
+              console.log(xhr.responseText); // Returns a 400 error the submission is rejected.
+            } else if (xhr.readyState == 4 && xhr.status == 403){
+              console.log(xhr.responseText); // Returns a 403 error if the portal isn't allowed to post submissions.
+            } else if (xhr.readyState == 4 && xhr.status == 404){
+              console.log(xhr.responseText); //Returns a 404 error if the formGuid isn't found
+            }
+          }
+          xhr.send(JSON.stringify(data))
+          setTimeout(() => {
+            this.step = 1
+            this.reset()
+          }, 5000)
         }
-        xhr.send(JSON.stringify(data))
       }
     },
     created () {
       this.reset()
     },
     mounted () {
-      gsap.set(this.$refs.steps, {pointerEvents: 'none'})
+      gsap.set(this.$refs.steps, { pointerEvents: 'none' })
     }
   })
 
