@@ -98,7 +98,8 @@ module.exports = {
       fontSize: ['hover', 'focus'],
       flex: ['group-hover'],
       scale: ['group-hover'],
-      translate: ['group-hover']
+      translate: ['group-hover'],
+      rotate: ['group-hover']
     },
   },
   plugins: [
