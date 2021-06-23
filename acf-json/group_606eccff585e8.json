@@ -167,6 +167,52 @@
             ]
         },
         {
+            "key": "field_60d319aef82cd",
+            "label": "Show Divider",
+            "name": "show_divider",
+            "type": "true_false",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "ui": 0,
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
+        {
+            "key": "field_60d319b6f82ce",
+            "label": "Divider Title",
+            "name": "divider_title",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_60d319aef82cd",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
             "key": "field_6070672b36ef0",
             "label": "Content",
             "name": "content",
@@ -706,6 +752,37 @@
                     ],
                     "min": "",
                     "max": ""
+                },
+                "layout_60d31559b2f26": {
+                    "key": "layout_60d31559b2f26",
+                    "name": "divider",
+                    "label": "Divider",
+                    "display": "block",
+                    "sub_fields": [
+                        {
+                            "key": "field_60d31559b2f27",
+                            "label": "Block",
+                            "name": "block",
+                            "type": "clone",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "clone": [
+                                "group_60d3151ae1f7d"
+                            ],
+                            "display": "seamless",
+                            "layout": "block",
+                            "prefix_label": 0,
+                            "prefix_name": 0
+                        }
+                    ],
+                    "min": "",
+                    "max": ""
                 }
             },
             "button_label": "Add Block",
@@ -730,5 +807,5 @@
     "hide_on_screen": "",
     "active": true,
     "description": "",
-    "modified": 1624373448
+    "modified": 1624447449
 }

@@ -7,7 +7,7 @@
             "label": "Bookmark Section",
             "name": "bookmark_section",
             "type": "true_false",
-            "instructions": "Should a link show in the banner for this section",
+            "instructions": "THIS SECTION BLOCK IS DEPRECIATED - USE DIVIDER BLOCKS INSTEAD",
             "required": 1,
             "conditional_logic": 0,
             "wrapper": {
@@ -510,6 +510,6 @@
     "instruction_placement": "label",
     "hide_on_screen": "",
     "active": true,
-    "description": "",
-    "modified": 1624373481
+    "description": "Depreciated - use dividers instead",
+    "modified": 1624447597
 }

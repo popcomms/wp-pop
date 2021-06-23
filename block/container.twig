@@ -5,6 +5,8 @@
 {% if not is_preview %}
 <div class="pop-container {{fields.theme == "dark" ? 'bg-pop-black' : 'bg-pop-white'}} ">
   <div class="relative py-12" >
+
+    {# Background POP Design #}
     <div class="{{fields.theme == "dark" ? 'bg-pop-black' : 'bg-pop-white'}} absolute top-0 left-0 w-full h-full bg-center bg-cover no-repeat pb-12 px-6 sm:px-12 pt-12">
       {% if fields.show_pop %}
       <div class="relative h-full w-full overflow-hidden ">
@@ -29,10 +31,20 @@
             </pattern>
           </defs>
         </svg>
-
       </div>
       {% endif %}
     </div>
+
+    {# Title #}
+    {# {% set bg_color = (fields.color == 'theme' ? theme_bg_color : 'bg-pop-' ~ fields.color) %} #}
+    {% if fields.show_divider %}
+      <div class="section__title {{ fields.theme == "dark" ? 'bg-pop-black' : 'bg-pop-white' }} py-2 px-8 flex items-center max-w-6xl absolute top-0 left-1/2 transform -translate-y-1/2 -translate-x-1/2" style="width: 90%">
+        <p class="text-pop-mid-gray text-xs m-0 mr-4">{{ fields.divider_title}}</p>
+        <div class="bg-pop-mid-gray flex-grow" style="height: 1px"></div>
+      </div>
+    {% endif %}
+
+    {# Content #}
     <div class="pop-container my-12">
       {% for item in fields.content %}
         <div class="{{ loop.last ? '' : 'mb-20 sm:mb-28' }}">
