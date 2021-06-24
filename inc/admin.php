@@ -1,5 +1,19 @@
 <?php
 
+// Change wp_mail() From: address
+
+add_filter( 'wp_mail_from', 'my_mail_from' );
+  function my_mail_from( $email ) {
+  return "damjan@popcomms.com";
+}
+
+// Change wp_mail From: name
+
+add_filter( 'wp_mail_from_name', 'my_mail_from_name' );
+  function my_mail_from_name( $name ) {
+  return "Damjan Haylor";
+}
+
 // Prevent default WP JPEG compressions
 
 add_filter('jpeg_quality', function($arg) { return 100; });

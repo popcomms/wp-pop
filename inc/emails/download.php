@@ -1,4 +1,6 @@
-<!doctype html>
+<?php
+
+$html = '<!doctype html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
 
 <head>
@@ -108,7 +110,7 @@
                 <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="vertical-align:top;" width="100%">
                   <tr>
                     <td align="left" style="font-size:0px;padding:10px 25px;word-break:break-word;">
-                      <div style="font-family:sans-serif;font-size:18px;line-height:1;text-align:left;color:#3d3d3d;">Hello {{ name }}, <br /><br /> Here's the link to the download you requested from our website:</div>
+                      <div style="font-family:sans-serif;font-size:18px;line-height:22px;text-align:left;color:#3d3d3d;">Hello {{ name }}, <br /><br /> Here&rsquo;s the link to the download you requested from our website:</div>
                     </td>
                   </tr>
                 </table>
@@ -154,7 +156,7 @@
                 <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="vertical-align:middle;" width="100%">
                   <tr>
                     <td align="left" style="font-size:0px;padding:10px 25px;word-break:break-word;">
-                      <div style="font-family:sans-serif;font-size:18px;font-weight:bold;line-height:1;text-align:left;color:#3d3d3d;">{{ title }}</div>
+                      <div style="font-family:sans-serif;font-size:18px;font-weight:bold;line-height:22px;text-align:left;color:#3d3d3d;">{{ title }}</div>
                     </td>
                   </tr>
                   <tr>
@@ -185,7 +187,7 @@
                         <tbody>
                           <tr>
                             <td style="width:250px;">
-                              <img height="auto" src="https://www.online-image-editor.com//styles/2014/images/example_image.png" style="border:0;display:block;outline:none;text-decoration:none;height:auto;width:100%;font-size:13px;" width="250" />
+                              <img height="auto" src="{{ image }}" style="border:0;display:block;outline:none;text-decoration:none;height:auto;width:100%;font-size:13px;" width="250" />
                             </td>
                           </tr>
                         </tbody>
@@ -235,7 +237,7 @@
                 <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="vertical-align:top;" width="100%">
                   <tr>
                     <td align="left" style="font-size:0px;padding:10px 25px;word-break:break-word;">
-                      <div style="font-family:sans-serif;font-size:18px;line-height:1;text-align:left;color:#3d3d3d;">If you have any questions or an idea you’d like to chat through then please feel free to get in touch, we always like a chat. <br></br> Bye for now! <br /><br /> Damjan Haylor<br />
+                      <div style="font-family:sans-serif;font-size:18px;line-height:22px;text-align:left;color:#3d3d3d;">If you have any questions or an idea you’d like to chat through then please feel free to get in touch, we always like a chat. <br></br> Bye for now! <br /><br /> Damjan Haylor<br />
                         <small style="color: #999; line-height: 2">Managing Director</small>
                       </div>
                     </td>
@@ -258,19 +260,24 @@
           </td>
         </tr>
       </table>
-
+      <![endif]-->
+    <table align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="background:#3d3d3d;background-color:#3d3d3d;width:100%;">
+      <tbody>
+        <tr>
+          <td>
+            <!--[if mso | IE]>
       <table
          align="center" border="0" cellpadding="0" cellspacing="0" class="" style="width:600px;" width="600"
       >
         <tr>
           <td style="line-height:0px;font-size:0px;mso-line-height-rule:exactly;">
       <![endif]-->
-    <div style="background:#3d3d3d;background-color:#3d3d3d;margin:0px auto;max-width:600px;">
-      <table align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="background:#3d3d3d;background-color:#3d3d3d;width:100%;">
-        <tbody>
-          <tr>
-            <td style="direction:ltr;font-size:0px;padding:20px 0;text-align:center;">
-              <!--[if mso | IE]>
+            <div style="margin:0px auto;max-width:600px;">
+              <table align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="width:100%;">
+                <tbody>
+                  <tr>
+                    <td style="direction:ltr;font-size:0px;padding:20px 0;text-align:center;">
+                      <!--[if mso | IE]>
                   <table role="presentation" border="0" cellpadding="0" cellspacing="0">
 
         <tr>
@@ -279,46 +286,50 @@
                class="" style="vertical-align:top;width:600px;"
             >
           <![endif]-->
-              <div class="mj-column-per-100 mj-outlook-group-fix" style="font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;">
-                <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="vertical-align:top;" width="100%">
-                  <tr>
-                    <td align="left" style="font-size:0px;padding:10px 25px;word-break:break-word;">
-                      <div style="font-family:sans-serif;font-size:16px;line-height:1;text-align:left;color:#fafafa;"><strong style="font-size: 18px">POP</strong><br /> 155 Whiteladies Road<br /> Bristol. BS8 2RF</div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td align="left" style="font-size:0px;padding:10px 25px;word-break:break-word;">
-                      <div style="font-family:sans-serif;font-size:16px;line-height:1;text-align:left;color:#333333;"><a href="tel:441173291712" style="color: #fafafa; text-decoration: none"> +44 (0)117 329 1712 </a><br />
-                        <a href="mailto:hello@popcomms.com" style="color: #fafafa; text-decoration: none"> hello@popcomms.com </a><br />
-                        <a href="https://www.linkedin.com/company/popcomms" style="color: #fafafa; text-decoration: none"> Connect on LinkedIn </a><br />
+                      <div class="mj-column-per-100 mj-outlook-group-fix" style="font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;">
+                        <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="vertical-align:top;" width="100%">
+                          <tr>
+                            <td align="left" style="font-size:0px;padding:10px 25px;word-break:break-word;">
+                              <div style="font-family:sans-serif;font-size:16px;line-height:22px;text-align:left;color:#fafafa;"><strong style="font-size: 18px">POP</strong><br /> 155 Whiteladies Road<br /> Bristol. BS8 2RF</div>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td align="left" style="font-size:0px;padding:10px 25px;word-break:break-word;">
+                              <div style="font-family:sans-serif;font-size:16px;line-height:22px;text-align:left;color:#333333;"><a href="tel:441173291712" style="color: #fafafa; text-decoration: none"> +44 (0)117 329 1712 </a><br />
+                                <a href="mailto:hello@popcomms.com" style="color: #fafafa; text-decoration: none"> hello@popcomms.com </a><br />
+                                <a href="https://www.linkedin.com/company/popcomms" style="color: #fafafa; text-decoration: none"> Connect on LinkedIn </a><br />
+                              </div>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td align="left" style="font-size:0px;padding:10px 25px;word-break:break-word;">
+                              <div style="font-family:sans-serif;font-size:16px;line-height:22px;text-align:left;color:#ffffff;"><a href="https://www.popcomms.com/touchscreen-experiences/" style="color:#64ffe3">Touchscreens</a> &emsp;&bull;&emsp; <a href="https://www.popcomms.com/sales-enablement-tools/" style="color:#64ffe3">Sales&nbsp;Enablement</a> &emsp;&bull;&emsp; <a href="https://www.popcomms.com/healthcare-and-pharma/" style="color:#ffff99">Healthcare&nbsp;&amp;&nbsp;Pharma</a> &emsp;&bull;&emsp; <a href="https://www.popcomms.com/built-environment/" style="color:#ffff99">Built&nbsp;Environment</a> &emsp;&bull;&emsp; <a href="https://www.popcomms.com/advanced-manufacturing/" style="color:#ffff99">Advanced&nbsp;Manufacturing</a> &emsp;&bull;&emsp; <a href="https://www.popcomms.com/technology/" style="color:#ffff99">Technology</a></div>
+                            </td>
+                          </tr>
+                        </table>
                       </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td align="left" style="font-size:0px;padding:10px 25px;word-break:break-word;">
-                      <div style="font-family:sans-serif;font-size:16px;line-height:1;text-align:left;color:#ffffff;"><a href="" style="color:#64ffe3">Touchscreens</a> &emsp;&bull;&emsp; <a href="" style="color:#64ffe3">Sales&nbsp;Enablement</a> &emsp;&bull;&emsp; <a href="" style="color:#ffff99">Healthcare&nbsp;&amp;&nbsp;Pharma</a> &emsp;&bull;&emsp; <a href="" style="color:#ffff99">Built&nbsp;Environment</a> &emsp;&bull;&emsp; <a href="" style="color:#ffff99">Advanced&nbsp;Manufacturing</a> &emsp;&bull;&emsp; <a href="" style="color:#ffff99">Technology</a></div>
-                    </td>
-                  </tr>
-                </table>
-              </div>
-              <!--[if mso | IE]>
+                      <!--[if mso | IE]>
             </td>
 
         </tr>
 
                   </table>
                 <![endif]-->
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <!--[if mso | IE]>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <!--[if mso | IE]>
           </td>
         </tr>
       </table>
       <![endif]-->
+          </td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </body>
 
-</html>
+</html>';

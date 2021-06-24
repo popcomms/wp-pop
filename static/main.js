@@ -254,6 +254,7 @@ document.addEventListener("DOMContentLoaded", function() {
             }
           }
           xhr.send(JSON.stringify(data))
+
           setTimeout(() => {
             this.hide()
             this.reset()
@@ -725,12 +726,46 @@ document.addEventListener("DOMContentLoaded", function() {
             }
           }
           xhr.send(JSON.stringify(data))
+
+          const download = {
+            name: this.form.firstName.value,
+            email: this.form.email.value,
+            title: "The Beginners’ Guide to Creating Interactive Touchscreen Experiences",
+            url: 'https://dev.popcomms.com/pop/wp-content/uploads/2021/06/POP_Beginners-guide-to-touchscreens.pdf',
+            image: 'https://dev.popcomms.com/pop/wp-content/uploads/2021/06/POP_Beginners-guide-to-touchscreens.jpg'
+          }
+          this.sendDownload(download)
+
           setTimeout(() => {
             this.step = 1
             this.reset()
           }, 5000)
         }
-      }
+      },
+      sendDownload (data) {
+        const headers = new Headers();
+        headers.append("Content-Type", "application/json");
+
+        const raw = JSON.stringify({
+          "name": data.name,
+          "email": data.email,
+          "title": data.title,
+          "url": data.url,
+          "image": data.image
+        });
+
+        const requestOptions = {
+          method: 'POST',
+          headers: headers,
+          body: raw,
+          redirect: 'follow'
+        };
+
+        fetch("https://dev.popcomms.com/pop/wp-json/pop/v1/download-fulfilment", requestOptions)
+          .then(response => response.text())
+          .then(result => console.log(result))
+          .catch(error => console.log('error', error));
+      },
     },
     created () {
       this.reset()

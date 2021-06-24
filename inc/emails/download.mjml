@@ -1,17 +1,20 @@
 <mjml>
+  <mj-title>
+
+  </mj-title>
   <mj-body>
     <mj-section>
       <mj-column>
-        <mj-text font-size="18px" color="#3d3d3d" font-family="sans-serif">
+        <mj-text line-height="22px" font-size="18px" color="#3d3d3d" font-family="sans-serif">
           Hello {{ name }},
           <br /><br />
-          Here's the link to the download you requested from our website:
+          Here&rsquo;s the link to the download you requested from our website:
         </mj-text>
       </mj-column>
     </mj-section>
     <mj-section background-color="#f4f4f4">
       <mj-column vertical-align="middle">
-        <mj-text font-size="18px" color="#3d3d3d" font-family="sans-serif" font-weight="bold">
+        <mj-text line-height="22px" font-size="18px" color="#3d3d3d" font-family="sans-serif" font-weight="bold">
           {{ title }}
         </mj-text>
         <mj-button font-size="16px" font-family="Helvetica" font-weight="bold" background-color="#ff0088" color="#ffffff" align="left" href="{{ url }}">
@@ -19,12 +22,12 @@
         </mj-button>
       </mj-column>
       <mj-column vertical-align="middle">
-        <mj-image width="280px" src="https://www.online-image-editor.com//styles/2014/images/example_image.png" />
+        <mj-image width="280px" src="{{ image }}" />
       </mj-column>
     </mj-section>
     <mj-section>
       <mj-column>
-        <mj-text font-size="18px" color="#3d3d3d" font-family="sans-serif">
+        <mj-text line-height="22px" font-size="18px" color="#3d3d3d" font-family="sans-serif">
           If you have any questions or an idea you’d like to chat through then please feel free to get in touch, we always like a chat.
           <br></br>
           Bye for now!
@@ -34,15 +37,15 @@
         </mj-text>
       </mj-column>
     </mj-section>
-    <mj-section background-color="#3d3d3d">
+    <mj-section full-width="full-width" background-color="#3d3d3d">
       <mj-column>
-        <mj-text font-size="16px" color="#fafafa" font-family="sans-serif">
+        <mj-text line-height="22px" font-size="16px" color="#fafafa" font-family="sans-serif">
           <strong style="font-size: 18px">POP</strong><br />
           155 Whiteladies Road<br />
           Bristol. BS8 2RF
         </mj-text>
 
-        <mj-text font-size="16px" color="#333" font-family="sans-serif">
+        <mj-text line-height="22px" font-size="16px" color="#333" font-family="sans-serif">
           <a href="tel:441173291712" style="color: #fafafa; text-decoration: none">
             +44 (0)117 329 1712
           </a><br />
@@ -53,20 +56,21 @@
             Connect on LinkedIn
           </a><br />
         </mj-text>
-        <mj-text font-size="16px" color="#fff" font-family="sans-serif">
-          <a href="" style="color:#64ffe3">Touchscreens</a>
+        <mj-text line-height="22px" font-size="16px" color="#fff" font-family="sans-serif">
+          <a href="https://www.popcomms.com/touchscreen-experiences/" style="color:#64ffe3">Touchscreens</a>
           &emsp;&bull;&emsp;
-          <a href="" style="color:#64ffe3">Sales&nbsp;Enablement</a>
+          <a href="https://www.popcomms.com/sales-enablement-tools/" style="color:#64ffe3">Sales&nbsp;Enablement</a>
           &emsp;&bull;&emsp;
-          <a href="" style="color:#ffff99">Healthcare&nbsp;&amp;&nbsp;Pharma</a>
+          <a href="https://www.popcomms.com/healthcare-and-pharma/" style="color:#ffff99">Healthcare&nbsp;&amp;&nbsp;Pharma</a>
           &emsp;&bull;&emsp;
-          <a href="" style="color:#ffff99">Built&nbsp;Environment</a>
+          <a href="https://www.popcomms.com/built-environment/" style="color:#ffff99">Built&nbsp;Environment</a>
           &emsp;&bull;&emsp;
-          <a href="" style="color:#ffff99">Advanced&nbsp;Manufacturing</a>
+          <a href="https://www.popcomms.com/advanced-manufacturing/" style="color:#ffff99">Advanced&nbsp;Manufacturing</a>
           &emsp;&bull;&emsp;
-          <a href="" style="color:#ffff99">Technology</a>
+          <a href="https://www.popcomms.com/technology/" style="color:#ffff99">Technology</a>
         </mj-text>
       </mj-column>
     </mj-section>
   </mj-body>
 </mjml>
+
