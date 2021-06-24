@@ -731,8 +731,8 @@ document.addEventListener("DOMContentLoaded", function() {
             name: this.form.firstName.value,
             email: this.form.email.value,
             title: "The Beginners’ Guide to Creating Interactive Touchscreen Experiences",
-            url: 'https://dev.popcomms.com/pop/wp-content/uploads/2021/06/POP_Beginners-guide-to-touchscreens.pdf',
-            image: 'https://dev.popcomms.com/pop/wp-content/uploads/2021/06/POP_Beginners-guide-to-touchscreens.jpg'
+            url: 'https://www.popcomms.com/pop/wp-content/uploads/2021/06/POP_Beginners-guide-to-touchscreens.pdf',
+            image: 'https://www.popcomms.com/pop/wp-content/uploads/2021/06/POP_Beginners-guide-to-touchscreens.jpg'
           }
           this.sendDownload(download)
 
@@ -761,7 +761,7 @@ document.addEventListener("DOMContentLoaded", function() {
           redirect: 'follow'
         };
 
-        fetch("https://dev.popcomms.com/pop/wp-json/pop/v1/download-fulfilment", requestOptions)
+        fetch("https://www.popcomms.com/pop/wp-json/pop/v1/download-fulfilment", requestOptions)
           .then(response => response.text())
           .then(result => console.log(result))
           .catch(error => console.log('error', error));

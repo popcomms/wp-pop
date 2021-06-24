@@ -23,7 +23,7 @@ function my_acf_init() {
 
 	// check function exists
 	if ( ! function_exists( 'acf_register_block' ) ) {
-			return;
+    return;
 	}
 
 	// Register Blocks
