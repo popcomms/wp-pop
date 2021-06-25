@@ -7,7 +7,7 @@
 		{% if item.children %}
 
     <div
-      class="nav-parent group hidden h-full sm:flex items-center px-6 {{ invert == 1 ? 'text-pop-pink hover:text-pop-mid-gray' : 'text-pop-white hover:text-pop-pink' }} hover:bg-pop-black" style="cursor: default;"
+      class="nav-parent group hidden h-full md:flex items-center px-6 {{ invert == 1 ? 'text-pop-pink hover:text-pop-mid-gray' : 'text-pop-white hover:text-pop-pink' }} hover:bg-pop-black" style="cursor: default;"
     >
       <span class="contrast-el">
         {{ item.title }}
@@ -27,7 +27,7 @@
 
     {% else %}
 
-    <div class="nav-parent group hidden h-full sm:flex items-center cursor-pointer">
+    <div class="nav-parent group hidden h-full md:flex items-center cursor-pointer">
       <a
         class="{{ invert == 1 ? 'text-pop-pink hover:text-pop-mid-gray' : 'text-pop-white hover:text-pop-pink' }} px-6"
         target="{{ item.target }}"
@@ -50,7 +50,7 @@
     v-show="menuActive"
     class="fixed bg-pop-black h-screen w-screen top-0 left-0 opacity-0 pointer-events-none"
   >
-		<div class="px-12 sm:px-32 box-border max-w-5xl w-full h-screen lg:mx-auto">
+		<div class="px-12 md:px-32 box-border max-w-5xl w-full h-screen lg:mx-auto">
 			<div class="h-full w-full">
 				<div class="absolute top-1/3 left-1/2 transform -translate-x-1/2 -translate-y-24 w-full">
 					<transition name="fade">
@@ -62,7 +62,7 @@
 							<svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
 								<path class="fill-current text-pop-white group-hover:text-pop-pink transition-colors" d="M14.5 16C14.5 15.1716 15.1716 14.5 16 14.5L29.5 14.5C30.3284 14.5 31 15.1716 31 16C31 16.8284 30.3284 17.5 29.5 17.5H17.5V29.5C17.5 30.3284 16.8284 31 16 31C15.1716 31 14.5 30.3284 14.5 29.5L14.5 16ZM30.9393 33.0607L14.9393 17.0607L17.0607 14.9393L33.0607 30.9393L30.9393 33.0607Z"/>
 							</svg>
-							<div class="hidden sm:block ">
+							<div class="hidden md:block ">
 								Main menu
 							</div>
 						</div>
@@ -89,7 +89,7 @@
 								</div>
 								<a
                   @click="changeSubMenu('{{ item.title }}')"
-                  class="text-2xl sm:text-5xl leading-tight text-pop-white font-bold"
+                  class="text-2xl md:text-5xl leading-tight text-pop-white font-bold"
                   target="{{ item.target }}"
                   href="{{ item.link }}"
                 >
@@ -99,7 +99,7 @@
 								{% else %}
 								<div class="absolute h-56 w-56 top-1/2 transform -translate-y-1/2 right-0 translate-x-1/2 opacity-0 pointer-events-none"></div>
 								<a
-                  class="text-2xl sm:text-5xl leading-tight text-pop-white font-bold"
+                  class="text-2xl md:text-5xl leading-tight text-pop-white font-bold"
                   target="{{ item.target }}"
                   href="{{ item.link }}"
                 >
@@ -123,7 +123,7 @@
 								<div class="absolute h-56 w-56 top-1/2 transform -translate-y-1/2 right-0 translate-x-1/2 opacity-0 pointer-events-none"></div>
 
 								<a
-                  class="text-2xl sm:text-5xl leading-tight text-pop-white font-bold"
+                  class="text-2xl md:text-5xl leading-tight text-pop-white font-bold"
                   target="{{ child.target }}"
                   href="{{ child.link }}"
                 >
@@ -137,9 +137,9 @@
 						{% endfor %}
 					</transition-group>
 				</div>
-				<div class="absolute bottom-10 left-0 transform sm:translate-x-6 flex">
+				<div class="absolute bottom-10 left-0 transform md:translate-x-6 flex">
 					<a
-            class="text-base sm:text-2xl leading-tight text-pop-white"
+            class="text-base md:text-2xl leading-tight text-pop-white"
             target="_blank"
             href="https://www.linkedin.com"
           >
@@ -148,7 +148,7 @@
 						</svg>
 					</a>
 					<a
-            class="text-base ml-4 sm:text-2xl leading-tight text-pop-white"
+            class="text-base ml-4 md:text-2xl leading-tight text-pop-white"
             target="_blank"
             href="https://www.youtube.com"
           >
@@ -158,7 +158,7 @@
 						</svg>
 					</a>
 					<a
-            class="text-base ml-4 sm:text-2xl leading-tight text-pop-white"
+            class="text-base ml-4 md:text-2xl leading-tight text-pop-white"
             target="_blank"
             href="https://www.instagram.com"
           >
