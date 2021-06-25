@@ -69,7 +69,7 @@ module.exports = {
     // },
     extend: {
       colors: {
-        'pop-white': '#F8F7EE',
+        'pop-white': '#FFFFFF',
         'pop-black': '#2D2D2D',
         'pop-black-dark': '#272727',
         'pop-gray': '#DFDFDF',

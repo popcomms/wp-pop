@@ -1,18 +1,17 @@
 <div class="sm:grid sm:grid-cols-2">
   <div class="hidden sm:block relative" style="padding-bottom: 100%;">
-    <div class="absolute top-0 left-0 w-full h-full bg-no-repeat bg-center bg-cover" style="background-image: url({{ fields.image.url }})"></div>
-    <!-- <img
-      src="{{ fields.image.url }}"
-      class="w-full object-cover inline-block"
-    > -->
+    <div
+      class="absolute top-0 left-0 w-full h-full bg-no-repeat bg-center bg-cover"
+      style="background-image: url({{ fields.image.url }})"
+    ></div>
   </div>
   <div class="flex flex-col">
-    <div class="h-1/2 bg-pop-{{fields.accent_color}} text-pop-white p-6 flex flex-col justify-center">
+    <div class="h-2/5 bg-pop-{{fields.accent_color}} text-pop-white p-6 flex flex-col justify-center">
       <h3 class="font-medium">{{ fields.title }}</h3>
     </div>
-    <div class="h-1/2 flex flex-col justify-between {{ fields.theme == 'dark' ? 'bg-pop-black' : 'bg-pop-white' }}" >
+    <div class="h-3/5 flex flex-col justify-between {{ fields.theme == 'dark' ? 'bg-pop-black' : 'bg-pop-white' }}" >
       <div class="flex items-center h-full p-6 {{ fields.theme == 'dark' ? 'text-pop-white' : 'text-pop-black' }}">
-        <h6 class="font-normal"  style="font-size: 24px;">{{ fields.text }}</h6>
+        {{ fields.text }}
       </div>
       <div
         class="flex justify-end cursor-pointer"
