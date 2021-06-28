@@ -25,5 +25,11 @@ $args = array(
 );
 $context['posts'] = new Timber\PostQuery($args);
 // $context['posts'] = new Timber\PostQuery();
+$cat_args = array(
+  'hide_empty' => true,
+	'orderby'    => 'name',
+	'order'      => 'ASC'
+);
+$context['categories'] = get_categories($cat_args);
 
 Timber::render( $templates, $context );
