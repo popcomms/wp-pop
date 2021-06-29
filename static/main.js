@@ -253,8 +253,8 @@ document.addEventListener("DOMContentLoaded", function() {
           xhr.send(JSON.stringify(data))
 
           setTimeout(() => {
-            this.hide()
-            this.reset()
+            // this.hide()
+            // this.reset()
           }, 5000)
         }
       },
