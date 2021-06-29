@@ -12,7 +12,7 @@ select:-webkit-autofill,
 select:-webkit-autofill::first-line,
 select:-webkit-autofill:hover,
 select:-webkit-autofill:focus {
-  @apply text-xl sm:text-2xl md:text-3xl;
+  @apply text-lg sm:text-2xl md:text-3xl;
 
   caret-color: #F8F7EE;
   box-shadow: 0 0 0 30px #2D2D2D inset !important;
