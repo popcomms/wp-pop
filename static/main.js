@@ -36,9 +36,6 @@ document.addEventListener("DOMContentLoaded", function() {
         show: false
       }
     },
-    computed: {
-
-    },
     methods: {
       validationHighlight (el) {
         if (el === true) {
@@ -188,7 +185,7 @@ document.addEventListener("DOMContentLoaded", function() {
           this.nextStep()
 
           const xhr = new XMLHttpRequest();
-          const url = 'https://api.hsforms.com/submissions/v3/integration/submit/7620391/e9adc62c-c6d2-41ff-83a2-c777407f2dbe'
+          const url = 'https://api.hsforms.com/submissions/v3/integration/submit/7620391/15de7731-0a8d-4220-83a9-807607da5964'
 
           const name = this.form.name.value.split(' ')
           const firstname = name[0]

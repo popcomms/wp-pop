@@ -18,14 +18,14 @@ function pop_enqueue_scripts() {
   );
 	wp_enqueue_script(
     'vue',
-    'https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.min.js', // change to vue.min.js for production
+    'https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.min.js',
     null,
     null,
     true
   );
 	wp_enqueue_script(
     'main',
-    get_template_directory_uri().'/static/main.js?v=0.3',
+    get_template_directory_uri().'/static/main.js?v=0.4',
     array('gsap', 'scrollTrigger', 'vue'),
     true
   );
