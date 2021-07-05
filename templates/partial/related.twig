@@ -10,62 +10,61 @@
         {% endif %}
       </h3>
 
-      <div class="grid grid-cols-1  mb-16 gap-2">
-        {% for post in related %}
-        <a class="block" href="{{ post.link }}">
-          <div class="grid grid-cols-1 sm:grid-cols-2 grid-rows-2 sm:grid-rows-1 border border-gray-200 shadow-md transition-opacity">
-            <div class="aspect-w-4 aspect-h-3 md:aspect-w-1 md:aspect-h-1">
-              {% if post.thumbnail.src %}
-              <img
-                class="object-cover"
-                src="{{ post.thumbnail.src }}"
-                style="font-size: 0"
-              />
-              {% else %}
-              <img
-                class="object-cover"
-                src="{{ theme.link }}/static/images/blogs-bg.png"
-                style="font-size: 0"
-              />
-              {% endif %}
-            </div>
-            <div class="relative flex flex-col items-start sm:justify-center p-6 pb-20">
-              
-              {% if post.type != 'case-studies' %}
-                <div class="my-2 text-pop-purple">
-                  {{ post.date }}
-                </div>
-                <br>
-              {% endif %}
+      {% for post in related %}
+      <a class="block" href="{{ post.link }}">
+        <div class="md:grid grid-cols-1 sm:grid-cols-2 grid-rows-2 sm:grid-rows-1 border border-gray-200 shadow-md transition-opacity mb-8">
+          <div class="relative aspect-w-4 aspect-h-3">
+            {% if post.thumbnail.src %}
+            <img
+              class="absolute top-0 left-0 bottom-0 right-0 object-cover"
+              src="{{ post.thumbnail.src }}"
+              style="font-size: 0"
+            />
+            {% else %}
+            <img
+              class="absolute top-0 left-0 bottom-0 right-0 object-cover"
+              src="{{ theme.link }}/static/images/blogs-bg.png"
+              style="font-size: 0"
+            />
+            {% endif %}
+          </div>
+          <div class="relative flex flex-col items-start sm:justify-center p-6 pb-20">
 
-              <h5 class="font-medium leading-tight">
-                {{ post.title }}
-              </h5>
-
-              {% if post.type != 'case-studies' %}
-                <br>
-                {% include "/templates/partial/archive-author.twig" %}
-              {% endif %}
-              
-              <div class="absolute bottom-0 right-0">
-                {% include "/templates/partial/link.twig" with
-                  {
-                    'link': {
-                      url: post.uid,
-                      text: 'Read',
-                      background_color: 'black',
-                      accent_color: 'yellow',
-                      arrow_color: 'blue',
-                      angle: 45
-                    },
-                  }
-                %}
+            {% if post.type != 'case-studies' %}
+              <div class="text-sm my-2 text-pop-purple">
+                {{ post.date }}
               </div>
+              <br>
+            {% endif %}
+
+            <h5 class="font-medium leading-tight">
+              {{ post.title }}
+            </h5>
+
+            {% if post.type != 'case-studies' %}
+              <br>
+              {% include "/templates/partial/archive-author.twig" %}
+            {% endif %}
+
+            <div class="absolute bottom-0 right-0">
+              {% include "/templates/partial/link.twig" with
+                {
+                  'link': {
+                    url: post.uid,
+                    text: 'Read',
+                    background_color: 'black',
+                    accent_color: 'yellow',
+                    arrow_color: 'blue',
+                    angle: 45
+                  },
+                }
+              %}
             </div>
           </div>
-        </a>
-        {% endfor %}
-      </div>
+        </div>
+      </a>
+      {% endfor %}
+
     </div>
   </div>
 {% endif %}

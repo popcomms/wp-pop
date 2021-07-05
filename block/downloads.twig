@@ -24,17 +24,14 @@
     class="w-full relative"
   >
     <transition name="fade">
-      <div v-show="step !== 1" class="absolute flex flex-col top-0 left-0 w-full h-full shadow-md bg-pop-black" style="z-index: 1;"></div>
+      <div
+        v-show="step !== 1"
+        class="absolute flex flex-col top-0 left-0 w-full h-full shadow-md bg-pop-black"
+        style="z-index: 1;"
+      ></div>
     </transition>
-
-    <div
-      ref="downloadFormStep1"
-    >
-      <!-- v-show="step === 1" -->
-      {% include "partial/forms/download/intro.twig" with
-      {
-        'fields': fields
-      } %}
+    <div ref="downloadFormStep1">
+      {% include "partial/forms/download/intro.twig" with { 'fields': fields } %}
     </div>
     <div
       ref="downloadFormStep2"
@@ -52,22 +49,6 @@
       <div class="text-sm mb-4">2 / 3</div>
       {% include "partial/forms/download/email-company.twig" %}
     </div>
-    <!-- <div
-      ref="downloadFormStep4"
-      v-show="step === 4"
-      class="absolute flex flex-col top-0 left-0 w-full h-full p-3 sm:p-10 bg-pop-black text-pop-white z-10"
-    >
-      <div class="text-sm mb-4">3 / 3</div>
-      {% include "partial/forms/newsletter.twig" %}
-    </div>
-    <div
-      ref="downloadFormStep5"
-      v-show="step === 5"
-      class="flex flex-col absolute top-0 left-0 w-full h-full p-3 sm:p-10 bg-pop-black text-pop-white z-10"
-    >
-      <div class="text-sm mb-4">4 / 3</div>
-      {% include "partial/forms/privacy.twig" %}
-    </div> -->
     <div
       ref="downloadFormStep4"
       v-show="step === 4"

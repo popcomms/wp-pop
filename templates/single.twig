@@ -24,7 +24,10 @@
 		{# {% include "/templates/partial/post-hero.twig" with { 'fields': hero } %} #}
 
     <div class="relative container-narrow md:-mt-48 bg-pop-white">
-      <div class="absolute  top-1/2 left-1/2 transform -translate-x-1/2 bg-pop-white h-full" style="max-width: 100vw; width: calc(100vw - 8px)"></div>
+      <div
+        class="absolute  top-1/2 left-1/2 transform -translate-x-1/2 bg-pop-white h-full"
+        style="max-width: 100vw; width: calc(100vw - 8px)"
+      ></div>
 
       {% for path in icons %}
         <img
@@ -51,19 +54,20 @@
       class="post-content pop-container post-type-{{ post.post_type }} bg-pop-white"
     >
 			<div class="relative py-12" >
-				<div id="content" class="article-body pop-container my-12">
+				<div
+          id="content"
+          class="entry-content pop-container md:my-12"
+        >
 					<div class="container-narrow text-pop-{{ content.theme == 'black' ? 'white' : 'black' }}">
 						{{ post.content }}
 					</div>
 				</div>
 			</div>
-      
-      
-      
+
       {% include "/templates/partial/author.twig" %}
       {% include "/templates/partial/single-categories.twig" %}
       {% include "/templates/partial/related.twig" %}
-      
+
 		</article>
 	</div>
 {% endblock %}
