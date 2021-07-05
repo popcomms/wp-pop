@@ -2,7 +2,7 @@
   Brill! Are you a human?
   Prove it by simply entering the answer to <span class="text-pop-yellow" v-html="captcha.a"></span> <span class="text-pop-yellow">+</span> <span class="text-pop-yellow" v-html="captcha.b"></span>
 </div>
-<div class="grid grid-cols-2 auto-cols-auto space-x-4 my-4">
+<div class="grid grid-cols-1 sm:grid-cols-2 auto-cols-auto sm:space-x-4 my-4">
   <div>
     {% include "/templates/partial/input.twig" with
       {
@@ -22,7 +22,7 @@
   </div>
   <div class="pt-2">
     <div
-      class="flex justify-center cursor-pointer"
+      class="flex justify-start sm:justify-center cursor-pointer"
       @click="submit"
     >
       <div class="bg-pop-purple text-pop-white m-0 px-4 py-3 h-12 leading-0">
@@ -42,11 +42,7 @@
 </div>
 <div class="form-text flex mt-10 opacity-0">
   <div>
-    By submitting this form you agree to:<br>
-    <ol class="m-3 pl-4" style="list-style-type: lower-roman; list-style-position: outside">
-      <li>The POPcomms <a href="{{ site.url }}/privacy-policy" target="_blank">Privacy Policy</a></li>
-      <li>Receive occasional, valuable information regarding POPcomms and our services. You may unsubscribe from these communications at any time.</li>
-    </ol>
+    By submitting this form you agree to POPcomms <a class="text-pop-pink underline" href="{{ site.url }}/privacy-policy" target="_blank">Privacy Policy</a>
   </div>
 </div>
 <div class="hidden sm:block absolute top-0 right-0 w-1/2 pointer-events-none">

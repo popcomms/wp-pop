@@ -4,6 +4,12 @@
 
 {% if not is_preview %}
   {% if fields.show_block %}
+  <div class="sm:hidden block relative" style="padding-bottom: 100%;">
+    <div
+      class="absolute top-0 left-0 w-full h-full bg-no-repeat bg-center bg-cover"
+      style="background-image: url({{ fields.image.url }})"
+    ></div>
+  </div>
   <div
   inline-template
   is="download-form"
@@ -24,20 +30,8 @@
         style="z-index: 1;"
       ></div>
     </transition>
-<<<<<<< Updated upstream
-    <div
-      ref="downloadFormStep1"
-    >
-      <!-- v-show="step === 1" -->
-      {% include "partial/forms/download/intro.twig" with
-      {
-        'fields': fields
-      } %}
-=======
-
     <div ref="downloadFormStep1">
       {% include "partial/forms/download/intro.twig" with { 'fields': fields } %}
->>>>>>> Stashed changes
     </div>
     <div
       ref="downloadFormStep2"
