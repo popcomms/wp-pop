@@ -16,8 +16,7 @@
   }
 
   strong {
-    @apply font-bold;
-    font-weight: bold;
+    @apply font-semibold;
   }
 
   ul li {
@@ -150,39 +149,39 @@
     }
   }
 
-  /*@media only screen and (min-width: 1024px) {
+  @media only screen and (min-width: 1024px) {
     h1,
     .h1 {
-      font-size: 64px;
+      @apply text-5xl;
     }
 
     h2,
     .h2 {
-      font-size: 48px;
+      @apply text-4xl;
     }
 
     h3,
     .h3 {
-      font-size: 36px;
+      @apply text-3xl;
     }
 
     h4,
     .h4 {
-
+      @apply text-2xl;
     }
 
     h5,
     .h5 {
-      font-size: 28px;
+      @apply text-xl;
     }
 
     h6,
     .h6 {
-
+      @apply text-lg;
     }
   }
 
-  @media only screen and (min-width: 1280px) {
+  /*@media only screen and (min-width: 1280px) {
     h1,
     .h1 {
       font-size: 64px;
@@ -254,7 +253,39 @@
     line-height: 140%;
   } */
 
+  /* --------------------
+  Tables
+  -------------------- */
 
+  table {
+    @apply min-w-full divide-y divide-gray-200;
+    thead {
+      @apply bg-gray-50;
+      th {
+        @apply px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider;
+      }
+      @media screen and (max-width: 640px) {
+        th {
+          @apply block;
+        }
+      }
+    }
+    tbody {
+      @apply divide-y divide-gray-200;
+      td {
+        @apply px-6 py-4;
+      }
+      @media screen and (max-width: 640px) {
+        td {
+          @apply block;
+        }
+      }
+    }
+  }
+
+  article table {
+    @apply my-12;
+  }
 
   .text-block img {
     @apply w-full;
@@ -272,9 +303,12 @@
     }
   }
 
+  /* --------------------
+    Blockquotes
+  -------------------- */
+
   blockquote {
     @apply my-4 px-8 border-l-4 border-pop-black border-opacity-50;
-
     p {
       @apply leading-tight;
     }
@@ -283,6 +317,10 @@
   hr {
     @apply my-6 border-t;
   }
+
+  /* --------------------
+    Containers
+  -------------------- */
 
   .container-banner {
     @apply px-4 xs:px-10 md:px-0 mx-auto;
@@ -295,8 +333,7 @@
   }
 
   .container-narrow {
-    @apply px-4 xs:px-10 md:px-0 md:mx-auto xs:mb-20 sm:mb-0;
-    max-width: 985px;
+    @apply w-full max-w-5xl px-6 md:mx-auto xs:mb-20 sm:mb-0;
   }
 
   .container div > .container-narrow ~ .container-narrow {
@@ -308,49 +345,15 @@
   }
 
   .container-wide {
-    @apply md:px-0 md:mx-auto;
-    max-width: 1050px;
+    @apply w-full max-w-full xl:max-w-7xl px-6 md:mx-auto;
   }
+
+  /* --------------------
+    WP Blocks
+  -------------------- */
 
   .wp-block-video {
     @apply px-4 xs:px-10 md:px-0 md:mx-auto mb-40 mt-20 shadow-md !important;
     max-width: 985px;
-  }
-
-  input::-webkit-input-placeholder { /* Chrome/Opera/Safari */
-    color: white;
-  }
-
-  input::-moz-placeholder { /* Firefo 19+ */
-    color: white;
-  }
-
-  input:-ms-input-placeholder { /* IE 10+ */
-    color: white;
-  }
-
-  input:-moz-placeholder { /* Firefox 18- */
-    color: white;
-  }
-
-  input:focus,
-  textarea:focus,
-  select:focus {
-    outline: none;
-  }
-
-  .fade-enter-active,
-  .fade-leave-active {
-    transition: opacity 0.5s;
-  }
-
-  .fade-enter,
-  .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
-    opacity: 0;
-  }
-
-  .fade-enter-to,
-  .fade-leave {
-    opacity: 1;
   }
 }

@@ -15,8 +15,12 @@
 @import 'nav.css';
 @import 'logos.css';
 @import 'post-hero.css';
-@import 'downloads.css';
 @import 'wp-colors.css';
 @import 'forms.css';
 @import 'search.css';
 @import 'blog.css';
+<<<<<<< Updated upstream
+=======
+@import 'square-grid.css';
+@import 'animations.css';
+>>>>>>> Stashed changes

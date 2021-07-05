@@ -1,3 +1,29 @@
+/* --------------------
+  Forms
+-------------------- */
+
+input::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  color: white;
+}
+
+input::-moz-placeholder { /* Firefo 19+ */
+  color: white;
+}
+
+input:-ms-input-placeholder { /* IE 10+ */
+  color: white;
+}
+
+input:-moz-placeholder { /* Firefox 18- */
+  color: white;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+}
+
 .input-box input:-internal-autofill-selected,
 .input-box input:-internal-autofill-previewed,
 .input-box input:-webkit-autofill,
@@ -12,9 +38,15 @@ select:-webkit-autofill,
 select:-webkit-autofill::first-line,
 select:-webkit-autofill:hover,
 select:-webkit-autofill:focus {
+<<<<<<< Updated upstream
   @apply text-xl sm:text-2xl md:text-3xl;
 
+=======
+  @apply text-lg sm:text-2xl md:text-3xl;
+>>>>>>> Stashed changes
   caret-color: #F8F7EE;
   box-shadow: 0 0 0 30px #2D2D2D inset !important;
   -webkit-text-fill-color: #F8F7EE !important;
 }
+
+
