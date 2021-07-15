@@ -7,7 +7,7 @@
 		{% if item.children %}
 
     <div
-      class="nav-parent group hidden h-full md:flex items-center px-6 {{ invert == 1 ? 'text-pop-pink hover:text-pop-mid-gray' : 'text-pop-white hover:text-pop-pink' }} hover:bg-pop-black" style="cursor: default;"
+      class="nav-parent group hidden h-full md:flex items-center py-2 px-6 {{ invert == 1 ? 'text-pop-pink hover:text-pop-mid-gray' : 'text-pop-white hover:text-pop-pink' }} hover:bg-pop-black" style="cursor: default;"
     >
       <span class="contrast-el">
         {{ item.title }}
@@ -15,7 +15,7 @@
       <div class="nav-child absolute top-full left-0 flex-col w-max group-hover:bg-pop-black py-2">
         {% for child in item.children %}
           <a
-            class="text-pop-white hover:text-pop-pink px-6 cursor-pointer"
+            class="text-pop-white hover:text-pop-pink py-1 px-6 cursor-pointer"
             target="{{ child.target }}"
             href="{{ child.link }}"
           >
@@ -29,7 +29,7 @@
 
     <div class="nav-parent group hidden h-full md:flex items-center cursor-pointer">
       <a
-        class="{{ invert == 1 ? 'text-pop-pink hover:text-pop-mid-gray' : 'text-pop-white hover:text-pop-pink' }} px-6"
+        class="{{ invert == 1 ? 'text-pop-pink hover:text-pop-mid-gray' : 'text-pop-white hover:text-pop-pink' }} py-1 px-6"
         target="{{ item.target }}"
         href="{{ item.link }}"
       >
