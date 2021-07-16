@@ -7,9 +7,11 @@
 #}
 {% set gradient_color = (fields.theme == 'white' ? '#FFF' : '#000') %}
 
-<div class="relative h-screen overflow-hidden flex flex-column items-end" >
+<div
+  class="relative w-full h-screen overflow-hidden flex flex-column items-end"
+>
   <div
-    class="contrast-bg absolute top-0 left-0 w-full h-full bg-center bg-cover no-repeat"
+    class=" fixed top-0 left-0 w-full h-screen contrast-bg bg-center bg-cover no-repeat"
     style="background-image: url({{ post.thumbnail.src }});"
   >
     <!-- Radial -->

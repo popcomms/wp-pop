@@ -323,7 +323,7 @@
   -------------------- */
 
   .container-banner {
-    @apply px-4 xs:px-6  mx-auto;
+    @apply px-0 sm:px-6  mx-auto;
   }
 
   @media (min-width: 985px) {
