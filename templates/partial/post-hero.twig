@@ -35,7 +35,7 @@
     </div>
   </div>
 
-  <div class="container-banner flex flex-col justify-between z-10 h-3/4 sm:h-1/2 bg-pop-{{fields.bg_color}}">
+  <div class="container-banner flex flex-col justify-between z-10 h-3/4 sm:h-1/2 w-full  bg-pop-{{fields.bg_color}}">
     {% if fields.icons|length > 0 %}
       <div class="flex">
         {% for item in fields.icons %}
@@ -44,7 +44,7 @@
       </div>
     {% endif %}
 
-    <h1 class="px-8 flex-grow flex items-center text-pop-{{fields.title_color}}">
+    <h1 class="px-8 flex-grow flex items-center text-pop-{{fields.title_color}} font-black text-4xl sm:text-7xl">
       {{ fields.title != null ? fields.title : post.title }}
     </h1>
 

@@ -1,5 +1,5 @@
 module.exports = {
-  purge: [],
+  // purge: [],
   darkMode: false, // or 'media' or 'class'
   theme: {
     screens: {
@@ -23,7 +23,10 @@ module.exports = {
       '3xl': '2.25rem',
       '4xl': '2.625rem',
       '5xl': '3.5rem',
-      '6xl': '4rem'
+      '6xl': '4rem',
+      '7xl': '4.5rem',
+      '8xl': '6rem',
+      '9xl': '8rem',
     },
     order: {
       first: '-9999',

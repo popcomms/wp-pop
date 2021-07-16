@@ -1,42 +1,42 @@
 .pattern.polka-blue {
   background-image: radial-gradient(circle, #00f 5%, transparent 5%), radial-gradient(circle, #00f 5%, transparent 5%);
-  background-size: 20px 20px;
+  background-size: 10px 10px;
   background-position: 0 0, 0 0;
 }
 
 .pattern.polka-pink {
   background-image: radial-gradient(circle, #f1f 5%, transparent 5%), radial-gradient(circle, #f1f 5%, transparent 5%);
-  background-size: 20px 20px;
+  background-size: 10px 10px;
   background-position: 0 0, 0 0;
 }
 
 .pattern.polka-green {
   background-image: radial-gradient(circle, #64FFE3 5%, transparent 5%), radial-gradient(circle, #64FFE3 5%, transparent 5%);
-  background-size: 20px 20px;
+  background-size: 10px 10px;
   background-position: 0 0, 0 0;
 }
 
 .pattern.polka-yellow {
   background-image: radial-gradient(circle, #FFFF99 5%, transparent 5%), radial-gradient(circle, #FFFF99 5%, transparent 5%);
-  background-size: 20px 20px;
+  background-size: 10px 10px;
   background-position: 0 0, 0 0;
 }
 
 .pattern.polka-purple {
   background-image: radial-gradient(circle, #6F62FF 5%, transparent 5%), radial-gradient(circle, #6F62FF 5%, transparent 5%);
-  background-size: 20px 20px;
+  background-size: 10px 10px;
   background-position: 0 0, 0 0;
 }
 
 .pattern.polka-navy {
   background-image: radial-gradient(circle, #212363 5%, transparent 5%), radial-gradient(circle, #212363 5%, transparent 5%);
-  background-size: 20px 20px;
+  background-size: 10px 10px;
   background-position: 0 0, 0 0;
 }
 
 .pattern.polka-gray {
   background-image: radial-gradient(circle, #8E8E8E 5%, transparent 5%), radial-gradient(circle, #8E8E8E 5%, transparent 5%);
-  background-size: 20px 20px;
+  background-size: 10px 10px;
   background-position: 0 0, 0 0;
 }
 
