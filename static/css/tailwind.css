@@ -323,12 +323,12 @@
   -------------------- */
 
   .container-banner {
-    @apply px-4 xs:px-10 md:px-0 mx-auto;
+    @apply px-4 xs:px-6  mx-auto;
   }
 
   @media (min-width: 985px) {
     .container-banner {
-      width: 985px;
+      max-width: 80rem;
     }
   }
 
@@ -345,7 +345,7 @@
   }
 
   .container-wide {
-    @apply w-full max-w-full xl:max-w-7xl px-6 md:mx-auto;
+    @apply w-full max-w-7xl px-6 md:mx-auto;
   }
 
   /* --------------------
