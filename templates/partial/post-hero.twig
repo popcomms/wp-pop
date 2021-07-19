@@ -11,17 +11,10 @@
   class="relative w-full h-screen overflow-hidden flex flex-column items-end"
 >
   <div
-    class=" fixed top-0 left-0 w-full h-screen contrast-bg bg-center bg-cover no-repeat"
+    class="fixed top-0 left-0 w-full h-screen contrast-bg bg-center bg-cover no-repeat"
     style="background-image: url({{ post.thumbnail.src }});"
   >
-    <!-- Radial -->
-    <!-- <div class="absolute top-0 left-0 w-full h-full" style="background: radial-gradient(50% 50% at 50% 50%, transparent {{ fields.overlay_start }}%, {{ gradient_color }} {{ fields.overlay_end }}%"></div> -->
-    <!-- Square -->
-    {# <div class="absolute top-0 left-0 w-full h-1/2" style="background: linear-gradient(0deg, transparent {{ fields.overlay_start }}%, {{ gradient_color }} {{ fields.overlay_end }}%);"></div>
-    <div class="absolute bottom-0 left-0 w-full h-1/2" style="background: linear-gradient(180deg, transparent {{ fields.overlay_start }}%, {{ gradient_color }} {{ fields.overlay_end }}%);"></div>
-    <div class="absolute top-0 left-0 w-1/2 h-full" style="background: linear-gradient(270deg, transparent {{ fields.overlay_start }}%, {{ gradient_color }} {{ fields.overlay_end }}%);"></div>
-    <div class="absolute bottom-0 right-0 w-1/2 h-full" style="background: linear-gradient(90deg, transparent {{ fields.overlay_start }}%, {{ gradient_color }} {{ fields.overlay_end }}%);"></div>  #}
-    <!-- FLAT -->
+
     <div class="absolute top-0 left-0 w-full h-full opacity-{{ fields.overlay_opacity }} bg-{{fields.overlay_color }}"></div>
 
     <div class="relative h-full w-full overflow-hidden">
