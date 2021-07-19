@@ -16,57 +16,59 @@
     {% set theme_text_color = 'text-pop-white' %}
   {% endif %}
 
-  <div class="container-wide block-container {{ fields.show_bg ? theme_bg_color ~ ' ' ~ theme_border_color : '' }} md:shadow-md md:box-content">
-    <div class="relative">
-
-      <div class="z-10 absolute bottom-0 right-0 sm:bottom-auto sm:top-0 sm:left-0 sm:transform sm:-translate-y-full">
-        {% if fields.show_button %}
-          {% include "/templates/partial/link.twig" with
-            {
-              'link': fields.button.link,
-            }
-          %}
-        {% endif %}
+  <div class="container-wide block-container {{ fields.show_bg ? theme_bg_color ~ ' ' ~ theme_border_color : '' }}">
+    <div class="md:shadow-md">
+      <div class="relative ">
+  
+        <div class="text-8xl z-10 absolute bottom-0 right-0 sm:bottom-auto sm:top-0 sm:left-0 sm:transform sm:-translate-y-full">
+          {% if fields.show_button %}
+            {% include "/templates/partial/link.twig" with
+              {
+                'link': fields.button.link,
+              }
+            %}
+          {% endif %}
+        </div>
+        {% include "/templates/partial/component-title.twig" with
+          {
+            'title': fields.title,
+            'subtitle': fields.subtitle,
+            'theme_text_color': theme_text_color,
+            'title_color': fields.title_color,
+            'pattern': fields.pattern.type,
+            'pattern_color': fields.pattern.color,
+            'pattern_opacity': fields.pattern.opacity
+          }
+        %}
       </div>
-      {% include "/templates/partial/component-title.twig" with
-        {
-          'title': fields.title,
-          'subtitle': fields.subtitle,
-          'theme_text_color': theme_text_color,
-          'title_color': fields.title_color,
-          'pattern': fields.pattern.type,
-          'pattern_color': fields.pattern.color,
-          'pattern_opacity': fields.pattern.opacity
-        }
-      %}
-    </div>
-    <div class="problems-list relative {{ fields.show_bg ? theme_bg_color : '' }} ">
-      {% for item in fields.problems %}
-          <a
-            href="{{ item.link }}"
-            class="problems-list__item relative flex flex-col sm:flex-row sm:justify-start items-start sm:items-center sm:mt-6 border-pop-{{ fields.accent_color}} {{ loop.last ? '' : 'border-b-1' }}"
-          >
-            <div class="problems-list__item-bg absolute w-full h-full bg-pop-{{ fields.accent_color }}"></div>
-            <p class="mb-0 sm:mb-auto mt-5 sm:mt-auto px-6 {{ theme_text_color }}">0{{ loop.index }}</p>
-            <!-- <p class="problems-list__item-number block sm:hidden absolute -top-6 left-6 opacity-30 text-6xl text-pop-{{ fields.accent_color }} p-0 m-0">0{{ loop.index }}</p> -->
-
-            <div class="p-6 pt-0 pb-1 sm:pl-12 sm:py-8 m-0 text-xl font-medium {{ theme_text_color }}">
-              {{ item.text }}
-            </div>
-            <div class="hidden sm:block ml-auto px-6 z-10">
-              <svg width="53" height="54" viewBox="0 0 53 54" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <line x1="0.353553" y1="0.646447" x2="52.3536" y2="52.6464" stroke="{{ theme == 'light' ? 'black' : 'white' }}"/>
-                <line x1="52.5" y1="1" x2="52.5" y2="53" stroke="{{ theme == 'light' ? 'black' : 'white' }}"/>
-                <line x1="52" y1="53.5" x2="6" y2="53.5" stroke="{{ theme == 'light' ? 'black' : 'white' }}"/>
-              </svg>
-            </div>
-            <div class="block sm:hidden ml-6 mb-5 w-12 h-12 p-3 bg-pop-{{ fields.accent_color }}">
-              <svg class="" width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path class="fill-current origin-center transform rotate-45 {{ theme_bg_color }}" d="M13.0607 0.625645C12.4749 0.0398579 11.5251 0.0398579 10.9393 0.625645L1.3934 10.1716C0.807611 10.7574 0.807611 11.7071 1.3934 12.2929C1.97919 12.8787 2.92893 12.8787 3.51472 12.2929L12 3.80762L20.4853 12.2929C21.0711 12.8787 22.0208 12.8787 22.6066 12.2929C23.1924 11.7071 23.1924 10.7574 22.6066 10.1716L13.0607 0.625645ZM13.5 24.3137V1.6863H10.5V24.3137H13.5Z" fill="#3A3EAB"/>
-              </svg>
-            </div>
-          </a>
-      {% endfor %}
+      <div class="problems-list relative {{ fields.show_bg ? theme_bg_color : '' }} ">
+        {% for item in fields.problems %}
+            <a
+              href="{{ item.link }}"
+              class="problems-list__item relative flex flex-col sm:flex-row sm:justify-start items-start sm:items-center border-pop-{{ fields.accent_color}} {{ loop.last ? '' : 'border-b-1' }}"
+            >
+              <div class="problems-list__item-bg absolute w-full h-full bg-pop-{{ fields.accent_color }}"></div>
+              <p class="mb-0 sm:mb-auto mt-5 sm:mt-auto px-6 {{ theme_text_color }}">0{{ loop.index }}</p>
+              <!-- <p class="problems-list__item-number block sm:hidden absolute -top-6 left-6 opacity-30 text-6xl text-pop-{{ fields.accent_color }} p-0 m-0">0{{ loop.index }}</p> -->
+  
+              <div class="p-6 pt-0 pb-1 sm:pl-12 sm:py-8 m-0 text-xl font-medium {{ theme_text_color }}">
+                {{ item.text }}
+              </div>
+              <div class="hidden sm:block ml-auto px-6 z-10">
+                <svg width="53" height="54" viewBox="0 0 53 54" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <line x1="0.353553" y1="0.646447" x2="52.3536" y2="52.6464" stroke="{{ theme == 'light' ? 'black' : 'white' }}"/>
+                  <line x1="52.5" y1="1" x2="52.5" y2="53" stroke="{{ theme == 'light' ? 'black' : 'white' }}"/>
+                  <line x1="52" y1="53.5" x2="6" y2="53.5" stroke="{{ theme == 'light' ? 'black' : 'white' }}"/>
+                </svg>
+              </div>
+              <div class="block sm:hidden ml-6 mb-5 w-12 h-12 p-3 bg-pop-{{ fields.accent_color }}">
+                <svg class="" width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path class="fill-current origin-center transform rotate-45 {{ theme_bg_color }}" d="M13.0607 0.625645C12.4749 0.0398579 11.5251 0.0398579 10.9393 0.625645L1.3934 10.1716C0.807611 10.7574 0.807611 11.7071 1.3934 12.2929C1.97919 12.8787 2.92893 12.8787 3.51472 12.2929L12 3.80762L20.4853 12.2929C21.0711 12.8787 22.0208 12.8787 22.6066 12.2929C23.1924 11.7071 23.1924 10.7574 22.6066 10.1716L13.0607 0.625645ZM13.5 24.3137V1.6863H10.5V24.3137H13.5Z" fill="#3A3EAB"/>
+                </svg>
+              </div>
+            </a>
+        {% endfor %}
+      </div>
     </div>
   </div>
 {% endif %}
