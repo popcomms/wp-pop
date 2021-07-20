@@ -4,19 +4,20 @@ body::-webkit-scrollbar,
   width: 8px;
   overflow: visible;
   display: block !important;
+  @apply bg-black;
 }
 
 html::-webkit-scrollbar-track,
 body::-webkit-scrollbar-track {
-  @apply bg-pop-gray;
+  @apply bg-none;
 }
 
 html::-webkit-scrollbar-thumb,
 body::-webkit-scrollbar-thumb {
-  @apply bg-pop-pink;
+  @apply bg-pop-pink rounded;
 }
 
 html::-webkit-scrollbar-thumb:window-inactive,
 body::-webkit-scrollbar-thumb:window-inactive {
-  @apply bg-pop-pink;
+  @apply bg-pop-pink rounded;
 }

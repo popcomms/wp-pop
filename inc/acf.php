@@ -3,6 +3,10 @@
 function my_acf_block_render_callback( $block, $content = '', $is_preview = false ) {
 	$context = Timber::context();
 
+  // Regular 'ol Post stuff
+  $timber_post     = new Timber\Post();
+  $context['post'] = $timber_post;
+
 	// Store block values.
 	$context['block'] = $block;
 
@@ -29,23 +33,23 @@ function my_acf_init() {
 	// Register Blocks
 
 	acf_register_block(array(
-		'name'				=> 'page-hero',
-		'title'				=> __('Page Hero'),
-		'description'		=> __('A custom hero block.'),
+		'name'				    => 'page-hero',
+		'title'				    => __('Page Hero'),
+		'description'		  => __('A custom hero block.'),
 		'render_callback'	=> 'my_acf_block_render_callback',
-		'category'			=> 'layout',
-		'icon'				=> 'cover-image',
-		'keywords'			=> array( 'hero' ),
+		'category'			  => 'layout',
+		'icon'				    => 'cover-image',
+		'keywords'			  => array( 'hero' ),
 	));
 
 	acf_register_block(array(
-		'name'				=> 'page-video-hero',
-		'title'				=> __('Page Video Hero'),
-		'description'		=> __('A custom video-hero block.'),
+		'name'				    => 'page-video-hero',
+		'title'				    => __('Page Video Hero'),
+		'description'		  => __('A custom video-hero block.'),
 		'render_callback'	=> 'my_acf_block_render_callback',
-		'category'			=> 'layout',
-		'icon'				=> 'cover-image',
-		'keywords'			=> array( 'hero' ),
+		'category'			  => 'layout',
+		'icon'				    => 'cover-image',
+		'keywords'		   	=> array( 'hero' ),
 	));
 
 	// acf_register_block(array(
@@ -60,13 +64,13 @@ function my_acf_init() {
 
 	// Pop Container
 	acf_register_block(array(
-		'name'				=> 'container',
-		'title'				=> __('Container'),
-		'description'		=> __('A custom container block.'),
+		'name'				    => 'container',
+		'title'				    => __('Container'),
+		'description'		  => __('A custom container block.'),
 		'render_callback'	=> 'my_acf_block_render_callback',
-		'category'			=> 'layout',
-		'icon'				=> 'align-full-width',
-		'keywords'			=> array( 'container' ),
+		'category'			  => 'layout',
+		'icon'				    => 'align-full-width',
+		'keywords'			  => array( 'container' ),
 	));
 
 	// Sub Container

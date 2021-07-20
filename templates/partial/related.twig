@@ -1,6 +1,6 @@
 {% if related|length > 0 %}
   <div class="py-20 bg-pop-{{ content.theme == 'black' ? 'black' : 'white' }}">
-    <div class="container-narrow border-t border-gray-300 text-pop-{{ content.theme == 'black' ? 'white' : 'black' }}">
+    <div class="container-wide border-t border-gray-300 text-pop-{{ content.theme == 'black' ? 'white' : 'black' }}">
 
       <h3 class="my-12">
         {% if post.type == 'case-studies' %}
@@ -12,7 +12,7 @@
 
       {% for post in related %}
       <a class="block" href="{{ post.link }}">
-        <div class="md:grid grid-cols-1 sm:grid-cols-2 grid-rows-2 sm:grid-rows-1 border border-gray-200 shadow-md transition-opacity mb-8">
+        <article class="md:grid grid-cols-1 sm:grid-cols-2 grid-rows-2 sm:grid-rows-1 border border-gray-200 shadow-md transition-opacity mb-8">
           <div class="relative aspect-w-4 aspect-h-3">
             {% if post.thumbnail.src %}
             <img
@@ -37,9 +37,9 @@
               <br>
             {% endif %}
 
-            <h3 class="font-medium leading-tight">
+            <h4 class="text-xl font-medium leading-tight">
               {{ post.title }}
-            </h3>
+            </h4>
 
             {% if post.type != 'case-studies' %}
               <br>
@@ -61,7 +61,7 @@
               %}
             </div>
           </div>
-        </div>
+        </article>
       </a>
       {% endfor %}
 

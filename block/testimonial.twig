@@ -15,15 +15,15 @@
           <path class="fill-current text-pop-pink" d="M19.9651 43.0856H0.674805L18.8304 0.155334H31.1232L19.9651 43.0856ZM50.6026 43.0856H31.3123L49.4678 0.155334H61.7607L50.6026 43.0856Z" fill="black"/>
         </svg>
       </div>
-      <h3 class="mb-6">
+      <div class="text-xl md:text-2xl mb-6 leading-tight">
         {{ fields.testimonial }}
-      </h3>
+      </div>
     </div>
     {% if fields.quotee|length > 0 %}
-      <h6 class="font-normal">
+      <div class="font-normal">
         <!-- One long line only way to remove space before comma -->
         <span class="font-bold">{{ fields.quotee }}</span>{% if fields.quotee_role|length > 0 %}<span class="inline italic">, {{ fields.quotee_role }}</span>{% endif %}
-      </h6>
+      </div>
     {% endif %}
   </div>
 {% endif %}

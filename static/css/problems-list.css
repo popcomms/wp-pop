@@ -1,15 +1,12 @@
 .problems-list {
   &__item {
-    * {
-      @apply text-xl;
-    }
 
     &-number {
       font-size: 5rem !important;
     }
 
     strong {
-      @apply font-bold;
+      @apply font-semibold;
     }
 
     svg {

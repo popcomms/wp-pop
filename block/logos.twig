@@ -4,7 +4,7 @@
 
 {% if not is_preview %}
   <div class="container-wide" >
-    <div class="md:border-16 md:{{ theme == 'dark' ? 'border-pop-black' : 'border-pop-white'}} {{ theme_bg_color }} md:shadow-md md:box-content">
+    <div class=" {{ theme_bg_color }} md:box-content">
       {% include "/templates/partial/component-title.twig" with
         {
           'title': fields.title,
@@ -16,7 +16,7 @@
           'pattern_opacity': fields.pattern.opacity
         }
       %}
-      <div class="relative grid grid-cols-2 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-3 items-center justify-start {{ theme == 'dark' ? 'bg-pop-black' : 'bg-pop-white'}}">
+      <div class="relative grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-1 sm:gap-3 items-center justify-start {{ theme == 'dark' ? 'bg-pop-black' : 'bg-pop-white'}}">
         <!-- grid grid-flow-col grid-cols-4 gap-0.5 -->
         {% for item in fields.logos %}
           <div class="{{ theme == 'dark' ? 'logos-light' : 'logos-dark'}} p-4 lg:p-6 h-full w-full flex justify-center items-center">

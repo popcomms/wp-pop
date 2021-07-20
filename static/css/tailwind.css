@@ -13,6 +13,9 @@
     height: 100%;
     width: 100%;
     margin: 0;
+    @media only screen and (min-width: 1024px) {
+      font-size: 21px;
+    }
   }
 
   p {
@@ -21,7 +24,7 @@
   }
 
   strong {
-    @apply font-semibold;
+    @apply font-bold;
   }
 
   ul li {
@@ -52,7 +55,7 @@
   h4, .h4,
   h5, .h5,
   h6, .h6 {
-    @apply font-semibold;
+    @apply font-bold;
     @apply leading-tight;
   }
 
@@ -119,10 +122,7 @@
     }
   } */
 
-  @media only screen and (min-width: 768px) {
-    p {
-      @apply text-lg;
-    }
+  @media only screen and (min-width: 1024px) {
     h1,
     .h1 {
       @apply text-4xl;
@@ -154,37 +154,6 @@
     }
   }
 
-  @media only screen and (min-width: 1024px) {
-    h1,
-    .h1 {
-      @apply text-5xl;
-    }
-
-    h2,
-    .h2 {
-      @apply text-4xl;
-    }
-
-    h3,
-    .h3 {
-      @apply text-3xl;
-    }
-
-    h4,
-    .h4 {
-      @apply text-2xl;
-    }
-
-    h5,
-    .h5 {
-      @apply text-xl;
-    }
-
-    h6,
-    .h6 {
-      @apply text-lg;
-    }
-  }
 
   /*@media only screen and (min-width: 1280px) {
     h1,
@@ -338,7 +307,7 @@
   }
 
   .container-narrow {
-    @apply w-full max-w-5xl px-6 md:mx-auto xs:mb-20 sm:mb-0;
+    @apply w-full max-w-4xl px-6 md:mx-auto mb-20 sm:mb-0;
   }
 
   .container div > .container-narrow ~ .container-narrow {
@@ -350,7 +319,7 @@
   }
 
   .container-wide {
-    @apply w-full max-w-7xl px-6 md:mx-auto;
+    @apply w-full max-w-5xl px-6 md:mx-auto;
   }
 
   /* --------------------
@@ -358,7 +327,7 @@
   -------------------- */
 
   .wp-block-video {
-    @apply px-4 xs:px-10 md:px-0 md:mx-auto mb-40 mt-20 shadow-md !important;
+    @apply px-4 sm:px-10 md:px-0 md:mx-auto mb-40 mt-20 shadow-md !important;
     max-width: 985px;
   }
 }

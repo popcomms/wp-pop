@@ -17,7 +17,7 @@
       }
     }
 
-    h2 {
+    /* h2 {
       @apply block;
       @apply text-3xl;
       @apply font-semibold;
@@ -47,7 +47,7 @@
       @apply font-semibold;
       @apply leading-tight;
 
-    }
+    } */
     .wp-block-image {
       @apply my-12;
 
