@@ -297,13 +297,7 @@
   -------------------- */
 
   .container-banner {
-    @apply px-0 sm:px-6  mx-auto;
-  }
-
-  @media (min-width: 985px) {
-    .container-banner {
-      max-width: 80rem;
-    }
+    @apply px-0 sm:px-6 mx-auto max-w-4xl;
   }
 
   .container-narrow {
@@ -319,7 +313,7 @@
   }
 
   .container-wide {
-    @apply w-full max-w-5xl px-6 md:mx-auto;
+    @apply w-full max-w-3xl px-6 md:mx-auto;
   }
 
   /* --------------------
