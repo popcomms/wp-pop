@@ -1,4 +1,4 @@
-<div class="container-narrow flex">
+<div class="container-wide flex">
   <div class="py-3 pr-4">
     <img
       src="{{ theme.link }}/static/icons/tag-solid.svg"
@@ -9,9 +9,9 @@
   {% for category in post.categories %}
     <a
       href="{{ category.link }}"
-      class="inline-block bg-pop-{{ function('get_random_colour') }} no-underline text-pop-white text-sm font-semibold px-4 py-2 rounded-full transition-all transform hover:scale-110 m-1"
+      class="inline-block bg-pop-{{ function('get_random_colour') }} no-underline text-pop-white font-semibold py-1 px-3 rounded-full transition-all transform hover:scale-110 m-1"
     >
-      <span class="text-pop-white">
+      <span class="text-xs text-pop-white leading-loose">
         {{ category }}
       </span>
     </a>

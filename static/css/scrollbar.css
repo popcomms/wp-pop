@@ -4,12 +4,12 @@ body::-webkit-scrollbar,
   width: 8px;
   overflow: visible;
   display: block !important;
-  @apply bg-black;
+  @apply bg-gray-100;
 }
 
 html::-webkit-scrollbar-track,
 body::-webkit-scrollbar-track {
-  @apply bg-none;
+  @apply bg-gray-100;
 }
 
 html::-webkit-scrollbar-thumb,
