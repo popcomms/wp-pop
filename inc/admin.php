@@ -1,5 +1,7 @@
 <?php
 
+add_editor_style('static/css/custom-editor.css');
+
 // Change wp_mail() From: address
 
 add_filter( 'wp_mail_from', 'my_mail_from' );

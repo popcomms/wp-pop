@@ -3,9 +3,9 @@
     <nav class="flex justify-between border-t border-gray-200 text-base">
       <div>
         {% if posts.pagination.prev %}
-          <a href="{{ posts.pagination.prev.link }}" class="inline-block py-4 transform hover:scale-110 transition-all hover:text-pop-blue">&larr; Previous</a>
+          <a href="{{ posts.pagination.prev.link }}" class="inline-block py-4 transform hover:scale-110 transition-all hover:text-pop-blue">&#10094;&nbsp;Previous</a>
         {% else %}
-          <span class="inline-block py-4 text-gray-400">&larr; Previous</span>
+          <span class="inline-block py-4 text-gray-400">&#10094;&nbsp;Previous</span>
         {% endif %}
       </div>
       <div>
@@ -21,9 +21,9 @@
       </div>
       <div>
         {% if posts.pagination.next %}
-          <a href="{{ posts.pagination.next.link }}" class="inline-block py-4 transform hover:scale-110 transition-all hover:text-pop-blue">Next &rarr;</a>
+          <a href="{{ posts.pagination.next.link }}" class="inline-block py-4 transform hover:scale-110 transition-all hover:text-pop-blue">Next&nbsp;&#10095;</a>
         {% else %}
-          <span class="inline-block py-4 text-gray-400">Next &rarr;</span>
+          <span class="inline-block py-4 text-gray-400">Next&nbsp;&#10095;</span>
         {% endif %}
       </div>
     </nav>

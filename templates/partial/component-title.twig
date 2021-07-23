@@ -10,7 +10,7 @@
 <div class="relative  px-8 py-12 {{ title_color_class }}">
   <div class="absolute top-0 left-0 h-full w-full pattern {{ pattern }}-{{ pattern_color }} opacity-{{ pattern_opacity }}"></div>
   <h3 class="{{ subtitle == '' ? '' : 'mb-3'}}">{{ title }}</h3>
-  <div class="md:w-1/2">{{ subtitle }}</div>
+  <div class="{{ theme == 'dark' ? 'text-pop-white' : 'text-pop-black' }}">{{ subtitle }}</div>
 </div>
 
 {% endif %}

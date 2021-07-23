@@ -2,13 +2,13 @@ module.exports = {
   // purge: [],
   darkMode: false, // or 'media' or 'class'
   theme: {
-    screens: {
-      'xs': '375px',
-      'sm': '575px',
-      'md': '966px',
-      'lg': '1024px',
-      'xl': '1920px'
-    },
+    // screens: {
+    //   'xs': '375px',
+    //   'sm': '575px',
+    //   'md': '966px',
+    //   'lg': '1024px',
+    //   'xl': '1920px'
+    // },
     fontFamily: {
       'default': ['Poppins', 'Arial', 'sans-serif']
     },
@@ -107,5 +107,6 @@ module.exports = {
   },
   plugins: [
     require('@tailwindcss/aspect-ratio'),
+    require('@tailwindcss/typography')
   ],
 }

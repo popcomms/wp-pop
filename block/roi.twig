@@ -5,9 +5,9 @@
 {% if not is_preview %}
 <div class="container-wide">
 
-  <div class="{{ theme_bg_color }} md:shadow-md md:box-content">
+  <div class="{{ theme_bg_color }} md:box-content">
     {% if fields.show_title %}
-      {% include "/templates/partial/component-title.twig" with 
+      {% include "/templates/partial/component-title.twig" with
         {
           'title': fields.title,
           'subtitle': fields.subtitle,

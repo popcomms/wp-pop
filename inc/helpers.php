@@ -24,5 +24,5 @@ function get_random_colour () {
 }
 
 function case_study_title ($title, $client, $category) {
-  return str_replace($client, $client.'. '.$category, $title);
+  return str_replace($client, '<strong>'.$client.'. </strong>'.$category, $title);
 }

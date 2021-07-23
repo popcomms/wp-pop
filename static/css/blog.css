@@ -1,4 +1,4 @@
-.post {
+.post, .page {
   .entry-content {
     h2, h3, h4, h5, h6, ul, ol {
       margin-bottom: 1em;
@@ -17,7 +17,7 @@
       }
     }
 
-    h2 {
+    /* h2 {
       @apply block;
       @apply text-3xl;
       @apply font-semibold;
@@ -47,7 +47,7 @@
       @apply font-semibold;
       @apply leading-tight;
 
-    }
+    } */
     .wp-block-image {
       @apply my-12;
 
