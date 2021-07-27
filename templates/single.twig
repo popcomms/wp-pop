@@ -42,8 +42,11 @@
         </h1>
       </div>
       <div class="px-6 lg:px-8 flex items-center justify-between">
-        <div class="text-pop-purple text-sm">
-          {{ post.date }}
+        <div class="flex items-center">
+          {% include "/templates/partial/archive-author.twig" %}
+          <div class="text-pop-purple">
+            {{ post.date }}
+          </div>
         </div>
         {% include "/templates/partial/single-share.twig" %}
       </div>
