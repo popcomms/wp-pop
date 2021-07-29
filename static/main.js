@@ -728,8 +728,8 @@ document.addEventListener("DOMContentLoaded", function() {
             name: this.form.firstName.value,
             email: this.form.email.value,
             title: "The Beginners’ Guide to Creating Interactive Touchscreen Experiences",
-            url: 'https://www.popcomms.com/wp-content/uploads/2021/06/POP_Beginners-guide-to-touchscreens.pdf',
-            image: 'https://www.popcomms.com/wp-content/uploads/2021/06/POP_Beginners-guide-to-touchscreens.jpg'
+            url: 'https://www.popcomms.com/wp-content/uploads/2021/07/POP_Beginners-guide-to-touchscreens.pdf',
+            image: 'https://www.popcomms.com/wp-content/uploads/2021/07/Touchscreen-cover.jpg'
           }
           this.sendDownload(download)
 
