@@ -72,7 +72,7 @@ function pop_enqueue_scripts() {
   );
 	wp_enqueue_script(
     'main',
-    get_template_directory_uri().'/static/main.js?v=0.4',
+    get_template_directory_uri().'/static/main.js?v=0.5',
     array('gsap',
     'scrollTrigger',
     'three',
