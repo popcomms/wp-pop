@@ -892,6 +892,450 @@ document.addEventListener("DOMContentLoaded", function() {
 
     }
   })
+  // get JSON url
+  var WpJsonUrl = document.querySelector('link[rel="https://api.w.org/"]').href
+  // then take out the '/wp-json/' part
+  var homeurl = WpJsonUrl.replace('/wp-json/','');
+  console.log(homeurl)
+  Vue.component('3D-Turbine', {
+    data () {
+      return {
+        // NOTHING HERE AS ALL THREEJS ITEMS MUST BE NON REACTIVE
+        active: false,
+        wireframeState: true,
+        animationState: true,
+        clippingPlane: true,
+        activeContent: '',
+        hideLabels: false,
+        fullScreen: false,
+        points: [
+          {
+            position: new THREE.Vector3(0.7, 0.15, 2),
+            title: 'Fan',
+            content: 'The fan is the first component in a turbofan. The large spinning fan sucks in large quantities of air. Most blades of the fan are made of titanium. It then speeds this air up and splits it into two parts. One part continues through the "core" or center of the engine, where it is acted upon by the other engine components.'
+          },
+          {
+            position: new THREE.Vector3(0.8, -0.75, 0.5),
+            title: 'Cold Area',
+            content: 'Area before compression where air is taken in cold. Around 80% of the air that comes through the intake will simply pass through the turbine without being compressed or heated.'
+          },
+          {
+            position: new THREE.Vector3(0.2, -0.2, -0.55),
+            title: 'Compressor',
+            content: 'The compressor is made up of fans with many blades and attached to a shaft. The compressor squeezes the air that enters it into progressively smaller areas, resulting in an increase in the air pressure. This results in an increase in the energy potential of the air.'
+          },
+          {
+            position: new THREE.Vector3(-0.2, 0.4, -0.65),
+            title: 'Combustion',
+            content: 'In the combustor the air is mixed with fuel and then ignited. There are as many as 20 nozzles to spray fuel into the airstream. The mixture of air and fuel catches fire. This provides a high temperature, high-energy airflow. The fuel burns with the oxygen in the compressed air, producing hot expanding gases.'
+          },
+          {
+            position: new THREE.Vector3(-0.75, -0.75, -0.6),
+            title: 'Hot Area',
+            content: 'Air that has been compress and passed through the combustion chamber can be up to 1600C. This is above the melting point of the turbines. It is only the excess cold air that keeps them from melting!'
+          },
+          {
+            position: new THREE.Vector3(-1, 0.75, -2),
+            title: 'Turbines',
+            content: 'The high-energy airflow coming out of the combustor goes into the turbine, causing the turbine blades to rotate. The turbines are linked by a shaft to turn the blades in the compressor and to spin the intake fan at the front. This rotation takes some energy from the high-energy flow that is used to drive the fan and the compressor. The gases produced in the combustion chamber move through the turbine and spin its blades.'
+          }
+        ]
+      }
+    },
+    mounted () {
+      this.init()
+    },
+    methods: {
+      fullScreenToggle () {
+        // THIS DOESNT WORK AHHHHH
+        this.fullScreen = !this.fullScreen
+        this.resizeCanvas()
+      },
+      toggleClippingPlane () {
+        if (this.clippingPlane) {
+          this.modelMaterials.forEach(childData => {
+            childData.child.material.clippingPlanes = [ this.modelClipPlane ]
+          })
+        } else {
+          this.modelMaterials.forEach(childData => {
+            childData.child.material.clippingPlanes = []
+          })
+        }
+        this.clippingPlane = !this.clippingPlane
+      },
+      toggleWireframe () {
+        this.modelMaterials.forEach(childData => {
+          childData.child.material.wireframe = this.wireframeState
+          childData.child.material.envMapIntensity = this.wireframeState ? 0 : 3
+        })
+        this.wireframeState = !this.wireframeState
+      },
+      toggleLights () {
+        if (this.animationState) {
+          this.turbineTimeline.pause(-1)
+          this.redPointLight.intensity = 500
+          this.bluePointLight.intensity = 500
+        } else {
+          this.redPointLight.intensity = 0
+          this.bluePointLight.intensity = 0
+          this.turbineTimeline.play()
+        }
+        this.animationState = !this.animationState
+      },
+      mouseOver () {
+        if (!this.active) {
+          this.active = !this.active
+          this.modelMaterials.forEach(childData => {
+            const baseColor = new THREE.Color('rgb(70, 70, 70)')
+            gsap.fromTo(childData.child.material.color, {r: baseColor.r, g: baseColor.g, b: baseColor.b}, {duration:0.3, r: childData.color.r, g: childData.color.g, b: childData.color.b})
+            gsap.fromTo(childData.child.material, {metalness: 0}, {duration:0.3, metalness: childData.metalness})
+            gsap.fromTo(childData.child.material, {emissiveIntensity: 0}, {duration:0.3, emissiveIntensity: childData.emissiveIntensity + 1})
+            gsap.fromTo(childData.child.material, {envMapIntensity: 0}, {duration:0.3, envMapIntensity: 2})
+            childData.child.material.wireframe = false
+          })
+          gsap.to(this.camera.position, {duration: 0.5, x: 0, y: 0, z: 5})
+          gsap.to(this.turbineGroup.rotation, {duration: 1.5, x: 0, y: -Math.PI * 0.25, z: 0})    
+          this.turbineTimeline.restart()
+        } else {
+          this.active = !this.active
+          this.turbineTimeline.pause(-1)
+          this.modelMaterials.forEach(childData => {
+            const baseColor = new THREE.Color('rgb(70, 70, 70)')
+            gsap.fromTo(childData.child.material, {envMapIntensity: 2}, {duration:0.3, envMapIntensity: 0, emissiveIntensity: 0, metalness: 0})
+            gsap.to(childData.child.material.color, {duration: 0.3, r: baseColor.r, g: baseColor.g, b: baseColor.b})
+            childData.child.material.wireframe = true
+            childData.child.material.clippingPlanes = []
+          })
+          gsap.to(this.turbineGroup.rotation, {duration: 0.5, x: 0, y: 0, z: 0})
+          gsap.to(this.camera.position, {duration: 0.5, x: 0, y: 0, z: 5})
+          gsap.to(this.controls.target, {duration: 0.5, x: 0, y: 0, z: 0})
+
+          this.activeContent = ''
+        }
+      },
+      init () {
+        // SCENE
+        this.scene = new THREE.Scene()
+  
+        // SIZES
+        this.sizes = {
+          width: document.querySelector('.canvas-container').clientWidth,
+          height: document.querySelector('.canvas-container').clientHeight
+        }
+  
+        // CAMERA
+        this.camera = new THREE.PerspectiveCamera(45, this.sizes.width / this.sizes.height, 0.1, 100)
+        this.camera.position.set(0, 0, 6)
+        this.scene.add(this.camera)
+  
+        // RENDERER
+        this.renderer = new THREE.WebGLRenderer({
+          antialias: true,
+          alpha: true
+        })
+        this.renderer.setClearColor( 0x000000, 0 ); // the default
+        this.renderer.physicallyCorrectLights = true
+        this.renderer.outputEncoding = THREE.sRGBEncoding
+        this.renderer.toneMapping = THREE.ReinhardToneMapping
+        this.renderer.toneMappingExposure = 1.5
+        this.renderer.shadowMap.enabled = true
+        this.renderer.shadowMap.type = THREE.PCFSoftShadowMap
+        this.renderer.setSize(this.sizes.width, this.sizes.height)
+        this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
+
+        document.querySelector('.canvas-container').insertBefore( this.renderer.domElement, document.querySelector('.canvas-container').firstChild );
+        this.canvas = this.renderer.domElement
+        
+        this.renderer.localClippingEnabled = true;
+        this.modelClipPlane = new THREE.Plane( new THREE.Vector3( -1, 0, 1), 0 );
+  
+        // CONTROLS
+        this.controls = new OrbitControls(this.camera, this.renderer.domElement)
+        this.controls.enableDamping = true
+  
+        // LIGHTING
+        let ambientLight = new THREE.AmbientLight (0xdaccff, 0.5)
+        this.scene.add(ambientLight)
+  
+        const directionalLight = new THREE.DirectionalLight('#ffffff', 5)
+        directionalLight.castShadow = true
+        directionalLight.shadow.mapSize.set(1024, 1024)
+        directionalLight.shadow.camera.far = 15
+        directionalLight.shadow.normalBias = 0.05
+        directionalLight.position.set(0, 1.5, -1.25)
+        this.scene.add(directionalLight)
+  
+        // ENVIRONMENT
+        var textureLoader = new THREE.TextureLoader();
+        this.environmentMap = textureLoader.load(homeurl + '/wp-content/themes/wp-pop/static/js/models/hdri-studio.jpg');
+          
+        this.environmentMap.encoding = THREE.sRGBEncoding
+        this.environmentMap.mapping = THREE.EquirectangularReflectionMapping
+        this.scene.background = null
+  
+        // CONTENT
+        this.modelMaterials = []
+  
+        const updateAllMaterials = () =>
+        {
+          this.scene.traverse((child) =>
+          {
+            if(child instanceof THREE.Mesh )
+            {
+              child.material.envMap = this.environmentMap
+              child.material.envMapIntensity = 0
+              child.material.needsUpdate = true
+              child.castShadow = true
+              child.receiveShadow = true
+              
+              const childData = {
+                child: child,
+                color: {
+                  r: child.material.color.r,
+                  g: child.material.color.g,
+                  b: child.material.color.b
+                },
+                metalness: child.material.metalness,
+                emissiveIntensity: child.material.emissiveIntensity
+              }
+              this.modelMaterials.push(childData)
+  
+              child.material.color = new THREE.Color('rgb(50, 50, 50)')
+              child.material.metalness = 0
+              child.material.transmission = 0
+              child.material.emissiveIntensity = 0
+              
+              child.material.wireframe = true
+              child.material.wireframeLineJoin = 'bevel'
+  
+              child.material.side = THREE.DoubleSide
+              child.material.clippingPlanes = [ ]
+              child.material.clipShadows = true
+            }
+          })
+        }
+  
+        const loader = new THREE.ObjectLoader();
+  
+        loader.load(
+          // resource URL
+          `${homeurl}/wp-content/themes/wp-pop/static/js/models/jet-v2.json`,
+  
+          ( obj ) => {
+            this.turbineGroup = new THREE.Group();
+  
+            this.turbineModel = obj.children[0]
+            this.turbineModel.position.y = 0
+            this.turbineModel.scale.set(0.1, 0.1, 0.1)
+            this.turbineGroup.add(this.turbineModel)
+  
+            this.redPointLight = obj.children[0]
+            this.redPointLight.castShadow = true
+            this.redPointLight.position.y = 0
+            this.redPointLight.position.x = -4
+            this.redPointLight.intensity = 0
+            this.turbineGroup.add(this.redPointLight)
+            
+            this.bluePointLight = obj.children[0]
+            this.bluePointLight.castShadow = true
+            this.bluePointLight.position.y = 0
+            this.bluePointLight.position.x = 4
+            this.bluePointLight.intensity = 0
+            this.turbineGroup.add(this.bluePointLight)
+  
+            this.scene.add(this.turbineGroup)
+  
+            this.turbineBlades = this.turbineGroup.children[0].children[0].children[5]
+            this.turbineTimeline = gsap.timeline({ paused: true, repeat: -1, repeatDelay: 1 })
+              .fromTo(this.turbineBlades.rotation, {x: 0}, {duration: 5, x: -Math.PI * 5, ease: 'Power1.easeInOut' })
+              .fromTo([this.bluePointLight, this.redPointLight], {intensity: 0}, {duration: 1, intensity: 500, ease: 'Power3.easeInOut' }, '-=3.5')
+              .to([this.bluePointLight, this.redPointLight], {duration: 1, intensity: 0, ease: 'Power3.easeInOut' }, '-=2')
+  
+            updateAllMaterials()
+          }
+        );
+  
+        // LABELS
+        this.labelRenderer = new CSS2DRenderer();
+        this.labelRenderer.setSize( this.sizes.width, this.sizes.height );
+        this.labelRenderer.domElement.style.position = 'absolute';
+        this.labelRenderer.domElement.classList.add('label-div');
+        this.labelRenderer.domElement.style.top = '0px';
+        this.labelRenderer.domElement.style.pointerEvents = 'none';
+        document.querySelector( '.canvas-container' ).appendChild( this.labelRenderer.domElement );
+  
+        this.css2DObjects = []
+        for (let index = 0; index < this.points.length; index++) {
+          const element = this.points[index]
+          const text = document.createElement( 'div' )
+          text.className = 'label-title'
+          text.textContent = element.title
+          const label = new CSS2DObject( text )
+          label.scale.set(0.1, 0.1, 0.1)
+          label.position.set(element.position.x, element.position.y, element.position.z);
+          this.scene.add( label );
+          this.css2DObjects.push(label)
+  
+          const $vm = this
+  
+          text.addEventListener('click', function() {
+            if ($vm.activeContent === element.content) {
+              $vm.activeContent = ''
+            } else {
+              $vm.activeContent = element.content
+            }
+          })
+        }
+   
+        this.raycaster = new THREE.Raycaster
+  
+        // POST PROCESSING
+  
+        //  Check Browser for antialias - standard doesnt work for mobile or IE
+        let RenderTargetClass = null
+  
+        if(this.renderer.getPixelRatio() == 1 && this.renderer.capabilities.isWebGL2)
+        {
+          RenderTargetClass = THREE.WebGLMultisampleRenderTarget
+          console.log('Using WebGLMultisampleRenderTarget')
+        }
+        else
+        {
+          RenderTargetClass = THREE.WebGLRenderTarget
+          console.log('Using WebGLRenderTarget')
+        }
+  
+        // Render Target - set props for Composer render targets
+        const renderTarget = new RenderTargetClass(
+          this.sizes.width,
+          this.sizes.height,
+          {
+            minFilter: THREE.LinearFilter,
+            magFilter: THREE.LinearFilter,
+            format: THREE.RGBAFormat,
+            encoding: THREE.sRGBEncoding
+          }
+        )
+  
+        this.composer = new EffectComposer( this.renderer, renderTarget );
+        this.composer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
+        this.composer.setSize(this.sizes.width, this.sizes.height)
+        
+        const renderPass = new RenderPass( this.scene, this.camera );
+        this.composer.addPass( renderPass );
+
+        // BLOOM TRANSPARENT HACK REQUIRES ES6 IMPORTS - ASK SIMON ABOUT THIS
+        // const params = {
+        //   exposure: 1.8,
+        //   bloomStrength: 0.55,
+        //   bloomThreshold: 0.7,
+        //   bloomRadius: 0.4
+        // };
+        // const bloomPass = new UnrealBloomPass( new THREE.Vector2( this.sizes.width, this.sizes.width ), 4, 1, 0.1 );
+        // bloomPass.threshold = params.bloomThreshold;
+        // bloomPass.strength = params.bloomStrength;
+        // bloomPass.radius = params.bloomRadius;
+        // this.composer.addPass( bloomPass );
+        
+        // Anti Alias - when browser doesn't support auto render target AA
+        if(this.renderer.getPixelRatio() === 1 && !this.renderer.capabilities.isWebGL2){
+            const smaaPass = new SMAAPass()
+            this.composer.addPass(smaaPass)
+            console.log('using smaa')
+        }
+  
+        // ANIMATION LOOP
+        this.clock = new THREE.Clock()
+        this.previousTime = 0
+        this.tick()
+  
+        window.addEventListener("resize", () => {
+          this.resizeCanvas()
+        })
+
+        // console.log(this.scene)
+      },
+  
+      tick () {
+        // Time settings
+        const elapsedTime = this.clock.getElapsedTime()
+        const deltaTime = elapsedTime - this.previousTime
+        this.previousTime = elapsedTime
+  
+        // Update anims
+        if (this.animation) { this.animation.update(deltaTime) }
+        if(this.turbineGroup) {
+          const $vm = this
+          this.css2DObjects.forEach(function (point){
+            const screenPosition = point.position.clone()
+            screenPosition.project($vm.camera)
+    
+            $vm.raycaster.setFromCamera(screenPosition, $vm.camera)
+  
+            if ($vm.hideLabels) {
+              point.element.classList.remove('visible')
+            } else {
+              // set the objects which will trigger raycaster
+              const intersects = $vm.raycaster.intersectObjects($vm.turbineGroup.children[0].children[0].children[0].children, true)
+              // Does intersection exist
+              if(intersects.length === 0){
+                if ($vm.active === true) {
+                  point.element.classList.add('visible')
+                } else {
+                  point.element.classList.remove('visible')
+                }
+    
+              } else {
+                // distance from $vm.camera of first intersection
+                const intersectionDistance = intersects[0].distance
+                const pointDistance = point.position.distanceTo($vm.camera.position)
+                for (let i = 0; i < intersects.length; i++) {
+                  if(pointDistance > intersectionDistance || $vm.active == false){
+                      point.element.classList.remove('visible')
+                  } else {
+                      point.element.classList.add('visible')
+                  }
+                }
+              }
+            }
+    
+          })
+        }
+  
+        // Controls
+        this.controls.update()
+        // this.stats.update()
+  
+        // Camera
+        this.camera.aspect = this.sizes.width / this.sizes.height
+        this.camera.updateProjectionMatrix() 
+  
+        // Rinse and repeat
+        this.composer.render(this.scene, this.camera)
+        this.labelRenderer.render(this.scene, this.camera)
+  
+        window.requestAnimationFrame(this.tick)
+      },
+      
+      resizeCanvas () {
+        // Update sizes
+        this.sizes.width = document.querySelector('.canvas-container').clientWidth
+        this.sizes.height = document.querySelector('.canvas-container').clientHeight
+  
+        // Update camera
+        this.camera.aspect = this.sizes.width / this.sizes.height
+        this.camera.updateProjectionMatrix()
+  
+        // Update renderer
+        this.composer.setSize(this.sizes.width, this.sizes.height)
+        this.composer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
+        
+        // Update Labels
+        this.labelRenderer.setSize(this.sizes.width, this.sizes.height)
+        this.labelRenderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
+      }
+    }
+  })
 
   new Vue({
     el: document.getElementById('site-wrapper')

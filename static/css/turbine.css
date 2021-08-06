@@ -1,0 +1,43 @@
+/* TURBINE */
+
+.label-title {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  width: max-content;
+  background: linear-gradient(-45deg, rgba(255, 0, 136, 1), rgba(255, 0, 136, 1));
+  border: 0 solid #fff;
+  color: white;
+  font-family: Helvetica, Arial, sans-serif;
+  padding: 5px 10px;
+  font-weight: 100;
+  text-align: center;
+  font-size: 1rem;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out;
+  pointer-events: none;
+}
+
+canvas,
+.label-div {
+  display: block;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.label-title.visible {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.point.visible .label-title:hover {
+  transform: scale(1.2, 1.2);
+}
+
+.point.visible .label-title {
+  transform: scale(1, 1);
+}

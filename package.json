@@ -31,6 +31,7 @@
     "postcss-import": "^14.0.1",
     "postcss-nested": "^5.0.5",
     "tailwindcss": "^2.1.1",
+    "three": "^0.131.3",
     "vue": "^2.6.12"
   },
   "devDependencies": {

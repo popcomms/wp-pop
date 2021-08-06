@@ -1,0 +1,87 @@
+{% if is_preview %}
+  <p><strong>Turbine</strong> - I will only appear in the editor.</p>
+{% endif %}
+
+{% if not is_preview %}
+  <div
+    inline-template
+    is="3D-Turbine"
+  >
+
+  {# <div
+  class="scene"
+  > #}
+<div class="container-wide mb-20 sm:mb-28" >
+  <div class="{{ theme_bg_color }} md:shadow-md md:box-content">
+    {% include "/templates/partial/component-title.twig" with
+      {
+        'title': fields.title,
+        'subtitle': fields.subtitle,
+        'theme_text_color': theme_text_color,
+        'title_color': fields.title_color,
+        'pattern': fields.pattern.type,
+        'pattern_color': fields.pattern.color,
+        'pattern_opacity': fields.pattern.opacity
+      }
+    %}
+    <div
+      class="relative"
+      style="padding-bottom: 50%;"
+      >
+      <div
+        class="canvas-container"
+        :class="fullScreen ? 'absolute top-0 left-0 w-screen h-screen' : 'absolute top-0 left-0 w-full h-full'"
+        @mouseenter="mouseOver"
+        @mouseleave="mouseOver"
+      >
+        <div class="absolute bottom-0 left-0 flex w-full justify-around py-2">
+          <div class="text-base text-pop-pink flex items-center cursor-pointer" @click="toggleWireframe"><span class="mr-2">Wireframe</span>
+            <div class="w-4 h-4 border-pop-pink border-4 bg-pop-white rounded-xl" :class="!wireframeState ? 'bg-pop-white' : 'bg-pop-dark-gray'"></div>
+          </div>
+          <div class="text-base text-pop-pink flex items-center cursor-pointer" @click="toggleLights"><span class="mr-2">Animation</span>
+            <div class="w-4 h-4 border-pop-pink border-4 bg-pop-white rounded-xl" :class="animationState ? 'bg-pop-white' : 'bg-pop-dark-gray'"></div>
+          </div>
+          <div class="text-base text-pop-pink flex items-center cursor-pointer" @click="toggleClippingPlane"><span class="mr-2">Cross Section</span>
+            <div class="w-4 h-4 border-pop-pink border-4 bg-pop-white rounded-xl" :class="!clippingPlane ? 'bg-pop-white' : 'bg-pop-dark-gray'"></div>
+          </div>
+          <div class="text-base text-pop-pink flex items-center cursor-pointer" @click="hideLabels = !hideLabels"><span class="mr-2">Labels</span>
+            <div class="w-4 h-4 border-pop-pink border-4 bg-pop-white rounded-xl" :class="!hideLabels ? 'bg-pop-white' : 'bg-pop-dark-gray'"></div>
+          </div>
+        </div>
+        <div
+          class="z-10 absolute top-0 left-0 bg-pop-pink bg-opacity-30 h-5/6 w-0 transition-all"
+          :class="activeContent !== '' ? 'w-1/4 p-3' : ''"
+        >
+          <div
+            class="turbine-info text-pop-white text-xs h-full overflow-auto px-2"
+            v-html="activeContent"
+          ></div>
+        </div>
+        <!-- FULL SCREEN MODE NEEDED EVENTUALLY -->
+        <!-- <div @click="fullScreenToggle" class="hidden sm:block absolute top-0 right-0 w-10 h-10 p-2 bg-pop-black bg-opacity-90 cursor-pointer group">
+          <div class="absolute transform left-1/2 top-1/2 -translate-y-1/2 -translate-x-1/2 transition-transform group-hover:scale-125">
+            <svg
+              width="25" height="25" viewBox="0 0 22 29" fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <circle
+                class="stroke-current text-pop-pink"
+                cx="11.0001"
+                cy="11.2123"
+                r="9.48109"
+                stroke-width="3"
+              />
+              <path
+                class="stroke-current text-pop-pink"
+                d="M15.6528 20.1655L19.9459 27.7689"
+                stroke-width="3"
+              />
+            </svg>
+          </div>
+        </div> -->
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endif %}
