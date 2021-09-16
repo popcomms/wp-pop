@@ -22,7 +22,6 @@
   },
   "homepage": "https://github.com/popcomms/wp-pop#readme",
   "dependencies": {
-    "@fullhuman/postcss-purgecss": "^4.0.3",
     "@tailwindcss/aspect-ratio": "^0.2.1",
     "@tailwindcss/typography": "^0.4.1",
     "autoprefixer": "^10.2.5",
@@ -30,11 +29,13 @@
     "postcss-cli": "^8.3.1",
     "postcss-import": "^14.0.1",
     "postcss-nested": "^5.0.5",
+    "purgecss": "^4.0.3",
     "tailwindcss": "^2.1.1",
     "three": "^0.131.3",
     "vue": "^2.6.12"
   },
   "devDependencies": {
+    "purgecss-with-wordpress": "^4.0.3",
     "stylelint": "^13.12.0",
     "stylelint-config-standard": "^21.0.0"
   }

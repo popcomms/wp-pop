@@ -1,10 +1,10 @@
-import { AdditiveBlending, Color, LinearFilter, MeshBasicMaterial, RGBAFormat, ShaderMaterial, UniformsUtils, Vector2, Vector3, WebGLRenderTarget, } from "three";
-import { Pass } from "three/examples/jsm/postprocessing/Pass";
-// typescript definitions doesn't have FullScreenQuad
-//@ts-ignore
-import { FullScreenQuad } from "three/examples/jsm/postprocessing/Pass";
-import { CopyShader } from "three/examples/jsm/shaders/CopyShader.js";
-import { LuminosityHighPassShader } from "three/examples/jsm/shaders/LuminosityHighPassShader.js";
+// import { AdditiveBlending, Color, LinearFilter, MeshBasicMaterial, RGBAFormat, ShaderMaterial, UniformsUtils, Vector2, Vector3, WebGLRenderTarget, } from "three";
+// import { Pass } from "three/examples/jsm/postprocessing/Pass";
+// // typescript definitions doesn't have FullScreenQuad
+// //@ts-ignore
+// import { FullScreenQuad } from "three/examples/jsm/postprocessing/Pass";
+// import { CopyShader } from "three/examples/jsm/shaders/CopyShader.js";
+// import { LuminosityHighPassShader } from "three/examples/jsm/shaders/LuminosityHighPassShader.js";
 /**
  * Thanks to https://github.com/mrdoob/three.js/issues/14104#issuecomment-429664412 for this fragmentShaderfix
  *
@@ -24,8 +24,8 @@ class TransparentBackgroundFixedUnrealBloomPass extends Pass {
         this.threshold = threshold;
         this.resolution =
             resolution !== undefined
-                ? new Vector2(resolution.x, resolution.y)
-                : new Vector2(256, 256);
+                ? new THREE.Vector2(resolution.x, resolution.y)
+                : new THREE.Vector2(256, 256);
         // create color only once here, reuse it later inside the render function
         this.clearColor = new Color(0, 0, 0);
         // render targets
@@ -74,7 +74,7 @@ class TransparentBackgroundFixedUnrealBloomPass extends Pass {
         resy = Math.round(this.resolution.y / 2);
         for (let i = 0; i < this.nMips; i++) {
             this.separableBlurMaterials.push(this.getSeperableBlurMaterial(kernelSizeArray[i]));
-            this.separableBlurMaterials[i].uniforms["texSize"].value = new Vector2(resx, resy);
+            this.separableBlurMaterials[i].uniforms["texSize"].value = new THREE.Vector2(resx, resy);
             resx = Math.round(resx / 2);
             resy = Math.round(resy / 2);
         }
@@ -143,7 +143,7 @@ class TransparentBackgroundFixedUnrealBloomPass extends Pass {
         for (let i = 0; i < this.nMips; i++) {
             this.renderTargetsHorizontal[i].setSize(resx, resy);
             this.renderTargetsVertical[i].setSize(resx, resy);
-            this.separableBlurMaterials[i].uniforms["texSize"].value = new Vector2(resx, resy);
+            this.separableBlurMaterials[i].uniforms["texSize"].value = new THREE.Vector2(resx, resy);
             resx = Math.round(resx / 2);
             resy = Math.round(resy / 2);
         }
@@ -226,8 +226,8 @@ class TransparentBackgroundFixedUnrealBloomPass extends Pass {
             },
             uniforms: {
                 colorTexture: { value: null },
-                texSize: { value: new Vector2(0.5, 0.5) },
-                direction: { value: new Vector2(0.5, 0.5) },
+                texSize: { value: new THREE.Vector2(0.5, 0.5) },
+                direction: { value: new THREE.Vector2(0.5, 0.5) },
             },
             vertexShader: `varying vec2 vUv;
                 void main() {
@@ -309,6 +309,6 @@ class TransparentBackgroundFixedUnrealBloomPass extends Pass {
         });
     }
 }
-TransparentBackgroundFixedUnrealBloomPass.BlurDirectionX = new Vector2(1.0, 0.0);
-TransparentBackgroundFixedUnrealBloomPass.BlurDirectionY = new Vector2(0.0, 1.0);
-export { TransparentBackgroundFixedUnrealBloomPass as UnrealBloomPass };
+TransparentBackgroundFixedUnrealBloomPass.BlurDirectionX = new THREE.Vector2(1.0, 0.0);
+TransparentBackgroundFixedUnrealBloomPass.BlurDirectionY = new THREE.Vector2(0.0, 1.0);
+THREE.UnrealBloomPass = TransparentBackgroundFixedUnrealBloomPass

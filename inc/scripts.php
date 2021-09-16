@@ -75,23 +75,11 @@ function pop_enqueue_scripts() {
     get_template_directory_uri().'/static/main.js?v=0.5',
     array('gsap',
     'scrollTrigger',
-    'three',
-    'OrbitControls',
-    // 'EffectComposer',
-    // 'RenderPass',
-    // 'ShaderPass',
-    // 'RGBShiftShader',
-    // 'SMAAPass',
-    // 'GammaCorrectionShader',
-    // 'CSS2DRenderer',
     'vue'),
     true
   );
 
-
-
   // CSS
-
   wp_enqueue_style(
     'wpb-google-fonts',
     'https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap',

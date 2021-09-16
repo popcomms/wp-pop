@@ -25,60 +25,79 @@
       }
     %}
     <div
-      class="relative"
-      style="padding-bottom: 50%;"
-      >
+      class="turbine-container relative"
+    >
       <div
         class="canvas-container"
-        :class="fullScreen ? 'absolute top-0 left-0 w-screen h-screen' : 'absolute top-0 left-0 w-full h-full'"
-        @mouseenter="mouseOver"
-        @mouseleave="mouseOver"
+        :class="fullScreen ? 'fixed top-0 left-0 w-screen h-screen bg-pop-black-dark z-50' : 'absolute top-0 left-0 w-full h-full'"
+        @mouseenter="activateModel"
       >
-        <div class="absolute bottom-0 left-0 flex w-full justify-around py-2">
-          <div class="text-base text-pop-pink flex items-center cursor-pointer" @click="toggleWireframe"><span class="mr-2">Wireframe</span>
-            <div class="w-4 h-4 border-pop-pink border-4 bg-pop-white rounded-xl" :class="!wireframeState ? 'bg-pop-white' : 'bg-pop-dark-gray'"></div>
-          </div>
-          <div class="text-base text-pop-pink flex items-center cursor-pointer" @click="toggleLights"><span class="mr-2">Animation</span>
-            <div class="w-4 h-4 border-pop-pink border-4 bg-pop-white rounded-xl" :class="animationState ? 'bg-pop-white' : 'bg-pop-dark-gray'"></div>
-          </div>
-          <div class="text-base text-pop-pink flex items-center cursor-pointer" @click="toggleClippingPlane"><span class="mr-2">Cross Section</span>
-            <div class="w-4 h-4 border-pop-pink border-4 bg-pop-white rounded-xl" :class="!clippingPlane ? 'bg-pop-white' : 'bg-pop-dark-gray'"></div>
-          </div>
-          <div class="text-base text-pop-pink flex items-center cursor-pointer" @click="hideLabels = !hideLabels"><span class="mr-2">Labels</span>
-            <div class="w-4 h-4 border-pop-pink border-4 bg-pop-white rounded-xl" :class="!hideLabels ? 'bg-pop-white' : 'bg-pop-dark-gray'"></div>
-          </div>
-        </div>
         <div
-          class="z-10 absolute top-0 left-0 bg-pop-pink bg-opacity-30 h-5/6 w-0 transition-all"
-          :class="activeContent !== '' ? 'w-1/4 p-3' : ''"
+          class="z-10 absolute top-0 left-0 bg-pop-pink bg-opacity-30 h-full w-0 transition-all"
+          :class="activeContent !== '' ? 'w-1/4 p-3 pb-14' : ''"
         >
           <div
             class="turbine-info text-pop-white text-xs h-full overflow-auto px-2"
             v-html="activeContent"
           ></div>
         </div>
-        <!-- FULL SCREEN MODE NEEDED EVENTUALLY -->
-        <!-- <div @click="fullScreenToggle" class="hidden sm:block absolute top-0 right-0 w-10 h-10 p-2 bg-pop-black bg-opacity-90 cursor-pointer group">
-          <div class="absolute transform left-1/2 top-1/2 -translate-y-1/2 -translate-x-1/2 transition-transform group-hover:scale-125">
-            <svg
-              width="25" height="25" viewBox="0 0 22 29" fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <circle
-                class="stroke-current text-pop-pink"
-                cx="11.0001"
-                cy="11.2123"
-                r="9.48109"
-                stroke-width="3"
-              />
-              <path
-                class="stroke-current text-pop-pink"
-                d="M15.6528 20.1655L19.9459 27.7689"
-                stroke-width="3"
-              />
+        <div class="turbine-toggles absolute bottom-0 left-0 flex w-full justify-center bg-pop-dark-gray z-10">
+          <div
+            class="text-sm sm:text-base flex items-center cursor-pointer bg-pop-black-dark py-2 px-2 sm:px-8"
+            :class="!wireframeState ? 'text-pop-pink' : 'text-pop-white'"
+            style="margin: 0 1px;"
+            @click="toggleWireframe"
+          >
+              Wireframe
+          </div>
+          <div
+            class="text-sm sm:text-base flex items-center cursor-pointer bg-pop-black-dark py-2 px-2 sm:px-8"
+            style="margin: 0 1px;" :class="animationState ? 'text-pop-pink' : 'text-pop-white'"
+            @click="toggleLights"
+          >
+            Animation
+          </div>
+          <div
+            class="text-sm sm:text-base flex items-center cursor-pointer bg-pop-black-dark py-2 px-2 sm:px-8"
+            :class="!clippingPlane ? 'text-pop-pink' : 'text-pop-white'"
+            style="margin: 0 1px;"
+            @click="toggleClippingPlane"
+          >
+            Cross Section
+          </div>
+          <div
+            class="text-sm sm:text-base flex items-center cursor-pointer bg-pop-black-dark py-2 px-2 sm:px-8"
+            :class="!hideLabels ? 'text-pop-pink' : 'text-pop-white'"
+            style="margin: 0 1px;"
+            @click="hideLabels = !hideLabels"
+          >
+            Labels
+          </div>
+        </div>
+        <div
+          v-for="(point, index) in points"
+          :key="index"
+          class="label-title transition-colors"
+          :class="point.title === activeTitle ? 'text-pop-pink bg-pop-white opacity-30' : 'text-pop-white bg-pop-pink'"
+          v-html="point.title"
+        >
+        </div>
+        <div
+          class="absolute bottom-16 left-1/2 transform -translate-x-1/2 min-w-max bg-pop-dark-gray rounded px-1 sm:px-4 transition-opacity duration-500 text-xs text-white"
+          :class="active ? 'opacity-0 pointer-events-none' : 'opacity-100'"
+        >
+          Drag and scroll to move. Click labels for more info.
+        </div>
+
+        <div @click="fullScreenToggle" class="hidden sm:block absolute top-0 bg-pop-black bg-opacity-90 cursor-pointer group" :class="fullScreen ? 'right-2' : 'right-0'" style="width: 48px; height: 48px;">
+          <div class="absolute transform left-1/2 top-1/2 -translate-y-1/2 -translate-x-1/2 transition-transform group-hover:scale-105">
+            <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect y="48" width="48" height="48" transform="rotate(-90 0 48)" fill="#FF0088"/>
+              <path class="origin-center transform transition-transform duration-500 delay-500" style="transform-box: fill-box;" :class="fullScreen ? 'rotate-180' : 'rotate-0'" d="M43.5 7C43.5 6.17157 42.8284 5.5 42 5.5L28.5 5.5C27.6716 5.5 27 6.17157 27 7C27 7.82843 27.6716 8.5 28.5 8.5H40.5V20.5C40.5 21.3284 41.1716 22 42 22C42.8284 22 43.5 21.3284 43.5 20.5L43.5 7ZM31.0607 20.0607L43.0607 8.06066L40.9393 5.93934L28.9393 17.9393L31.0607 20.0607Z" fill="white"/>
+              <path class="origin-center transform transition-transform duration-500 delay-500" style="transform-box: fill-box;" :class="fullScreen ? 'rotate-180' : 'rotate-0'" d="M5.5 41C5.5 41.8284 6.17157 42.5 7 42.5L20.5 42.5C21.3284 42.5 22 41.8284 22 41C22 40.1716 21.3284 39.5 20.5 39.5H8.5V27.5C8.5 26.6716 7.82843 26 7 26C6.17157 26 5.5 26.6716 5.5 27.5L5.5 41ZM17.9393 27.9393L5.93934 39.9393L8.06066 42.0607L20.0607 30.0607L17.9393 27.9393Z" fill="white"/>
             </svg>
           </div>
-        </div> -->
+        </div>
       </div>
     </div>
   </div>

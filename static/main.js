@@ -906,6 +906,7 @@ document.addEventListener("DOMContentLoaded", function() {
         animationState: true,
         clippingPlane: true,
         activeContent: '',
+        activeTitle: '',
         hideLabels: false,
         fullScreen: false,
         points: [
@@ -946,10 +947,62 @@ document.addEventListener("DOMContentLoaded", function() {
       this.init()
     },
     methods: {
+      cameraToMarker(point) {
+        const zoomFactor = 2
+        // const currentCamPosition = {x: this.camera.position.x, y: this.camera.position.y, z: this.camera.position.z};
+        const storedPointPosition = new THREE.Vector3(point.position.x, point.position.y, point.position.z);
+        const startRotation = new THREE.Euler().copy(this.camera.rotation);
+        this.camera.lookAt(storedPointPosition);
+        // const endRotation = new THREE.Euler().copy(this.camera.rotation);
+        this.camera.rotation.copy(startRotation);
+        gsap.to(
+          this.camera.position,
+          {
+            duration: 1,
+            x: point.position.x * zoomFactor,
+            y: point.position.y * zoomFactor,
+            z: point.position.z * zoomFactor,
+            onUpdate: () => {
+              this.camera.lookAt(storedPointPosition)
+            },
+            onComplete: () => {
+              this.camera.lookAt(storedPointPosition)
+            }
+          })
+        // gsap.to(
+        //   this.camera.rotation,
+        //   {
+        //     duration: 1,
+        //     x: endRotation.x,
+        //     y: endRotation.y,
+        //     z: endRotation.z,
+        //     onComplete: () => {
+        //       gsap.to(
+        //         this.camera.position,
+        //         {
+        //           duration: 1,
+        //           x: point.position.x,
+        //           y: point.position.y,
+        //           z: point.position.z,
+        //           onUpdate: () => {
+        //             this.camera.lookAt(storedPointPosition)
+        //           },
+        //           onComplete: () => {
+        //             this.camera.lookAt(storedPointPosition)
+        //           }
+        //         })
+        //     }
+        //   })
+      },
       fullScreenToggle () {
         // THIS DOESNT WORK AHHHHH
-        this.fullScreen = !this.fullScreen
-        this.resizeCanvas()
+        gsap.to(document.querySelector('.canvas-container'), {duration: 0.2, opacity: 0, onComplete: () => {
+          this.fullScreen = !this.fullScreen
+          setTimeout(() => {
+            this.resizeCanvas()
+          }, 50);
+          gsap.to(document.querySelector('.canvas-container'), {duration: 0.2, opacity: 1})
+        }})
       },
       toggleClippingPlane () {
         if (this.clippingPlane) {
@@ -982,7 +1035,7 @@ document.addEventListener("DOMContentLoaded", function() {
         }
         this.animationState = !this.animationState
       },
-      mouseOver () {
+      activateModel () {
         if (!this.active) {
           this.active = !this.active
           this.modelMaterials.forEach(childData => {
@@ -994,28 +1047,33 @@ document.addEventListener("DOMContentLoaded", function() {
             childData.child.material.wireframe = false
           })
           gsap.to(this.camera.position, {duration: 0.5, x: 0, y: 0, z: 5})
-          gsap.to(this.turbineGroup.rotation, {duration: 1.5, x: 0, y: -Math.PI * 0.25, z: 0})    
+          gsap.to(this.turbineGroup.rotation, {duration: 0.5, x: 0, y: -Math.PI * 0.25, z: 0})    
           this.turbineTimeline.restart()
-        } else {
-          this.active = !this.active
-          this.turbineTimeline.pause(-1)
-          this.modelMaterials.forEach(childData => {
-            const baseColor = new THREE.Color('rgb(70, 70, 70)')
-            gsap.fromTo(childData.child.material, {envMapIntensity: 2}, {duration:0.3, envMapIntensity: 0, emissiveIntensity: 0, metalness: 0})
-            gsap.to(childData.child.material.color, {duration: 0.3, r: baseColor.r, g: baseColor.g, b: baseColor.b})
-            childData.child.material.wireframe = true
-            childData.child.material.clippingPlanes = []
-          })
-          gsap.to(this.turbineGroup.rotation, {duration: 0.5, x: 0, y: 0, z: 0})
-          gsap.to(this.camera.position, {duration: 0.5, x: 0, y: 0, z: 5})
-          gsap.to(this.controls.target, {duration: 0.5, x: 0, y: 0, z: 0})
-
-          this.activeContent = ''
         }
+        // else {
+          // this.active = !this.active
+          // this.turbineTimeline.pause(-1)
+          // this.modelMaterials.forEach(childData => {
+          //   const baseColor = new THREE.Color('rgb(70, 70, 70)')
+          //   gsap.fromTo(childData.child.material, {envMapIntensity: 2}, {duration:0.3, envMapIntensity: 0, emissiveIntensity: 0, metalness: 0})
+          //   gsap.to(childData.child.material.color, {duration: 0.3, r: baseColor.r, g: baseColor.g, b: baseColor.b})
+          //   childData.child.material.wireframe = true
+          //   childData.child.material.clippingPlanes = []
+          // })
+          // gsap.to(this.turbineGroup.rotation, {duration: 0.5, x: 0, y: 0, z: 0})
+          // gsap.to(this.camera.position, {duration: 0.5, x: 0, y: 0, z: 5})
+          // gsap.to(this.controls.target, {duration: 0.5, x: 0, y: 0, z: 0})
+
+          // this.activeContent = ''
+          // this.activeTitle = ''
+        // }
       },
       init () {
         // SCENE
         this.scene = new THREE.Scene()
+
+        // const axesHelper = new THREE.AxesHelper( 5 );
+        // this.scene.add( axesHelper );
   
         // SIZES
         this.sizes = {
@@ -1062,7 +1120,7 @@ document.addEventListener("DOMContentLoaded", function() {
         directionalLight.shadow.mapSize.set(1024, 1024)
         directionalLight.shadow.camera.far = 15
         directionalLight.shadow.normalBias = 0.05
-        directionalLight.position.set(0, 1.5, -1.25)
+        directionalLight.position.set(0, 0, 1.25)
         this.scene.add(directionalLight)
   
         // ENVIRONMENT
@@ -1165,27 +1223,30 @@ document.addEventListener("DOMContentLoaded", function() {
         document.querySelector( '.canvas-container' ).appendChild( this.labelRenderer.domElement );
   
         this.css2DObjects = []
-        for (let index = 0; index < this.points.length; index++) {
+        const labels = document.querySelectorAll('.label-title')
+        labels.forEach((el, index) => {
           const element = this.points[index]
-          const text = document.createElement( 'div' )
-          text.className = 'label-title'
-          text.textContent = element.title
-          const label = new CSS2DObject( text )
+          const label = new CSS2DObject( el )
           label.scale.set(0.1, 0.1, 0.1)
-          label.position.set(element.position.x, element.position.y, element.position.z);
+          label.position.set(element.position.x, element.position.y, element.position.z)
+
           this.scene.add( label );
           this.css2DObjects.push(label)
+
   
           const $vm = this
   
-          text.addEventListener('click', function() {
+          el.addEventListener('click', function() {
+            $vm.cameraToMarker(element)
             if ($vm.activeContent === element.content) {
               $vm.activeContent = ''
+              $vm.activeTitle = ''
             } else {
               $vm.activeContent = element.content
+              $vm.activeTitle = element.title
             }
           })
-        }
+        });
    
         this.raycaster = new THREE.Raycaster
   
@@ -1252,8 +1313,6 @@ document.addEventListener("DOMContentLoaded", function() {
         window.addEventListener("resize", () => {
           this.resizeCanvas()
         })
-
-        // console.log(this.scene)
       },
   
       tick () {
@@ -1264,6 +1323,7 @@ document.addEventListener("DOMContentLoaded", function() {
   
         // Update anims
         if (this.animation) { this.animation.update(deltaTime) }
+
         if(this.turbineGroup) {
           const $vm = this
           this.css2DObjects.forEach(function (point){
@@ -1274,6 +1334,7 @@ document.addEventListener("DOMContentLoaded", function() {
   
             if ($vm.hideLabels) {
               point.element.classList.remove('visible')
+              $vm.activeContent = ''
             } else {
               // set the objects which will trigger raycaster
               const intersects = $vm.raycaster.intersectObjects($vm.turbineGroup.children[0].children[0].children[0].children, true)
@@ -1327,12 +1388,13 @@ document.addEventListener("DOMContentLoaded", function() {
         this.camera.updateProjectionMatrix()
   
         // Update renderer
+        this.renderer.setSize(this.sizes.width, this.sizes.height)
+        this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
         this.composer.setSize(this.sizes.width, this.sizes.height)
         this.composer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
         
         // Update Labels
         this.labelRenderer.setSize(this.sizes.width, this.sizes.height)
-        this.labelRenderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
       }
     }
   })
