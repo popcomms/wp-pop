@@ -902,6 +902,7 @@ document.addEventListener("DOMContentLoaded", function() {
       return {
         // NOTHING HERE AS ALL THREEJS ITEMS MUST BE NON REACTIVE
         active: false,
+        initComplete: false,
         wireframeState: true,
         animationState: true,
         clippingPlane: true,
@@ -1036,8 +1037,8 @@ document.addEventListener("DOMContentLoaded", function() {
         this.animationState = !this.animationState
       },
       activateModel () {
-        if (!this.active) {
-          this.active = !this.active
+        if (this.initComplete && !this.active) {
+          this.active = true
           this.modelMaterials.forEach(childData => {
             const baseColor = new THREE.Color('rgb(70, 70, 70)')
             gsap.fromTo(childData.child.material.color, {r: baseColor.r, g: baseColor.g, b: baseColor.b}, {duration:0.3, r: childData.color.r, g: childData.color.g, b: childData.color.b})
@@ -1050,23 +1051,6 @@ document.addEventListener("DOMContentLoaded", function() {
           gsap.to(this.turbineGroup.rotation, {duration: 0.5, x: 0, y: -Math.PI * 0.25, z: 0})    
           this.turbineTimeline.restart()
         }
-        // else {
-          // this.active = !this.active
-          // this.turbineTimeline.pause(-1)
-          // this.modelMaterials.forEach(childData => {
-          //   const baseColor = new THREE.Color('rgb(70, 70, 70)')
-          //   gsap.fromTo(childData.child.material, {envMapIntensity: 2}, {duration:0.3, envMapIntensity: 0, emissiveIntensity: 0, metalness: 0})
-          //   gsap.to(childData.child.material.color, {duration: 0.3, r: baseColor.r, g: baseColor.g, b: baseColor.b})
-          //   childData.child.material.wireframe = true
-          //   childData.child.material.clippingPlanes = []
-          // })
-          // gsap.to(this.turbineGroup.rotation, {duration: 0.5, x: 0, y: 0, z: 0})
-          // gsap.to(this.camera.position, {duration: 0.5, x: 0, y: 0, z: 5})
-          // gsap.to(this.controls.target, {duration: 0.5, x: 0, y: 0, z: 0})
-
-          // this.activeContent = ''
-          // this.activeTitle = ''
-        // }
       },
       init () {
         // SCENE
@@ -1110,6 +1094,10 @@ document.addEventListener("DOMContentLoaded", function() {
         // CONTROLS
         this.controls = new OrbitControls(this.camera, this.renderer.domElement)
         this.controls.enableDamping = true
+        // Helps with touch control
+        if (this.sizes.width < 500) {
+          this.controls.enableDamping = false
+        }
   
         // LIGHTING
         let ambientLight = new THREE.AmbientLight (0xdaccff, 0.5)
@@ -1246,6 +1234,11 @@ document.addEventListener("DOMContentLoaded", function() {
               $vm.activeTitle = element.title
             }
           })
+
+          el.addEventListener('wheel', function(event) {
+            event.preventDefault()
+            event.stopPropagation()
+          })
         });
    
         this.raycaster = new THREE.Raycaster
@@ -1313,6 +1306,8 @@ document.addEventListener("DOMContentLoaded", function() {
         window.addEventListener("resize", () => {
           this.resizeCanvas()
         })
+
+        this.initComplete = true
       },
   
       tick () {
@@ -1382,6 +1377,10 @@ document.addEventListener("DOMContentLoaded", function() {
         // Update sizes
         this.sizes.width = document.querySelector('.canvas-container').clientWidth
         this.sizes.height = document.querySelector('.canvas-container').clientHeight
+
+        if (this.sizes.width < 500) {
+          this.controls.enableDamping = false
+        }
   
         // Update camera
         this.camera.aspect = this.sizes.width / this.sizes.height

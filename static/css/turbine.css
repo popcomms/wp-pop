@@ -7,6 +7,14 @@
   }
 }
 
+.turbine-info::-webkit-scrollbar-track {
+  @apply bg-pop-mid-gray rounded;
+}
+
+.turbine-info::-webkit-scrollbar {
+  background-color: transparent;
+}
+
 .turbine-toggles {
   -webkit-touch-callout: none;
   -webkit-user-select: none;
@@ -42,6 +50,10 @@
   align-items: center;
   padding: 0 16px;
   border-radius: 10px;
+
+  @media (max-width: 500px) {
+    font-size: 15px;
+  }
 }
 
 canvas,

@@ -33,17 +33,25 @@
         @mouseenter="activateModel"
       >
         <div
-          class="z-10 absolute top-0 left-0 bg-pop-pink bg-opacity-30 h-full w-0 transition-all"
-          :class="activeContent !== '' ? 'w-1/4 p-3 pb-14' : ''"
+          class="z-10 absolute top-0 left-0 flex flex-col bg-pop-dark-gray h-full w-0 transition-all"
+          :class="activeContent !== '' ? 'w-2/3 sm:w-1/4 px-3 pt-3 pb-14' : ''"
         >
           <div
-            class="turbine-info text-pop-white text-xs h-full overflow-auto px-2"
-            v-html="activeContent"
-          ></div>
+            class="text-sm text-pop-yellow transition-opacity mb-5 cursor-pointer"
+            :class="activeContent !== '' ? 'opacity-100' : 'opacity-0'"
+            @click="activeContent = ''; activeTitle = '';"
+          >
+            close
+          </div>
+          <div
+            class="turbine-info text-pop-white text-xs overflow-auto h-full pr-2"
+          >
+            <p v-html="activeContent" class="m-0"></p>
+          </div>
         </div>
         <div class="turbine-toggles absolute bottom-0 left-0 flex w-full justify-center bg-pop-dark-gray z-10">
           <div
-            class="text-sm sm:text-base flex items-center cursor-pointer bg-pop-black-dark py-2 px-2 sm:px-8"
+            class="text-xs sm:text-base flex items-center cursor-pointer bg-pop-black-dark py-2 px-2 sm:px-8"
             :class="!wireframeState ? 'text-pop-pink' : 'text-pop-white'"
             style="margin: 0 1px;"
             @click="toggleWireframe"
@@ -51,14 +59,14 @@
               Wireframe
           </div>
           <div
-            class="text-sm sm:text-base flex items-center cursor-pointer bg-pop-black-dark py-2 px-2 sm:px-8"
+            class="hidden sm:flex text-xs sm:text-base items-center cursor-pointer bg-pop-black-dark py-2 px-2 sm:px-8"
             style="margin: 0 1px;" :class="animationState ? 'text-pop-pink' : 'text-pop-white'"
             @click="toggleLights"
           >
-            Animation
+            Animate
           </div>
           <div
-            class="text-sm sm:text-base flex items-center cursor-pointer bg-pop-black-dark py-2 px-2 sm:px-8"
+            class="text-xs sm:text-base flex items-center cursor-pointer bg-pop-black-dark py-2 px-2 sm:px-8"
             :class="!clippingPlane ? 'text-pop-pink' : 'text-pop-white'"
             style="margin: 0 1px;"
             @click="toggleClippingPlane"
@@ -66,7 +74,7 @@
             Cross Section
           </div>
           <div
-            class="text-sm sm:text-base flex items-center cursor-pointer bg-pop-black-dark py-2 px-2 sm:px-8"
+            class="hidden sm:flex text-xs sm:text-base items-center cursor-pointer bg-pop-black-dark py-2 px-2 sm:px-8"
             :class="!hideLabels ? 'text-pop-pink' : 'text-pop-white'"
             style="margin: 0 1px;"
             @click="hideLabels = !hideLabels"
@@ -80,6 +88,7 @@
           class="label-title transition-colors"
           :class="point.title === activeTitle ? 'text-pop-pink bg-pop-white opacity-30' : 'text-pop-white bg-pop-pink'"
           v-html="point.title"
+          onmousewheel.stop.prevent=""
         >
         </div>
         <div
@@ -89,14 +98,12 @@
           Drag and scroll to move. Click labels for more info.
         </div>
 
-        <div @click="fullScreenToggle" class="hidden sm:block absolute top-0 bg-pop-black bg-opacity-90 cursor-pointer group" :class="fullScreen ? 'right-2' : 'right-0'" style="width: 48px; height: 48px;">
-          <div class="absolute transform left-1/2 top-1/2 -translate-y-1/2 -translate-x-1/2 transition-transform group-hover:scale-105">
-            <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <rect y="48" width="48" height="48" transform="rotate(-90 0 48)" fill="#FF0088"/>
-              <path class="origin-center transform transition-transform duration-500 delay-500" style="transform-box: fill-box;" :class="fullScreen ? 'rotate-180' : 'rotate-0'" d="M43.5 7C43.5 6.17157 42.8284 5.5 42 5.5L28.5 5.5C27.6716 5.5 27 6.17157 27 7C27 7.82843 27.6716 8.5 28.5 8.5H40.5V20.5C40.5 21.3284 41.1716 22 42 22C42.8284 22 43.5 21.3284 43.5 20.5L43.5 7ZM31.0607 20.0607L43.0607 8.06066L40.9393 5.93934L28.9393 17.9393L31.0607 20.0607Z" fill="white"/>
-              <path class="origin-center transform transition-transform duration-500 delay-500" style="transform-box: fill-box;" :class="fullScreen ? 'rotate-180' : 'rotate-0'" d="M5.5 41C5.5 41.8284 6.17157 42.5 7 42.5L20.5 42.5C21.3284 42.5 22 41.8284 22 41C22 40.1716 21.3284 39.5 20.5 39.5H8.5V27.5C8.5 26.6716 7.82843 26 7 26C6.17157 26 5.5 26.6716 5.5 27.5L5.5 41ZM17.9393 27.9393L5.93934 39.9393L8.06066 42.0607L20.0607 30.0607L17.9393 27.9393Z" fill="white"/>
-            </svg>
-          </div>
+        <div @click="fullScreenToggle" class="absolute transform origin-top-right scale-75 sm:scale-100 right-0 top-0 transition-transform group-hover:scale-105" :class="fullScreen ? 'right-2' : 'right-0'">
+          <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect y="48" width="48" height="48" transform="rotate(-90 0 48)" fill="#8E8E8E"/>
+            <path class="origin-center transform transition-transform duration-500 delay-500" style="transform-box: fill-box;" :class="fullScreen ? 'rotate-180' : 'rotate-0'" d="M43.5 7C43.5 6.17157 42.8284 5.5 42 5.5L28.5 5.5C27.6716 5.5 27 6.17157 27 7C27 7.82843 27.6716 8.5 28.5 8.5H40.5V20.5C40.5 21.3284 41.1716 22 42 22C42.8284 22 43.5 21.3284 43.5 20.5L43.5 7ZM31.0607 20.0607L43.0607 8.06066L40.9393 5.93934L28.9393 17.9393L31.0607 20.0607Z" fill="white"/>
+            <path class="origin-center transform transition-transform duration-500 delay-500" style="transform-box: fill-box;" :class="fullScreen ? 'rotate-180' : 'rotate-0'" d="M5.5 41C5.5 41.8284 6.17157 42.5 7 42.5L20.5 42.5C21.3284 42.5 22 41.8284 22 41C22 40.1716 21.3284 39.5 20.5 39.5H8.5V27.5C8.5 26.6716 7.82843 26 7 26C6.17157 26 5.5 26.6716 5.5 27.5L5.5 41ZM17.9393 27.9393L5.93934 39.9393L8.06066 42.0607L20.0607 30.0607L17.9393 27.9393Z" fill="white"/>
+          </svg>
         </div>
       </div>
     </div>
