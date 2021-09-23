@@ -1,0 +1,110 @@
+.post, .page {
+  .entry-content {
+    h2, h3, h4, h5, h6, ul, ol {
+      margin-bottom: 1em;
+      margin-top: 1em;
+    }
+    ol, ul {
+      @apply pl-4;
+    }
+    li {
+      @apply mt-2 mb-2;
+    }
+    a {
+      @apply underline text-pop-purple;
+      &:hover {
+        @apply text-blue-500;
+      }
+    }
+
+    /* h2 {
+      @apply block;
+      @apply text-3xl;
+      @apply font-semibold;
+      @apply leading-tight;
+    }
+    h3 {
+      @apply block;
+      @apply text-2xl;
+      @apply font-semibold;
+      @apply leading-tight;
+    }
+    h4 {
+      @apply block;
+      @apply text-xl;
+      @apply font-semibold;
+      @apply leading-tight;
+    }
+    h5 {
+      @apply block;
+      @apply text-lg;
+      @apply font-semibold;
+      @apply leading-tight;
+    }
+    h6 {
+      @apply block;
+      @apply text-base;
+      @apply font-semibold;
+      @apply leading-tight;
+
+    } */
+    .wp-block-image {
+      @apply my-12;
+
+      figcaption {
+        @apply border-pop-black border-l-4 border-opacity-50 pl-3 text-sm;
+      }
+    }
+    .wp-block-quote {
+      @apply my-12;
+
+      &.is-large,
+      &.is-style-large {
+        @apply my-12;
+
+        p {
+          @apply leading-tight;
+        }
+      }
+    }
+
+    .wp-block-separator {
+      @apply my-12;
+    }
+
+    .wp-block-embed.wp-embed-aspect-1-1,
+    .wp-block-embed.wp-embed-aspect-1-2,
+    .wp-block-embed.wp-embed-aspect-4-3,
+    .wp-block-embed.wp-embed-aspect-9-16,
+    .wp-block-embed.wp-embed-aspect-16-9,
+    .wp-block-embed.wp-embed-aspect-18-9,
+    .wp-block-embed.wp-embed-aspect-21-9 {
+      @apply my-12;
+
+      .wp-block-embed__wrapper {
+        position: relative;
+
+        &:before {
+          content: "";
+          display: block;
+          padding-top: 50%;
+        }
+
+        iframe {
+          position: absolute;
+          top: 0;
+          right: 0;
+          bottom: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+        }
+      }
+    }
+    .wp-block-embed.wp-embed-aspect-16-9 {
+      .wp-block-embed__wrapper:before {
+        padding-top: 56.25%;
+      }
+    }
+  }
+}

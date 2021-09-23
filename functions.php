@@ -52,7 +52,6 @@ Timber::$dirname = array( 'templates', 'views' );
  */
 Timber::$autoescape = false;
 
-
 /**
  * We're going to configure our theme inside of a subclass of Timber\Site
  * You can move this to its own file and include here via php's include("MySite.php")
@@ -84,7 +83,7 @@ class StarterSite extends Timber\Site {
 		$context['foo']   = 'bar';
 		$context['stuff'] = 'I am a value set in your functions.php file';
 		$context['notes'] = 'These values are available everytime you call Timber::context();';
-		$context['menu']  = new Timber\Menu();
+		$context['menu']  = new Timber\Menu('top-nav');
 		$context['site']  = $this;
 		return $context;
 	}
@@ -143,19 +142,11 @@ class StarterSite extends Timber\Site {
 		add_theme_support( 'menus' );
 	}
 
-	/** This Would return 'foo bar!'.
-	 *
-	 * @param string $text being 'foo', then returned 'foo bar!'.
-	 */
-	public function myfoo( $text ) {
-		$text .= ' bar!';
-		return $text;
-	}
-
 	/** This is where you can add your own functions to twig.
 	 *
 	 * @param string $twig get extension.
-	 */
+  */
+
 	public function add_to_twig( $twig ) {
 		$twig->addExtension( new Twig\Extension\StringLoaderExtension() );
 		$twig->addFilter( new Twig\TwigFilter( 'myfoo', array( $this, 'myfoo' ) ) );
@@ -163,5 +154,27 @@ class StarterSite extends Timber\Site {
 	}
 
 }
+
+// WP Admin / Editor
+get_template_part('inc/admin');
+
+// ACF
+get_template_part('inc/acf');
+
+// Custom Post Types
+get_template_part('inc/post-types');
+
+// Custom Taxonomies
+get_template_part('inc/taxonomies');
+
+// Helper Functions
+get_template_part('inc/helpers');
+
+// Enqueue Scripts
+get_template_part('inc/scripts');
+
+// API
+get_template_part('inc/api/download');
+
 
 new StarterSite();

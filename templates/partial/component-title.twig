@@ -1,0 +1,16 @@
+{% set title_color_class = theme_text_color %}
+{% if title_color != null %}
+  {% if title_color != 'theme' %}
+    {% set title_color_class = 'text-pop-' ~ title_color %}
+  {% endif %}
+{% endif %}
+
+{% if title|length > 0 %}
+
+<div class="relative  px-8 py-12 {{ title_color_class }}">
+  <div class="absolute top-0 left-0 h-full w-full pattern {{ pattern }}-{{ pattern_color }} opacity-{{ pattern_opacity }}"></div>
+  <h3 class="{{ subtitle == '' ? '' : 'mb-3'}}">{{ title }}</h3>
+  <div class="{{ theme == 'dark' ? 'text-pop-white' : 'text-pop-black' }}">{{ subtitle }}</div>
+</div>
+
+{% endif %}

@@ -1,0 +1,52 @@
+{% if is_preview %}
+  <p><strong>Square Grid</strong> - I will only appear in the editor.</p>
+{% endif %}
+
+{% if not is_preview %}
+  <div class="container-wide" >
+    <div class="{{ theme_bg_color }} md:shadow-md md:box-content">
+      {% include "/templates/partial/component-title.twig" with
+        {
+          'title': fields.title,
+          'subtitle': fields.subtitle,
+          'theme_text_color': theme_text_color,
+          'title_color': fields.title_color,
+          'pattern': fields.pattern.type,
+          'pattern_color': fields.pattern.color,
+          'pattern_opacity': fields.pattern.opacity
+        }
+      %}
+      <div class="relative grid gap-0.5 grid-cols-2 grid-rows-4 sm:grid-cols-4 sm:grid-rows-2 border-2 {{ theme_border_color }} {{ theme == 'dark' ? 'bg-pop-black' : 'bg-pop-gray'}}">
+
+        {% for item in fields.square_grid %}
+          <div class="relative" style="padding-bottom: 100%;">
+            {% if item.acf_fc_layout == 'Icon' %}
+              <div
+                class="absolute top-0 left-0 flex flex-col h-full w-full bg-cover bg-no-repeat bg-center"
+                style="background-image: url({{ item.icon_image }});">
+              </div>
+            {% endif %}
+
+            {% if item.acf_fc_layout == 'Link Card' %}
+              <div class="link-card absolute top-0 left-0 flex flex-col h-full w-full">
+                <a class="h-full" href="{{ item.url }}" >
+                  <div class="bg-pop-white flex flex-col justify-between h-full">
+                    <div class="text-base sm:text-lg font-bold py-4 px-2 md:px-4 m-0 text-pop-black">{{ item.text }}</div>
+                    <div class="self-end">
+                      {% include "/templates/partial/arrow.twig" with
+                        {
+                          'arrow': fields.arrow,
+                        }
+                      %}
+                    </div>
+                  </div>
+                </a>
+              </div>
+            {% endif %}
+          </div>
+
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+{% endif %}

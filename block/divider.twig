@@ -1,0 +1,12 @@
+{% if is_preview %}
+<p><strong>Pop Container</strong> - I will only appear in the editor.</p>
+{% endif %}
+
+{% if not is_preview %}
+  {% set bg_color = (fields.color == 'theme' ? theme_bg_color : 'bg-pop-' ~ fields.color) %}
+
+  <div class="section__title {{ bg_color }} py-2 px-8  flex items-center my-20 mx-auto max-w-6xl" style="width: 90%">
+    <p class="text-pop-mid-gray text-xs m-0 mr-4">{{ fields.title }}</p>
+    <div class="bg-pop-mid-gray flex-grow" style="height: 1px"></div>
+  </div>
+{% endif %}

@@ -1,0 +1,46 @@
+html::-webkit-scrollbar,
+body::-webkit-scrollbar,
+.back-card-content::-webkit-scrollbar {
+  opacity: 1;
+  width: 8px;
+  overflow: visible;
+  display: block !important;
+
+  @apply bg-gray-100;
+}
+
+html::-webkit-scrollbar-track,
+body::-webkit-scrollbar-track {
+  @apply bg-gray-100;
+}
+
+html::-webkit-scrollbar-thumb,
+body::-webkit-scrollbar-thumb {
+  @apply bg-pop-pink rounded;
+}
+
+html::-webkit-scrollbar-thumb:window-inactive,
+body::-webkit-scrollbar-thumb:window-inactive {
+  @apply bg-pop-pink rounded;
+}
+
+.turbine-info::-webkit-scrollbar-track {
+  @apply bg-pop-pink;
+}
+
+.turbine-info::-webkit-scrollbar-thumb {
+  @apply bg-pop-white rounded;
+}
+
+.turbine-info::-webkit-scrollbar-thumb:window-inactive {
+  @apply bg-pop-white rounded;
+}
+
+.turbine-info::-webkit-scrollbar {
+  opacity: 1;
+  width: 8px;
+  overflow: visible;
+  display: block !important;
+
+  @apply bg-pop-pink;
+}

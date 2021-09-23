@@ -1,0 +1,11 @@
+{% if is_preview %}
+  <p><strong>Text Block</strong> - I will only appear in the editor.</p>
+{% endif %}
+
+{% if not is_preview %}
+  <div class="container-wide relative flex flex-wrap md:flex-nowrap" >
+    <div class="w-full {{ theme_text_color }}">
+      {{ fields.text }}
+    </div>
+  </div>
+{% endif %}

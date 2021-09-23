@@ -15,9 +15,14 @@
 
 $context          = Timber::context();
 $context['posts'] = new Timber\PostQuery();
-$context['foo']   = 'bar';
-$templates        = array( 'index.twig' );
+$templates        = array('index.twig');
 if ( is_home() ) {
 	array_unshift( $templates, 'front-page.twig', 'home.twig' );
 }
+$cat_args = array(
+  'hide_empty' => true,
+	'orderby'    => 'name',
+	'order'      => 'ASC'
+);
+$context['categories'] = get_categories($cat_args);
 Timber::render( $templates, $context );

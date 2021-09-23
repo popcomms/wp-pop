@@ -1,0 +1,117 @@
+{% if is_preview %}
+  <p><strong>Portfolio</strong> - I will only appear in the editor.</p>
+{% endif %}
+
+{% if not is_preview %}
+  <div class="container-wide" >
+    <div class="{{ theme_bg_color }} md:shadow-md md:box-content">
+      {% if fields.show_title %}
+      {% include "/templates/partial/component-title.twig" with
+        {
+          'title': fields.title,
+          'subtitle': fields.subtitle,
+          'theme_text_color': theme_text_color,
+          'title_color': fields.title_color,
+          'pattern': fields.pattern.type,
+          'pattern_color': fields.pattern.color,
+          'pattern_opacity': fields.pattern.opacity
+        }
+      %}
+      {% endif %}
+      <div class="portfolio grid gap-0.5 grid-cols-1 sm:grid-cols-2  relative border-2 {{ theme_border_color }} {{ theme_bg_color }}">
+        {% for item in fields.content %}
+          {% set width = 'col-span-1' %}
+          {% set height = 'row-span-1' %}
+
+          {% if loop.index == 3 %}
+            {% set width = 'col-span-1 sm:col-span-2' %}
+          {% elseif loop.index == 4 %}
+            {% set height = 'row-span-1 sm:row-span-2' %}
+          {% endif %}
+
+          <div class="portfolio__item image-container relative">
+            {% if item.acf_fc_layout == 'Image' %}
+              <div
+              class="portfolio__item--image absolute top-0 left-0 flex flex-col h-full w-full bg-cover bg-no-repeat bg-center"
+              style="background-image: url({{ item.image.url }});">
+                <div class="group hidden sm:block image-magnify absolute top-0 right-0 w-10 h-10 p-2 bg-pop-black bg-opacity-90 cursor-pointer">
+                  <svg width="25" height="25" viewBox="0 0 22 29" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full absolute transform left-1/2 top-1/2 -translate-y-1/2 -translate-x-1/2 transition-transform group-hover:scale-125">
+                    <circle class="stroke-current text-pop-pink" cx="11.0001" cy="11.2123" r="9.48109" stroke-width="3"/>
+                    <path class="stroke-current text-pop-pink" d="M15.6528 20.1655L19.9459 27.7689" stroke-width="3"/>
+                  </svg>
+                </div>
+                {# PopUp Image #}
+                <div class="hidden opacity-0 full-width-image-popup fixed z-50 w-screen h-screen top-0 left-0 p-10">
+                  <div class="absolute top-0 left-0 bg-pop-black-dark opacity-90 w-screen h-screen"></div>
+                  <div class="relative w-full h-full bg-pop-black">
+                    <img class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full max-h-full object-contain" src="{{ item.image.url }}" alt="">
+                    <div class="group image-hide absolute top-0 right-0 w-10 h-10 p-2 bg-pop-black bg-opacity-90 cursor-pointer">
+                      <svg class="w-full absolute transform left-1/2 top-1/2 -translate-y-1/2 -translate-x-1/2 transition-transform group-hover:scale-125" width="25" height="25" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path class="stroke-current text-pop-pink" d="M18.2189 1.5682L1.78125 17.9892" stroke-width="3"/>
+                        <path class="stroke-current text-pop-pink" d="M18.2104 17.9975L1.78939 1.55987" stroke-width="3"/>
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            {% elseif item.acf_fc_layout == 'Icon' %}
+              <div
+                class="portfolio__item--icon absolute top-0 left-0 flex flex-col h-full w-full bg-cover bg-no-repeat bg-center"
+                style="background-image: url({{ item.icon }});">
+              </div>
+
+              {% elseif item.acf_fc_layout == 'Link Card' %}
+              <div class="link-card absolute top-0 left-0 flex flex-col h-full w-full">
+                {% set link_post = function('get_post', item.link_card.link) %}
+                {% set featured_img = function('get_the_post_thumbnail_url', link_post.ID) %}
+                <a class="h-full relative" href="{{ link_post.guid }}" >
+                  <div class="group bg-pop-white flex flex-col justify-between h-full">
+                    <div class="absolute top-0 left-0 w-full h-full hover:opacity-100 transition-opacity overflow-hidden">
+                      <img class="w-full h-full object-cover origin-center transform group-hover:scale-110 transition-transform duration-500" src="{{ featured_img }}" alt="">
+                      <div class="absolute top-0 left-0 h-full w-full bg-pop-black opacity-40 group-hover:opacity-0 transition-opacity duration-500"></div>
+                    </div>
+
+                    <h3 class="group-hover:opacity-0 transition-opacity duration-500 p-6 m-0 text-pop-white {{ loop.index == 3 ? 'sm:w-3/4' : 'w-full'}}">{{ item.link_card.text }}</h3>
+                    {% if featured_img %}
+                    {% endif %}
+                    <div class="self-end">
+                      {% include "/templates/partial/arrow.twig" with
+                        {
+                          'arrow': fields.arrow,
+                        }
+                      %}
+                    </div>
+                  </div>
+                </a>
+              </div>
+            {% elseif item.acf_fc_layout == 'Custom Image Link Card' %}
+              <div class="link-card absolute top-0 left-0 flex flex-col h-full w-full">
+                {% set link_post = function('get_post', item.link_card.link) %}
+                <a class="h-full relative" href="{{ link_post.guid }}" >
+                  <div class="group bg-pop-white flex flex-col justify-between h-full">
+                    <div class="absolute top-0 left-0 w-full h-full hover:opacity-100 transition-opacity overflow-hidden">
+                      <img class="w-full h-full object-cover origin-center transform group-hover:scale-110 transition-transform duration-500" src="{{ item.link_card.image }}" alt="">
+                      {# <div class="absolute top-0 left-0 h-full w-full bg-pop-black opacity-40 group-hover:opacity-0 transition-opacity duration-500"></div> #}
+                    </div>
+
+                    <h3 class="group-hover:opacity-0 transition-opacity duration-500 p-6 m-0 text-pop-white {{ loop.index == 3 ? 'sm:w-1/2' : 'w-3/4'}}">{{ item.link_card.text }}</h3>
+                    {% if featured_img %}
+                    {% endif %}
+                    <div class="self-end">
+                      {% include "/templates/partial/arrow.twig" with
+                        {
+                          'arrow': fields.arrow,
+                        }
+                      %}
+                    </div>
+                  </div>
+                </a>
+              </div>
+            {% endif %}
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+{% endif %}

@@ -1,0 +1,74 @@
+{% if related|length > 0 %}
+  <div class="py-20 bg-pop-{{ content.theme == 'black' ? 'black' : 'white' }}">
+    <div class="container-wide border-t border-gray-300 text-pop-{{ content.theme == 'black' ? 'white' : 'black' }}">
+
+      <h3 class="my-12">
+        {% if post.type == 'case-studies' %}
+          Related Case Studies
+        {% else %}
+          Related Posts
+        {% endif %}
+      </h3>
+
+      {% for post in related %}
+      <a class="block" href="{{ post.link }}">
+        <article class="group md:grid grid-cols-1 sm:grid-cols-2 grid-rows-2 border border-gray-200 sm:grid-rows-1 bg-black bg-opacity-5 transition-opacity mb-8">
+          <div class="relative aspect-w-4 aspect-h-3 transition-opacity group-hover:opacity-80 md:border-r border-gray-200">
+            {% if post.thumbnail.src %}
+            <img
+              class="absolute top-0 left-0 bottom-0 right-0 object-cover"
+              src="{{ post.thumbnail.src }}"
+              style="font-size: 0"
+            />
+            {% else %}
+            <img
+              class="absolute top-0 left-0 bottom-0 right-0 object-cover"
+              src="{{ theme.link }}/static/images/blogs-bg.png"
+              style="font-size: 0"
+            />
+            {% endif %}
+          </div>
+          <div class="relative flex flex-col items-start sm:justify-center p-6 pb-20">
+
+            {% if post.type != 'case-studies' %}
+              <div class="text-xs my-2 text-pop-purple">
+                {{ post.date }}
+              </div>
+              <br>
+            {% endif %}
+
+            <h4 class="text-xl font-bold leading-tight group-hover:text-pop-pink">
+            {% if post.type == 'case-studies' %}
+              {{ function('case_study_title', post.title, post.terms('client') | first, post.terms('category') | first) }}
+            {% else %}
+              {{ post.title }}
+            {% endif %}
+            </h4>
+
+            {% if post.type != 'case-studies' %}
+              <br>
+              {% include "/templates/partial/archive-author.twig" %}
+            {% endif %}
+
+            <div class="absolute bottom-0 right-0">
+              {% include "/templates/partial/link.twig" with
+                {
+                  'link': {
+                    url: post.uid,
+                    text: 'Read',
+                    background_color: 'black',
+                    accent_color: 'yellow',
+                    arrow_color: 'blue',
+                    angle: 45
+                  },
+                }
+              %}
+            </div>
+          </div>
+        </article>
+      </a>
+      {% endfor %}
+
+    </div>
+  </div>
+{% endif %}

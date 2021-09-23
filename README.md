@@ -1,13 +1,11 @@
 
-# The Timber Starter Theme
+# POP WordPress Theme
 
-The "_s" for Timber: a dead-simple theme that you can build from. The primary purpose of this theme is to provide a file structure rather than a framework for markup or styles. Configure your Sass, scripts, and task runners however you would like!
-
-[![Build Status](https://travis-ci.com/timber/starter-theme.svg?branch=master)](https://travis-ci.come/github/timber/starter-theme)
+Custom theme for POP website built for the Timber framework.
 
 ## Installing the Theme
 
-Install this theme as you would any other, and be sure the Timber plugin is activated. But hey, let's break it down into some bullets:
+Install this theme as you would any other, and be sure the Timber plugin is activated:
 
 1. Make sure you have installed the plugin for the [Timber Library](https://wordpress.org/plugins/timber-library/) (and Advanced Custom Fields - they [play quite nicely](https://timber.github.io/docs/guides/acf-cookbook/#nav) together). 
 2. Download the zip for this theme (or clone it) and move it to `wp-content/themes` in your WordPress installation. 
@@ -31,3 +29,9 @@ Install this theme as you would any other, and be sure the Timber plugin is acti
 * [A real live Timber theme](https://github.com/laras126/yuling-theme).
 * [Timber Video Tutorials](http://timber.github.io/timber/#video-tutorials) and [an incomplete set of screencasts](https://www.youtube.com/playlist?list=PLuIlodXmVQ6pkqWyR6mtQ5gQZ6BrnuFx-) for building a Timber theme from scratch.
 
+## Compile CSS
+
+Running will watch for css changes and compile `main.css` into the theme `style.css`
+```
+npm run watch:css
+```

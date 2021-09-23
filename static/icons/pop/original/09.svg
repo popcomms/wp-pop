@@ -1,0 +1,16 @@
+<svg width="600" height="600" viewBox="0 0 600 600" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#clip0)">
+<rect width="600" height="600" transform="translate(600 600) rotate(180)" fill="#F8F7EE"/>
+<rect y="360" width="120" height="600" transform="rotate(-90 0 360)" fill="#FF0088"/>
+<rect x="600" y="600" width="120" height="600" transform="rotate(180 600 600)" fill="#2D2D2D"/>
+<rect y="120" width="120" height="600" transform="rotate(-90 0 120)" fill="#FF0088"/>
+<rect y="600" width="120" height="600" transform="rotate(-90 0 600)" fill="#FF0088"/>
+<rect x="360" y="600" width="120" height="600" transform="rotate(180 360 600)" fill="#2D2D2D"/>
+<rect x="120" y="600" width="120" height="600" transform="rotate(180 120 600)" fill="#2D2D2D"/>
+</g>
+<defs>
+<clipPath id="clip0">
+<rect width="600" height="600" fill="white" transform="translate(600 600) rotate(180)"/>
+</clipPath>
+</defs>
+</svg>

@@ -1,0 +1,20 @@
+<div class="container-wide flex">
+  <div class="py-3 pr-4">
+    <img
+      src="{{ theme.link }}/static/icons/tag-solid.svg"
+      class="w-6 opacity-30"
+    >
+  </div>
+  <div>
+  {% for category in post.categories %}
+    <a
+      href="{{ category.link }}"
+      class="inline-block bg-pop-{{ function('get_random_colour') }} no-underline text-pop-white font-semibold py-1 px-3 rounded-full transition-all transform hover:scale-110 m-1"
+    >
+      <span class="text-xs text-pop-white leading-loose">
+        {{ category }}
+      </span>
+    </a>
+  {% endfor %}
+  </div>
+</div>

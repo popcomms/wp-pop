@@ -1,0 +1,26 @@
+{% if is_preview %}
+<p><strong>Pop Container</strong> - I will only appear in the editor.</p>
+{% endif %}
+
+{% if not is_preview %}
+<div class="section relative">
+  <div class="section__title {{ theme_bg_color }} py-2 px-8 shadow-md z-10 absolute -top-24 left-1/2 flex items-center transform -translate-x-1/2 -translate-y-1/2" style="width: 90%">
+    <p class="text-pop-mid-gray text-xs m-0 mr-4">{{ fields.title }}</p>
+    <div class="bg-pop-mid-gray flex-grow" style="height: 1px"></div>
+  </div>
+  {% for sub_item in item.content %}
+    <div class="section__item {{ loop.last ? '' : 'mb-0 sm:mb-28' }}">
+      {% set path = "/block/" ~ sub_item.acf_fc_layout ~ ".twig" %}
+      {% include path with 
+        {
+          'fields': sub_item,
+          'theme': theme,
+          'theme_text_color': theme == "dark" ? 'text-pop-white' : 'text-pop-black',
+          'theme_bg_color': theme == "dark" ? 'bg-pop-black' : 'bg-pop-white',
+          'theme_border_color': theme == "dark" ? 'border-pop-black-dark' : 'border-pop-gray'
+        }
+      %}
+    </div>
+  {% endfor %}
+</div>
+{% endif %}

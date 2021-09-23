@@ -1,0 +1,36 @@
+/* --------------------
+  Animations
+-------------------- */
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s;
+}
+
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
+}
+
+.fade-enter-to,
+.fade-leave {
+  opacity: 1;
+}
+
+
+.fade-Y-enter-active {
+  transition: all 0.3s ease;
+}
+
+.fade-Y-leave-active {
+  transition: all 0.3s ease;
+}
+
+.fade-Y-enter {
+  transform: translateY(50%);
+  opacity: 0;
+}
+
+.fade-Y-leave-to {
+  transform: translateY(-50%);
+  opacity: 0;
+}

@@ -1,0 +1,25 @@
+<svg width="600" height="600" viewBox="0 0 600 600" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#clip0)">
+<rect width="600" height="600" transform="translate(0 600) rotate(-90)" fill="#2D2D2D"/>
+<line x1="13.5" y1="-71" x2="13.5" y2="662" stroke="#3A3EAB" stroke-width="27"/>
+<line x1="218.5" y1="-71" x2="218.5" y2="662" stroke="#3A3EAB" stroke-width="27"/>
+<line x1="95.5" y1="-71" x2="95.5" y2="662" stroke="#3A3EAB" stroke-width="27"/>
+<line x1="382.5" y1="-71" x2="382.5" y2="662" stroke="#3A3EAB" stroke-width="27"/>
+<line x1="177.5" y1="-71" x2="177.5" y2="662" stroke="#3A3EAB" stroke-width="27"/>
+<line x1="505.5" y1="-71" x2="505.5" y2="662" stroke="#3A3EAB" stroke-width="27"/>
+<line x1="341.5" y1="-71" x2="341.5" y2="662" stroke="#3A3EAB" stroke-width="27"/>
+<line x1="587.5" y1="-71" x2="587.5" y2="662" stroke="#3A3EAB" stroke-width="27"/>
+<line x1="54.5" y1="-71" x2="54.5" y2="662" stroke="#3A3EAB" stroke-width="27"/>
+<line x1="300.5" y1="-71" x2="300.5" y2="662" stroke="#3A3EAB" stroke-width="27"/>
+<line x1="136.5" y1="-71" x2="136.5" y2="662" stroke="#3A3EAB" stroke-width="27"/>
+<line x1="464.5" y1="-71" x2="464.5" y2="662" stroke="#3A3EAB" stroke-width="27"/>
+<line x1="259.5" y1="-71" x2="259.5" y2="662" stroke="#3A3EAB" stroke-width="27"/>
+<line x1="546.5" y1="-71" x2="546.5" y2="662" stroke="#3A3EAB" stroke-width="27"/>
+<line x1="423.5" y1="-71" x2="423.5" y2="662" stroke="#3A3EAB" stroke-width="27"/>
+</g>
+<defs>
+<clipPath id="clip0">
+<rect width="600" height="600" fill="white" transform="translate(0 600) rotate(-90)"/>
+</clipPath>
+</defs>
+</svg>

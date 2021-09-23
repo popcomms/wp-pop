@@ -1,0 +1,332 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    position: relative;
+    box-sizing: border-box;
+  }
+
+  body,
+  html {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    @media only screen and (min-width: 1024px) {
+      font-size: 21px;
+    }
+  }
+
+  p {
+    margin-top: 1em;
+    margin-bottom: 1em;
+  }
+
+  strong {
+    @apply font-bold;
+  }
+
+  ul li {
+    @apply pl-5;
+    @apply my-3;
+    &::before {
+      @apply block absolute left-0 transform -translate-y-1/2 w-1.5 h-1.5 bg-pop-pink rounded-full;
+      content: '';
+      top: 0.75em;
+    }
+  }
+
+  ol {
+    list-style: decimal-leading-zero;
+    list-style-position: inside;
+
+    &::marker {
+      @apply text-pop-pink;
+    }
+  }
+
+  pre {
+    @apply border-4 border-pop-pink rounded-2xl p-8 my-10 overflow-auto;
+  }
+
+  h1, .h1,
+  h2, .h2,
+  h3, .h3,
+  h4, .h4,
+  h5, .h5,
+  h6, .h6 {
+    @apply font-bold;
+    @apply leading-tight;
+  }
+
+  h1,
+  .h1 {
+    @apply text-3xl;
+  }
+
+  h2,
+  .h2 {
+    @apply text-2xl;
+  }
+
+  h3,
+  .h3 {
+    @apply text-xl;
+  }
+
+  h4,
+  .h4 {
+    @apply text-lg;
+  }
+
+  h5,
+  .h5 {
+    @apply text-base;
+  }
+
+  h6,
+  .h6 {
+    @apply text-sm;
+  }
+
+
+  /* @media only screen and (max-width: 640px) {
+    h1,
+    .h1 {
+      font-size: 36px;
+    }
+
+    h2,
+    .h2 {
+      font-size: 24px;
+    }
+
+    h3,
+    .h3 {
+      font-size: 28px;
+    }
+
+    h4,
+    .h4 {
+
+    }
+
+    h5,
+    .h5 {
+      font-size: 21px;
+    }
+
+    h6,
+    .h6 {
+
+    }
+  } */
+
+  @media only screen and (min-width: 1024px) {
+    h1,
+    .h1 {
+      @apply text-4xl;
+    }
+
+    h2,
+    .h2 {
+      @apply text-3xl;
+    }
+
+    h3,
+    .h3 {
+      @apply text-2xl;
+    }
+
+    h4,
+    .h4 {
+      @apply text-xl;
+    }
+
+    h5,
+    .h5 {
+      @apply text-lg;
+    }
+
+    h6,
+    .h6 {
+      @apply text-base;
+    }
+  }
+
+
+  /*@media only screen and (min-width: 1280px) {
+    h1,
+    .h1 {
+      font-size: 64px;
+    }
+
+    h2,
+    .h2 {
+      font-size: 48px;
+    }
+
+    h3,
+    .h3 {
+      font-size: 36px;
+    }
+
+    h4,
+    .h4 {
+
+    }
+
+    h5,
+    .h5 {
+      font-size: 28px;
+    }
+
+    h6,
+    .h6 {
+
+    }
+  }
+
+  @media only screen and (min-width: 1536px) {
+    h1,
+    .h1 {
+      font-size: 64px;
+    }
+
+    h2,
+    .h2 {
+      font-size: 48px;
+    }
+
+    h3,
+    .h3 {
+      font-size: 36px;
+    }
+
+    h4,
+    .h4 {
+
+    }
+
+    h5,
+    .h5 {
+      font-size: 28px;
+    }
+
+    h6,
+    .h6 {
+
+    }
+  } */
+
+
+  /* article p,
+  article li,
+  article pre {
+    @apply text-xl font-normal;
+    line-height: 140%;
+  } */
+
+  /* --------------------
+  Tables
+  -------------------- */
+
+  table {
+    @apply min-w-full divide-y divide-gray-200;
+    thead {
+      @apply bg-gray-50;
+      th {
+        @apply px-4 py-2 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider;
+      }
+      @media screen and (max-width: 640px) {
+        th {
+          @apply block;
+        }
+      }
+    }
+    tbody {
+      @apply divide-y divide-gray-200;
+      td {
+        @apply px-4 py-2 md:text-sm;
+      }
+      @media screen and (max-width: 640px) {
+        td {
+          @apply block;
+        }
+      }
+    }
+  }
+
+  article table {
+    @apply my-12;
+  }
+
+  .text-block img {
+    @apply w-full;
+  }
+
+  .banner-title > * {
+    @apply my-5 font-normal;
+    font-size: 5rem;
+    line-height: 4rem;
+  }
+
+  @media (max-width: 375px) {
+    p {
+      font-size: 1rem;
+    }
+  }
+
+  /* --------------------
+    Blockquotes
+  -------------------- */
+
+  blockquote {
+    @apply my-4 px-8 border-l-4 border-pop-black border-opacity-50;
+    p {
+      @apply leading-tight;
+    }
+  }
+
+  hr {
+    @apply my-6 border-t;
+  }
+
+  /* --------------------
+    Containers
+  -------------------- */
+
+  .container-banner {
+    @apply px-0 sm:px-6 mx-auto max-w-4xl;
+  }
+
+  .container-narrow {
+    @apply w-full max-w-4xl px-6 md:mx-auto mb-20 sm:mb-0;
+  }
+
+  .container div > .container-narrow ~ .container-narrow {
+    @apply mt-20 sm:mt-0;
+  }
+
+  .section > .container-narrow ~ .container-narrow {
+    @apply mt-20 sm:mt-0;
+  }
+
+  .container-wide {
+    @apply w-full max-w-3xl px-6 md:mx-auto;
+  }
+
+  /* --------------------
+    WP Blocks
+  -------------------- */
+
+  .wp-block-video {
+    @apply px-4 sm:px-10 md:px-0 md:mx-auto mb-40 mt-20 !important;
+  }
+
+  hr.wp-block-separator {
+    @apply border-0 border-t border-gray-300;
+  }
+
+}

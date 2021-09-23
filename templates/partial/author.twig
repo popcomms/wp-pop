@@ -1,0 +1,30 @@
+<div class="w-full">
+  <div class="my-20 container-wide text-pop-{{ content.theme == 'black' ? 'white' : 'black' }}">
+    <div class="flex items-center justify-start space-x-4">
+      <div class="w-20 h-20 md:w-32 md:h-32 mr-2">
+        <div
+          class="aspect-w-1 aspect-h-1 bg-cover rounded-full  border border-gray-200"
+          style="background-image: url({{ Image(post.author.meta('avatar')).src }})"
+        ></div>
+      </div>
+      <div class="text-base">
+        <div class="text-lg font-bold">
+          {{ post.author.display_name }}
+        </div>
+        <div class="text-xs mb-4 text-gray-500">
+          {{ post.author.meta('job_title') }}
+        </div>
+        <div class="text-xs mb-1">
+          <a class="text-pop-pink" href="mailto:{{ post.author.user_email }}">
+            {{ post.author.user_email }}
+          </a>
+        </div>
+        <div class="text-xs">
+          <a href="tel:+441173291712">
+            +44 (0)117 329 1712
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

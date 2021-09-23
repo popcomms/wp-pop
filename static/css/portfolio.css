@@ -1,0 +1,25 @@
+.portfolio {
+  &__item {
+    grid-column: span 1 / span 1;
+    grid-row: span 1 / span 1;
+    padding-bottom: 100%;
+
+    &--icon {
+      background-size: 101%;
+    }
+  }
+
+  &__item:nth-child(3) {
+    @screen sm {
+      grid-column: span 2 / span 2;
+      padding-bottom: 50%;
+    }
+  }
+
+  &__item:nth-child(4) {
+    @screen sm {
+      grid-row: span 2 / span 2;
+      padding-bottom: 200%;
+    }
+  }
+}

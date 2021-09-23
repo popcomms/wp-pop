@@ -1,39 +1,76 @@
 {% extends "base.twig" %}
 
 {% block content %}
-	<div class="content-wrapper">
-		<article class="post-type-{{ post.post_type }}" id="post-{{ post.ID }}">
-			<img src="{{ post.thumbnail.src|resize(1200, 300) }}">
-			<section class="article-content">
-				<h1 class="article-h1">{{ post.title }}</h1>
-				<a href="{{ post.link }}">{{ _e('edit') }}</a>
-				<p class="blog-author">
-					<span>By</span><a href="{{post.author.path}}"> {{ post.author.name }} </a><span>&bull;</span> <time datetime="{{ post.date|date('Y-m-d H:i:s') }}">{{ post.date }}</time>
-				</p>
-				<div class="article-body">
-					{{post.content}}
-				</div>
-			</section>
 
-			<!-- comment box -->
-			<section class="comment-box">
-				<!-- comments -->
-				<div class="comments">
-				    {% if post.comments %}
-					<h3> comments </h3>
-					{% for cmt in post.comments %}
-					    {% include "comment.twig" with {comment:cmt} %}
-					{% endfor %}
-				    {% endif %}
-				</div>
+  {% if post.thumbnail.src %}
+    <div
+      class="fixed w-full aspect-w-16 aspect-h-9 lg:aspect-h-7 bg-cover bg-pop-white max-h-screen max-w-screen"
+      style="background-image: url({{ post.thumbnail.src }})"
+    ></div>
+    <div
+      class="aspect-w-16 aspect-h-9 lg:aspect-h-7 bg-cover bg-pop-transparent max-h-screen max-w-screen"
+    ></div>
+  {% else %}
+    <div
+      class="fixed w-full aspect-w-16 aspect-h-9 lg:aspect-h-7 bg-cover bg-pop-white max-h-screen max-w-screen"
+      style="background-image: url({{ theme.link }}/static/images/blogs-bg.png)"
+    ></div>
+    <div
+      class="aspect-w-16 aspect-h-9 lg:aspect-h-7 bg-cover bg-pop-transparent max-h-screen max-w-screen"
+    ></div>
+  {% endif %}
 
-				{% if post.comment_status == "closed" %}
-					<p> comments for this post are closed </p>
-				{% else %}
-				    <!-- comment form -->
-				    {% include "comment-form.twig" %}
-				{% endif %}
-			</section>
+	<div class="relative content-wrapper">
+		{# {% include "/templates/partial/post-hero.twig" with { 'fields': hero } %} #}
+
+    <div class="relative max-w-3xl mx-auto md:-mt-48 bg-pop-white">
+      <div
+        class="absolute top-1/2 left-1/2 transform -translate-x-1/2 bg-pop-white h-full"
+        style="max-width: 100vw; width: calc(100vw - 8px)"
+      ></div>
+
+      {% for path in icons %}
+        <img
+          src="{{ path }}"
+          class="inline-block w-12"
+        />
+      {% endfor %}
+
+      <div class="p-6 lg:p-8">
+        <h1 class="font-bold text-2xl sm:text-3xl lg:text-4xl">
+          {{ post.title }}
+        </h1>
+      </div>
+      <div class="px-6 lg:px-8 flex items-center justify-between">
+        <div class="flex items-center">
+          {% include "/templates/partial/archive-author.twig" %}
+          <div class="text-pop-purple">
+            {{ post.date }}
+          </div>
+        </div>
+        {% include "/templates/partial/single-share.twig" %}
+      </div>
+    </div>
+
+		<article
+      id="post-{{ post.ID }}"
+      class="post-content pop-container post-type-{{ post.post_type }} bg-pop-white"
+    >
+			<div class="relative pb-12" >
+				<div
+          id="content"
+          class="entry-content pop-container md:my-12"
+        >
+					<div class="container-wide text-pop-{{ content.theme == 'black' ? 'white' : 'black' }}">
+						{{ post.content }}
+					</div>
+				</div>
+			</div>
+
+      {% include "/templates/partial/author.twig" %}
+      {% include "/templates/partial/single-categories.twig" %}
+      {% include "/templates/partial/related.twig" %}
+
 		</article>
-	</div><!-- /content-wrapper -->
+	</div>
 {% endblock %}

@@ -1,0 +1,34 @@
+.problems-list {
+  &__item {
+
+    &-number {
+      font-size: 5rem !important;
+    }
+
+    strong {
+      @apply font-semibold;
+    }
+
+    svg {
+      transition: transform 0.3s ease;
+      transform: rotate3d(1, 1, 1, 0deg);
+    }
+
+    &-bg {
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    &:hover {
+      svg {
+        transition: transform 0.3s ease;
+        transform: rotate3d(8.5, 0, 1, 184deg);
+      }
+
+      .problems-list__item-bg {
+        opacity: 0.1;
+        transition: opacity 0.3s ease;
+      }
+    }
+  }
+}

@@ -1,0 +1,15 @@
+.link {
+  &__text {
+    transform: translateZ(0);
+    transition: transform 0.3s ease;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+  }
+}
+
+.link:hover {
+  .link__text {
+    transform: scale(1.2) translateZ(0);
+    transition: transform 0.3s ease;
+  }
+}

@@ -14,7 +14,7 @@
  * @since   Timber 0.2
  */
 
-$templates = array( 'archive.twig', 'index.twig' );
+$templates = array( 'archive.twig');
 
 $context = Timber::context();
 
@@ -35,6 +35,12 @@ if ( is_day() ) {
 	array_unshift( $templates, 'archive-' . get_post_type() . '.twig' );
 }
 
-$context['posts'] = new Timber\PostQuery();
+$args = array(
+  'post_type'   => array('post', 'case-studies'),
+  'post_status' => 'publish',
+  'category'    => get_query_var('cat')
+);
+
+$context['posts'] = new Timber\PostQuery($args);
 
 Timber::render( $templates, $context );

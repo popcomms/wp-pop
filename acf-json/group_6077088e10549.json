@@ -1,0 +1,162 @@
+{
+    "key": "group_6077088e10549",
+    "title": "Partial: Pattern",
+    "fields": [
+        {
+            "key": "field_6077089308691",
+            "label": "Pattern",
+            "name": "pattern",
+            "type": "group",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "layout": "block",
+            "sub_fields": [
+                {
+                    "key": "field_607708a408692",
+                    "label": "Type",
+                    "name": "type",
+                    "type": "radio",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "33.33",
+                        "class": "",
+                        "id": ""
+                    },
+                    "choices": {
+                        "polka": "Polka",
+                        "stripe": "Stripe",
+                        "none": "None"
+                    },
+                    "allow_null": 0,
+                    "other_choice": 0,
+                    "default_value": "polka",
+                    "layout": "horizontal",
+                    "return_format": "value",
+                    "save_other_choice": 0
+                },
+                {
+                    "key": "field_607708c908693",
+                    "label": "Color",
+                    "name": "color",
+                    "type": "select",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_607708a408692",
+                                "operator": "==",
+                                "value": "polka"
+                            }
+                        ]
+                    ],
+                    "wrapper": {
+                        "width": "33.33",
+                        "class": "",
+                        "id": ""
+                    },
+                    "choices": {
+                        "blue": "blue",
+                        "pink": "pink",
+                        "green": "green",
+                        "yellow": "yellow",
+                        "purple": "purple",
+                        "navy": "navy",
+                        "gray": "gray"
+                    },
+                    "default_value": "blue",
+                    "allow_null": 0,
+                    "multiple": 0,
+                    "ui": 0,
+                    "return_format": "value",
+                    "ajax": 0,
+                    "placeholder": ""
+                },
+                {
+                    "key": "field_607708ff08694",
+                    "label": "Color",
+                    "name": "color",
+                    "type": "select",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_607708a408692",
+                                "operator": "==",
+                                "value": "stripe"
+                            }
+                        ]
+                    ],
+                    "wrapper": {
+                        "width": "33.33",
+                        "class": "",
+                        "id": ""
+                    },
+                    "choices": {
+                        "blue": "blue",
+                        "pink": "pink",
+                        "green": "green",
+                        "yellow": "yellow",
+                        "purple": "purple",
+                        "navy": "navy",
+                        "gray": "gray"
+                    },
+                    "default_value": "blue",
+                    "allow_null": 0,
+                    "multiple": 0,
+                    "ui": 0,
+                    "return_format": "value",
+                    "ajax": 0,
+                    "placeholder": ""
+                },
+                {
+                    "key": "field_60b0f8429bece",
+                    "label": "Opacity",
+                    "name": "opacity",
+                    "type": "range",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "33.33",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": 80,
+                    "min": "",
+                    "max": "",
+                    "step": 10,
+                    "prepend": "",
+                    "append": ""
+                }
+            ]
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "post"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": false,
+    "description": "",
+    "modified": 1626771139
+}

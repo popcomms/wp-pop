@@ -1,11 +1,74 @@
 {% extends "base.twig" %}
 
 {% block content %}
-	<h2>{{ foo }}</h2>
-	<p>{{ qux }}</p>
-	{% for post in posts %}
-		{% include ['tease-'~post.post_type~'.twig', 'tease.twig'] %}
-	{% endfor %}
-	
-	{% include 'partial/pagination.twig' with { pagination: posts.pagination({show_all: false, mid_size: 3, end_size: 2}) } %}
+<div class="relative content-wrapper">
+	<div class="relative flex flex-column items-end pt-48 pb-16">
+
+    <div
+      class="absolute top-0 left-0 w-full h-full bg-center bg-cover no-repeat"
+      style="background-image: url({{ theme.link }}/static/images/blogs-bg.png);"
+    ></div>
+
+		<div class="px-4 flex flex-col justify-between z-10 h-3/4 sm:h-1/2 w-full max-w-full lg:max-w-screen-lg mx-auto">
+      <div class="input-box relative w-full bg-pop-white border border-gray-200 shadow-md">
+        <div class="pt-4 px-6">
+          <form
+            class="search-form w-full border-b border-pop-purple border-opacity-50 flex justify-between mb-1"
+            method="get"
+            role="search"
+            action="{{ site.url }}"
+          >
+            <input
+              class="search-input text-lg lg:text-2xl text-pop-blue w-11/12 py-2"
+              type="text"
+              placeholder="Search Insights"
+              name="s"
+              value=""
+            >
+            <input
+              class="bg-transparent text-pop-purple w-6 lg:w-8"
+              type="image"
+              src="{{ theme.link }}/static/icons/search-arrow.svg"
+              alt="Submit"
+            >
+            <input type="hidden" name="post_type" value="post">
+          </form>
+          <div class="text-pop-purple text-xs text-right">
+            click or hit enter
+          </div>
+        </div>
+        <div class="flex lg:flex-wrap p-4 overflow-x-auto w-full">
+          {% for cat in categories %}
+            <a
+              href="{{ site.url }}/{{ cat.taxonomy }}/{{ cat.slug }}/"
+              class="m-1 py-2 px-4 rounded-3xl bg-pop-{{ function('get_random_colour') }} text-white whitespace-nowrap text-xs font-medium transition-opacity hover:opacity-50"
+            >
+              {{ cat.name }}
+            </a>
+          {% endfor %}
+        </div>
+      </div>
+		</div>
+	</div>
+
+	<div class="px-4 md:mx-auto mb-20 sm:mb-0 mb-20 max-w-screen-lg">
+
+		<h1 class="text-2xl my-8">
+      {% if title %}
+        {{ title }}
+      {% else  %}
+        Blog Posts
+      {% endif %}
+    </h1>
+		{% for post in posts %}
+			<div class="mb-12">
+				{% include ['tease-'~post.post_type~'.twig', 'tease.twig'] %}
+			</div>
+		{% endfor %}
+	</div>
+</div>
+
+	<!-- Pagination -->
+	{% include 'partial/pagination.twig' %}
+
 {% endblock %}
