@@ -917,12 +917,12 @@ document.addEventListener("DOMContentLoaded", function() {
             content: 'The fan is the first component in a turbofan. The large spinning fan sucks in large quantities of air. Most blades of the fan are made of titanium. It then speeds this air up and splits it into two parts. One part continues through the "core" or center of the engine, where it is acted upon by the other engine components.'
           },
           {
-            position: new THREE.Vector3(0.8, -0.75, 0.5),
+            position: new THREE.Vector3(0, 0, 1.5),
             title: 'Cold Area',
             content: 'Area before compression where air is taken in cold. Around 80% of the air that comes through the intake will simply pass through the turbine without being compressed or heated.'
           },
           {
-            position: new THREE.Vector3(0.2, -0.2, -0.55),
+            position: new THREE.Vector3(0.2, -0.2, -0.95),
             title: 'Compressor',
             content: 'The compressor is made up of fans with many blades and attached to a shaft. The compressor squeezes the air that enters it into progressively smaller areas, resulting in an increase in the air pressure. This results in an increase in the energy potential of the air.'
           },
@@ -932,12 +932,12 @@ document.addEventListener("DOMContentLoaded", function() {
             content: 'In the combustor the air is mixed with fuel and then ignited. There are as many as 20 nozzles to spray fuel into the airstream. The mixture of air and fuel catches fire. This provides a high temperature, high-energy airflow. The fuel burns with the oxygen in the compressed air, producing hot expanding gases.'
           },
           {
-            position: new THREE.Vector3(-0.75, -0.75, -0.6),
+            position: new THREE.Vector3(-1, 0, 0.3),
             title: 'Hot Area',
             content: 'Air that has been compress and passed through the combustion chamber can be up to 1600C. This is above the melting point of the turbines. It is only the excess cold air that keeps them from melting!'
           },
           {
-            position: new THREE.Vector3(-1, 0.75, -2),
+            position: new THREE.Vector3(-0.9, 0.5, -1.9),
             title: 'Turbines',
             content: 'The high-energy airflow coming out of the combustor goes into the turbine, causing the turbine blades to rotate. The turbines are linked by a shaft to turn the blades in the compressor and to spin the intake fan at the front. This rotation takes some energy from the high-energy flow that is used to drive the fan and the compressor. The gases produced in the combustion chamber move through the turbine and spin its blades.'
           }
@@ -1240,7 +1240,50 @@ document.addEventListener("DOMContentLoaded", function() {
             event.stopPropagation()
           })
         });
-   
+
+        // BACKGROUND PARTICLES
+        const getRandomParticelPos = (particleCount) => {
+          const arr = new Float32Array(particleCount * 3);
+          for (let i = 0; i < particleCount; i++) {
+            arr[i] = (Math.random() - 0.5) * 10;
+          }
+          return arr;
+        };
+        const geometrys = [new THREE.BufferGeometry(), new THREE.BufferGeometry()];
+        geometrys[0].setAttribute(
+          "position",
+          new THREE.BufferAttribute(getRandomParticelPos(350), 3)
+        );
+        geometrys[1].setAttribute(
+          "position",
+          new THREE.BufferAttribute(getRandomParticelPos(1500), 3)
+        );
+      
+        const loader2 = new THREE.TextureLoader();
+      
+        // material
+        const materials = [
+          new THREE.PointsMaterial({
+            size: 0.0075,
+            map: loader2.load("https://raw.githubusercontent.com/Kuntal-Das/textures/main/sp1.png"),
+            transparent: true
+            // color: "#ff0000"
+          }),
+          new THREE.PointsMaterial({
+            size: 0.02,
+            map: loader2.load("https://raw.githubusercontent.com/Kuntal-Das/textures/main/sp2.png"),
+            transparent: true
+            // color: "#0000ff"
+          })
+        ];
+      
+        const starsT1 = new THREE.Points(geometrys[0], materials[0]);
+        const starsT2 = new THREE.Points(geometrys[1], materials[1]);
+        this.scene.add(starsT1);
+        this.scene.add(starsT2);
+
+        console.log(this.scene)
+  
         this.raycaster = new THREE.Raycaster
   
         // POST PROCESSING
