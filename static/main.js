@@ -1264,7 +1264,7 @@ document.addEventListener("DOMContentLoaded", function() {
         // material
         const materials = [
           new THREE.PointsMaterial({
-            size: 0.0075,
+            size: 0.05,
             map: loader2.load("https://raw.githubusercontent.com/Kuntal-Das/textures/main/sp1.png"),
             transparent: true
             // color: "#ff0000"
@@ -1272,13 +1272,13 @@ document.addEventListener("DOMContentLoaded", function() {
           new THREE.PointsMaterial({
             size: 0.02,
             map: loader2.load("https://raw.githubusercontent.com/Kuntal-Das/textures/main/sp2.png"),
-            transparent: true
+            // transparent: true
             // color: "#0000ff"
           })
         ];
       
         const starsT1 = new THREE.Points(geometrys[0], materials[0]);
-        const starsT2 = new THREE.Points(geometrys[1], materials[1]);
+        const starsT2 = new THREE.Points(geometrys[1], materials[0]);
         this.scene.add(starsT1);
         this.scene.add(starsT2);
 
