@@ -12,7 +12,7 @@
 
 {% if not is_preview %}
 
-<div class="page-hero relative h-screen overflow-hidden flex justify-center" >
+<div class="page-hero relative h-screen-1/2 sm:h-screen overflow-hidden flex justify-center" >
   <div class="fixed top-0 left-0 w-full h-screen  bg-center {{ fields.title != '' ? 'bg-cover' : 'bg-cover'}} bg-no-repeat pb-12 px-12 pt-12" style="background-image: url({{ fields.background_image.url }});">
     <div class="absolute top-0 left-0 w-full h-full opacity-{{ fields.overlay_opacity }} bg-{{fields.overlay_color }}"></div>
 

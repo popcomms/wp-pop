@@ -34,7 +34,7 @@
     {% if fields.icons|length > 0 %}
       <div class="flex">
         {% for item in fields.icons %}
-          <img class="h-16" src="{{ item.icon }}" />
+          <img class="h-16" src="{{ item.icon }}" alt="{{ item.icon.alt }}"/>
         {% endfor %}
       </div>
     {% endif %}

@@ -934,7 +934,7 @@ document.addEventListener("DOMContentLoaded", function() {
           {
             position: new THREE.Vector3(-1, 0, 0.3),
             title: 'Hot Area',
-            content: 'Air that has been compress and passed through the combustion chamber can be up to 1600C. This is above the melting point of the turbines. It is only the excess cold air that keeps them from melting!'
+            content: 'Air that has been compressed and passed through the combustion chamber can be up to 1600C. This is above the melting point of the turbines. It is only the excess cold air that keeps them from melting!'
           },
           {
             position: new THREE.Vector3(-0.9, 0.5, -1.9),
@@ -1047,7 +1047,11 @@ document.addEventListener("DOMContentLoaded", function() {
             gsap.fromTo(childData.child.material, {envMapIntensity: 0}, {duration:0.3, envMapIntensity: 2})
             childData.child.material.wireframe = false
           })
-          gsap.to(this.camera.position, {duration: 0.5, x: 0, y: 0, z: 5})
+          if (window.innerWidth < 500) { 
+            gsap.to(this.camera.position, {duration: 0.5, x: 0, y: 0, z: 7})
+          } else {
+            gsap.to(this.camera.position, {duration: 0.5, x: 0, y: 0, z: 5})
+          }
           gsap.to(this.turbineGroup.rotation, {duration: 0.5, x: 0, y: -Math.PI * 0.25, z: 0})    
           this.turbineTimeline.restart()
         }
@@ -1094,6 +1098,7 @@ document.addEventListener("DOMContentLoaded", function() {
         // CONTROLS
         this.controls = new OrbitControls(this.camera, this.renderer.domElement)
         this.controls.enableDamping = true
+        this.controls.maxDistance = 10
         // Helps with touch control
         if (this.sizes.width < 500) {
           this.controls.enableDamping = false
@@ -1198,6 +1203,8 @@ document.addEventListener("DOMContentLoaded", function() {
               .to([this.bluePointLight, this.redPointLight], {duration: 1, intensity: 0, ease: 'Power3.easeInOut' }, '-=2')
   
             updateAllMaterials()
+            this.initComplete = true
+            if (window.innerWidth < 500) { this.activateModel() }
           }
         );
   
@@ -1264,9 +1271,9 @@ document.addEventListener("DOMContentLoaded", function() {
         // material
         const materials = [
           new THREE.PointsMaterial({
-            size: 0.05,
+            size: 0.02,
             map: loader2.load("https://raw.githubusercontent.com/Kuntal-Das/textures/main/sp1.png"),
-            transparent: true
+            transparent: true,
             // color: "#ff0000"
           }),
           new THREE.PointsMaterial({
@@ -1277,10 +1284,10 @@ document.addEventListener("DOMContentLoaded", function() {
           })
         ];
       
-        const starsT1 = new THREE.Points(geometrys[0], materials[0]);
-        const starsT2 = new THREE.Points(geometrys[1], materials[0]);
-        this.scene.add(starsT1);
-        this.scene.add(starsT2);
+        this.starsT1 = new THREE.Points(geometrys[0], materials[0]);
+        this.starsT2 = new THREE.Points(geometrys[1], materials[0]);
+        this.scene.add(this.starsT1);
+        this.scene.add(this.starsT2);
 
         console.log(this.scene)
   
@@ -1349,8 +1356,6 @@ document.addEventListener("DOMContentLoaded", function() {
         window.addEventListener("resize", () => {
           this.resizeCanvas()
         })
-
-        this.initComplete = true
       },
   
       tick () {
@@ -1361,6 +1366,8 @@ document.addEventListener("DOMContentLoaded", function() {
   
         // Update anims
         if (this.animation) { this.animation.update(deltaTime) }
+        this.starsT1.rotation.y += deltaTime * 0.03
+        this.starsT2.rotation.y += deltaTime * 0.03
 
         if(this.turbineGroup) {
           const $vm = this

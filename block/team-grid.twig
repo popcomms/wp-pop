@@ -45,13 +45,13 @@
             {% endif %}
             {% if person.acf_fc_layout == 'photo' %}
               <div class="relative row-span-2 col-span-1 md:order-none order-{{personLoopIndex + 1}}  md:col-start-auto md:col-span-1 md:row-span-1">
-                <img class="w-full object-fill" src="{{person.photo}}" alt="">
+                <img class="w-full object-fill" src="{{person.photo}}" alt="{{person.photo.alt}}">
               </div>
 
             {% endif %}
             {% if person.acf_fc_layout == 'icon' %}
             <div class="relative row-span-2 col-span-1 md:order-none order-{{personLoopIndex}}  md:col-start-auto md:col-span-1 md:row-span-1 h-full w-full">
-              <img class="w-full absolute {{person.alignment}}-0 left-0" src="{{person.icon}}" alt="">
+              <img class="w-full absolute {{person.alignment}}-0 left-0" src="{{person.icon}}" alt="{{person.icon.alt}}">
             </div>
             {% endif %}
           {% endfor %}
