@@ -4,9 +4,9 @@
     "fields": [
         {
             "key": "field_607016238af71",
-            "label": "Subtitle",
-            "name": "subtitle",
-            "type": "textarea",
+            "label": "Title",
+            "name": "title",
+            "type": "wysiwyg",
             "instructions": "Page Title Here",
             "required": 0,
             "conditional_logic": 0,
@@ -16,10 +16,29 @@
                 "id": ""
             },
             "default_value": "",
+            "tabs": "all",
+            "toolbar": "full",
+            "media_upload": 0,
+            "delay": 0
+        },
+        {
+            "key": "field_616d7c21613e5",
+            "label": "Text",
+            "name": "text",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "download",
             "placeholder": "",
-            "maxlength": "",
-            "rows": "",
-            "new_lines": "br"
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
         },
         {
             "key": "field_607016238af77",
@@ -46,6 +65,31 @@
             "mime_types": ""
         },
         {
+            "key": "field_616d7c21613e6",
+            "label": "Background Color",
+            "name": "background_color",
+            "type": "select",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "white": "white",
+                "black": "black"
+            },
+            "default_value": "black",
+            "allow_null": 0,
+            "multiple": 0,
+            "ui": 0,
+            "ajax": 0,
+            "return_format": "value",
+            "placeholder": ""
+        },
+        {
             "key": "field_60b0edc3645d2",
             "label": "Show Overlay",
             "name": "show_overlay",
@@ -63,6 +107,37 @@
             "ui": 0,
             "ui_on_text": "",
             "ui_off_text": ""
+        },
+        {
+            "key": "field_616d7c21613e7",
+            "label": "Accent Color",
+            "name": "accent_color",
+            "type": "select",
+            "instructions": "",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "30",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "white": "white",
+                "black": "black",
+                "gray": "gray",
+                "navy": "navy",
+                "green": "green",
+                "pink": "pink",
+                "blue": "blue",
+                "yellow": "yellow"
+            },
+            "default_value": "navy",
+            "allow_null": 0,
+            "multiple": 0,
+            "ui": 0,
+            "ajax": 0,
+            "return_format": "value",
+            "placeholder": ""
         },
         {
             "key": "field_60b0ee11645d5",
@@ -98,6 +173,37 @@
             "placeholder": ""
         },
         {
+            "key": "field_616d7c21613e8",
+            "label": "Arrow Color",
+            "name": "arrow_color",
+            "type": "select",
+            "instructions": "",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "30",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "white": "white",
+                "black": "black",
+                "gray": "gray",
+                "navy": "navy",
+                "green": "green",
+                "pink": "pink",
+                "blue": "blue",
+                "yellow": "yellow"
+            },
+            "default_value": "pink",
+            "allow_null": 0,
+            "multiple": 0,
+            "ui": 0,
+            "ajax": 0,
+            "return_format": "value",
+            "placeholder": ""
+        },
+        {
             "key": "field_60b0edfb645d4",
             "label": "Overlay Opacity",
             "name": "overlay_opacity",
@@ -126,6 +232,32 @@
             "append": ""
         },
         {
+            "key": "field_616d7c21613e9",
+            "label": "Arrow Angle",
+            "name": "angle",
+            "type": "select",
+            "instructions": "",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "30",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "45": "45",
+                "90": "90",
+                "180": "180"
+            },
+            "default_value": 45,
+            "allow_null": 0,
+            "multiple": 0,
+            "ui": 0,
+            "ajax": 0,
+            "return_format": "value",
+            "placeholder": ""
+        },
+        {
             "key": "field_607016238af7f",
             "label": "Title Text Color",
             "name": "text_color",
@@ -152,8 +284,8 @@
         },
         {
             "key": "field_607016783b8ee",
-            "label": "Show Link",
-            "name": "show_link",
+            "label": "Show Scroll Button",
+            "name": "show_scroll",
             "type": "true_false",
             "instructions": "",
             "required": 0,
@@ -170,10 +302,10 @@
             "ui_off_text": ""
         },
         {
-            "key": "field_6070168e3b8ef",
-            "label": "Link",
-            "name": "link",
-            "type": "clone",
+            "key": "field_616d7d78886fc",
+            "label": "Scroll Button",
+            "name": "scroll_button",
+            "type": "group",
             "instructions": "",
             "required": 0,
             "conditional_logic": [
@@ -190,13 +322,332 @@
                 "class": "",
                 "id": ""
             },
-            "clone": [
-                "group_606d7ffc9df90"
-            ],
-            "display": "group",
             "layout": "block",
-            "prefix_label": 0,
-            "prefix_name": 0
+            "sub_fields": [
+                {
+                    "key": "field_616d7d78886fd",
+                    "label": "Text",
+                    "name": "text",
+                    "type": "text",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "33",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "scroll",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "maxlength": ""
+                },
+                {
+                    "key": "field_616d7d8688702",
+                    "label": "Url",
+                    "name": "url",
+                    "type": "link",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "33",
+                        "class": "",
+                        "id": ""
+                    },
+                    "return_format": ""
+                },
+                {
+                    "key": "field_616d7d78886fe",
+                    "label": "Background Color",
+                    "name": "background_color",
+                    "type": "select",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "33",
+                        "class": "",
+                        "id": ""
+                    },
+                    "choices": {
+                        "white": "white",
+                        "black": "black"
+                    },
+                    "default_value": "black",
+                    "allow_null": 0,
+                    "multiple": 0,
+                    "ui": 0,
+                    "return_format": "value",
+                    "ajax": 0,
+                    "placeholder": ""
+                },
+                {
+                    "key": "field_616d7d78886ff",
+                    "label": "Accent Color",
+                    "name": "accent_color",
+                    "type": "select",
+                    "instructions": "",
+                    "required": 1,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "30",
+                        "class": "",
+                        "id": ""
+                    },
+                    "choices": {
+                        "white": "white",
+                        "black": "black",
+                        "gray": "gray",
+                        "navy": "navy",
+                        "green": "green",
+                        "pink": "pink",
+                        "blue": "blue",
+                        "yellow": "yellow"
+                    },
+                    "default_value": "pink",
+                    "allow_null": 0,
+                    "multiple": 0,
+                    "ui": 0,
+                    "return_format": "value",
+                    "ajax": 0,
+                    "placeholder": ""
+                },
+                {
+                    "key": "field_616d7d7888700",
+                    "label": "Arrow Color",
+                    "name": "arrow_color",
+                    "type": "select",
+                    "instructions": "",
+                    "required": 1,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "30",
+                        "class": "",
+                        "id": ""
+                    },
+                    "choices": {
+                        "white": "white",
+                        "black": "black",
+                        "gray": "gray",
+                        "navy": "navy",
+                        "green": "green",
+                        "pink": "pink",
+                        "blue": "blue",
+                        "yellow": "yellow"
+                    },
+                    "default_value": "white",
+                    "allow_null": 0,
+                    "multiple": 0,
+                    "ui": 0,
+                    "return_format": "value",
+                    "ajax": 0,
+                    "placeholder": ""
+                },
+                {
+                    "key": "field_616d7d7888701",
+                    "label": "Arrow Angle",
+                    "name": "angle",
+                    "type": "select",
+                    "instructions": "",
+                    "required": 1,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "30",
+                        "class": "",
+                        "id": ""
+                    },
+                    "choices": {
+                        "45": "45",
+                        "90": "90",
+                        "180": "180"
+                    },
+                    "default_value": 180,
+                    "allow_null": 0,
+                    "multiple": 0,
+                    "ui": 0,
+                    "return_format": "value",
+                    "ajax": 0,
+                    "placeholder": ""
+                }
+            ]
+        },
+        {
+            "key": "field_616d76e22ad15",
+            "label": "Show Download Button",
+            "name": "show_download",
+            "type": "true_false",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "ui": 0,
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
+        {
+            "key": "field_616d7aa7b8cbf",
+            "label": "Download Button",
+            "name": "download_button",
+            "type": "group",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_616d76e22ad15",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "layout": "block",
+            "sub_fields": [
+                {
+                    "key": "field_616d7ab5b8cc0",
+                    "label": "Text",
+                    "name": "text",
+                    "type": "text",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "50",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "download",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "maxlength": ""
+                },
+                {
+                    "key": "field_616d7af2b8cc2",
+                    "label": "Background Color",
+                    "name": "background_color",
+                    "type": "select",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "50",
+                        "class": "",
+                        "id": ""
+                    },
+                    "choices": {
+                        "white": "white",
+                        "black": "black"
+                    },
+                    "default_value": "black",
+                    "allow_null": 0,
+                    "multiple": 0,
+                    "ui": 0,
+                    "return_format": "value",
+                    "ajax": 0,
+                    "placeholder": ""
+                },
+                {
+                    "key": "field_616d7b13b8cc3",
+                    "label": "Accent Color",
+                    "name": "accent_color",
+                    "type": "select",
+                    "instructions": "",
+                    "required": 1,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "30",
+                        "class": "",
+                        "id": ""
+                    },
+                    "choices": {
+                        "white": "white",
+                        "black": "black",
+                        "gray": "gray",
+                        "navy": "navy",
+                        "green": "green",
+                        "pink": "pink",
+                        "blue": "blue",
+                        "yellow": "yellow"
+                    },
+                    "default_value": "navy",
+                    "allow_null": 0,
+                    "multiple": 0,
+                    "ui": 0,
+                    "return_format": "value",
+                    "ajax": 0,
+                    "placeholder": ""
+                },
+                {
+                    "key": "field_616d7b2eb8cc4",
+                    "label": "Arrow Color",
+                    "name": "arrow_color",
+                    "type": "select",
+                    "instructions": "",
+                    "required": 1,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "30",
+                        "class": "",
+                        "id": ""
+                    },
+                    "choices": {
+                        "white": "white",
+                        "black": "black",
+                        "gray": "gray",
+                        "navy": "navy",
+                        "green": "green",
+                        "pink": "pink",
+                        "blue": "blue",
+                        "yellow": "yellow"
+                    },
+                    "default_value": "pink",
+                    "allow_null": 0,
+                    "multiple": 0,
+                    "ui": 0,
+                    "return_format": "value",
+                    "ajax": 0,
+                    "placeholder": ""
+                },
+                {
+                    "key": "field_616d7b4db8cc5",
+                    "label": "Arrow Angle",
+                    "name": "angle",
+                    "type": "select",
+                    "instructions": "",
+                    "required": 1,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "30",
+                        "class": "",
+                        "id": ""
+                    },
+                    "choices": {
+                        "45": "45",
+                        "90": "90",
+                        "180": "180"
+                    },
+                    "default_value": 45,
+                    "allow_null": 0,
+                    "multiple": 0,
+                    "ui": 0,
+                    "return_format": "value",
+                    "ajax": 0,
+                    "placeholder": ""
+                }
+            ]
         }
     ],
     "location": [
@@ -216,5 +667,5 @@
     "hide_on_screen": "",
     "active": true,
     "description": "",
-    "modified": 1626707651
+    "modified": 1634565902
 }

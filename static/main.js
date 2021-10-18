@@ -1,5 +1,4 @@
 document.addEventListener("DOMContentLoaded", function() {
-
   function calcCaptcha () {
     const min = Math.ceil(1)
     const max = Math.floor(10)
@@ -1471,7 +1470,7 @@ document.addEventListener("DOMContentLoaded", function() {
   const scrollButtons = document.querySelectorAll('.scroll-button')
   for (var i = 0; i < scrollButtons.length; i++) {
     scrollButtons[i].addEventListener('click', function () {
-      el = document.getElementById('content');
+      el = document.getElementById('.pop-container');
       var rect = el.getBoundingClientRect(),
       scrollLeft = window.pageXOffset || document.documentElement.scrollLeft,
       scrollTop = window.pageYOffset || document.documentElement.scrollTop;
@@ -1541,43 +1540,42 @@ document.addEventListener("DOMContentLoaded", function() {
     return false;
   }
 
-  // const highlights = problems.getElementsByTagName('strong');
-  // console.log(highlights)
-  // gsap.set(".section__title", {
-  //   y: 100,
-  //   opacity: 0,
-  // })
-  // gsap.set(".section__item", {
-  //   y: 100,
-  //   opacity: 0,
-  // })
-
-  // gsap
-  // .timeline({
-  //   scrollTrigger: {
-  //     trigger: ".section",
-  //     toggleActions: "play none none none"
-  //   },
-  // })
-  // .to(
-  //   ".section__title",
-  //   {
-  //     y: 0,
-  //     opacity: 1,
-  //     duration: 0.75
-  //   }
-  // )
-  // .to(
-  //   ".section__item",
-  //   {
-  //     y: 0,
-  //     opacity: 1,
-  //     duration: 1,
-  //     stagger: 0.5
-  //   },
-  //   "-=0.5"
-  // );
-
-
+  // DOWNLOADS BANNER LINK
+  // const isDownload = document.querySelector('#download-form')
+  // if (isDownload) {
+  //   const scrollButton = document.querySelector('.scroll-button-page')
+  //   const downloadButtonClasses = 'right-0 sm:right-auto sm:left-40'
+  //   const banner = document.querySelector('.page-hero .container-wide')
+  //   const buttonHtml = `
+  //     <div class="download-banner-button absolute bottom-0 ${downloadButtonClasses}" style="">
+  //       <div class="link flex cursor-pointer">
+  //         <div class="flex lowercase items-center px-6 py-2 bg-pop-black">
+  //           <p class="link__text text-pop-white m-0 transform text-sm group-hover:text-base text-pop-white">
+  //             download
+  //           </p>
+  //         </div>
+  //         <div class="relative w-10 h-10 p-2 bg-pop-pink">
+  //           <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full absolute transform left-1/2 top-1/2 -translate-y-1/2 -translate-x-1/2 rotate-45">
+  //             <path d="M13.0607 0.625645C12.4749 0.0398579 11.5251 0.0398579 10.9393 0.625645L1.3934 10.1716C0.807611 10.7574 0.807611 11.7071 1.3934 12.2929C1.97919 12.8787 2.92893 12.8787 3.51472 12.2929L12 3.80762L20.4853 12.2929C21.0711 12.8787 22.0208 12.8787 22.6066 12.2929C23.1924 11.7071 23.1924 10.7574 22.6066 10.1716L13.0607 0.625645ZM13.5 24.3137V1.6863H10.5V24.3137H13.5Z" fill="#3A3EAB" class="fill-current text-pop-white"></path>
+  //           </svg>
+  //         </div>
+  //       </div>
+  //     </div>`
+  //   banner.innerHTML += buttonHtml
+  // }
+  if (document.querySelector('.download-banner-button')) {
+    document.querySelector('.download-banner-button').addEventListener('click', () => {
+      var element = document.getElementById('download-form');
+      const offset = 150;
+      const bodyRect = document.body.getBoundingClientRect().top;
+      const elementRect = element.getBoundingClientRect().top;
+      const elementPosition = elementRect - bodyRect;
+      const offsetPosition = elementPosition - offset;
+  
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
+    })
+  }
 })
-

@@ -109,6 +109,10 @@ module.exports = {
         'order-28',
         'order-29',
         'order-30',
+        'left-40',
+        'left-28',
+        'right-0',
+        'right-auto'
       ]
     }
   },
