@@ -40,7 +40,7 @@ select:-webkit-autofill:hover,
 select:-webkit-autofill:focus {
   @apply text-lg sm:text-2xl md:text-3xl;
 
-  caret-color: #F8F7EE;
-  box-shadow: 0 0 0 100px #2D2D2D inset !important;
-  -webkit-text-fill-color: #F8F7EE !important;
+  caret-color: #f8f7ee;
+  box-shadow: 0 0 0 100px #2d2d2d inset !important;
+  -webkit-text-fill-color: #f8f7ee !important;
 }
