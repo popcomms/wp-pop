@@ -5,6 +5,7 @@ module.exports = {
         './src/**/*.php',
         './*.php',
         './templates/**/**/*.twig',
+        './templates/partial/*.twig',
         './templates/**/*.twig',
         './templates/*.twig',
         './block/*.twig',

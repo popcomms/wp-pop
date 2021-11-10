@@ -19,7 +19,6 @@ if (!empty($all_acf["post_options"])) {
 }
 
 // Related Posts
-
 $categories = wp_get_post_categories($timber_post->ID);
 $context["related"] = Timber::get_posts([
   'category__in'   => $categories,

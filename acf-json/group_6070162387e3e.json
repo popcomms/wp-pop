@@ -3,49 +3,11 @@
     "title": "Block: Page Hero",
     "fields": [
         {
-            "key": "field_607016238af71",
-            "label": "Title",
-            "name": "title",
-            "type": "wysiwyg",
-            "instructions": "Page Title Here",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "",
-            "tabs": "all",
-            "toolbar": "full",
-            "media_upload": 0,
-            "delay": 0
-        },
-        {
-            "key": "field_616d7c21613e5",
-            "label": "Text",
-            "name": "text",
-            "type": "text",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "50",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "download",
-            "placeholder": "",
-            "prepend": "",
-            "append": "",
-            "maxlength": ""
-        },
-        {
             "key": "field_607016238af77",
             "label": "Background Image",
             "name": "background_image",
             "type": "image",
-            "instructions": "",
+            "instructions": "Title and subtitle taken from the page title and excerpt respectively",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -667,5 +629,5 @@
     "hide_on_screen": "",
     "active": true,
     "description": "",
-    "modified": 1634565902
+    "modified": 1636541321
 }

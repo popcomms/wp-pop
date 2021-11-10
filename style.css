@@ -1566,6 +1566,10 @@ hr.wp-block-separator {
   --tw-bg-opacity: 0.25;
 }
 
+.bg-opacity-40 {
+  --tw-bg-opacity: 0.4;
+}
+
 .bg-opacity-90 {
   --tw-bg-opacity: 0.9;
 }
@@ -1833,6 +1837,10 @@ hr.wp-block-separator {
 
 .flex-grow {
   flex-grow: 1;
+}
+
+.flex-shrink {
+  flex-shrink: 1;
 }
 
 .order-1 {
@@ -2632,10 +2640,6 @@ hr.wp-block-separator {
   padding-bottom: 5rem;
 }
 
-.pb-24 {
-  padding-bottom: 6rem;
-}
-
 .pt-48 {
   padding-top: 12rem;
 }
@@ -2904,11 +2908,6 @@ hr.wp-block-separator {
 .group:hover .group-hover\:text-pop-pink {
   --tw-text-opacity: 1;
   color: rgba(255, 0, 136, var(--tw-text-opacity));
-}
-
-.hover\:text-pop-mid-gray:hover {
-  --tw-text-opacity: 1;
-  color: rgba(142, 142, 142, var(--tw-text-opacity));
 }
 
 .hover\:text-pop-pink:hover {
@@ -3188,6 +3187,11 @@ hr.wp-block-separator {
 .group:hover .group-hover\:scale-125 {
   --tw-scale-x: 1.25;
   --tw-scale-y: 1.25;
+}
+
+.hover\:scale-105:hover {
+  --tw-scale-x: 1.05;
+  --tw-scale-y: 1.05;
 }
 
 .hover\:scale-110:hover {
@@ -3898,7 +3902,7 @@ select:-webkit-autofill::first-line,
 select:-webkit-autofill:hover,
 select:-webkit-autofill:focus {
   caret-color: #F8F7EE;
-  box-shadow: 0 0 0 30px #2D2D2D inset !important;
+  box-shadow: 0 0 0 100px #2D2D2D inset !important;
   -webkit-text-fill-color: #F8F7EE !important;
 }
 
@@ -4487,12 +4491,14 @@ canvas,
 }
 
 @media (min-width: 768px) {
-  .md\:aspect-w-1 {
+  
+.md\:aspect-w-4 {
     position: relative;
     padding-bottom: calc(var(--tw-aspect-h) / var(--tw-aspect-w) * 100%);
   }
 
-  .md\:aspect-w-1 > * {
+  
+.md\:aspect-w-4 > * {
     position: absolute;
     height: 100%;
     width: 100%;
@@ -4502,12 +4508,12 @@ canvas,
     left: 0;
   }
 
-  .md\:aspect-w-1 {
-    --tw-aspect-w: 1;
+  .md\:aspect-w-4 {
+    --tw-aspect-w: 4;
   }
 
-  .md\:aspect-h-1 {
-    --tw-aspect-h: 1;
+  .md\:aspect-h-3 {
+    --tw-aspect-h: 3;
   }
 
   .md\:bg-transparent {
@@ -4572,6 +4578,10 @@ canvas,
 
   .md\:h-4\/6 {
     height: 66.666667%;
+  }
+
+  .md\:text-xl {
+    font-size: 1.3125rem;
   }
 
   .md\:text-2xl {
