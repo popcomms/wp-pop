@@ -29,14 +29,14 @@
     </div>
   </div>
 
-  <div class="container-wide relative h-full flex flex-col justify-end pb-24">
+  <div class="container-wide relative h-full flex flex-col justify-end pb-20 px-0">
       <h1 class="hero-title sm:text-5xl text-pop-{{fields.text_color}} font-black">
         {{ post.title }}
       </h1>
-      {% if fields.subtitle %}
-      <p class="text-2xl text-pop-{{fields.text_color}} font-semibold leading-tight">
-        {{ fields.subtitle }}
-      </p>
+      {% if post.post_excerpt %}
+        <p class="text-pop-{{fields.text_color}} prose mb-0">
+          {{post.post_excerpt}}
+        </p>
       {% endif %}
       {% if fields.show_scroll %}
         <div class="absolute bottom-0 left-0">

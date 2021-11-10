@@ -722,13 +722,16 @@ document.addEventListener("DOMContentLoaded", function() {
             }
           }
           xhr.send(JSON.stringify(data))
-
+          console.log(this.$refs.downloadContainer.dataset.emailFile)
           const download = {
             name: this.form.firstName.value,
             email: this.form.email.value,
-            title: "The Beginners’ Guide to Creating Interactive Touchscreen Experiences",
-            url: 'https://www.popcomms.com/wp-content/uploads/2021/07/POP_Beginners-guide-to-touchscreens.pdf',
-            image: 'https://www.popcomms.com/wp-content/uploads/2021/07/Touchscreen-cover.jpg'
+            // title: "The Beginners’ Guide to Creating Interactive Touchscreen Experiences",
+            // url: 'https://www.popcomms.com/wp-content/uploads/2021/07/POP_Beginners-guide-to-touchscreens.pdf',
+            // image: 'https://www.popcomms.com/wp-content/uploads/2021/07/Touchscreen-cover.jpg'
+            title: this.$refs.downloadContainer.dataset.emailTitle,
+            url: this.$refs.downloadContainer.dataset.emailFile,
+            image: this.$refs.downloadContainer.dataset.emailImage
           }
           this.sendDownload(download)
 
