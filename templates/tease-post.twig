@@ -19,16 +19,29 @@
       />
       {% endif %}
 		</div>
-		<div class="relative flex flex-col items-start sm:justify-center p-6 pb-20">
-      <div class="my-2 text-pop-purple text-xs">
+		<div class="relative flex flex-col items-start sm:justify-center px-6 pt-6">
+      <div class="mt-2 mb-auto text-pop-purple text-xs">
         {{ post.date }}
       </div>
-      <br>
-      <h2 class="text-xl font-bold leading-tight group-hover:text-pop-pink">
-        {{ post.title }}
-      </h2>
-      <br>
-      {% include "/templates/partial/archive-author.twig" %}
+      <div class="flex-1 pt-4 w-full">
+        <h2 class="text-xl font-bold leading-tight group-hover:text-pop-pink mb-2">
+          {{ post.title }}
+        </h2>
+        <div class="w-full h-10 overflow-x-auto overflow-y-hidden whitespace-nowrap">
+          {% for category in post.categories %}
+            <a
+              href="{{ category.link }}"
+              class="w-max inline-block bg-pop-purple bg-opacity-40 mr-2 no-underline py-1 px-2 transition-all transform hover:scale-105 uppercase font-semibold text-pop-white"
+              style="font-size: 12px;"
+            >
+              {{ category }}
+            </a>
+          {% endfor %}
+        </div>
+      </div>
+      <div class="mt-auto">
+        {% include "/templates/partial/archive-author.twig" %}
+      </div>
 			<div class="absolute bottom-0 right-0">
 				{% include "/templates/partial/link.twig" with
 					{

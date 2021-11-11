@@ -1835,6 +1835,10 @@ hr.wp-block-separator {
   justify-self: center;
 }
 
+.flex-1 {
+  flex: 1 1 0%;
+}
+
 .flex-grow {
   flex-grow: 1;
 }
@@ -2147,6 +2151,11 @@ hr.wp-block-separator {
   margin-bottom: 5rem;
 }
 
+.my-auto {
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
 .mx-auto {
   margin-left: auto;
   margin-right: auto;
@@ -2182,6 +2191,10 @@ hr.wp-block-separator {
 
 .mr-2 {
   margin-right: 0.5rem;
+}
+
+.mb-2 {
+  margin-bottom: 0.5rem;
 }
 
 .mr-3 {
@@ -2258,6 +2271,10 @@ hr.wp-block-separator {
 
 .mt-auto {
   margin-top: auto;
+}
+
+.mb-auto {
+  margin-bottom: auto;
 }
 
 .ml-auto {
@@ -2426,6 +2443,10 @@ hr.wp-block-separator {
 
 .overflow-x-auto {
   overflow-x: auto;
+}
+
+.overflow-y-hidden {
+  overflow-y: hidden;
 }
 
 .p-0 {
@@ -2606,6 +2627,10 @@ hr.wp-block-separator {
 
 .pl-4 {
   padding-left: 1rem;
+}
+
+.pt-6 {
+  padding-top: 1.5rem;
 }
 
 .pr-6 {
@@ -3250,10 +3275,6 @@ hr.wp-block-separator {
 
 .-translate-x-1\/2 {
   --tw-translate-x: -50%;
-}
-
-.-translate-x-full {
-  --tw-translate-x: -100%;
 }
 
 .-translate-y-24 {
