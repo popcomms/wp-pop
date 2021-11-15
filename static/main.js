@@ -622,7 +622,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
       },
       moveEye (evt) {
-        console.log(evt)
+        // console.log(evt)
         const current = this.$refs['downloadFormStep' + this.step]
         const iris = current.querySelector('.iris');
         const pupil = current.querySelector('.pupil');
@@ -799,7 +799,7 @@ document.addEventListener("DOMContentLoaded", function() {
       showContactForm () {
         const vueComponents = this.$parent
         if (window.innerWidth < 575 ) {
-          console.log('small!', vueComponents)
+          // console.log('small!', vueComponents)
           vueComponents.$children.forEach((element) => {
             if (element.$el.id === 'contact-form' && element.step === 1) {
               element.nextStep()
@@ -899,7 +899,7 @@ document.addEventListener("DOMContentLoaded", function() {
   var WpJsonUrl = document.querySelector('link[rel="https://api.w.org/"]').href
   // then take out the '/wp-json/' part
   var homeurl = WpJsonUrl.replace('/wp-json/','');
-  console.log(homeurl)
+  // console.log(homeurl)
   Vue.component('3D-Turbine', {
     data () {
       return {
@@ -1292,7 +1292,7 @@ document.addEventListener("DOMContentLoaded", function() {
         this.scene.add(this.starsT1);
         this.scene.add(this.starsT2);
 
-        console.log(this.scene)
+        // console.log(this.scene)
   
         this.raycaster = new THREE.Raycaster
   
@@ -1505,7 +1505,7 @@ document.addEventListener("DOMContentLoaded", function() {
   const magnifyImage = document.querySelectorAll('.image-magnify');
   for (var i = 0; i < magnifyImage.length; i++) {
     let index = i
-    console.log(magnifyImage[0])
+    // console.log(magnifyImage[0])
     magnifyImage[index].addEventListener("click", function() {
       let popup = magnifyImage[index].closest('.image-container').querySelector('.full-width-image-popup');
       popup.style.display = "block";
