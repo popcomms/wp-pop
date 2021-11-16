@@ -1566,10 +1566,6 @@ hr.wp-block-separator {
   --tw-bg-opacity: 0.25;
 }
 
-.bg-opacity-40 {
-  --tw-bg-opacity: 0.4;
-}
-
 .bg-opacity-90 {
   --tw-bg-opacity: 0.9;
 }
@@ -1833,10 +1829,6 @@ hr.wp-block-separator {
 
 .justify-self-center {
   justify-self: center;
-}
-
-.flex-1 {
-  flex: 1 1 0%;
 }
 
 .flex-grow {
@@ -2271,10 +2263,6 @@ hr.wp-block-separator {
 
 .mt-auto {
   margin-top: auto;
-}
-
-.mb-auto {
-  margin-bottom: auto;
 }
 
 .ml-auto {
@@ -4252,6 +4240,10 @@ canvas,
     flex-direction: column;
   }
 
+  .sm\:flex-wrap {
+    flex-wrap: wrap;
+  }
+
   .sm\:flex-nowrap {
     flex-wrap: nowrap;
   }
@@ -4347,6 +4339,10 @@ canvas,
 
   .sm\:mb-auto {
     margin-bottom: auto;
+  }
+
+  .sm\:overflow-y-auto {
+    overflow-y: auto;
   }
 
   .sm\:p-10 {

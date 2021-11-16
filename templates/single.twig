@@ -42,6 +42,23 @@
           {{ post.title }}
         </h1>
       </div>
+      {% if post.categories|length > 0 %}
+        <div class="px-6 lg:px-8 flex flex-wrap flex-shrink justify-start items-center">
+          {% for category in post.categories %}
+            <a
+              href="{{ category.link }}"
+              class="flex items-center bg-pop-pink no-underline mr-4 mb-2 py-1 px-2 transition-all transform hover:scale-105"
+            >
+              <span
+                class=" uppercase font-semibold text-pop-white"
+                style="font-size: 12px;"
+              >
+                {{ category }}
+              </span>
+            </a>
+          {% endfor %}
+        </div>
+      {% endif %}
       <div class="px-6 lg:px-8 flex items-center justify-between">
         <div class="flex items-center">
           {% include "/templates/partial/archive-author.twig" %}

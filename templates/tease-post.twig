@@ -1,37 +1,39 @@
 {% extends "tease.twig" %}
-
 {% block content %}
-<a class="group block" href="{{ post.link }}">
-	<div class="grid grid-cols-1 sm:grid-cols-2 grid-rows-2 sm:grid-rows-1 border border-gray-200 bg-black bg-opacity-5 transition-opacity">
-		<div class="bg-white aspect-w-4 aspect-h-3 md:aspect-w-4 md:aspect-h-3 group-hover:opacity-80 transition-opacity sm:border-r border-gray-200">
-      {% if post.thumbnail.src %}
-			<img
-        class="object-cover"
-        src="{{ post.thumbnail.src }}"
-        alt="{{ post.thumbnail.alt }}"
-        style="font-size: 0"
-      />
-      {% else %}
-      <img
-        class="object-cover"
-        src="{{ theme.link }}/static/images/blogs-bg.png"
-        style="font-size: 0"
-      />
-      {% endif %}
-		</div>
+	<div class="grid grid-cols-1 sm:grid-cols-2 grid-rows-2 sm:grid-rows-1 border border-gray-200 bg-black bg-opacity-5 transition-opacity cursor-pointer">
+    <a class="group block h-full w-full bg-white aspect-w-4 aspect-h-3 md:aspect-w-4 md:aspect-h-3 group-hover:opacity-80 transition-opacity sm:border-r border-gray-200" href="{{ post.link }}">
+      {# <div class=""> #}
+        {% if post.thumbnail.src %}
+        <img
+          class="object-cover"
+          src="{{ post.thumbnail.src }}"
+          alt="{{ post.thumbnail.alt }}"
+          style="font-size: 0"
+        />
+        {% else %}
+        <img
+          class="object-cover"
+          src="{{ theme.link }}/static/images/blogs-bg.png"
+          style="font-size: 0"
+        />
+        {% endif %}
+      {# </div> #}
+    </a>
 		<div class="relative flex flex-col items-start justify-center px-6 pt-6">
       <div class="mt-2 text-pop-purple text-xs">
         {{ post.date }}
       </div>
       <div class="my-auto pt-4 w-full">
-        <h2 class="text-xl font-bold leading-tight group-hover:text-pop-pink mb-2">
-          {{ post.title }}
-        </h2>
-        <div class="w-full h-10 overflow-x-auto overflow-y-hidden whitespace-nowrap">
+        <a class="group block" href="{{ post.link }}">
+          <h2 class="text-xl font-bold leading-tight group-hover:text-pop-pink mb-2">
+            {{ post.title }}
+          </h2>
+        </a>
+        <div class="w-full sm:flex sm:flex-wrap overflow-x-auto whitespace-nowrap">
           {% for category in post.categories %}
             <a
               href="{{ category.link }}"
-              class="w-max inline-block bg-pop-purple bg-opacity-40 mr-2 no-underline py-1 px-2 transition-all transform hover:scale-105 uppercase font-semibold text-pop-white"
+              class="w-max inline-block bg-pop-pink mr-2 mb-2 no-underline py-1 px-2 transition-all transform hover:scale-105 uppercase font-semibold text-pop-white"
               style="font-size: 12px;"
             >
               {{ category }}
@@ -42,7 +44,7 @@
       <div class="">
         {% include "/templates/partial/archive-author.twig" %}
       </div>
-			<div class="absolute bottom-0 right-0">
+			{# <div class="absolute bottom-0 right-0">
 				{% include "/templates/partial/link.twig" with
 					{
 						'link': {
@@ -55,8 +57,8 @@
 						},
 					}
 				%}
-			</div>
+			</div> #}
 		</div>
 	</div>
-</a>
 {% endblock %}
+
