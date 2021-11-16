@@ -16,7 +16,7 @@ function custom_case_study_post_type() {
 					'public'       => true,
 					'has_archive'  => true,
 					'show_in_rest' => true,
-					'taxonomies'   => array( 'category' )
+					'taxonomies'   => array( 'category', 'post_tag' )
 			)
 	);
 }
