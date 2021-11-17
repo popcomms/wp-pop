@@ -218,11 +218,14 @@ module.exports = {
   },
   variants: {
     extend: {
+      colors: ['hover', 'group-hover', 'bg-opacity'],
       fontSize: ['hover', 'focus'],
       flex: ['group-hover'],
       scale: ['group-hover'],
       translate: ['group-hover'],
-      rotate: ['group-hover']
+      rotate: ['group-hover'],
+      backgroundColor: ['group-hover'],
+      textColor: ['group-hover']
     },
   },
   plugins: [
