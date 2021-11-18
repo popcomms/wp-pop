@@ -2,56 +2,71 @@
 
 {% block content %}
 <div class="relative content-wrapper">
-	<div class="relative flex flex-column items-end pt-48 pb-16">
-
+  <div class="page-hero relative h-screen-1/2 sm:h-screen flex flex-col justify-end" >
     <div
       class="absolute top-0 left-0 w-full h-full bg-center bg-cover no-repeat"
       style="background-image: url({{ theme.link }}/static/images/blogs-bg.png);"
     ></div>
-
-		<div class="px-4 flex flex-col justify-between z-10 h-3/4 sm:h-1/2 w-full max-w-full lg:max-w-screen-lg mx-auto">
-      <div class="input-box relative w-full bg-pop-white border border-gray-200 shadow-md">
-        <div class="pt-4 px-6">
-          <form
-            class="search-form w-full border-b border-pop-purple border-opacity-50 flex justify-between mb-1"
-            method="get"
-            role="search"
-            action="{{ site.url }}"
+    <div class="container-wide relative h-full flex flex-col justify-end pb-8  px-8 md:px-0">
+        <h1 class="hero-title sm:text-5xl text-pop-white font-black w-5/6">
+          {{ post.title }}
+        </h1>
+        {% if post.post_excerpt %}
+          <p class="text-pop-white prose mb-0">
+            {{post.post_excerpt}}
+          </p>
+        {% endif %}
+    </div>
+    {# Toolbar #}
+    <div class="w-full overflow-visible bg-opacity-40 bg-pop-black text-pop-white">
+      <div class="container-wide flex justify-between px-8 md:px-0 font-bold">
+        <a
+          class="py-6 cursor-pointer hover:text-pop-green font-bold"
+          href="{{ site.url }}/built-environment/"
+        >Video</a>
+        <a
+          class="py-6 cursor-pointer hover:text-pop-green font-bold"
+          href="{{ site.url }}/category/advanced-manufacturing/"
+          
+        >Industry Insights</a>
+        <div
+          class="group py-6 cursor-pointer hover:text-pop-green relative font-bold box-border"
+        >
+        <div class="flex items-center">
+          Categories
+          <svg
+            class="h-6 w-6"
+            xmlns="http://www.w3.org/2000/svg"
+            aria-hidden="true"
+            role="img"
+            viewBox="0 0 320 512"
           >
-            <input
-              class="search-input text-lg lg:text-2xl text-pop-blue w-11/12 py-2"
-              type="text"
-              placeholder="Search Insights"
-              name="s"
-              value=""
-            >
-            <input
-              class="bg-transparent text-pop-purple w-6 lg:w-8"
-              type="image"
-              src="{{ theme.link }}/static/icons/search-arrow.svg"
-              alt="Submit"
-            >
-            <input type="hidden" name="post_type" value="post">
-          </form>
-          <div class="text-pop-purple text-xs text-right">
-            click or hit enter
+            <path fill="currentColor" d="M31.3 192h257.3c17.8 0 26.7 21.5 14.1 34.1L174.1 354.8c-7.8 7.8-20.5 7.8-28.3 0L17.2 226.1C4.6 213.5 13.5 192 31.3 192z"/>
+          </svg>
+          
+        </div>
+        <div class="absolute hidden group-hover:block top-full left-0 bg-pop-black bg-opacity-90 px-3 py-3 z-50">
+          <div class="max-h-80 overflow-y-scroll turbine-info pr-2">
+            {% for category in categories %}
+              <a
+                href="{{ site.url }}/{{ category.taxonomy }}/{{ category.slug }}/"
+                class="block w-max py-2 text-white hover:text-pop-green cursor-pointer transition-colors"
+              >
+                {{ category.name }}
+              </a>
+            {% endfor %}
           </div>
         </div>
-        <div class="flex lg:flex-wrap p-4 overflow-x-auto w-full">
-          {% for cat in categories %}
-            <a
-              href="{{ site.url }}/{{ cat.taxonomy }}/{{ cat.slug }}/"
-              class="m-1 py-2 px-4 rounded-3xl bg-pop-{{ function('get_random_colour') }} text-white whitespace-nowrap text-xs font-medium transition-opacity hover:opacity-50"
-            >
-              {{ cat.name }}
-            </a>
-          {% endfor %}
+        
         </div>
+        <a
+          class="py-6 cursor-pointer hover:text-pop-green font-bold"
+          href="{{ site.url }}/built-environment/"
+        >Industries</a>
       </div>
-		</div>
-	</div>
-
-	<div class="px-4 md:mx-auto mb-20 sm:mb-0 mb-20 max-w-screen-lg">
+    </div>
+  </div>
+	<div class="px-4 md:mx-auto mb-20 sm:mb-0 max-w-screen-lg">
 
 		<h1 class="text-2xl my-8">
       {% if title %}
