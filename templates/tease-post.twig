@@ -4,8 +4,8 @@
   class="block"
   href="{{ post.link }}"
 >
-	<div class="group grid grid-cols-1 sm:grid-cols-2 grid-rows-2 sm:grid-rows-1 border border-gray-200 bg-black bg-opacity-5 transition-opacity cursor-pointer">
-    <div class="block h-full w-full bg-white aspect-w-4 aspect-h-3 md:aspect-w-4 md:aspect-h-3 group-hover:opacity-80 transition-opacity sm:border-r border-gray-200" >
+	<div class="group sm:grid sm:grid-cols-2 sm:grid-rows-1 border border-gray-200 bg-black bg-opacity-5 transition-opacity cursor-pointer">
+    <div class="block h-full w-full bg-white aspect-w-16 aspect-h-9 sm:aspect-w-4 sm:aspect-h-3 group-hover:opacity-80 transition-opacity sm:border-r border-gray-200" >
       {# <div class=""> #}
         {% if post.thumbnail.src %}
         <img
@@ -38,7 +38,7 @@
           {% include "/templates/partial/archive-author.twig" %}
         </div>
       </div>
-      <div class="w-full sm:flex sm:flex-wrap overflow-x-auto whitespace-nowrap">
+      <div class="w-full flex flex-wrap">
         {% for category in post.categories %}
           <div
             class="w-max inline-block mr-1 mt-1 no-underline py-1 px-2 font-medium rounded bg-pop-purple bg-opacity-25 text-pop-purple group-hover:bg-pop-pink group-hover:text-white group-hover:bg-opacity-100 transition-all text-xs"
