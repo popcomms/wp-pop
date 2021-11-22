@@ -1,9 +1,4 @@
-{# see `archive.twig` for an alternative strategy of extending templates #}
-{% extends "base.twig" %}
-
-{% block content %}
-<div class="relative content-wrapper">
-  {# <div class="page-hero relative h-screen-3/4 flex flex-col justify-end" >
+  <div class="page-hero relative h-screen-3/4 flex flex-col justify-end" >
     <div
       class="absolute top-0 left-0 w-full h-full bg-center bg-cover no-repeat"
       style="background-image: url({{ theme.link }}/static/images/blogs-bg.png);"
@@ -12,13 +7,13 @@
       class="absolute top-0 left-0 w-full h-full bg-pop-black bg-opacity-20"
     ></div>
     <div class="container-wide relative h-full flex flex-col justify-end pb-8  px-8 md:px-0">
-        <h1 class="hero-title sm:text-3xl text-pop-white font-black w-5/6">
-        	{% if s %}
-					<span class="text-lg">Search results for:</span>
-					<br/>
-            {{s}}
+        <h1 class="hero-title sm:text-5xl text-pop-white font-black w-5/6">
+        	{% if post.title %}
+            {{ post.title }}
           {% else %}
-            Search
+            <span class="text-lg">Search results for:</span>
+					  <br/>
+            {{title}}
           {% endif %}
         </h1>
         {% if post.post_excerpt %}
@@ -27,15 +22,16 @@
           </p>
         {% endif %}
     </div>
+    {# Toolbar #}
     <div class="relative search-nav w-full overflow-visible bg-opacity-40 bg-pop-black text-pop-white">
-      <div class="container-wide relative px-8 md:px-0">
-        <div class="search-nav-items flex justify-between  font-bold">
+      <div class="container-wide box-border relative mx-4 md:mx-0 px-0">
+        <div class="search-nav-items flex justify-around sm:justify-between  font-bold">
           <a
             class="py-6 cursor-pointer hover:text-pop-green font-bold"
             href="{{ site.url }}/built-environment/"
           >Video</a>
           <a
-            class="py-6 cursor-pointer hover:text-pop-green font-bold"
+            class="hidden sm:block py-6 cursor-pointer hover:text-pop-green font-bold"
             href="{{ site.url }}/category/advanced-manufacturing/"
             
           >Industry Insights</a>
@@ -55,7 +51,7 @@
               </svg>
               
             </div>
-            <div class="absolute hidden group-hover:block top-full left-0 bg-pop-black bg-opacity-90 px-3 py-3 z-50">
+            <div class="absolute hidden group-hover:block top-full left-0 bg-pop-black-dark bg-opacity-90 px-3 py-3 z-50">
               <div class="max-h-80 overflow-y-scroll turbine-info pr-2">
                 {% for category in categories %}
                   <a
@@ -69,7 +65,7 @@
             </div>
           </div>
           <a
-            class="py-6 cursor-pointer hover:text-pop-green font-bold"
+            class="hidden sm:block py-6 cursor-pointer hover:text-pop-green font-bold"
             href="{{ site.url }}/built-environment/"
           >
             Industries
@@ -118,31 +114,4 @@
       </div>
 
     </div>
-  </div> #}
-  {% include "/templates/partial/search-hero.twig" with
-    {
-      'post': post,
-      'title': title,
-      'categories': categories
-    }
-  %}
-	{% if posts|length > 0 %}
-	<div class="container-narrow mb-20 mt-20">
-			{# <h3 class="my-8">Search results for &ldquo; {{ s }} &rdquo;</h3> #}
-			{% for post in posts %}
-				<div class="mb-8">
-					{% include ['tease-'~post.post_type~'.twig', 'tease.twig'] %}
-				</div>
-    	{% endfor %}
-			{% include 'partial/pagination.twig' with { pagination: posts.pagination({show_all: false, mid_size: 3, end_size: 2}) } %}
-	</div>
-	{% endif %}
-	{% if posts|length == 0 %}
-	<div class="container-banner py-20 px-12 ">
-		<h3>Sorry, there are no insights on &ldquo;{{ s }}&rdquo; 😊, try another topic or clear your filters to start again.</h3>
-	</div>
-	{% endif %}
-
-
-</div>
-{% endblock %}
+  </div>

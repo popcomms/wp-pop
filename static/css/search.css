@@ -1,17 +1,17 @@
 .search-form input {
   &::-webkit-input-placeholder {
-    @apply text-pop-blue;
+    @apply text-pop-black;
   }
   &::-moz-placeholder {
-    @apply text-pop-blue;
+    @apply text-pop-black;
     @apply opacity-70;
   }
   &:-ms-input-placeholder {
-    @apply text-pop-blue;
+    @apply text-pop-black;
     @apply opacity-70;
   }
   &:-moz-placeholder {
-    @apply text-pop-blue;
+    @apply text-pop-black;
     @apply opacity-70;
   }
 }

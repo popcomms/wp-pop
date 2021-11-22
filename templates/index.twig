@@ -2,72 +2,17 @@
 
 {% block content %}
 <div class="relative content-wrapper">
-  <div class="page-hero relative h-screen-1/2 sm:h-screen flex flex-col justify-end" >
-    <div
-      class="absolute top-0 left-0 w-full h-full bg-center bg-cover no-repeat"
-      style="background-image: url({{ theme.link }}/static/images/blogs-bg.png);"
-    ></div>
-    <div class="container-wide relative h-full flex flex-col justify-end pb-8  px-8 md:px-0">
-        <h1 class="hero-title sm:text-5xl text-pop-white font-black w-5/6">
-          {{ post.title }}
-        </h1>
-        {% if post.post_excerpt %}
-          <p class="text-pop-white prose mb-0">
-            {{post.post_excerpt}}
-          </p>
-        {% endif %}
-    </div>
-    {# Toolbar #}
-    <div class="w-full overflow-visible bg-opacity-40 bg-pop-black text-pop-white">
-      <div class="container-wide flex justify-between px-8 md:px-0 font-bold">
-        <a
-          class="py-6 cursor-pointer hover:text-pop-green font-bold"
-          href="{{ site.url }}/built-environment/"
-        >Video</a>
-        <a
-          class="py-6 cursor-pointer hover:text-pop-green font-bold"
-          href="{{ site.url }}/category/advanced-manufacturing/"
-          
-        >Industry Insights</a>
-        <div
-          class="group py-6 cursor-pointer hover:text-pop-green relative font-bold box-border"
-        >
-        <div class="flex items-center">
-          Categories
-          <svg
-            class="h-6 w-6"
-            xmlns="http://www.w3.org/2000/svg"
-            aria-hidden="true"
-            role="img"
-            viewBox="0 0 320 512"
-          >
-            <path fill="currentColor" d="M31.3 192h257.3c17.8 0 26.7 21.5 14.1 34.1L174.1 354.8c-7.8 7.8-20.5 7.8-28.3 0L17.2 226.1C4.6 213.5 13.5 192 31.3 192z"/>
-          </svg>
-          
-        </div>
-        <div class="absolute hidden group-hover:block top-full left-0 bg-pop-black bg-opacity-90 px-3 py-3 z-50">
-          <div class="max-h-80 overflow-y-scroll turbine-info pr-2">
-            {% for category in categories %}
-              <a
-                href="{{ site.url }}/{{ category.taxonomy }}/{{ category.slug }}/"
-                class="block w-max py-2 text-white hover:text-pop-green cursor-pointer transition-colors"
-              >
-                {{ category.name }}
-              </a>
-            {% endfor %}
-          </div>
-        </div>
-        
-        </div>
-        <a
-          class="py-6 cursor-pointer hover:text-pop-green font-bold"
-          href="{{ site.url }}/built-environment/"
-        >Industries</a>
-      </div>
-    </div>
-  </div>
-	<div class="px-4 md:mx-auto mb-20 sm:mb-0 max-w-screen-lg">
 
+  {% include "/templates/partial/search-hero.twig" with
+    {
+      'post': post,
+      'title': title,
+      'categories': categories
+    }
+  %}
+
+	<div class="px-4 md:mx-auto mb-20 sm:mb-0 max-w-screen-lg">
+    {{dump(post)}}
 		<h1 class="text-2xl my-8">
       {% if title %}
         {{ title }}
