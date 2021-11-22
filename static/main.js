@@ -1587,11 +1587,15 @@ document.addEventListener("DOMContentLoaded", function() {
     const searchBar = document.querySelector('.search-bar-container')
     const searchNav = document.querySelector('.search-nav-items')
     document.querySelector('.search-bar-button').addEventListener('click', () => {
-      gsap.to(searchNav, {duration: 0.5, opacity: 0})
-      gsap.fromTo(searchBar, {translateX: -10 + '%'}, {duration: 1, delay: 0.5, translateX: 0, opacity: 1, onComplete: () => {searchBar.classList.remove('pointer-events-none')}})
+      gsap.set(searchNav, {pointerEvents: 'none'})
+      gsap.set(searchBar, {pointerEvents: 'auto'})
+      gsap.to(searchNav, {duration: 0.23, opacity: 0})
+      gsap.fromTo(searchBar, {translateX: -60 + '%'}, {duration: 1, delay: 0.25, translateX: -50 + '%', opacity: 1})
     })  
     document.querySelector('.search-bar-close').addEventListener('click', () => {
-      gsap.to(searchBar, {translateX: -10 + '%', duration: 0.5, opacity: 0, onComplete: () => {searchBar.classList.add('pointer-events-none')}})
+      gsap.set(searchNav, {pointerEvents: 'auto'})
+      gsap.set(searchBar, {pointerEvents: 'none'})
+      gsap.to(searchBar, {translateX: -60 + '%', duration: 0.5, opacity: 0})
       gsap.to(searchNav, {duration: 0.5,  delay: 0.5, opacity: 1})
     })  
   }

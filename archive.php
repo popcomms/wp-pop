@@ -35,6 +35,13 @@ if ( is_day() ) {
 	array_unshift( $templates, 'archive-' . get_post_type() . '.twig' );
 }
 
+$categories = get_categories( array(
+	'orderby' => 'name',
+	'order' => 'ASC',
+	'hide_empty' => '1'
+	) );
+	$context['archiveCats'] = $categories;
+
 $args = array(
   'post_type'   => array('post', 'case-studies'),
   'post_status' => 'publish',
