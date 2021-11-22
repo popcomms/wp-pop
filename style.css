@@ -1749,6 +1749,11 @@ hr.wp-block-separator {
   margin: 0px;
 }
 
+.mx-4 {
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+
 .mx-auto {
   margin-left: auto;
   margin-right: auto;
@@ -2162,6 +2167,12 @@ hr.wp-block-separator {
 
 .max-w-full {
   max-width: 100%;
+}
+
+.max-w-min {
+  max-width: -webkit-min-content;
+  max-width: -moz-min-content;
+  max-width: min-content;
 }
 
 .max-w-screen-lg {
@@ -4418,6 +4429,12 @@ canvas,
     width: 66.666667%;
   }
 
+  .sm\:max-w-max {
+    max-width: -webkit-max-content;
+    max-width: -moz-max-content;
+    max-width: max-content;
+  }
+
   .sm\:transform {
     --tw-translate-x: 0;
     --tw-translate-y: 0;
@@ -4427,6 +4444,10 @@ canvas,
     --tw-scale-x: 1;
     --tw-scale-y: 1;
     transform: translateX(var(--tw-translate-x)) translateY(var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+  }
+
+  .sm\:transform-none {
+    transform: none;
   }
 
   .sm\:-translate-y-full {
@@ -4476,10 +4497,6 @@ canvas,
 
   .sm\:justify-center {
     justify-content: center;
-  }
-
-  .sm\:justify-between {
-    justify-content: space-between;
   }
 
   .sm\:gap-3 {
@@ -4615,6 +4632,11 @@ canvas,
 
   .md\:row-span-1 {
     grid-row: span 1 / span 1;
+  }
+
+  .md\:mx-0 {
+    margin-left: 0px;
+    margin-right: 0px;
   }
 
   .md\:mx-auto {
