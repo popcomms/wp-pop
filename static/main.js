@@ -316,8 +316,8 @@ document.addEventListener("DOMContentLoaded", function() {
         var irisLeft = svg.left + svg.width / 2;
 
 
-        const irisX = ((evt.screenX - irisLeft) / 5) + 247.653;
-        const irisY = ((evt.screenY - irisTop) / 3) + 102;
+        const irisX = ((evt.clientX - irisLeft) / 5) + 247.653;
+        const irisY = ((evt.clientY - irisTop) / 3) + 102;
 
         iris.setAttribute('cx', Math.min(400, Math.max(100, irisX)))
         iris.setAttribute('cy', Math.min(200, Math.max(50, irisY)))
@@ -325,8 +325,8 @@ document.addEventListener("DOMContentLoaded", function() {
         var pupilTop = svg.top + svg.height / 2;
         var pupilLeft = svg.left + svg.width / 2;
 
-        const pupilX = ((evt.screenX - pupilLeft) / 4) + 247.5
-        const pupilY = ((evt.screenY - pupilTop) / 2) + 100;
+        const pupilX = ((evt.clientX - pupilLeft) / 4) + 247.5
+        const pupilY = ((evt.clientY - pupilTop) / 2) + 100;
 
         pupil.setAttribute('cx', Math.min(450, Math.max(50, pupilX)))
         pupil.setAttribute('cy', Math.min(225, Math.max(25, pupilY)))
