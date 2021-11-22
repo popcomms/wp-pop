@@ -31,5 +31,11 @@ $cat_args = array(
 	'order'      => 'ASC'
 );
 $context['categories'] = get_categories($cat_args);
+$industryCatId = get_cat_ID('Industries');
+$context['industryCatId'] = $industryCatId;
+$industyCategories=get_categories(
+  array( 'parent' => $cat->$industryCatId )
+);
+$context['industryCategories'] = $industyCategories;
 
 Timber::render( $templates, $context );

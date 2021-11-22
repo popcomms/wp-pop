@@ -128,7 +128,6 @@
   %}
 	{% if posts|length > 0 %}
 	<div class="container-narrow mb-20 mt-20">
-			{# <h3 class="my-8">Search results for &ldquo; {{ s }} &rdquo;</h3> #}
 			{% for post in posts %}
 				<div class="mb-8">
 					{% include ['tease-'~post.post_type~'.twig', 'tease.twig'] %}
