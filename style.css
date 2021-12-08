@@ -2820,8 +2820,8 @@ hr.wp-block-separator {
   --tw-bg-opacity: 0.9;
 }
 
-.group:hover .group-hover\:bg-opacity-25 {
-  --tw-bg-opacity: 0.25;
+.group:hover .group-hover\:bg-opacity-100 {
+  --tw-bg-opacity: 1;
 }
 
 .hover\:bg-opacity-100:hover {
@@ -4244,6 +4244,31 @@ canvas,
 }
 
 @media (min-width: 640px) {
+  
+.sm\:aspect-w-4 {
+    position: relative;
+    padding-bottom: calc(var(--tw-aspect-h) / var(--tw-aspect-w) * 100%);
+  }
+
+  
+.sm\:aspect-w-4 > * {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+  }
+
+  .sm\:aspect-w-4 {
+    --tw-aspect-w: 4;
+  }
+
+  .sm\:aspect-h-3 {
+    --tw-aspect-h: 3;
+  }
+
   .sm\:top-0 {
     top: 0px;
   }
