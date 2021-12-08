@@ -3,7 +3,7 @@
 {% endif %}
 
 {% if not is_preview %}
-<div class="pop-container {{fields.theme == "dark" ? 'bg-pop-black' : 'bg-pop-white'}} ">
+<div class="container-1 pop-container {{fields.theme == "dark" ? 'bg-pop-black' : 'bg-pop-white'}} ">
   <div class="relative py-12" >
 
     {# Background POP Design #}
@@ -48,6 +48,7 @@
     <div class="pop-container my-12">
       {% for item in fields.content %}
         <div class="{{ loop.last ? '' : 'mb-20 sm:mb-28' }}">
+          {# <pre>{{ dump(item) }}</pre> #}
           {% set path = "/block/" ~ item.acf_fc_layout ~ ".twig" %}
           {% include path with 
             {

@@ -1,17 +1,17 @@
-document.addEventListener("DOMContentLoaded", function() {
-  function calcCaptcha () {
+document.addEventListener("DOMContentLoaded", function () {
+  function calcCaptcha() {
     const min = Math.ceil(1)
     const max = Math.floor(10)
     return Math.floor(Math.random() * (max - min) + min)
   }
 
   function getCookie(cname) {
-    var name = cname + '='
+    var name = cname + "="
     var decodedCookie = decodeURIComponent(document.cookie)
-    var ca = decodedCookie.split(';')
-    for(var i = 0; i < ca.length; i++) {
-      var c = ca[i];
-      while (c.charAt(0) == ' ') {
+    var ca = decodedCookie.split(";")
+    for (var i = 0; i < ca.length; i++) {
+      var c = ca[i]
+      while (c.charAt(0) == " ") {
         c = c.substring(1)
       }
       if (c.indexOf(name) == 0) {
@@ -21,114 +21,127 @@ document.addEventListener("DOMContentLoaded", function() {
     return null
   }
 
-  gsap.registerPlugin(ScrollTrigger);
+  gsap.registerPlugin(ScrollTrigger)
 
-  Vue.component('contact-form', {
-    data () {
+  Vue.component("contact-form", {
+    data() {
       return {
         step: 1,
         form: null,
         captcha: {
           a: calcCaptcha(),
-          b: calcCaptcha()
+          b: calcCaptcha(),
         },
-        show: false
+        show: false,
       }
     },
     methods: {
-      validationHighlight (el) {
+      validationHighlight(el) {
         if (el === true) {
-          return 'bg-pop-white'
+          return "bg-pop-white"
         } else {
-          return 'bg-pop-pink'
+          return "bg-pop-pink"
         }
       },
-      hide () {
+      hide() {
         this.show = false
-        document.querySelector('body').style.overflow = 'auto'
+        document.querySelector("body").style.overflow = "auto"
         if (this.step === 6) {
           this.step = 1
           this.reset()
         }
       },
-      nextStep () {
+      nextStep() {
         const container = this.$refs.contactForm
         const heightContainer = container.clientHeight
-        gsap.set(container, {height: heightContainer})
+        gsap.set(container, { height: heightContainer })
 
-        const current = this.$refs['contactFormStep' + this.step]
+        const current = this.$refs["contactFormStep" + this.step]
         this.hideInput(current)
         this.hideText(current)
         this.hideEye(current)
 
-        const next = this.$refs['contactFormStep' + (this.step + 1)]
-        const eye = next.getElementsByClassName('eye-mask')
-        const lines = next.getElementsByClassName('lines')
+        const next = this.$refs["contactFormStep" + (this.step + 1)]
+        const eye = next.getElementsByClassName("eye-mask")
+        const lines = next.getElementsByClassName("lines")
         gsap.set(eye, { scaleY: 0 })
-        gsap.set(lines, {opacity: 0})
+        gsap.set(lines, { opacity: 0 })
 
         if (this.step === 5) {
-          const fingers = next.querySelectorAll('.finger')
-          const hand = next.querySelectorAll('.hand')
-          gsap.set(hand, {translateY: 100 + '%'})
-          gsap.set(fingers, {translateY: 100 + '%'})
+          const fingers = next.querySelectorAll(".finger")
+          const hand = next.querySelectorAll(".hand")
+          gsap.set(hand, { translateY: 100 + "%" })
+          gsap.set(fingers, { translateY: 100 + "%" })
         }
 
         setTimeout(() => {
           this.step = this.step + 1
-          const next = this.$refs['contactFormStep' + this.step]
+          const next = this.$refs["contactFormStep" + this.step]
           gsap.to(container, {
             duration: 0.5,
-            height: 'auto',
+            height: "auto",
             onComplete: () => {
               this.revealInput(next)
               this.revealText(next)
-              if (next.getElementsByClassName('eye-mask').length !== 0) {
+              if (next.getElementsByClassName("eye-mask").length !== 0) {
                 this.revealEye(next)
               }
               if (this.step === 6) {
                 this.revealFingers(next)
               }
-            }
+            },
           })
         }, 500)
       },
-      validateName (e) {
+      validateName(e) {
         if (this.form.name.value.length > 3) {
           this.form.name.valid = true
 
-          if(e.type === 'click' || (e.keyCode === 13 && this.form.email.valid === true)) {
+          if (
+            e.type === "click" ||
+            (e.keyCode === 13 && this.form.email.valid === true)
+          ) {
             this.nextStep()
           }
         } else {
           this.form.name.valid = false
         }
       },
-      validateEmail (e) {
-        const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+      validateEmail(e) {
+        const re =
+          /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
 
         if (re.test(this.form.email.value.toLowerCase())) {
           this.form.email.valid = true
 
-          if(e.type === 'click' || (e.keyCode === 13 && this.form.name.valid === true)) {
+          if (
+            e.type === "click" ||
+            (e.keyCode === 13 && this.form.name.valid === true)
+          ) {
             this.nextStep()
           }
         } else {
           this.form.email.valid = false
         }
       },
-      validateCompany (e) {
+      validateCompany(e) {
         if (this.form.company.value.length > 2) {
           this.form.company.valid = true
-          if(e.type === 'click' || (e.keyCode === 13) && this.form.phone.valid) {
+          if (
+            e.type === "click" ||
+            (e.keyCode === 13 && this.form.phone.valid)
+          ) {
             this.nextStep()
           }
         }
       },
-      validatePhone (e) {
+      validatePhone(e) {
         if (!isNaN(this.form.phone.value)) {
           this.form.phone.valid = true
-          if(e.type === 'click' || (e.keyCode === 13) && this.form.company.valid) {
+          if (
+            e.type === "click" ||
+            (e.keyCode === 13 && this.form.company.valid)
+          ) {
             this.nextStep()
           }
         }
@@ -145,108 +158,112 @@ document.addEventListener("DOMContentLoaded", function() {
       //     }, 4000)
       //   }
       // },
-      validateCaptcha (e) {
-        if (this.captcha.a + this.captcha.b === parseInt(this.form.captcha.value)) {
+      validateCaptcha(e) {
+        if (
+          this.captcha.a + this.captcha.b ===
+          parseInt(this.form.captcha.value)
+        ) {
           this.form.captcha.valid = true
         } else {
           this.form.captcha.valid = false
         }
       },
-      reset () {
+      reset() {
         this.form = {
-          id: 'contact',
+          id: "contact",
           name: {
             valid: false,
-            value: ''
+            value: "",
           },
           email: {
             valid: false,
-            value: ''
+            value: "",
           },
           company: {
             valid: false,
-            value: ''
+            value: "",
           },
           phone: {
             valid: false,
-            value: ''
+            value: "",
           },
-          message: '',
-          newsletter: '',
+          message: "",
+          newsletter: "",
           captcha: {
             valid: false,
-            value: ''
-          }
+            value: "",
+          },
         }
       },
-      submit () {
+      submit() {
         if (this.form.captcha.valid) {
           this.nextStep()
 
-          const xhr = new XMLHttpRequest();
-          const url = 'https://api.hsforms.com/submissions/v3/integration/submit/7620391/15de7731-0a8d-4220-83a9-807607da5964'
+          const xhr = new XMLHttpRequest()
+          const url =
+            "https://api.hsforms.com/submissions/v3/integration/submit/7620391/15de7731-0a8d-4220-83a9-807607da5964"
 
-          const name = this.form.name.value.split(' ')
+          const name = this.form.name.value.split(" ")
           const firstname = name[0]
-          const lastname = this.form.name.value.replace(name[0] + ' ', '')
+          const lastname = this.form.name.value.replace(name[0] + " ", "")
 
           const data = {
-            "fields": [
+            fields: [
               {
-                "name": "email",
-                "value": this.form.email.value
+                name: "email",
+                value: this.form.email.value,
               },
               {
-                "name": "firstname",
-                "value": firstname
+                name: "firstname",
+                value: firstname,
               },
               {
-                "name": "lastname",
-                "value": lastname
+                name: "lastname",
+                value: lastname,
               },
               {
-                "name": "company",
-                "value": this.form.company.value
+                name: "company",
+                value: this.form.company.value,
               },
               {
-                "name": "phone",
-                "value": this.form.phone.value
+                name: "phone",
+                value: this.form.phone.value,
               },
               {
-                "name": "message",
-                "value": this.form.message
-              }
+                name: "message",
+                value: this.form.message,
+              },
             ],
-            "context": {
-              "pageUri": window.location.href,
-              "pageName": document.title
+            context: {
+              pageUri: window.location.href,
+              pageName: document.title,
             },
-            "legalConsentOptions":{
-              "legitimateInterest": {
-                "value": true,
-                "subscriptionTypeId": 1,
-                "legalBasis": "LEAD",
-                "text": "By submitting this form you agree to (i) The POPcomms Privacy Policy (ii) Receive occassional, valuable information regarding POPcomms and our services. You may unsubscribe from these communications at any time."
-              }
-            }
+            legalConsentOptions: {
+              legitimateInterest: {
+                value: true,
+                subscriptionTypeId: 1,
+                legalBasis: "LEAD",
+                text: "By submitting this form you agree to (i) The POPcomms Privacy Policy (ii) Receive occassional, valuable information regarding POPcomms and our services. You may unsubscribe from these communications at any time.",
+              },
+            },
           }
 
-          const hubspotTrackingId = getCookie('hubspotutk')
+          const hubspotTrackingId = getCookie("hubspotutk")
           if (hubspotTrackingId) {
             data.context.hutk = hubspotTrackingId
           }
 
-          xhr.open('POST', url);
-          xhr.setRequestHeader('Content-Type', 'application/json');
-          xhr.onreadystatechange = function() {
-            if(xhr.readyState == 4 && xhr.status == 200) {
-                console.log(xhr.responseText); // Returns a 200 response if the submission is successful.
-            } else if (xhr.readyState == 4 && xhr.status == 400){
-                console.log(xhr.responseText); // Returns a 400 error the submission is rejected.
-            } else if (xhr.readyState == 4 && xhr.status == 403){
-                console.log(xhr.responseText); // Returns a 403 error if the portal isn't allowed to post submissions.
-            } else if (xhr.readyState == 4 && xhr.status == 404){
-                console.log(xhr.responseText); //Returns a 404 error if the formGuid isn't found
+          xhr.open("POST", url)
+          xhr.setRequestHeader("Content-Type", "application/json")
+          xhr.onreadystatechange = function () {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+              console.log(xhr.responseText) // Returns a 200 response if the submission is successful.
+            } else if (xhr.readyState == 4 && xhr.status == 400) {
+              console.log(xhr.responseText) // Returns a 400 error the submission is rejected.
+            } else if (xhr.readyState == 4 && xhr.status == 403) {
+              console.log(xhr.responseText) // Returns a 403 error if the portal isn't allowed to post submissions.
+            } else if (xhr.readyState == 4 && xhr.status == 404) {
+              console.log(xhr.responseText) //Returns a 404 error if the formGuid isn't found
             }
           }
           xhr.send(JSON.stringify(data))
@@ -257,162 +274,199 @@ document.addEventListener("DOMContentLoaded", function() {
           }, 5000)
         }
       },
-      revealInput (step) {
-        const borders = step.getElementsByClassName('input-border')
-        const guides = step.getElementsByClassName('input-guide')
-        const inputs = step.querySelectorAll('.input-content')
-        const text = step.querySelectorAll('h4')
+      revealInput(step) {
+        const borders = step.getElementsByClassName("input-border")
+        const guides = step.getElementsByClassName("input-guide")
+        const inputs = step.querySelectorAll(".input-content")
+        const text = step.querySelectorAll("h4")
 
         this.revealInputAnim(step, inputs, borders, guides, text)
       },
-      hideInput (step) {
-        const borders = step.getElementsByClassName('input-border')
-        const guides = step.getElementsByClassName('input-guide')
-        const inputs = step.querySelectorAll('.input-content')
-        const text = step.querySelectorAll('h4')
+      hideInput(step) {
+        const borders = step.getElementsByClassName("input-border")
+        const guides = step.getElementsByClassName("input-guide")
+        const inputs = step.querySelectorAll(".input-content")
+        const text = step.querySelectorAll("h4")
 
         this.hideInputAnim(step, inputs, borders, guides, text)
       },
-      hideText (step) {
-        const text = step.getElementsByClassName('form-text')
-        gsap.to(text, { duration: 0.5, translateY: -2.25 + 'rem', opacity: 0 })
+      hideText(step) {
+        const text = step.getElementsByClassName("form-text")
+        gsap.to(text, { duration: 0.5, translateY: -2.25 + "rem", opacity: 0 })
       },
-      revealText (step) {
-        const text = step.getElementsByClassName('form-text')
-        gsap.fromTo(text, {translateY: +2.25 + 'rem', opacity: 0}, {duration: 0.4, translateY: 0, opacity: 1})
+      revealText(step) {
+        const text = step.getElementsByClassName("form-text")
+        gsap.fromTo(
+          text,
+          { translateY: +2.25 + "rem", opacity: 0 },
+          { duration: 0.4, translateY: 0, opacity: 1 }
+        )
       },
-      hideEye (step) {
-        const eye = step.getElementsByClassName('eye-mask')
-        const lines = step.getElementsByClassName('lines')
-        gsap.to(eye, { duration: 0.35, translateY: this.step > 1 ? 40 : 0, scaleY: 0 })
-        gsap.to(lines, {duration: 0.35, opacity: 0})
+      hideEye(step) {
+        const eye = step.getElementsByClassName("eye-mask")
+        const lines = step.getElementsByClassName("lines")
+        gsap.to(eye, {
+          duration: 0.35,
+          translateY: this.step > 1 ? 40 : 0,
+          scaleY: 0,
+        })
+        gsap.to(lines, { duration: 0.35, opacity: 0 })
 
-        window.removeEventListener('mousemove', this.moveEye);
+        window.removeEventListener("mousemove", this.moveEye)
       },
-      revealEye (step) {
-        const eye = step.getElementsByClassName('eye-mask')
-        const lines = step.getElementsByClassName('lines')
+      revealEye(step) {
+        const eye = step.getElementsByClassName("eye-mask")
+        const lines = step.getElementsByClassName("lines")
         gsap.to(eye, { duration: 0.35, scaleY: 1 })
-        gsap.to(lines, {duration: 0.35, opacity: 1})
-        if(this.step === 5) {
-          gsap.to(eye, { duration: 0.35, delay: 1, translateY: 10, scaleY: 0.5 })
+        gsap.to(lines, { duration: 0.35, opacity: 1 })
+        if (this.step === 5) {
+          gsap.to(eye, {
+            duration: 0.35,
+            delay: 1,
+            translateY: 10,
+            scaleY: 0.5,
+          })
         }
 
-        window.addEventListener('mousemove', this.moveEye, false);
+        window.addEventListener("mousemove", this.moveEye, false)
       },
-      revealFingers (step) {
-        const fingers = step.querySelectorAll('.finger')
-        const hand = step.querySelectorAll('.hand')
-        gsap.to(fingers, { duration: 0.7, translateY: 0 + '%', stagger: 0.1, ease: Elastic.easeOut.config(1, 1) })
-        gsap.to(hand, { duration: 0.3, translateY: 0 + '%', delay: 0.25 })
+      revealFingers(step) {
+        const fingers = step.querySelectorAll(".finger")
+        const hand = step.querySelectorAll(".hand")
+        gsap.to(fingers, {
+          duration: 0.7,
+          translateY: 0 + "%",
+          stagger: 0.1,
+          ease: Elastic.easeOut.config(1, 1),
+        })
+        gsap.to(hand, { duration: 0.3, translateY: 0 + "%", delay: 0.25 })
       },
-      moveEye (evt) {
-        const current = this.$refs['contactFormStep' + this.step]
-        const iris = current.querySelector('.iris');
-        const pupil = current.querySelector('.pupil');
+      moveEye(evt) {
+        const current = this.$refs["contactFormStep" + this.step]
+        const iris = current.querySelector(".iris")
+        const pupil = current.querySelector(".pupil")
 
-        var svg = current.querySelector('.watching-eye').getBoundingClientRect();
-        var irisTop = svg.top + svg.height / 2;
-        var irisLeft = svg.left + svg.width / 2;
+        var svg = current.querySelector(".watching-eye").getBoundingClientRect()
+        var irisTop = svg.top + svg.height / 2
+        var irisLeft = svg.left + svg.width / 2
 
+        const irisX = (evt.clientX - irisLeft) / 5 + 247.653
+        const irisY = (evt.clientY - irisTop) / 3 + 102
 
-        const irisX = ((evt.clientX - irisLeft) / 5) + 247.653;
-        const irisY = ((evt.clientY - irisTop) / 3) + 102;
+        iris.setAttribute("cx", Math.min(400, Math.max(100, irisX)))
+        iris.setAttribute("cy", Math.min(200, Math.max(50, irisY)))
 
-        iris.setAttribute('cx', Math.min(400, Math.max(100, irisX)))
-        iris.setAttribute('cy', Math.min(200, Math.max(50, irisY)))
+        var pupilTop = svg.top + svg.height / 2
+        var pupilLeft = svg.left + svg.width / 2
 
-        var pupilTop = svg.top + svg.height / 2;
-        var pupilLeft = svg.left + svg.width / 2;
+        const pupilX = (evt.clientX - pupilLeft) / 4 + 247.5
+        const pupilY = (evt.clientY - pupilTop) / 2 + 100
 
-        const pupilX = ((evt.clientX - pupilLeft) / 4) + 247.5
-        const pupilY = ((evt.clientY - pupilTop) / 2) + 100;
-
-        pupil.setAttribute('cx', Math.min(450, Math.max(50, pupilX)))
-        pupil.setAttribute('cy', Math.min(225, Math.max(25, pupilY)))
+        pupil.setAttribute("cx", Math.min(450, Math.max(50, pupilX)))
+        pupil.setAttribute("cy", Math.min(225, Math.max(25, pupilY)))
       },
-      hideInputAnim (step, inputs, borders, guides, text) {
-        gsap.timeline({})
-        .to(borders, {duration: 0.5, width: 0 + '%'})
-        .to(text, {duration: 0.5, opacity: 0}, "-0.5")
-        .to(inputs, {duration: 0.5, translateY: -100 + '%', opacity: 1,  ease: "power3.in"}, "-=0.5")
-        .to(guides, {duration: 0.3, opacity: 0,  ease: "power3.in"}, "-=0.3")
-        .set(inputs, {translateY: 100 + '%'})
-        .set(step, {pointerEvents: 'none'})
+      hideInputAnim(step, inputs, borders, guides, text) {
+        gsap
+          .timeline({})
+          .to(borders, { duration: 0.5, width: 0 + "%" })
+          .to(text, { duration: 0.5, opacity: 0 }, "-0.5")
+          .to(
+            inputs,
+            {
+              duration: 0.5,
+              translateY: -100 + "%",
+              opacity: 1,
+              ease: "power3.in",
+            },
+            "-=0.5"
+          )
+          .to(guides, { duration: 0.3, opacity: 0, ease: "power3.in" }, "-=0.3")
+          .set(inputs, { translateY: 100 + "%" })
+          .set(step, { pointerEvents: "none" })
       },
-      revealInputAnim (step, inputs, borders, guides, text) {
-        gsap.timeline({})
-        .to(borders, {duration: 0.5, width: 100 + '%'})
-        .to(text, {duration: 0.5, opacity: 1}, "-0.5")
-        .to(inputs, {duration: 0.5, translateY: 0 + '%', opacity: 1, ease: "power3.out"}, "-=0.5")
-        .to(guides, {duration: 0.3, opacity: 1,  ease: "power3.in"}, "-=0.3")
-        .set(step,{ pointerEvents: 'all'}, "-=0.01")
+      revealInputAnim(step, inputs, borders, guides, text) {
+        gsap
+          .timeline({})
+          .to(borders, { duration: 0.5, width: 100 + "%" })
+          .to(text, { duration: 0.5, opacity: 1 }, "-0.5")
+          .to(
+            inputs,
+            {
+              duration: 0.5,
+              translateY: 0 + "%",
+              opacity: 1,
+              ease: "power3.out",
+            },
+            "-=0.5"
+          )
+          .to(guides, { duration: 0.3, opacity: 1, ease: "power3.in" }, "-=0.3")
+          .set(step, { pointerEvents: "all" }, "-=0.01")
       },
     },
-    created () {
+    created() {
       this.show = false
       this.reset()
     },
-    mounted () {
-      window.addEventListener('mousemove', this.moveEye, false);
-      document.querySelector('#contact-form').classList.add('opacity-100')
-    }
+    mounted() {
+      window.addEventListener("mousemove", this.moveEye, false)
+      document.querySelector("#contact-form").classList.add("opacity-100")
+    },
   })
 
-  Vue.component('download-form', {
-    data () {
+  Vue.component("download", {
+    data() {
       return {
         step: 1,
         form: null,
         captcha: {
           a: calcCaptcha(),
-          b: calcCaptcha()
-        }
+          b: calcCaptcha(),
+        },
       }
     },
     computed: {
-      getStepName () {
+      getStepName() {
         return this.stepName[this.step]
       },
-      getIntro () {
+      getIntro() {
         if (this.step < 3) {
-          return 'Your'
+          return "Your"
         } else {
-          return 'All done!'
-        }
-      }
-    },
-    methods: {
-      validationHighlight (el) {
-        if (el === true) {
-          return 'bg-pop-white'
-        } else {
-          return 'bg-pop-pink'
+          return "All done!"
         }
       },
-      nextStep () {
-        const current = this.$refs['downloadFormStep' + this.step]
-        this.hideInput (current)
+    },
+    methods: {
+      validationHighlight(el) {
+        if (el === true) {
+          return "bg-pop-white"
+        } else {
+          return "bg-pop-pink"
+        }
+      },
+      nextStep() {
+        const current = this.$refs["downloadFormStep" + this.step]
+        this.hideInput(current)
         this.hideText(current)
 
         if (this.step === 4) {
           this.hideEye(current)
         }
 
-        const next = this.$refs['downloadFormStep' + (this.step + 1)]
+        const next = this.$refs["downloadFormStep" + (this.step + 1)]
 
         if (this.step === 3) {
-          const eye = next.getElementsByClassName('eye-mask')
-          const lines = next.getElementsByClassName('lines')
+          const eye = next.getElementsByClassName("eye-mask")
+          const lines = next.getElementsByClassName("lines")
           gsap.set(eye, { scaleY: 0 })
-          gsap.set(lines, {opacity: 0})
+          gsap.set(lines, { opacity: 0 })
         }
 
         if (this.step === 4) {
-          const fingers = next.querySelectorAll('.finger')
-          const hand = next.querySelectorAll('.hand')
-          gsap.set(hand, {translateX: 100 + '%'})
-          gsap.set(fingers, {translateX: 100 + '%'})
+          const fingers = next.querySelectorAll(".finger")
+          const hand = next.querySelectorAll(".hand")
+          gsap.set(hand, { translateX: 100 + "%" })
+          gsap.set(fingers, { translateX: 100 + "%" })
         }
 
         // Allow for bg to fade in before appears
@@ -420,8 +474,8 @@ document.addEventListener("DOMContentLoaded", function() {
 
         setTimeout(() => {
           this.step = this.step + 1
-          const next = this.$refs['downloadFormStep' + this.step]
-          this.revealInput (next)
+          const next = this.$refs["downloadFormStep" + this.step]
+          this.revealInput(next)
           this.revealText(next)
           if (this.step === 4) {
             this.revealEye(next)
@@ -431,32 +485,42 @@ document.addEventListener("DOMContentLoaded", function() {
           }
         }, timeout)
       },
-      validateFirstName (e) {
+      validateFirstName(e) {
         if (this.form.firstName.value.length > 2) {
           this.form.firstName.valid = true
-          if(e.type === 'click' || (e.keyCode === 13 && this.form.lastName.valid === true)) {
+          if (
+            e.type === "click" ||
+            (e.keyCode === 13 && this.form.lastName.valid === true)
+          ) {
             this.nextStep()
           }
         } else {
           this.form.firstName.valid = false
         }
       },
-      validateLastName (e) {
+      validateLastName(e) {
         if (this.form.lastName.value.length > 2) {
           this.form.lastName.valid = true
-          if(e.type === 'click' || (e.keyCode === 13 && this.form.firstName.valid === true)) {
+          if (
+            e.type === "click" ||
+            (e.keyCode === 13 && this.form.firstName.valid === true)
+          ) {
             this.nextStep()
           }
         } else {
           this.form.lastName.valid = false
         }
       },
-      validateEmail (e) {
-        const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+      validateEmail(e) {
+        const re =
+          /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
 
         if (re.test(this.form.email.value.toLowerCase())) {
           this.form.email.valid = true
-          if(e.type === 'click' || (e.keyCode === 13 && this.form.company.valid === true)) {
+          if (
+            e.type === "click" ||
+            (e.keyCode === 13 && this.form.company.valid === true)
+          ) {
             this.nextStep()
           }
         } else {
@@ -466,260 +530,327 @@ document.addEventListener("DOMContentLoaded", function() {
       validateCompany(e) {
         if (this.form.company.value.length > 2) {
           this.form.company.valid = true
-          if(e.type === 'click' || (e.keyCode === 13 && this.form.email.valid === true)) {
+          if (
+            e.type === "click" ||
+            (e.keyCode === 13 && this.form.email.valid === true)
+          ) {
             this.nextStep()
           }
         } else {
           this.form.company.valid = false
         }
       },
-      validateCaptcha (e) {
-        if (this.captcha.a + this.captcha.b === parseInt(this.form.captcha.value)) {
+      validateCaptcha(e) {
+        if (
+          this.captcha.a + this.captcha.b ===
+          parseInt(this.form.captcha.value)
+        ) {
           this.form.captcha.valid = true
         } else {
           this.form.captcha.valid = false
         }
       },
-      reset () {
+      reset() {
         this.form = {
-          id: 'download',
+          id: "download",
           firstName: {
-            value: '',
-            valid: false
+            value: "",
+            valid: false,
           },
           lastName: {
-            value: '',
-            valid: false
+            value: "",
+            valid: false,
           },
           email: {
-            value: '',
-            valid: false
+            value: "",
+            valid: false,
           },
           company: {
-            value: '',
-            valid: false
+            value: "",
+            valid: false,
           },
-          newsletter: '',
+          newsletter: "",
           captcha: {
             valid: false,
-            value: ''
+            value: "",
           },
         }
       },
       revealInput(step) {
-        const borders = step.getElementsByClassName('input-border')
-        const guides = step.getElementsByClassName('input-guide')
-        const inputs = step.querySelectorAll('.input-content')
+        const borders = step.getElementsByClassName("input-border")
+        const guides = step.getElementsByClassName("input-guide")
+        const inputs = step.querySelectorAll(".input-content")
         this.revealInputAnim(step, inputs, borders, guides)
-
       },
       hideInput(step) {
-        const borders = step.getElementsByClassName('input-border')
-        const guides = step.getElementsByClassName('input-guide')
-        const inputs = step.querySelectorAll('.input-content')
+        const borders = step.getElementsByClassName("input-border")
+        const guides = step.getElementsByClassName("input-guide")
+        const inputs = step.querySelectorAll(".input-content")
         this.hideInputAnim(step, inputs, borders, guides)
       },
-      hideText (step) {
-        const text = step.getElementsByClassName('form-text')
-        gsap.to(text, { duration: 0.5, translateY: -2.25 + 'rem', opacity: 0 })
+      hideText(step) {
+        const text = step.getElementsByClassName("form-text")
+        gsap.to(text, { duration: 0.5, translateY: -2.25 + "rem", opacity: 0 })
       },
-      revealText (step) {
-        const text = step.getElementsByClassName('form-text')
-        gsap.fromTo(text, {translateY: +2.25 + 'rem', opacity: 0}, {duration: 0.4, translateY: 0, opacity: 1, delay: this.step === 2 ? 0.5 : 0})
+      revealText(step) {
+        const text = step.getElementsByClassName("form-text")
+        gsap.fromTo(
+          text,
+          { translateY: +2.25 + "rem", opacity: 0 },
+          {
+            duration: 0.4,
+            translateY: 0,
+            opacity: 1,
+            delay: this.step === 2 ? 0.5 : 0,
+          }
+        )
       },
-      hideEye (step) {
-        const eye = step.getElementsByClassName('eye-mask')
-        const lines = step.getElementsByClassName('lines')
-        gsap.to(eye, { duration: 0.35, translateY: this.step > 1 ? 40 : 0, scaleY: 0 })
-        gsap.to(lines, {duration: 0.35, opacity: 0})
+      hideEye(step) {
+        const eye = step.getElementsByClassName("eye-mask")
+        const lines = step.getElementsByClassName("lines")
+        gsap.to(eye, {
+          duration: 0.35,
+          translateY: this.step > 1 ? 40 : 0,
+          scaleY: 0,
+        })
+        gsap.to(lines, { duration: 0.35, opacity: 0 })
 
-        window.removeEventListener('mousemove', this.moveEye);
+        window.removeEventListener("mousemove", this.moveEye)
       },
-      revealEye (step) {
-        const eye = step.getElementsByClassName('eye-mask')
-        const lines = step.getElementsByClassName('lines')
+      revealEye(step) {
+        const eye = step.getElementsByClassName("eye-mask")
+        const lines = step.getElementsByClassName("lines")
         gsap.to(eye, { duration: 0.35, scaleY: 1 })
-        gsap.to(lines, {duration: 0.35, opacity: 1})
-        if(this.step === 5) {
-          gsap.to(eye, { duration: 0.35, delay: 1, translateY: 10, scaleY: 0.5 })
+        gsap.to(lines, { duration: 0.35, opacity: 1 })
+        if (this.step === 5) {
+          gsap.to(eye, {
+            duration: 0.35,
+            delay: 1,
+            translateY: 10,
+            scaleY: 0.5,
+          })
         }
 
-        window.addEventListener('mousemove', this.moveEye, false);
+        window.addEventListener("mousemove", this.moveEye, false)
       },
-      revealFingers (step) {
-        const fingers = step.querySelectorAll('.finger')
-        const hand = step.querySelectorAll('.hand')
-        const waves = step.querySelectorAll('.waves')
+      revealFingers(step) {
+        const fingers = step.querySelectorAll(".finger")
+        const hand = step.querySelectorAll(".hand")
+        const waves = step.querySelectorAll(".waves")
 
-        gsap.to(fingers, { duration: 0.7, translateX: 0 + '%', stagger: 0.1, ease: Elastic.easeOut.config(1, 1) })
-        gsap.to(hand, { duration: 0.3, translateX: 0 + '%', delay: 0.25 })
-        gsap.timeline({})
-          .fromTo(waves, {
-            scale: 0.8,
-            translateX: 1 + '%',
-            translateY: 1 + '%',
-            opacity: 0
-          },
-          {
-            duration: 0.5,
-            translateX: -1 + '%',
-            translateY: 1 + '%',
-            scale: 1.05,
-            opacity: 1,
-            delay: 0.5,
-            stagger: -0.2,
-            ease: Elastic.easeOut.config(1, 1)
-          }, "+=0.25")
-          .to(waves, {
-            duration: 1.25,
-            scale: 0.8,
-            translateX: 1 + '%',
-            translateY: 1 + '%',
-            opacity: 0,
-            stagger: -0.2,
-            ease: Elastic.easeOut.config(1, 1)
-          }, '+=0.5')
+        gsap.to(fingers, {
+          duration: 0.7,
+          translateX: 0 + "%",
+          stagger: 0.1,
+          ease: Elastic.easeOut.config(1, 1),
+        })
+        gsap.to(hand, { duration: 0.3, translateX: 0 + "%", delay: 0.25 })
+        gsap
+          .timeline({})
+          .fromTo(
+            waves,
+            {
+              scale: 0.8,
+              translateX: 1 + "%",
+              translateY: 1 + "%",
+              opacity: 0,
+            },
+            {
+              duration: 0.5,
+              translateX: -1 + "%",
+              translateY: 1 + "%",
+              scale: 1.05,
+              opacity: 1,
+              delay: 0.5,
+              stagger: -0.2,
+              ease: Elastic.easeOut.config(1, 1),
+            },
+            "+=0.25"
+          )
+          .to(
+            waves,
+            {
+              duration: 1.25,
+              scale: 0.8,
+              translateX: 1 + "%",
+              translateY: 1 + "%",
+              opacity: 0,
+              stagger: -0.2,
+              ease: Elastic.easeOut.config(1, 1),
+            },
+            "+=0.5"
+          )
 
-        const repeatPulseAnim = gsap.timeline({ repeat: -1, paused: true })
+        const repeatPulseAnim = gsap
+          .timeline({ repeat: -1, paused: true })
           .to(fingers[0], {
             duration: 0.5,
-            translateX: 5 + '%'
+            translateX: 5 + "%",
           })
           .to(fingers[0], {
             duration: 0.5,
-            translateX: 0 + '%',
-            ease: Elastic.easeOut.config(1, 1)
+            translateX: 0 + "%",
+            ease: Elastic.easeOut.config(1, 1),
           })
-          .fromTo(waves, {
-            scale: 0.8,
-            translateX: 1 + '%',
-            translateY: 1 + '%',
-            opacity: 0
-          },
-          {
-            duration: 0.5,
-            translateX: -1 + '%',
-            translateY: 1 + '%',
-            scale: 1.05,
-            opacity: 1,
-            delay: 0.5,
-            stagger: -0.2,
-            ease: Elastic.easeOut.config(1, 1)
-          }, "-=0.5")
-          .to(waves, {
-            duration: 1.25,
-            scale: 0.8,
-            translateX: 1 + '%',
-            translateY: 1 + '%',
-            opacity: 0,
-            stagger: -0.2,
-            ease: Elastic.easeOut.config(1, 1)
-          }, '+=0.5')
+          .fromTo(
+            waves,
+            {
+              scale: 0.8,
+              translateX: 1 + "%",
+              translateY: 1 + "%",
+              opacity: 0,
+            },
+            {
+              duration: 0.5,
+              translateX: -1 + "%",
+              translateY: 1 + "%",
+              scale: 1.05,
+              opacity: 1,
+              delay: 0.5,
+              stagger: -0.2,
+              ease: Elastic.easeOut.config(1, 1),
+            },
+            "-=0.5"
+          )
+          .to(
+            waves,
+            {
+              duration: 1.25,
+              scale: 0.8,
+              translateX: 1 + "%",
+              translateY: 1 + "%",
+              opacity: 0,
+              stagger: -0.2,
+              ease: Elastic.easeOut.config(1, 1),
+            },
+            "+=0.5"
+          )
 
         setTimeout(() => {
           repeatPulseAnim.play()
-        }, 3000);
-
+        }, 3000)
       },
-      moveEye (evt) {
+      moveEye(evt) {
         // console.log(evt)
-        const current = this.$refs['downloadFormStep' + this.step]
-        const iris = current.querySelector('.iris');
-        const pupil = current.querySelector('.pupil');
+        const current = this.$refs["downloadFormStep" + this.step]
+        const iris = current.querySelector(".iris")
+        const pupil = current.querySelector(".pupil")
 
-        var svg = current.querySelector('.watching-eye').getBoundingClientRect();
-        var irisTop = svg.top + svg.height / 2;
-        var irisLeft = svg.left + svg.width / 2;
+        var svg = current.querySelector(".watching-eye").getBoundingClientRect()
+        var irisTop = svg.top + svg.height / 2
+        var irisLeft = svg.left + svg.width / 2
 
+        const irisX = (evt.clientX - irisLeft) / 5 + 247.653
+        const irisY = (evt.clientY - irisTop) / 3 + 102
 
-        const irisX = ((evt.clientX - irisLeft) / 5) + 247.653;
-        const irisY = ((evt.clientY - irisTop) / 3) + 102;
+        iris.setAttribute("cx", Math.min(400, Math.max(100, irisX)))
+        iris.setAttribute("cy", Math.min(200, Math.max(50, irisY)))
 
-        iris.setAttribute('cx', Math.min(400, Math.max(100, irisX)))
-        iris.setAttribute('cy', Math.min(200, Math.max(50, irisY)))
+        var pupilTop = svg.top + svg.height / 2
+        var pupilLeft = svg.left + svg.width / 2
 
-        var pupilTop = svg.top + svg.height / 2;
-        var pupilLeft = svg.left + svg.width / 2;
+        const pupilX = (evt.clientX - pupilLeft) / 4 + 247.5
+        const pupilY = (evt.clientY - pupilTop) / 2 + 100
 
-        const pupilX = ((evt.clientX - pupilLeft) / 4) + 247.5
-        const pupilY = ((evt.clientY - pupilTop) / 2) + 100;
-
-        pupil.setAttribute('cx', Math.min(450, Math.max(50, pupilX)))
-        pupil.setAttribute('cy', Math.min(225, Math.max(25, pupilY)))
+        pupil.setAttribute("cx", Math.min(450, Math.max(50, pupilX)))
+        pupil.setAttribute("cy", Math.min(225, Math.max(25, pupilY)))
       },
-      hideInputAnim (step, inputs, borders, guides) {
-        gsap.timeline({
-        })
-        .to(borders, {duration: 0.5, width: 0 + '%'})
-        .to(inputs, {duration: 0.5, translateY: -100 + '%', opacity: 1,  ease: "power3.in"}, "-=0.5")
-        .to(guides, {duration: 0.3, opacity: 0,  ease: "power3.in"}, "-=0.3")
-        .set(inputs, {translateY: 100 + '%'})
-        .set(step, {pointerEvents: 'none'})
+      hideInputAnim(step, inputs, borders, guides) {
+        gsap
+          .timeline({})
+          .to(borders, { duration: 0.5, width: 0 + "%" })
+          .to(
+            inputs,
+            {
+              duration: 0.5,
+              translateY: -100 + "%",
+              opacity: 1,
+              ease: "power3.in",
+            },
+            "-=0.5"
+          )
+          .to(guides, { duration: 0.3, opacity: 0, ease: "power3.in" }, "-=0.3")
+          .set(inputs, { translateY: 100 + "%" })
+          .set(step, { pointerEvents: "none" })
       },
-      revealInputAnim (step, inputs, borders, guides) {
-        gsap.timeline({
-        })
-        .to(borders, {duration: 0.5, width: 100 + '%',  delay: this.step === 2 ? 0.5 : 0})
-        .to(inputs, {duration: 0.5, translateY: 0 + '%', opacity: 1, ease: "power3.out"}, "-=0.5")
-        .to(guides, {duration: 0.3, opacity: 1,  ease: "power3.in"}, "-=0.3")
-        .set(step,{ pointerEvents: 'all'}, "-=0.01")
+      revealInputAnim(step, inputs, borders, guides) {
+        gsap
+          .timeline({})
+          .to(borders, {
+            duration: 0.5,
+            width: 100 + "%",
+            delay: this.step === 2 ? 0.5 : 0,
+          })
+          .to(
+            inputs,
+            {
+              duration: 0.5,
+              translateY: 0 + "%",
+              opacity: 1,
+              ease: "power3.out",
+            },
+            "-=0.5"
+          )
+          .to(guides, { duration: 0.3, opacity: 1, ease: "power3.in" }, "-=0.3")
+          .set(step, { pointerEvents: "all" }, "-=0.01")
       },
-      submit () {
+      submit() {
         if (this.form.captcha.valid) {
           this.nextStep()
 
-          const xhr = new XMLHttpRequest();
-          const url = 'https://api.hsforms.com/submissions/v3/integration/submit/7620391/a80eef42-8cb7-432d-ad17-a1cb3d1ee17c'
+          const xhr = new XMLHttpRequest()
+          const url =
+            "https://api.hsforms.com/submissions/v3/integration/submit/7620391/a80eef42-8cb7-432d-ad17-a1cb3d1ee17c"
 
           const data = {
-            "fields": [
+            fields: [
               {
-                "name": "email",
-                "value": this.form.email.value
+                name: "email",
+                value: this.form.email.value,
               },
               {
-                "name": "firstname",
-                "value": this.form.firstName.value
+                name: "firstname",
+                value: this.form.firstName.value,
               },
               {
-                "name": "lastname",
-                "value": this.form.lastName.value
+                name: "lastname",
+                value: this.form.lastName.value,
               },
               {
-                "name": "company",
-                "value": this.form.company.value
-              }
+                name: "company",
+                value: this.form.company.value,
+              },
             ],
-            "context": {
-              "pageUri": window.location.href,
-              "pageName": document.title
+            context: {
+              pageUri: window.location.href,
+              pageName: document.title,
             },
-            "legalConsentOptions":{
-              "legitimateInterest": {
-                "value": true,
-                "subscriptionTypeId": 1,
-                "legalBasis": "LEAD",
-                "text": "By submitting this form you agree to (i) The POPcomms Privacy Policy (ii) Receive occassional, valuable information regarding POPcomms and our services. You may unsubscribe from these communications at any time."
-              }
-            }
+            legalConsentOptions: {
+              legitimateInterest: {
+                value: true,
+                subscriptionTypeId: 1,
+                legalBasis: "LEAD",
+                text: "By submitting this form you agree to (i) The POPcomms Privacy Policy (ii) Receive occassional, valuable information regarding POPcomms and our services. You may unsubscribe from these communications at any time.",
+              },
+            },
           }
 
-          const hubspotTrackingId = getCookie('hubspotutk')
+          const hubspotTrackingId = getCookie("hubspotutk")
           if (hubspotTrackingId) {
             data.context.hutk = hubspotTrackingId
           }
 
-          xhr.open('POST', url);
-          xhr.setRequestHeader('Content-Type', 'application/json');
-          xhr.onreadystatechange = function() {
-            if(xhr.readyState == 4 && xhr.status == 200) {
-              console.log(xhr.responseText); // Returns a 200 response if the submission is successful.
-            } else if (xhr.readyState == 4 && xhr.status == 400){
-              console.log(xhr.responseText); // Returns a 400 error the submission is rejected.
-            } else if (xhr.readyState == 4 && xhr.status == 403){
-              console.log(xhr.responseText); // Returns a 403 error if the portal isn't allowed to post submissions.
-            } else if (xhr.readyState == 4 && xhr.status == 404){
-              console.log(xhr.responseText); //Returns a 404 error if the formGuid isn't found
+          xhr.open("POST", url)
+          xhr.setRequestHeader("Content-Type", "application/json")
+          xhr.onreadystatechange = function () {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+              console.log(xhr.responseText) // Returns a 200 response if the submission is successful.
+            } else if (xhr.readyState == 4 && xhr.status == 400) {
+              console.log(xhr.responseText) // Returns a 400 error the submission is rejected.
+            } else if (xhr.readyState == 4 && xhr.status == 403) {
+              console.log(xhr.responseText) // Returns a 403 error if the portal isn't allowed to post submissions.
+            } else if (xhr.readyState == 4 && xhr.status == 404) {
+              console.log(xhr.responseText) //Returns a 404 error if the formGuid isn't found
             }
           }
           xhr.send(JSON.stringify(data))
@@ -732,7 +863,7 @@ document.addEventListener("DOMContentLoaded", function() {
             // image: 'https://www.popcomms.com/wp-content/uploads/2021/07/Touchscreen-cover.jpg'
             title: this.$refs.downloadContainer.dataset.emailTitle,
             url: this.$refs.downloadContainer.dataset.emailFile,
-            image: this.$refs.downloadContainer.dataset.emailImage
+            image: this.$refs.downloadContainer.dataset.emailImage,
           }
           this.sendDownload(download)
 
@@ -742,80 +873,82 @@ document.addEventListener("DOMContentLoaded", function() {
           }, 10000)
         }
       },
-      sendDownload (data) {
-        const headers = new Headers();
-        headers.append("Content-Type", "application/json");
+      sendDownload(data) {
+        const headers = new Headers()
+        headers.append("Content-Type", "application/json")
 
         const raw = JSON.stringify({
-          "name": data.name,
-          "email": data.email,
-          "title": data.title,
-          "url": data.url,
-          "image": data.image
-        });
+          name: data.name,
+          email: data.email,
+          title: data.title,
+          url: data.url,
+          image: data.image,
+        })
 
         const requestOptions = {
-          method: 'POST',
+          method: "POST",
           headers: headers,
           body: raw,
-          redirect: 'follow'
-        };
+          redirect: "follow",
+        }
 
-        fetch("https://www.popcomms.com/wp-json/pop/v1/download-fulfilment", requestOptions)
-          .then(response => response.text())
-          .then(result => console.log(result))
-          .catch(error => console.log('error', error));
+        fetch(
+          "https://www.popcomms.com/wp-json/pop/v1/download-fulfilment",
+          requestOptions
+        )
+          .then((response) => response.text())
+          .then((result) => console.log(result))
+          .catch((error) => console.log("error", error))
       },
     },
-    created () {
+    created() {
+    },
+    mounted() {
       this.reset()
     },
-    mounted () {
-      gsap.set(this.$refs.steps, { pointerEvents: 'none' })
-    }
   })
 
-  Vue.component('MainMenu', {
-    data () {
+  Vue.component("MainMenu", {
+    data() {
       return {
-        test: 'test',
+        test: "test",
         menuActive: false,
-        activeChild: '',
+        activeChild: "",
         showMenuTl: gsap.timeline({ paused: true }),
       }
     },
-    methods:{
-      toggleMenu (item) {
+    methods: {
+      toggleMenu(item) {
         if (this.menuActive) {
           this.menuActive = false
-          document.querySelector('body').style.overflow = 'auto'
-          this.activeChild = ''
+          document.querySelector("body").style.overflow = "auto"
+          this.activeChild = ""
         } else {
           this.menuActive = true
-          document.querySelector('body').style.overflow = 'hidden'
+          document.querySelector("body").style.overflow = "hidden"
           this.activeChild = item
         }
       },
-      showContactForm () {
+      showContactForm() {
         const vueComponents = this.$parent
-        if (window.innerWidth < 575 ) {
+        if (window.innerWidth < 575) {
           // console.log('small!', vueComponents)
           vueComponents.$children.forEach((element) => {
-            if (element.$el.id === 'contact-form' && element.step === 1) {
+            if (element.$el.id === "contact-form" && element.step === 1) {
               element.nextStep()
             }
             setTimeout(() => {
               element.show = true
-            }, 500);
+            }, 500)
           })
         } else {
           vueComponents.$children.forEach((element) => {
-            if (element.$el.id === 'contact-form') {
+            if (element.$el.id === "contact-form") {
               element.show = true
             }
           })
         }
-        document.querySelector('body').style.overflow = 'hidden'
+        document.querySelector("body").style.overflow = "hidden"
       },
       // hideContactForm () {
       //   const vueComponents = this.$parent
@@ -830,78 +963,110 @@ document.addEventListener("DOMContentLoaded", function() {
       //     }
       //   })
       // },
-      changeSubMenu (item) {
+      changeSubMenu(item) {
         this.activeChild = item
       },
-      enterMenu () {
+      enterMenu() {
         this.showMenuTl.play()
-        gsap.timeline({})
-        .to(this.$refs.menuContainer, { duration: 0.3, opacity: 1, pointerEvents: 'auto' })
+        gsap.timeline({}).to(this.$refs.menuContainer, {
+          duration: 0.3,
+          opacity: 1,
+          pointerEvents: "auto",
+        })
       },
-      leaveMenu (el, done) {
-        gsap.timeline({})
-        .to(this.$refs.menuContainer, { opacity: 0, pointerEvents: 'none', duration: 0.3 })
-      }
+      leaveMenu(el, done) {
+        gsap.timeline({}).to(this.$refs.menuContainer, {
+          opacity: 0,
+          pointerEvents: "none",
+          duration: 0.3,
+        })
+      },
     },
-    mounted () {
-      const $ = (s, o = document) => o.querySelector(s);
-      const $$ = (s, o = document) => o.querySelectorAll(s);
+    mounted() {
+      const $ = (s, o = document) => o.querySelector(s)
+      const $$ = (s, o = document) => o.querySelectorAll(s)
 
-      $$('.sub-item-container').forEach(el => el.addEventListener('mouseenter', function(e) {
-        let container = this.querySelectorAll('.sub-item')
+      $$(".sub-item-container").forEach((el) =>
+        el.addEventListener("mouseenter", function (e) {
+          let container = this.querySelectorAll(".sub-item")
 
-        container.forEach(element => {
-          // gsap.fromTo(element.children[1], {textShadow: '0px 0px 0 transparent, 0px 0px 0 transparent, 0px 0px 0 transparent, 0px 0px 0 transparent'}, {duration: 0.5, color: '#2D2D2D', textShadow: '-1px -1px 0 #F8F7EE, 1px -1px 0 #F8F7EE, -1px 1px 0 #F8F7EE, 1px 1px 0 #F8F7EE'})
-          // gsap.fromTo(element.children[1], {}, {duration: 0.5, color: '#2D2D2D', })
-        });
-      }));
-      $$('.sub-item-container').forEach(el => el.addEventListener('mouseleave', function(e) {
-        let container = this.querySelectorAll('.sub-item')
+          container.forEach((element) => {
+            // gsap.fromTo(element.children[1], {textShadow: '0px 0px 0 transparent, 0px 0px 0 transparent, 0px 0px 0 transparent, 0px 0px 0 transparent'}, {duration: 0.5, color: '#2D2D2D', textShadow: '-1px -1px 0 #F8F7EE, 1px -1px 0 #F8F7EE, -1px 1px 0 #F8F7EE, 1px 1px 0 #F8F7EE'})
+            // gsap.fromTo(element.children[1], {}, {duration: 0.5, color: '#2D2D2D', })
+          })
+        })
+      )
+      $$(".sub-item-container").forEach((el) =>
+        el.addEventListener("mouseleave", function (e) {
+          let container = this.querySelectorAll(".sub-item")
 
-        container.forEach(element => {
-          // gsap.to(element.children[1], {duration: 0.5, color: '#F8F7EE', textShadow: '0px 0px 0 #F8F7EE'})
-        });
-      }));
+          container.forEach((element) => {
+            // gsap.to(element.children[1], {duration: 0.5, color: '#F8F7EE', textShadow: '0px 0px 0 #F8F7EE'})
+          })
+        })
+      )
 
-      $$('.sub-item').forEach(el => el.addEventListener('mousemove', function(e) {
-        const pos = this.getBoundingClientRect();
-        const mx = e.clientX - pos.left - pos.width/2;
-        const my = e.clientY - pos.top - pos.height/2;
-        gsap.to(this, {duration: 0.5, x: mx * 0.15 +'px', y: my * 0.3 + 'px' })
-        gsap.to(this.children[1], {duration: 0.5, x: mx * 0.025 +'px', y: my * 0.075 + 'px', color: '#FF0088'})
-      }));
+      $$(".sub-item").forEach((el) =>
+        el.addEventListener("mousemove", function (e) {
+          const pos = this.getBoundingClientRect()
+          const mx = e.clientX - pos.left - pos.width / 2
+          const my = e.clientY - pos.top - pos.height / 2
+          gsap.to(this, {
+            duration: 0.5,
+            x: mx * 0.15 + "px",
+            y: my * 0.3 + "px",
+          })
+          gsap.to(this.children[1], {
+            duration: 0.5,
+            x: mx * 0.025 + "px",
+            y: my * 0.075 + "px",
+            color: "#FF0088",
+          })
+        })
+      )
 
-      $$('.sub-item').forEach(el => el.addEventListener('mouseenter', function(e) {
-        // gsap.to(this.children[2], {duration: 0.5, width: 100 + '%'})
-        gsap.fromTo(this.children[0], {opacity: 0}, {duration: 0.5, opacity: 1})
-        // const feDisplacementMapEl = this.querySelector('feDisplacementMap');
-        // const feTurbulenceEl = this.querySelector('feTurbulence');
-        // gsap.fromTo(feDisplacementMapEl, { attr: {scale: 250}}, {duration: 1, attr: {scale: 0}, ease: Quad.easeOut})
-        // gsap.fromTo(feTurbulenceEl, { attr: {baseFrequency: 0.007}}, {duration: 1, attr: {baseFrequency: 0}, ease: Quad.easeOut})
-      }));
+      $$(".sub-item").forEach((el) =>
+        el.addEventListener("mouseenter", function (e) {
+          // gsap.to(this.children[2], {duration: 0.5, width: 100 + '%'})
+          gsap.fromTo(
+            this.children[0],
+            { opacity: 0 },
+            { duration: 0.5, opacity: 1 }
+          )
+          // const feDisplacementMapEl = this.querySelector('feDisplacementMap');
+          // const feTurbulenceEl = this.querySelector('feTurbulence');
+          // gsap.fromTo(feDisplacementMapEl, { attr: {scale: 250}}, {duration: 1, attr: {scale: 0}, ease: Quad.easeOut})
+          // gsap.fromTo(feTurbulenceEl, { attr: {baseFrequency: 0.007}}, {duration: 1, attr: {baseFrequency: 0}, ease: Quad.easeOut})
+        })
+      )
 
-      $$('.sub-item').forEach(el => el.addEventListener('mouseleave', function() {
-        gsap.to(this, {duration: 0.5, x: 0, y: 0})
-        gsap.to(this.children[1], {duration: 0.5, x: 0, y: 0, color: '#F8F7EE'})
-        // gsap.to(this.children[2], {duration: 0.5, width: 0 + '%'})
-        // const feDisplacementMapEl = this.querySelector('feDisplacementMap');
-        // gsap.to(feDisplacementMapEl, {duration: 0.5, attr: {scale: 100}, ease: Quad.easeOut})
+      $$(".sub-item").forEach((el) =>
+        el.addEventListener("mouseleave", function () {
+          gsap.to(this, { duration: 0.5, x: 0, y: 0 })
+          gsap.to(this.children[1], {
+            duration: 0.5,
+            x: 0,
+            y: 0,
+            color: "#F8F7EE",
+          })
+          // gsap.to(this.children[2], {duration: 0.5, width: 0 + '%'})
+          // const feDisplacementMapEl = this.querySelector('feDisplacementMap');
+          // gsap.to(feDisplacementMapEl, {duration: 0.5, attr: {scale: 100}, ease: Quad.easeOut})
 
-        // const feTurbulenceEl = this.querySelector('feTurbulence');
-        // gsap.to(feTurbulenceEl, {duration: 0.5, attr: {baseFrequency: 0.007}, ease: Quad.easeOut})
-        gsap.to(this.children[0], {duration: 0.5, opacity: 0})
-      }));
-
-
-    }
+          // const feTurbulenceEl = this.querySelector('feTurbulence');
+          // gsap.to(feTurbulenceEl, {duration: 0.5, attr: {baseFrequency: 0.007}, ease: Quad.easeOut})
+          gsap.to(this.children[0], { duration: 0.5, opacity: 0 })
+        })
+      )
+    },
   })
   // get JSON url
   var WpJsonUrl = document.querySelector('link[rel="https://api.w.org/"]').href
   // then take out the '/wp-json/' part
-  var homeurl = WpJsonUrl.replace('/wp-json/','');
+  var homeurl = WpJsonUrl.replace("/wp-json/", "")
   // console.log(homeurl)
-  Vue.component('3D-Turbine', {
-    data () {
+  Vue.component("3D-Turbine", {
+    data() {
       return {
         // NOTHING HERE AS ALL THREEJS ITEMS MUST BE NON REACTIVE
         active: false,
@@ -909,70 +1074,78 @@ document.addEventListener("DOMContentLoaded", function() {
         wireframeState: true,
         animationState: true,
         clippingPlane: true,
-        activeContent: '',
-        activeTitle: '',
+        activeContent: "",
+        activeTitle: "",
         hideLabels: false,
         fullScreen: false,
         points: [
           {
             position: new THREE.Vector3(0.7, 0.15, 2),
-            title: 'Fan',
-            content: 'The fan is the first component in a turbofan. The large spinning fan sucks in large quantities of air. Most blades of the fan are made of titanium. It then speeds this air up and splits it into two parts. One part continues through the "core" or center of the engine, where it is acted upon by the other engine components.'
+            title: "Fan",
+            content:
+              'The fan is the first component in a turbofan. The large spinning fan sucks in large quantities of air. Most blades of the fan are made of titanium. It then speeds this air up and splits it into two parts. One part continues through the "core" or center of the engine, where it is acted upon by the other engine components.',
           },
           {
             position: new THREE.Vector3(0, 0, 1.5),
-            title: 'Cold Area',
-            content: 'Area before compression where air is taken in cold. Around 80% of the air that comes through the intake will simply pass through the turbine without being compressed or heated.'
+            title: "Cold Area",
+            content:
+              "Area before compression where air is taken in cold. Around 80% of the air that comes through the intake will simply pass through the turbine without being compressed or heated.",
           },
           {
             position: new THREE.Vector3(0.2, -0.2, -0.95),
-            title: 'Compressor',
-            content: 'The compressor is made up of fans with many blades and attached to a shaft. The compressor squeezes the air that enters it into progressively smaller areas, resulting in an increase in the air pressure. This results in an increase in the energy potential of the air.'
+            title: "Compressor",
+            content:
+              "The compressor is made up of fans with many blades and attached to a shaft. The compressor squeezes the air that enters it into progressively smaller areas, resulting in an increase in the air pressure. This results in an increase in the energy potential of the air.",
           },
           {
             position: new THREE.Vector3(-0.2, 0.4, -0.65),
-            title: 'Combustion',
-            content: 'In the combustor the air is mixed with fuel and then ignited. There are as many as 20 nozzles to spray fuel into the airstream. The mixture of air and fuel catches fire. This provides a high temperature, high-energy airflow. The fuel burns with the oxygen in the compressed air, producing hot expanding gases.'
+            title: "Combustion",
+            content:
+              "In the combustor the air is mixed with fuel and then ignited. There are as many as 20 nozzles to spray fuel into the airstream. The mixture of air and fuel catches fire. This provides a high temperature, high-energy airflow. The fuel burns with the oxygen in the compressed air, producing hot expanding gases.",
           },
           {
             position: new THREE.Vector3(-1, 0, 0.3),
-            title: 'Hot Area',
-            content: 'Air that has been compressed and passed through the combustion chamber can be up to 1600C. This is above the melting point of the turbines. It is only the excess cold air that keeps them from melting!'
+            title: "Hot Area",
+            content:
+              "Air that has been compressed and passed through the combustion chamber can be up to 1600C. This is above the melting point of the turbines. It is only the excess cold air that keeps them from melting!",
           },
           {
             position: new THREE.Vector3(-0.9, 0.5, -1.9),
-            title: 'Turbines',
-            content: 'The high-energy airflow coming out of the combustor goes into the turbine, causing the turbine blades to rotate. The turbines are linked by a shaft to turn the blades in the compressor and to spin the intake fan at the front. This rotation takes some energy from the high-energy flow that is used to drive the fan and the compressor. The gases produced in the combustion chamber move through the turbine and spin its blades.'
-          }
-        ]
+            title: "Turbines",
+            content:
+              "The high-energy airflow coming out of the combustor goes into the turbine, causing the turbine blades to rotate. The turbines are linked by a shaft to turn the blades in the compressor and to spin the intake fan at the front. This rotation takes some energy from the high-energy flow that is used to drive the fan and the compressor. The gases produced in the combustion chamber move through the turbine and spin its blades.",
+          },
+        ],
       }
     },
-    mounted () {
+    mounted() {
       this.init()
     },
     methods: {
       cameraToMarker(point) {
         const zoomFactor = 2
         // const currentCamPosition = {x: this.camera.position.x, y: this.camera.position.y, z: this.camera.position.z};
-        const storedPointPosition = new THREE.Vector3(point.position.x, point.position.y, point.position.z);
-        const startRotation = new THREE.Euler().copy(this.camera.rotation);
-        this.camera.lookAt(storedPointPosition);
+        const storedPointPosition = new THREE.Vector3(
+          point.position.x,
+          point.position.y,
+          point.position.z
+        )
+        const startRotation = new THREE.Euler().copy(this.camera.rotation)
+        this.camera.lookAt(storedPointPosition)
         // const endRotation = new THREE.Euler().copy(this.camera.rotation);
-        this.camera.rotation.copy(startRotation);
-        gsap.to(
-          this.camera.position,
-          {
-            duration: 1,
-            x: point.position.x * zoomFactor,
-            y: point.position.y * zoomFactor,
-            z: point.position.z * zoomFactor,
-            onUpdate: () => {
-              this.camera.lookAt(storedPointPosition)
-            },
-            onComplete: () => {
-              this.camera.lookAt(storedPointPosition)
-            }
-          })
+        this.camera.rotation.copy(startRotation)
+        gsap.to(this.camera.position, {
+          duration: 1,
+          x: point.position.x * zoomFactor,
+          y: point.position.y * zoomFactor,
+          z: point.position.z * zoomFactor,
+          onUpdate: () => {
+            this.camera.lookAt(storedPointPosition)
+          },
+          onComplete: () => {
+            this.camera.lookAt(storedPointPosition)
+          },
+        })
         // gsap.to(
         //   this.camera.rotation,
         //   {
@@ -998,36 +1171,43 @@ document.addEventListener("DOMContentLoaded", function() {
         //     }
         //   })
       },
-      fullScreenToggle () {
+      fullScreenToggle() {
         // THIS DOESNT WORK AHHHHH
-        gsap.to(document.querySelector('.canvas-container'), {duration: 0.2, opacity: 0, onComplete: () => {
-          this.fullScreen = !this.fullScreen
-          setTimeout(() => {
-            this.resizeCanvas()
-          }, 50);
-          gsap.to(document.querySelector('.canvas-container'), {duration: 0.2, opacity: 1})
-        }})
+        gsap.to(document.querySelector(".canvas-container"), {
+          duration: 0.2,
+          opacity: 0,
+          onComplete: () => {
+            this.fullScreen = !this.fullScreen
+            setTimeout(() => {
+              this.resizeCanvas()
+            }, 50)
+            gsap.to(document.querySelector(".canvas-container"), {
+              duration: 0.2,
+              opacity: 1,
+            })
+          },
+        })
       },
-      toggleClippingPlane () {
+      toggleClippingPlane() {
         if (this.clippingPlane) {
-          this.modelMaterials.forEach(childData => {
-            childData.child.material.clippingPlanes = [ this.modelClipPlane ]
+          this.modelMaterials.forEach((childData) => {
+            childData.child.material.clippingPlanes = [this.modelClipPlane]
           })
         } else {
-          this.modelMaterials.forEach(childData => {
+          this.modelMaterials.forEach((childData) => {
             childData.child.material.clippingPlanes = []
           })
         }
         this.clippingPlane = !this.clippingPlane
       },
-      toggleWireframe () {
-        this.modelMaterials.forEach(childData => {
+      toggleWireframe() {
+        this.modelMaterials.forEach((childData) => {
           childData.child.material.wireframe = this.wireframeState
           childData.child.material.envMapIntensity = this.wireframeState ? 0 : 3
         })
         this.wireframeState = !this.wireframeState
       },
-      toggleLights () {
+      toggleLights() {
         if (this.animationState) {
           this.turbineTimeline.pause(-1)
           this.redPointLight.intensity = 500
@@ -1039,50 +1219,84 @@ document.addEventListener("DOMContentLoaded", function() {
         }
         this.animationState = !this.animationState
       },
-      activateModel () {
+      activateModel() {
         if (this.initComplete && !this.active) {
           this.active = true
-          this.modelMaterials.forEach(childData => {
-            const baseColor = new THREE.Color('rgb(70, 70, 70)')
-            gsap.fromTo(childData.child.material.color, {r: baseColor.r, g: baseColor.g, b: baseColor.b}, {duration:0.3, r: childData.color.r, g: childData.color.g, b: childData.color.b})
-            gsap.fromTo(childData.child.material, {metalness: 0}, {duration:0.3, metalness: childData.metalness})
-            gsap.fromTo(childData.child.material, {emissiveIntensity: 0}, {duration:0.3, emissiveIntensity: childData.emissiveIntensity + 1})
-            gsap.fromTo(childData.child.material, {envMapIntensity: 0}, {duration:0.3, envMapIntensity: 2})
+          this.modelMaterials.forEach((childData) => {
+            const baseColor = new THREE.Color("rgb(70, 70, 70)")
+            gsap.fromTo(
+              childData.child.material.color,
+              { r: baseColor.r, g: baseColor.g, b: baseColor.b },
+              {
+                duration: 0.3,
+                r: childData.color.r,
+                g: childData.color.g,
+                b: childData.color.b,
+              }
+            )
+            gsap.fromTo(
+              childData.child.material,
+              { metalness: 0 },
+              { duration: 0.3, metalness: childData.metalness }
+            )
+            gsap.fromTo(
+              childData.child.material,
+              { emissiveIntensity: 0 },
+              {
+                duration: 0.3,
+                emissiveIntensity: childData.emissiveIntensity + 1,
+              }
+            )
+            gsap.fromTo(
+              childData.child.material,
+              { envMapIntensity: 0 },
+              { duration: 0.3, envMapIntensity: 2 }
+            )
             childData.child.material.wireframe = false
           })
-          if (window.innerWidth < 500) { 
-            gsap.to(this.camera.position, {duration: 0.5, x: 0, y: 0, z: 7})
+          if (window.innerWidth < 500) {
+            gsap.to(this.camera.position, { duration: 0.5, x: 0, y: 0, z: 7 })
           } else {
-            gsap.to(this.camera.position, {duration: 0.5, x: 0, y: 0, z: 5})
+            gsap.to(this.camera.position, { duration: 0.5, x: 0, y: 0, z: 5 })
           }
-          gsap.to(this.turbineGroup.rotation, {duration: 0.5, x: 0, y: -Math.PI * 0.25, z: 0})    
+          gsap.to(this.turbineGroup.rotation, {
+            duration: 0.5,
+            x: 0,
+            y: -Math.PI * 0.25,
+            z: 0,
+          })
           this.turbineTimeline.restart()
         }
       },
-      init () {
+      init() {
         // SCENE
         this.scene = new THREE.Scene()
 
         // const axesHelper = new THREE.AxesHelper( 5 );
         // this.scene.add( axesHelper );
-  
+
         // SIZES
         this.sizes = {
-          width: document.querySelector('.canvas-container').clientWidth,
-          height: document.querySelector('.canvas-container').clientHeight
+          width: document.querySelector(".canvas-container").clientWidth,
+          height: document.querySelector(".canvas-container").clientHeight,
         }
-  
+
         // CAMERA
-        this.camera = new THREE.PerspectiveCamera(45, this.sizes.width / this.sizes.height, 0.1, 100)
+        this.camera = new THREE.PerspectiveCamera(
+          45,
+          this.sizes.width / this.sizes.height,
+          0.1,
+          100
+        )
         this.camera.position.set(0, 0, 6)
         this.scene.add(this.camera)
-  
+
         // RENDERER
         this.renderer = new THREE.WebGLRenderer({
           antialias: true,
-          alpha: true
+          alpha: true,
         })
-        this.renderer.setClearColor( 0x000000, 0 ); // the default
+        this.renderer.setClearColor(0x000000, 0) // the default
         this.renderer.physicallyCorrectLights = true
         this.renderer.outputEncoding = THREE.sRGBEncoding
         this.renderer.toneMapping = THREE.ReinhardToneMapping
@@ -1092,12 +1306,17 @@ document.addEventListener("DOMContentLoaded", function() {
         this.renderer.setSize(this.sizes.width, this.sizes.height)
         this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
 
-        document.querySelector('.canvas-container').insertBefore( this.renderer.domElement, document.querySelector('.canvas-container').firstChild );
+        document
+          .querySelector(".canvas-container")
+          .insertBefore(
+            this.renderer.domElement,
+            document.querySelector(".canvas-container").firstChild
+          )
         this.canvas = this.renderer.domElement
-        
-        this.renderer.localClippingEnabled = true;
-        this.modelClipPlane = new THREE.Plane( new THREE.Vector3( -1, 0, 1), 0 );
-  
+
+        this.renderer.localClippingEnabled = true
+        this.modelClipPlane = new THREE.Plane(new THREE.Vector3(-1, 0, 1), 0)
+
         // CONTROLS
         this.controls = new OrbitControls(this.camera, this.renderer.domElement)
         this.controls.enableDamping = true
@@ -1106,212 +1325,240 @@ document.addEventListener("DOMContentLoaded", function() {
         if (this.sizes.width < 500) {
           this.controls.enableDamping = false
         }
-  
+
         // LIGHTING
-        let ambientLight = new THREE.AmbientLight (0xdaccff, 0.5)
+        let ambientLight = new THREE.AmbientLight(0xdaccff, 0.5)
         this.scene.add(ambientLight)
-  
-        const directionalLight = new THREE.DirectionalLight('#ffffff', 5)
+
+        const directionalLight = new THREE.DirectionalLight("#ffffff", 5)
         directionalLight.castShadow = true
         directionalLight.shadow.mapSize.set(1024, 1024)
         directionalLight.shadow.camera.far = 15
         directionalLight.shadow.normalBias = 0.05
         directionalLight.position.set(0, 0, 1.25)
         this.scene.add(directionalLight)
-  
+
         // ENVIRONMENT
-        var textureLoader = new THREE.TextureLoader();
-        this.environmentMap = textureLoader.load(homeurl + '/wp-content/themes/wp-pop/static/js/models/hdri-studio.jpg');
-          
+        var textureLoader = new THREE.TextureLoader()
+        this.environmentMap = textureLoader.load(
+          homeurl + "/wp-content/themes/wp-pop/static/js/models/hdri-studio.jpg"
+        )
+
         this.environmentMap.encoding = THREE.sRGBEncoding
         this.environmentMap.mapping = THREE.EquirectangularReflectionMapping
         this.scene.background = null
-  
+
         // CONTENT
         this.modelMaterials = []
-  
-        const updateAllMaterials = () =>
-        {
-          this.scene.traverse((child) =>
-          {
-            if(child instanceof THREE.Mesh )
-            {
+
+        const updateAllMaterials = () => {
+          this.scene.traverse((child) => {
+            if (child instanceof THREE.Mesh) {
               child.material.envMap = this.environmentMap
               child.material.envMapIntensity = 0
               child.material.needsUpdate = true
               child.castShadow = true
               child.receiveShadow = true
-              
+
               const childData = {
                 child: child,
                 color: {
                   r: child.material.color.r,
                   g: child.material.color.g,
-                  b: child.material.color.b
+                  b: child.material.color.b,
                 },
                 metalness: child.material.metalness,
-                emissiveIntensity: child.material.emissiveIntensity
+                emissiveIntensity: child.material.emissiveIntensity,
               }
               this.modelMaterials.push(childData)
-  
-              child.material.color = new THREE.Color('rgb(50, 50, 50)')
+
+              child.material.color = new THREE.Color("rgb(50, 50, 50)")
               child.material.metalness = 0
               child.material.transmission = 0
               child.material.emissiveIntensity = 0
-              
+
               child.material.wireframe = true
-              child.material.wireframeLineJoin = 'bevel'
-  
+              child.material.wireframeLineJoin = "bevel"
+
               child.material.side = THREE.DoubleSide
-              child.material.clippingPlanes = [ ]
+              child.material.clippingPlanes = []
               child.material.clipShadows = true
             }
           })
         }
-  
-        const loader = new THREE.ObjectLoader();
-  
+
+        const loader = new THREE.ObjectLoader()
+
         loader.load(
           // resource URL
           `${homeurl}/wp-content/themes/wp-pop/static/js/models/jet-v2.json`,
-  
-          ( obj ) => {
-            this.turbineGroup = new THREE.Group();
-  
+
+          (obj) => {
+            this.turbineGroup = new THREE.Group()
+
             this.turbineModel = obj.children[0]
             this.turbineModel.position.y = 0
             this.turbineModel.scale.set(0.1, 0.1, 0.1)
             this.turbineGroup.add(this.turbineModel)
-  
+
             this.redPointLight = obj.children[0]
             this.redPointLight.castShadow = true
             this.redPointLight.position.y = 0
             this.redPointLight.position.x = -4
             this.redPointLight.intensity = 0
             this.turbineGroup.add(this.redPointLight)
-            
+
             this.bluePointLight = obj.children[0]
             this.bluePointLight.castShadow = true
             this.bluePointLight.position.y = 0
             this.bluePointLight.position.x = 4
             this.bluePointLight.intensity = 0
             this.turbineGroup.add(this.bluePointLight)
-  
+
             this.scene.add(this.turbineGroup)
-  
-            this.turbineBlades = this.turbineGroup.children[0].children[0].children[5]
-            this.turbineTimeline = gsap.timeline({ paused: true, repeat: -1, repeatDelay: 1 })
-              .fromTo(this.turbineBlades.rotation, {x: 0}, {duration: 5, x: -Math.PI * 5, ease: 'Power1.easeInOut' })
-              .fromTo([this.bluePointLight, this.redPointLight], {intensity: 0}, {duration: 1, intensity: 500, ease: 'Power3.easeInOut' }, '-=3.5')
-              .to([this.bluePointLight, this.redPointLight], {duration: 1, intensity: 0, ease: 'Power3.easeInOut' }, '-=2')
-  
+
+            this.turbineBlades =
+              this.turbineGroup.children[0].children[0].children[5]
+            this.turbineTimeline = gsap
+              .timeline({ paused: true, repeat: -1, repeatDelay: 1 })
+              .fromTo(
+                this.turbineBlades.rotation,
+                { x: 0 },
+                { duration: 5, x: -Math.PI * 5, ease: "Power1.easeInOut" }
+              )
+              .fromTo(
+                [this.bluePointLight, this.redPointLight],
+                { intensity: 0 },
+                { duration: 1, intensity: 500, ease: "Power3.easeInOut" },
+                "-=3.5"
+              )
+              .to(
+                [this.bluePointLight, this.redPointLight],
+                { duration: 1, intensity: 0, ease: "Power3.easeInOut" },
+                "-=2"
+              )
+
             updateAllMaterials()
             this.initComplete = true
-            if (window.innerWidth < 500) { this.activateModel() }
+            if (window.innerWidth < 500) {
+              this.activateModel()
+            }
           }
-        );
-  
+        )
+
         // LABELS
-        this.labelRenderer = new CSS2DRenderer();
-        this.labelRenderer.setSize( this.sizes.width, this.sizes.height );
-        this.labelRenderer.domElement.style.position = 'absolute';
-        this.labelRenderer.domElement.classList.add('label-div');
-        this.labelRenderer.domElement.style.top = '0px';
-        this.labelRenderer.domElement.style.pointerEvents = 'none';
-        document.querySelector( '.canvas-container' ).appendChild( this.labelRenderer.domElement );
-  
+        this.labelRenderer = new CSS2DRenderer()
+        this.labelRenderer.setSize(this.sizes.width, this.sizes.height)
+        this.labelRenderer.domElement.style.position = "absolute"
+        this.labelRenderer.domElement.classList.add("label-div")
+        this.labelRenderer.domElement.style.top = "0px"
+        this.labelRenderer.domElement.style.pointerEvents = "none"
+        document
+          .querySelector(".canvas-container")
+          .appendChild(this.labelRenderer.domElement)
+
         this.css2DObjects = []
-        const labels = document.querySelectorAll('.label-title')
+        const labels = document.querySelectorAll(".label-title")
         labels.forEach((el, index) => {
           const element = this.points[index]
-          const label = new CSS2DObject( el )
+          const label = new CSS2DObject(el)
           label.scale.set(0.1, 0.1, 0.1)
-          label.position.set(element.position.x, element.position.y, element.position.z)
+          label.position.set(
+            element.position.x,
+            element.position.y,
+            element.position.z
+          )
 
-          this.scene.add( label );
+          this.scene.add(label)
           this.css2DObjects.push(label)
 
-  
           const $vm = this
-  
-          el.addEventListener('click', function() {
+
+          el.addEventListener("click", function () {
             $vm.cameraToMarker(element)
             if ($vm.activeContent === element.content) {
-              $vm.activeContent = ''
-              $vm.activeTitle = ''
+              $vm.activeContent = ""
+              $vm.activeTitle = ""
             } else {
               $vm.activeContent = element.content
               $vm.activeTitle = element.title
             }
           })
 
-          el.addEventListener('wheel', function(event) {
+          el.addEventListener("wheel", function (event) {
             event.preventDefault()
             event.stopPropagation()
           })
-        });
+        })
 
         // BACKGROUND PARTICLES
         const getRandomParticelPos = (particleCount) => {
-          const arr = new Float32Array(particleCount * 3);
+          const arr = new Float32Array(particleCount * 3)
           for (let i = 0; i < particleCount; i++) {
-            arr[i] = (Math.random() - 0.5) * 10;
+            arr[i] = (Math.random() - 0.5) * 10
           }
-          return arr;
-        };
-        const geometrys = [new THREE.BufferGeometry(), new THREE.BufferGeometry()];
+          return arr
+        }
+        const geometrys = [
+          new THREE.BufferGeometry(),
+          new THREE.BufferGeometry(),
+        ]
         geometrys[0].setAttribute(
           "position",
           new THREE.BufferAttribute(getRandomParticelPos(350), 3)
-        );
+        )
         geometrys[1].setAttribute(
           "position",
           new THREE.BufferAttribute(getRandomParticelPos(1500), 3)
-        );
-      
-        const loader2 = new THREE.TextureLoader();
-      
+        )
+
+        const loader2 = new THREE.TextureLoader()
+
         // material
         const materials = [
           new THREE.PointsMaterial({
             size: 0.02,
-            map: loader2.load("https://raw.githubusercontent.com/Kuntal-Das/textures/main/sp1.png"),
+            map: loader2.load(
+              "https://raw.githubusercontent.com/Kuntal-Das/textures/main/sp1.png"
+            ),
             transparent: true,
             // color: "#ff0000"
           }),
           new THREE.PointsMaterial({
             size: 0.02,
-            map: loader2.load("https://raw.githubusercontent.com/Kuntal-Das/textures/main/sp2.png"),
+            map: loader2.load(
+              "https://raw.githubusercontent.com/Kuntal-Das/textures/main/sp2.png"
+            ),
             // transparent: true
             // color: "#0000ff"
-          })
-        ];
-      
-        this.starsT1 = new THREE.Points(geometrys[0], materials[0]);
-        this.starsT2 = new THREE.Points(geometrys[1], materials[0]);
-        this.scene.add(this.starsT1);
-        this.scene.add(this.starsT2);
+          }),
+        ]
+
+        this.starsT1 = new THREE.Points(geometrys[0], materials[0])
+        this.starsT2 = new THREE.Points(geometrys[1], materials[0])
+        this.scene.add(this.starsT1)
+        this.scene.add(this.starsT2)
 
         // console.log(this.scene)
-  
-        this.raycaster = new THREE.Raycaster
-  
+
+        this.raycaster = new THREE.Raycaster()
+
         // POST PROCESSING
-  
+
         //  Check Browser for antialias - standard doesnt work for mobile or IE
         let RenderTargetClass = null
-  
-        if(this.renderer.getPixelRatio() == 1 && this.renderer.capabilities.isWebGL2)
-        {
+
+        if (
+          this.renderer.getPixelRatio() == 1 &&
+          this.renderer.capabilities.isWebGL2
+        ) {
           RenderTargetClass = THREE.WebGLMultisampleRenderTarget
-          console.log('Using WebGLMultisampleRenderTarget')
-        }
-        else
-        {
+          console.log("Using WebGLMultisampleRenderTarget")
+        } else {
           RenderTargetClass = THREE.WebGLRenderTarget
-          console.log('Using WebGLRenderTarget')
+          console.log("Using WebGLRenderTarget")
         }
-  
+
         // Render Target - set props for Composer render targets
         const renderTarget = new RenderTargetClass(
           this.sizes.width,
@@ -1320,16 +1567,16 @@ document.addEventListener("DOMContentLoaded", function() {
             minFilter: THREE.LinearFilter,
             magFilter: THREE.LinearFilter,
             format: THREE.RGBAFormat,
-            encoding: THREE.sRGBEncoding
+            encoding: THREE.sRGBEncoding,
           }
         )
-  
-        this.composer = new EffectComposer( this.renderer, renderTarget );
+
+        this.composer = new EffectComposer(this.renderer, renderTarget)
         this.composer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
         this.composer.setSize(this.sizes.width, this.sizes.height)
-        
-        const renderPass = new RenderPass( this.scene, this.camera );
-        this.composer.addPass( renderPass );
+
+        const renderPass = new RenderPass(this.scene, this.camera)
+        this.composer.addPass(renderPass)
 
         // BLOOM TRANSPARENT HACK REQUIRES ES6 IMPORTS - ASK SIMON ABOUT THIS
         // const params = {
@@ -1343,116 +1590,129 @@ document.addEventListener("DOMContentLoaded", function() {
         // bloomPass.strength = params.bloomStrength;
         // bloomPass.radius = params.bloomRadius;
         // this.composer.addPass( bloomPass );
-        
+
         // Anti Alias - when browser doesn't support auto render target AA
-        if(this.renderer.getPixelRatio() === 1 && !this.renderer.capabilities.isWebGL2){
-            const smaaPass = new SMAAPass()
-            this.composer.addPass(smaaPass)
-            console.log('using smaa')
+        if (
+          this.renderer.getPixelRatio() === 1 &&
+          !this.renderer.capabilities.isWebGL2
+        ) {
+          const smaaPass = new SMAAPass()
+          this.composer.addPass(smaaPass)
+          console.log("using smaa")
         }
-  
+
         // ANIMATION LOOP
         this.clock = new THREE.Clock()
         this.previousTime = 0
         this.tick()
-  
+
         window.addEventListener("resize", () => {
           this.resizeCanvas()
         })
       },
-  
-      tick () {
+
+      tick() {
         // Time settings
         const elapsedTime = this.clock.getElapsedTime()
         const deltaTime = elapsedTime - this.previousTime
         this.previousTime = elapsedTime
-  
+
         // Update anims
-        if (this.animation) { this.animation.update(deltaTime) }
+        if (this.animation) {
+          this.animation.update(deltaTime)
+        }
         this.starsT1.rotation.y += deltaTime * 0.03
         this.starsT2.rotation.y += deltaTime * 0.03
 
-        if(this.turbineGroup) {
+        if (this.turbineGroup) {
           const $vm = this
-          this.css2DObjects.forEach(function (point){
+          this.css2DObjects.forEach(function (point) {
             const screenPosition = point.position.clone()
             screenPosition.project($vm.camera)
-    
+
             $vm.raycaster.setFromCamera(screenPosition, $vm.camera)
-  
+
             if ($vm.hideLabels) {
-              point.element.classList.remove('visible')
-              $vm.activeContent = ''
+              point.element.classList.remove("visible")
+              $vm.activeContent = ""
             } else {
               // set the objects which will trigger raycaster
-              const intersects = $vm.raycaster.intersectObjects($vm.turbineGroup.children[0].children[0].children[0].children, true)
+              const intersects = $vm.raycaster.intersectObjects(
+                $vm.turbineGroup.children[0].children[0].children[0].children,
+                true
+              )
               // Does intersection exist
-              if(intersects.length === 0){
+              if (intersects.length === 0) {
                 if ($vm.active === true) {
-                  point.element.classList.add('visible')
+                  point.element.classList.add("visible")
                 } else {
-                  point.element.classList.remove('visible')
+                  point.element.classList.remove("visible")
                 }
-    
               } else {
                 // distance from $vm.camera of first intersection
                 const intersectionDistance = intersects[0].distance
-                const pointDistance = point.position.distanceTo($vm.camera.position)
+                const pointDistance = point.position.distanceTo(
+                  $vm.camera.position
+                )
                 for (let i = 0; i < intersects.length; i++) {
-                  if(pointDistance > intersectionDistance || $vm.active == false){
-                      point.element.classList.remove('visible')
+                  if (
+                    pointDistance > intersectionDistance ||
+                    $vm.active == false
+                  ) {
+                    point.element.classList.remove("visible")
                   } else {
-                      point.element.classList.add('visible')
+                    point.element.classList.add("visible")
                   }
                 }
               }
             }
-    
           })
         }
-  
+
         // Controls
         this.controls.update()
         // this.stats.update()
-  
+
         // Camera
         this.camera.aspect = this.sizes.width / this.sizes.height
-        this.camera.updateProjectionMatrix() 
-  
+        this.camera.updateProjectionMatrix()
+
         // Rinse and repeat
         this.composer.render(this.scene, this.camera)
         this.labelRenderer.render(this.scene, this.camera)
-  
+
         window.requestAnimationFrame(this.tick)
       },
-      
-      resizeCanvas () {
+
+      resizeCanvas() {
         // Update sizes
-        this.sizes.width = document.querySelector('.canvas-container').clientWidth
-        this.sizes.height = document.querySelector('.canvas-container').clientHeight
+        this.sizes.width =
+          document.querySelector(".canvas-container").clientWidth
+        this.sizes.height =
+          document.querySelector(".canvas-container").clientHeight
 
         if (this.sizes.width < 500) {
           this.controls.enableDamping = false
         }
-  
+
         // Update camera
         this.camera.aspect = this.sizes.width / this.sizes.height
         this.camera.updateProjectionMatrix()
-  
+
         // Update renderer
         this.renderer.setSize(this.sizes.width, this.sizes.height)
         this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
         this.composer.setSize(this.sizes.width, this.sizes.height)
         this.composer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
-        
+
         // Update Labels
         this.labelRenderer.setSize(this.sizes.width, this.sizes.height)
-      }
-    }
+      },
+    },
   })
 
   new Vue({
-    el: document.getElementById('site-wrapper')
+    el: document.getElementById("site-wrapper"),
   })
 
   // new Vue({
@@ -1460,88 +1720,112 @@ document.addEventListener("DOMContentLoaded", function() {
   // })
 
   // Apply highlight color to text
-  const problems = document.querySelectorAll('.problems-list__item');
+  const problems = document.querySelectorAll(".problems-list__item")
   if (problems.length > 0) {
-    const accentColor = getComputedStyle(problems[0]).borderColor;
-    problems.forEach(element => {
-      element.querySelectorAll('strong').forEach(e => {
+    const accentColor = getComputedStyle(problems[0]).borderColor
+    problems.forEach((element) => {
+      element.querySelectorAll("strong").forEach((e) => {
         e.style.color = accentColor
-      });
-    });
+      })
+    })
   }
 
   // Scroll to
-  const scrollButtons = document.querySelectorAll('.scroll-button')
+  const scrollButtons = document.querySelectorAll(".scroll-button")
   for (var i = 0; i < scrollButtons.length; i++) {
-    scrollButtons[i].addEventListener('click', function () {
-      el = document.getElementById('.pop-container');
+    scrollButtons[i].addEventListener("click", function () {
+      el = document.getElementById(".pop-container")
       var rect = el.getBoundingClientRect(),
-      scrollLeft = window.pageXOffset || document.documentElement.scrollLeft,
-      scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        scrollLeft = window.pageXOffset || document.documentElement.scrollLeft,
+        scrollTop = window.pageYOffset || document.documentElement.scrollTop
       window.scrollTo({
         left: 0,
         top: rect.top + scrollTop,
-        behavior: 'smooth'
+        behavior: "smooth",
       })
     })
   }
 
-  const pageScrollButtons = document.querySelectorAll('.scroll-button-page')
+  const pageScrollButtons = document.querySelectorAll(".scroll-button-page")
   for (var i = 0; i < pageScrollButtons.length; i++) {
-    pageScrollButtons[i].addEventListener('click', function () {
-      el = document.querySelector('.pop-container');
+    pageScrollButtons[i].addEventListener("click", function () {
+      el = document.querySelector(".pop-container")
       var rect = el.getBoundingClientRect(),
-      scrollLeft = window.pageXOffset || document.documentElement.scrollLeft,
-      scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        scrollLeft = window.pageXOffset || document.documentElement.scrollLeft,
+        scrollTop = window.pageYOffset || document.documentElement.scrollTop
       window.scrollTo({
         left: 0,
         top: rect.top + scrollTop,
-        behavior: 'smooth'
+        behavior: "smooth",
       })
     })
   }
 
-
-  const magnifyImage = document.querySelectorAll('.image-magnify');
+  const magnifyImage = document.querySelectorAll(".image-magnify")
   for (var i = 0; i < magnifyImage.length; i++) {
     let index = i
     // console.log(magnifyImage[0])
-    magnifyImage[index].addEventListener("click", function() {
-      let popup = magnifyImage[index].closest('.image-container').querySelector('.full-width-image-popup');
-      popup.style.display = "block";
+    magnifyImage[index].addEventListener("click", function () {
+      let popup = magnifyImage[index]
+        .closest(".image-container")
+        .querySelector(".full-width-image-popup")
+      popup.style.display = "block"
       gsap.to(popup, { duration: 0.3, opacity: 1 })
     })
   }
 
-  const hideImage = document.querySelectorAll('.image-hide');
+  const hideImage = document.querySelectorAll(".image-hide")
   for (var i = 0; i < hideImage.length; i++) {
     let index = i
-    hideImage[index].addEventListener("click", function() {
-        let popup = hideImage[index].closest('.image-container').querySelector('.full-width-image-popup');
-        gsap.to(popup, { duration: 0.3, opacity: 0, onComplete: function(){
-        popup.style.display = "none";
-      }})
+    hideImage[index].addEventListener("click", function () {
+      let popup = hideImage[index]
+        .closest(".image-container")
+        .querySelector(".full-width-image-popup")
+      gsap.to(popup, {
+        duration: 0.3,
+        opacity: 0,
+        onComplete: function () {
+          popup.style.display = "none"
+        },
+      })
     })
   }
 
   // Social Media Sharing
 
-  function shareFB(url){
-    const link = 'https://www.facebook.com/sharer/sharer.php?u=' + url + '&t=your message';
-    window.open(link, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');
-    return false;
+  function shareFB(url) {
+    const link =
+      "https://www.facebook.com/sharer/sharer.php?u=" + url + "&t=your message"
+    window.open(
+      link,
+      "",
+      "menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600"
+    )
+    return false
   }
 
-  function shareTwitter(url){
-    const link = 'https://twitter.com/intent/tweet?url=' + url + '&via=getboldify&text=yourtext';
-    TwitterWindow = window.open(link, 'TwitterWindow', width=600, height=300);
-    return false;
+  function shareTwitter(url) {
+    const link =
+      "https://twitter.com/intent/tweet?url=" +
+      url +
+      "&via=getboldify&text=yourtext"
+    TwitterWindow = window.open(
+      link,
+      "TwitterWindow",
+      (width = 600),
+      (height = 300)
+    )
+    return false
   }
 
-  function shareLinkedin(url){
-    const link = 'https://plus.google.com/share?url=' + url;
-    window.open(link, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=480');
-    return false;
+  function shareLinkedin(url) {
+    const link = "https://plus.google.com/share?url=" + url
+    window.open(
+      link,
+      "",
+      "menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=480"
+    )
+    return false
   }
 
   // DOWNLOADS BANNER LINK
@@ -1567,36 +1851,46 @@ document.addEventListener("DOMContentLoaded", function() {
   //     </div>`
   //   banner.innerHTML += buttonHtml
   // }
-  if (document.querySelector('.download-banner-button')) {
-    document.querySelector('.download-banner-button').addEventListener('click', () => {
-      var element = document.getElementById('download-form');
-      const offset = 150;
-      const bodyRect = document.body.getBoundingClientRect().top;
-      const elementRect = element.getBoundingClientRect().top;
-      const elementPosition = elementRect - bodyRect;
-      const offsetPosition = elementPosition - offset;
-  
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: 'smooth'
-      });
-    })
+  if (document.querySelector(".download-banner-button")) {
+    document
+      .querySelector(".download-banner-button")
+      .addEventListener("click", () => {
+        var element = document.getElementById("download-form")
+        const offset = 150
+        const bodyRect = document.body.getBoundingClientRect().top
+        const elementRect = element.getBoundingClientRect().top
+        const elementPosition = elementRect - bodyRect
+        const offsetPosition = elementPosition - offset
+
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: "smooth",
+        })
+      })
   }
 
-  if (document.querySelector('.search-bar-button')) {
-    const searchBar = document.querySelector('.search-bar-container')
-    const searchNav = document.querySelector('.search-nav-items')
-    document.querySelector('.search-bar-button').addEventListener('click', () => {
-      gsap.set(searchNav, {pointerEvents: 'none'})
-      gsap.set(searchBar, {pointerEvents: 'auto'})
-      gsap.to(searchNav, {duration: 0.23, opacity: 0})
-      gsap.fromTo(searchBar, {translateX: -60 + '%'}, {duration: 1, delay: 0.25, translateX: -50 + '%', opacity: 1})
-    })  
-    document.querySelector('.search-bar-close').addEventListener('click', () => {
-      gsap.set(searchNav, {pointerEvents: 'auto'})
-      gsap.set(searchBar, {pointerEvents: 'none'})
-      gsap.to(searchBar, {translateX: -60 + '%', duration: 0.5, opacity: 0})
-      gsap.to(searchNav, {duration: 0.5,  delay: 0.5, opacity: 1})
-    })  
+  if (document.querySelector(".search-bar-button")) {
+    const searchBar = document.querySelector(".search-bar-container")
+    const searchNav = document.querySelector(".search-nav-items")
+    document
+      .querySelector(".search-bar-button")
+      .addEventListener("click", () => {
+        gsap.set(searchNav, { pointerEvents: "none" })
+        gsap.set(searchBar, { pointerEvents: "auto" })
+        gsap.to(searchNav, { duration: 0.23, opacity: 0 })
+        gsap.fromTo(
+          searchBar,
+          { translateX: -60 + "%" },
+          { duration: 1, delay: 0.25, translateX: -50 + "%", opacity: 1 }
+        )
+      })
+    document
+      .querySelector(".search-bar-close")
+      .addEventListener("click", () => {
+        gsap.set(searchNav, { pointerEvents: "auto" })
+        gsap.set(searchBar, { pointerEvents: "none" })
+        gsap.to(searchBar, { translateX: -60 + "%", duration: 0.5, opacity: 0 })
+        gsap.to(searchNav, { duration: 0.5, delay: 0.5, opacity: 1 })
+      })
   }
 })
