@@ -1,6 +1,10 @@
 {% block content %}
-	<div class="grid grid-cols-1 sm:grid-cols-2 grid-rows-2 sm:grid-rows-1 border border-gray-200 bg-black bg-opacity-5 transition-opacity cursor-pointer">
-    <a class="group block h-full w-full bg-white aspect-w-4 aspect-h-3 md:aspect-w-4 md:aspect-h-3 group-hover:opacity-80 transition-opacity sm:border-r border-gray-200" href="{{ post.link }}">
+<a
+  class="block"
+  href="{{ post.link }}"
+>
+	<div class="group sm:grid sm:grid-cols-2 sm:grid-rows-1 border border-gray-200 bg-black bg-opacity-5 transition-opacity cursor-pointer">
+    <div class="block h-full w-full bg-white aspect-w-16 aspect-h-9 sm:aspect-w-4 sm:aspect-h-3 group-hover:opacity-80 transition-opacity sm:border-r border-gray-200" >
       {# <div class=""> #}
         {% if post.thumbnail.src %}
         <img
@@ -17,46 +21,33 @@
         />
         {% endif %}
       {# </div> #}
-    </a>
-		<div class="relative flex flex-col items-start justify-center px-6 pt-6">
-      <div class="mt-2 text-pop-purple text-xs">
-        {{ post.date }}
-      </div>
-      <div class="my-auto pt-4 w-full">
-        <a class="group block" href="{{ post.link }}">
-          <h2 class="text-xl font-bold leading-tight group-hover:text-pop-pink mb-2">
-            {{ post.title }}
-          </h2>
-        </a>
-        <div class="w-full sm:flex sm:flex-wrap overflow-x-auto whitespace-nowrap">
-          {% for category in post.categories %}
-            <a
-              href="{{ category.link }}"
-              class="w-max inline-block bg-pop-pink mr-2 mb-2 no-underline py-1 px-2 transition-all transform hover:scale-105 uppercase font-semibold text-pop-white"
-              style="font-size: 12px;"
-            >
-              {{ category }}
-            </a>
-          {% endfor %}
+    </div>
+		<div class="relative flex flex-col items-start justify-between py-4 px-6">
+      <div class="w-full">
+        <div
+          class="text-pop-purple group-hover:text-pop-pink text-xs uppercase font-semibold mb-3 tracking-wider transition-all"
+          style="font-size: 0.6rem"
+        >
+          {{ post.date }}
+        </div>
+        <h2 class="text-lg font-bold leading-tight group-hover:text-pop-pink transition-all">
+          {{ post.title }}
+        </h2>
+        <div class="my-2 text-gray-500 group-hover:text-pop-pink transition-all">
+          {% include "/templates/partial/archive-author.twig" %}
         </div>
       </div>
-      <div class="">
-        {% include "/templates/partial/archive-author.twig" %}
+      <div class="w-full flex flex-wrap">
+        {% for category in post.categories %}
+          <div
+            class="w-max inline-block mr-1 mt-1 no-underline py-1 px-2 font-medium rounded bg-pop-purple bg-opacity-25 text-pop-purple group-hover:bg-pop-pink group-hover:text-white group-hover:bg-opacity-100 transition-all text-xs"
+            style="font-size: 0.6rem"
+          >
+            {{ category }}
+          </div>
+        {% endfor %}
       </div>
-			{# <div class="absolute bottom-0 right-0">
-				{% include "/templates/partial/link.twig" with
-					{
-						'link': {
-							url: post.uid,
-							text: 'Read',
-							background_color: 'black',
-							accent_color: 'yellow',
-							arrow_color: 'blue',
-							angle: 45
-						},
-					}
-				%}
-			</div> #}
-		</div>
-	</div>
+    </div>
+  </div>
+</a>
 {% endblock %}

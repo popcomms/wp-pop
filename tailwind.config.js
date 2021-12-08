@@ -224,8 +224,9 @@ module.exports = {
       scale: ['group-hover'],
       translate: ['group-hover'],
       rotate: ['group-hover'],
-      backgroundColor: ['group-hover'],
-      textColor: ['group-hover']
+      backgroundColor: ['hover', 'group-hover'],
+      textColor: ['hover', 'group-hover'],
+      display: ['group-hover']
     },
   },
   plugins: [

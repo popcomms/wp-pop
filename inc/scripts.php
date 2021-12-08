@@ -66,8 +66,7 @@ function pop_enqueue_scripts() {
 	wp_enqueue_script(
     'vue',
     'https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.min.js',
-    null,
-    null,
+    array(),
     true
   );
 	wp_enqueue_script(
