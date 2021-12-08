@@ -1009,10 +1009,6 @@ hr.wp-block-separator {
   border-color: rgba(209, 213, 219, var(--tw-border-opacity));
 }
 
-.h-screen-3\/4 {
-  height: 75vh;
-}
-
 .container {
   width: 100%;
 }
@@ -1962,6 +1958,10 @@ hr.wp-block-separator {
   height: 0.25rem;
 }
 
+.h-3 {
+  height: 0.75rem;
+}
+
 .h-6 {
   height: 1.5rem;
 }
@@ -2048,6 +2048,10 @@ hr.wp-block-separator {
 
 .w-1 {
   width: 0.25rem;
+}
+
+.w-3 {
+  width: 0.75rem;
 }
 
 .w-5 {
@@ -2176,6 +2180,10 @@ hr.wp-block-separator {
 
 .max-w-screen-lg {
   max-width: 1024px;
+}
+
+.flex-1 {
+  flex: 1 1 0%;
 }
 
 .flex-shrink {
@@ -2571,8 +2579,8 @@ hr.wp-block-separator {
   overflow: visible;
 }
 
-.overflow-y-scroll {
-  overflow-y: scroll;
+.overflow-y-auto {
+  overflow-y: auto;
 }
 
 .whitespace-nowrap {
@@ -3203,6 +3211,10 @@ hr.wp-block-separator {
 
 .italic {
   font-style: italic;
+}
+
+.leading-none {
+  line-height: 1;
 }
 
 .leading-tight {

@@ -1,4 +1,4 @@
-  <div class="page-hero relative h-screen-3/4 flex flex-col justify-end" >
+  <div class="page-hero relative flex flex-col justify-end" style="height: 66vh;">
     <div
       class="absolute top-0 left-0 w-full h-full bg-center bg-cover no-repeat"
       style="background-image: url({{ theme.link }}/static/images/blogs-bg.png);"
@@ -7,15 +7,14 @@
       class="absolute top-0 left-0 w-full h-full bg-pop-black bg-opacity-20"
     ></div>
     <div class="container-banner w-full relative h-full flex flex-col justify-end pb-8  px-8 md:px-0">
-        <h1 class="hero-title sm:text-5xl text-pop-white font-black w-5/6">
+        <div class="hero-title sm:text-5xl text-pop-white font-black w-5/6">
         	{% if post.title %}
             {{ post.title }}
           {% else %}
-            <span class="text-lg">Search results for:</span>
-					  <br/>
-            {{title}}
+            <div class="text-sm uppercase mb-1 tracking-wider font-semibold">Search results for:</div>
+            <div class="leading-none">{{title}}</div>
           {% endif %}
-        </h1>
+        </div>
         {% if post.post_excerpt %}
           <p class="text-pop-white prose mb-0">
             {{post.post_excerpt}}
@@ -25,23 +24,27 @@
     {# Toolbar #}
     <div class="relative search-nav w-full overflow-visible bg-opacity-40 bg-pop-black text-pop-white">
       <div class="container-banner w-full box-border relative mx-auto px-0">
-        <div class="search-nav-items flex justify-around font-bold">
+        <div class="search-nav-items flex justify-around font-bold text-sm">
           <a
-            class="py-6 cursor-pointer hover:text-pop-green font-bold"
+            class="flex-1 text-center py-6 cursor-pointer hover:text-pop-green font-bold"
             href="{{ site.url }}/built-environment/"
-          >Video</a>
+          >
+            Video
+          </a>
           <a
-            class="hidden sm:block py-6 cursor-pointer hover:text-pop-green font-bold"
+            class="flex-1 text-center hidden sm:block py-6 cursor-pointer hover:text-pop-green font-bold"
             href="{{ site.url }}/category/advanced-manufacturing/"
             
-          >Industry Insights</a>
-          <div
-            class="group py-6 cursor-pointer hover:text-pop-green relative font-bold box-border"
           >
-            <div class="flex items-center">
+            Industry Insights
+          </a>
+          <div
+            class="flex-1 group hover:bg-pop-black py-6 cursor-pointer hover:text-pop-green relative font-bold box-border"
+          >
+            <div class="flex items-center justify-center ">
               Categories
               <svg
-                class="h-6 w-6"
+                class="h-3 w-3 ml-1"
                 xmlns="http://www.w3.org/2000/svg"
                 aria-hidden="true"
                 role="img"
@@ -51,13 +54,13 @@
               </svg>
               
             </div>
-            <div class="absolute hidden group-hover:block top-full left-1/2 sm:left-0 transform -translate-x-1/2 sm:transform-none bg-pop-black-dark bg-opacity-90 px-3 py-3 z-50">
-              <div class="max-h-80 max-w-min sm:max-w-max overflow-y-scroll turbine-info pr-2">
+            <div class="absolute hidden group-hover:block top-5/6 left-1/2 sm:left-0 transform -translate-x-1/2 sm:transform-none bg-pop-black px-3 py-3 z-50">
+              <div class="max-h-80 max-w-min sm:max-w-max overflow-y-auto turbine-info pr-2">
                 {% for category in categories %}
                   {% if category.term_id != function('get_cat_ID', 'Industries') and category.parent != function('get_cat_ID', 'Industries') %}
                   <a
                     href="{{ site.url }}/{{ category.taxonomy }}/{{ category.slug }}/"
-                    class="block w-max py-2 text-white hover:text-pop-green cursor-pointer transition-colors"
+                    class="block text-sm font-normal w-max py-2 text-white hover:text-pop-green cursor-pointer transition-colors"
                   >
                     {{ category.name }}
                   </a>
@@ -67,12 +70,12 @@
             </div>
           </div>
           <div
-            class="hidden sm:block group py-6 cursor-pointer hover:text-pop-green relative font-bold box-border"
+            class="flex-1 text-center hidden hover:bg-pop-black sm:block group py-6 cursor-pointer hover:text-pop-green relative font-bold box-border"
           >
-            <div class="flex items-center">
+            <div class="flex items-center justify-center">
               Industries
               <svg
-                class="h-6 w-6"
+                class="h-3 w-3 ml-1"
                 xmlns="http://www.w3.org/2000/svg"
                 aria-hidden="true"
                 role="img"
@@ -82,13 +85,13 @@
               </svg>
               
             </div>
-            <div class="absolute hidden group-hover:block top-full left-0 bg-pop-black-dark bg-opacity-90 px-3 py-3 z-50">
-              <div class="max-h-80 overflow-y-scroll turbine-info pr-2">
+            <div class="absolute hidden group-hover:block top-5/6 left-0 bg-pop-black px-3 py-3 z-50">
+              <div class="max-h-80 overflow-y-auto turbine-info pr-2">
                 {% for category in categories %}
                   {% if category.parent == function('get_cat_ID', 'Industries') %}
                   <a
                     href="{{ site.url }}/{{ category.taxonomy }}/{{ category.slug }}/"
-                    class="block w-max py-2 text-white hover:text-pop-green cursor-pointer transition-colors"
+                    class="block text-sm font-normal w-max py-1 text-white hover:text-pop-green cursor-pointer transition-colors"
                   >
                     {{ category.name }}
                   </a>
@@ -103,8 +106,13 @@
           >
             Industries
           </a> #}
-          <div class="relative py-6 cursor-pointer hover:text-pop-green font-bold">
-            <div class="search-bar-button">Search</div>
+          <div class="flex-1 relative py-6 cursor-pointer hover:text-pop-green font-bold">
+            <div class="search-bar-button flex items-center justify-center">
+              <div class="mr-1">Search</div>
+              <svg class="stroke-current text-pop-white" width="23" height="24" viewBox="0 0 23 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M19.2941 21L13.7815 15M15.619 10C15.619 13.866 12.7396 17 9.1877 17C5.63576 17 2.75635 13.866 2.75635 10C2.75635 6.13401 5.63576 3 9.1877 3C12.7396 3 15.619 6.13401 15.619 10Z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
           </div>
         </div>
         <div class="search-bar-container container-wide absolute opacity-0 pointer-events-none top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-full flex w-full items-center">
