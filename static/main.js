@@ -902,9 +902,9 @@ document.addEventListener("DOMContentLoaded", function () {
       },
     },
     created() {
+      this.reset()
     },
     mounted() {
-      this.reset()
     },
   })
 

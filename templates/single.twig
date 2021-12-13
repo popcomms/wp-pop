@@ -4,15 +4,15 @@
 
   {% if post.thumbnail.src %}
     <div
-      class="fixed w-full aspect-w-16 aspect-h-9 lg:aspect-h-7 bg-cover bg-pop-white max-h-screen max-w-screen"
+      class="fixed w-full aspect-w-16 aspect-h-9 lg:aspect-h-7 bg-center bg-cover bg-pop-white max-h-screen max-w-screen"
       style="background-image: url({{ post.thumbnail.src }})"
     ></div>
     <div
-      class="aspect-w-16 aspect-h-9 lg:aspect-h-7 bg-cover bg-pop-transparent max-h-screen max-w-screen"
+      class="bg-opacity-{{ post.hero_overlay_opacity }} bg-pop-black aspect-w-16 aspect-h-9 lg:aspect-h-7 bg-cover bg-pop-transparent max-h-screen max-w-screen"
     ></div>
   {% else %}
     <div
-      class="fixed w-full aspect-w-16 aspect-h-9 lg:aspect-h-7 bg-cover bg-pop-white max-h-screen max-w-screen"
+      class="fixed w-full aspect-w-16 aspect-h-9 bg-center lg:aspect-h-7 bg-cover bg-pop-white max-h-screen max-w-screen"
       style="background-image: url({{ theme.link }}/static/images/blogs-bg.png)"
     ></div>
     <div
