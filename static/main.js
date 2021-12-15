@@ -1853,11 +1853,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // VIDEO PLAYER
 
-  const play = `<svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 transform -translate-x-1/2" viewBox="0 0 20 20" fill="currentColor">
-    <path class="stroke-current text-pop-pink" fill="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="1" fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd" />
+  const play = `<svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 transform -translate-x-1/2 filter drop-shadow" viewBox="0 0 26 26" fill="none">
+    <circle cx="13.1328" cy="12.9296" r="12.2461" fill="#FF0088" stroke="white"/>
+    <path fill-rule="evenodd" clip-rule="evenodd" d="M17.505 12.9296L10.25 8.72087V17.1384L17.505 12.9296ZM18.495 12.0596C18.6482 12.1474 18.7756 12.274 18.8642 12.4268C18.9527 12.5796 18.9994 12.753 18.9994 12.9296C18.9994 13.1062 18.9527 13.2797 18.8642 13.4324C18.7756 13.5852 18.6482 13.7119 18.495 13.7996L10.5412 18.4146C9.89125 18.7921 9 18.3609 9 17.5446V8.31462C9 7.49837 9.89125 7.06712 10.5412 7.44462L18.495 12.0596Z" fill="white"/>
   </svg>`;
-  const pause = `<svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 transform -translate-x-1/2" viewBox="0 0 24 24" fill="currentColor">
-    <path class="stroke-current text-pop-pink"  fill="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M10 9v6m4-6v6m7-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+  const pause = `<svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 transform -translate-x-1/2 filter drop-shadow" viewBox="0 0 26 26" fill="none">
+    <circle cx="13.1328" cy="12.9296" r="12.2461" fill="#FF0088" stroke="white"/>
+    <path transform="translate(-0.5 0)" fill-rule="evenodd" clip-rule="evenodd" d="M11.0977 7.30457C11.2634 7.30457 11.4224 7.37041 11.5396 7.48762C11.6568 7.60483 11.7227 7.76381 11.7227 7.92957V17.9296C11.7227 18.0953 11.6568 18.2543 11.5396 18.3715C11.4224 18.4887 11.2634 18.5546 11.0977 18.5546C10.9319 18.5546 10.7729 18.4887 10.6557 18.3715C10.5385 18.2543 10.4727 18.0953 10.4727 17.9296V7.92957C10.4727 7.76381 10.5385 7.60483 10.6557 7.48762C10.7729 7.37041 10.9319 7.30457 11.0977 7.30457V7.30457ZM16.0977 7.30457C16.2634 7.30457 16.4224 7.37041 16.5396 7.48762C16.6568 7.60483 16.7227 7.76381 16.7227 7.92957V17.9296C16.7227 18.0953 16.6568 18.2543 16.5396 18.3715C16.4224 18.4887 16.2634 18.5546 16.0977 18.5546C15.9319 18.5546 15.7729 18.4887 15.6557 18.3715C15.5385 18.2543 15.4727 18.0953 15.4727 17.9296V7.92957C15.4727 7.76381 15.5385 7.60483 15.6557 7.48762C15.7729 7.37041 15.9319 7.30457 16.0977 7.30457V7.30457Z" fill="white"/>
   </svg>`;
   const sound = `<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />

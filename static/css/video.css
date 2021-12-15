@@ -39,8 +39,9 @@
   border: none;
   background: transparent;
   cursor: pointer;
-  opacity: 0.8;
   transition: all 0.2s;
+
+  /* opacity: 0.8; */
 }
 
 .control-button:hover {
