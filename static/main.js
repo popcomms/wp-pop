@@ -1069,6 +1069,7 @@ document.addEventListener("DOMContentLoaded", function () {
     data() {
       return {
         // NOTHING HERE AS ALL THREEJS ITEMS MUST BE NON REACTIVE
+        loaded: false,
         active: false,
         initComplete: false,
         wireframeState: true,
@@ -1119,6 +1120,7 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     },
     mounted() {
+      console.log('hey')
       this.init()
     },
     methods: {
@@ -1394,54 +1396,56 @@ document.addEventListener("DOMContentLoaded", function () {
           `${homeurl}/wp-content/themes/wp-pop/static/js/models/jet-v2.json`,
 
           (obj) => {
-            this.turbineGroup = new THREE.Group()
-
-            this.turbineModel = obj.children[0]
-            this.turbineModel.position.y = 0
-            this.turbineModel.scale.set(0.1, 0.1, 0.1)
-            this.turbineGroup.add(this.turbineModel)
-
-            this.redPointLight = obj.children[0]
-            this.redPointLight.castShadow = true
-            this.redPointLight.position.y = 0
-            this.redPointLight.position.x = -4
-            this.redPointLight.intensity = 0
-            this.turbineGroup.add(this.redPointLight)
-
-            this.bluePointLight = obj.children[0]
-            this.bluePointLight.castShadow = true
-            this.bluePointLight.position.y = 0
-            this.bluePointLight.position.x = 4
-            this.bluePointLight.intensity = 0
-            this.turbineGroup.add(this.bluePointLight)
-
-            this.scene.add(this.turbineGroup)
-
-            this.turbineBlades =
-              this.turbineGroup.children[0].children[0].children[5]
-            this.turbineTimeline = gsap
-              .timeline({ paused: true, repeat: -1, repeatDelay: 1 })
-              .fromTo(
-                this.turbineBlades.rotation,
-                { x: 0 },
-                { duration: 5, x: -Math.PI * 5, ease: "Power1.easeInOut" }
-              )
-              .fromTo(
-                [this.bluePointLight, this.redPointLight],
-                { intensity: 0 },
-                { duration: 1, intensity: 500, ease: "Power3.easeInOut" },
-                "-=3.5"
-              )
-              .to(
-                [this.bluePointLight, this.redPointLight],
-                { duration: 1, intensity: 0, ease: "Power3.easeInOut" },
-                "-=2"
-              )
-
-            updateAllMaterials()
-            this.initComplete = true
-            if (window.innerWidth < 500) {
-              this.activateModel()
+            if (!this.loaded) {
+              this.loaded = true
+              
+              this.turbineGroup = new THREE.Group()  
+  
+              this.turbineModel = obj.children[0]
+              this.turbineModel.position.y = 0
+              this.turbineModel.scale.set(0.1, 0.1, 0.1)
+              this.turbineGroup.add(this.turbineModel)
+  
+              this.redPointLight = obj.children[0]
+              this.redPointLight.castShadow = true
+              this.redPointLight.position.y = 0
+              this.redPointLight.position.x = -4
+              this.redPointLight.intensity = 0
+              this.turbineGroup.add(this.redPointLight)
+  
+              this.bluePointLight = obj.children[0]
+              this.bluePointLight.castShadow = true
+              this.bluePointLight.position.y = 0
+              this.bluePointLight.position.x = 4
+              this.bluePointLight.intensity = 0
+              this.turbineGroup.add(this.bluePointLight)
+  
+              this.scene.add(this.turbineGroup)
+  
+              this.turbineBlades = this.turbineGroup.children[0].children[0].children[5]
+              this.turbineTimeline = gsap.timeline({ paused: true, repeat: -1, repeatDelay: 1 })
+                .fromTo(
+                  this.turbineBlades.rotation,
+                  { x: 0 },
+                  { duration: 5, x: -Math.PI * 5, ease: "Power1.easeInOut" }
+                )
+                .fromTo(
+                  [this.bluePointLight, this.redPointLight],
+                  { intensity: 0 },
+                  { duration: 1, intensity: 500, ease: "Power3.easeInOut" },
+                  "-=3.5"
+                )
+                .to(
+                  [this.bluePointLight, this.redPointLight],
+                  { duration: 1, intensity: 0, ease: "Power3.easeInOut" },
+                  "-=2"
+                )
+  
+              updateAllMaterials()
+              this.initComplete = true
+              if (window.innerWidth < 500) {
+                this.activateModel()
+              }
             }
           }
         )
