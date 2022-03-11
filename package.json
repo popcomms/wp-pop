@@ -31,7 +31,7 @@
     "postcss-nested": "^5.0.5",
     "purgecss": "^4.0.3",
     "tailwindcss": "^2.1.1",
-    "three": "^0.131.3",
+    "three": "^0.137.0",
     "vue": "^2.6.12"
   },
   "devDependencies": {
