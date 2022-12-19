@@ -8,7 +8,7 @@
   {% set color = post.hero_theme == 'white' ? 'black' : 'white' %}
 {% endif %}
 
-<div class="py-8 text-sm bg-pop-{{ bg }} text-pop-{{ color }} border-t border-gray-300">
+<div class="py-8 text-xs bg-pop-{{ bg }} text-pop-{{ color }} border-t border-gray-300">
   <div class="container-wide">
     <div class="flex flex-wrap">
       <div class="w-full sm:w-1/2 md:w-1/3">
@@ -23,9 +23,8 @@
         {% include "/templates/partial/footer/partners.twig" %}
       </div>
     </div>
-    <div class="w-full mt-16 sm:mt-24 opacity-60 text-xs">
-      &copy; {{"now"|date('Y')}} POP Communications Ltd&emsp;&bull;&emsp;155 Whiteladies Road. Bristol. BS8 2RF. United Kingdom<br>
-      Company&nbsp;06086985&emsp;&bull;&emsp;VAT&nbsp;888&nbsp;7070&nbsp;67&emsp;&bull;&emsp;<a href="{{ site.url }}/privacy-policy/" class="underline hover:opacity-50">Privacy Policy</a>
+    <div class="w-full mt-16 sm:mt-24 opacity-60 text-xs" style="font-size: .675rem">
+      &copy; {{"now"|date('Y')}} POPcomms Ltd&emsp;&bull;&emsp;155 Whiteladies Road. Bristol. BS8 2RF. United Kingdom&emsp;&bull;&emsp;Company&nbsp;13906686&emsp;&bull;&emsp;<a href="{{ site.url }}/privacy-policy/" class="underline hover:opacity-50">Privacy Policy</a>
     </div>
   </div>
 </div>

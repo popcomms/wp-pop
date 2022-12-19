@@ -71,7 +71,7 @@ function pop_enqueue_scripts() {
   );
 	wp_enqueue_script(
     'main',
-    get_template_directory_uri().'/static/main.js?v=0.5',
+    get_template_directory_uri().'/static/main.js?v=0.7',
     array('gsap',
     'scrollTrigger',
     'vue'),
@@ -86,38 +86,3 @@ function pop_enqueue_scripts() {
   );
 }
 add_action( 'wp_enqueue_scripts', 'pop_enqueue_scripts' );
-
-
-// add_filter('script_loader_tag','add_type_to_script', 10, 3);
-
-// function add_type_to_script($tag, $handle, $source){
-//     // if ('three' === $handle) {
-//     //     $tag = '<script src="'. $source .'" type="module"></script>';
-//     // } 
-//     if ('OrbitControls' === $handle) {
-//         $tag = '<script src="'. $source .'" type="module"></script>';
-//     }
-//     if ('EffectComposer' === $handle) {
-//         $tag = '<script src="'. $source .'" type="module"></script>';
-//     }
-//     if ('RenderPass' === $handle) {
-//         $tag = '<script src="'. $source .'" type="module"></script>';
-//     }
-//     if ('ShaderPass' === $handle) {
-//         $tag = '<script src="'. $source .'" type="module"></script>';
-//     }
-//     if ('RGBShiftShader' === $handle) {
-//         $tag = '<script src="'. $source .'" type="module"></script>';
-//     }
-//     if ('SMAAPass' === $handle) {
-//         $tag = '<script src="'. $source .'" type="module"></script>';
-//     }
-//     if ('GammaCorrectionShader' === $handle) {
-//         $tag = '<script src="'. $source .'" type="module"></script>';
-//     }
-//     if ('CSS2DRenderer' === $handle) {
-//         $tag = '<script src="'. $source .'" type="module"></script>';
-//     }
-
-//     return $tag;
-// }

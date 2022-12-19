@@ -9,7 +9,7 @@
 >
 
   {% block header %}
-  <div class="wrapper flex justify-between items-center p-4 md:px-8">
+  <div class="wrapper flex justify-between items-center py-3 px-4 md:px-8">
     <div class="absolute h-full w-full bg-blue top-0 left-0 backdrop-filter backdrop-blur"></div>
     <a
       v-show="!menuActive"
@@ -33,20 +33,20 @@
       role="navigation"
     >
       <div
-        class="md:hidden group flex absolute md:relative top-1/2 transform -translate-y-1/2 right-0 items-center z-50 cursor-pointer"
+        class="fixed top-0 right-0 group flex items-center z-50 cursor-pointer md:relative md:hidden"
         @click="toggleMenu('main')"
       >
         <transition name="menu-button" mode="out-in">
           <p
             v-if="!menuActive"
-            class="font-bold text-pop-pink pr-4"
+            class="font-semibold text-pop-white pr-3"
             key="menu"
           >
             Menu
           </p>
           <p
             v-else
-            class="block md:hidden font-bold text-pop-white pr-4"
+            class="block md:hidden font-semibold text-pop-white pr-3"
             key="close"
           >
             Close
@@ -67,7 +67,7 @@
       class="fixed bottom-0 right-0 w-1/2 min-w-min whitespace-nowrap md:w-auto z-50 md:z-0 md:relative flex items-center transition-opacity cursor-pointer bg-pop-pink md:bg-transparent"
       :class="menuActive ? 'opacity-0' : 'opacity-100'"
     >
-      <div class="flex-grow text-center h-full px-3 py-2 md:p-0 text-pop-white md:text-pop-pink md:font-bold md:mr-2 text-sm">
+      <div class="flex-grow text-center h-full px-3 py-2 md:p-0 text-pop-white md:text-pop-pink md:font-bold md:mr-2 text-xs">
         Get in Touch
       </div>
       <svg class="hidden md:block" width="54" height="16" viewBox="0 0 54 16" fill="none" xmlns="http://www.w3.org/2000/svg">
