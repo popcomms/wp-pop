@@ -9,7 +9,7 @@
 >
 
   {% block header %}
-  <div class="wrapper flex justify-between items-center p-4 md:px-8">
+  <div class="wrapper flex justify-between items-center py-3 px-4 md:px-8">
     <div class="absolute h-full w-full bg-blue top-0 left-0 backdrop-filter backdrop-blur"></div>
     <a
       v-show="!menuActive"
@@ -29,24 +29,24 @@
 
     <nav
       id="nav-main"
-      class="nav-container relative h-full flex-grow flex flex-col px-10"
+      class="relative h-full flex-grow flex flex-col pl-8"
       role="navigation"
     >
       <div
-        class="md:hidden group flex absolute md:relative top-1/2 transform -translate-y-1/2 right-0 items-center z-50 cursor-pointer"
+        class="fixed top-0 right-0 group flex items-center z-50 cursor-pointer md:relative md:hidden"
         @click="toggleMenu('main')"
       >
         <transition name="menu-button" mode="out-in">
           <p
             v-if="!menuActive"
-            class="font-bold text-pop-pink pr-4"
+            class="font-semibold text-pop-white pr-3"
             key="menu"
           >
             Menu
           </p>
           <p
             v-else
-            class="block md:hidden font-bold text-pop-white pr-4"
+            class="block md:hidden font-semibold text-pop-white pr-3"
             key="close"
           >
             Close
@@ -61,13 +61,13 @@
       {% include "menu.twig" with {'items': menu.get_items, 'invert': invertNav} %}
     </nav>
 
-    <div
+    {# <div
       v-show="!menuActive"
       @click="showContactForm()"
       class="fixed bottom-0 right-0 w-1/2 min-w-min whitespace-nowrap md:w-auto z-50 md:z-0 md:relative flex items-center transition-opacity cursor-pointer bg-pop-pink md:bg-transparent"
       :class="menuActive ? 'opacity-0' : 'opacity-100'"
     >
-      <div class="flex-grow text-center h-full px-3 py-2 md:p-0 text-pop-white md:text-pop-pink md:font-bold md:mr-2 text-sm">
+      <div class="flex-grow text-center h-full px-3 py-2 md:p-0 text-pop-white md:text-pop-pink md:font-bold md:mr-2 text-xs">
         Get in Touch
       </div>
       <svg class="hidden md:block" width="54" height="16" viewBox="0 0 54 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -78,7 +78,7 @@
           <path class="fill-current text-pop-blue" d="M13.0607 0.625645C12.4749 0.0398579 11.5251 0.0398579 10.9393 0.625645L1.3934 10.1716C0.807611 10.7574 0.807611 11.7071 1.3934 12.2929C1.97919 12.8787 2.92893 12.8787 3.51472 12.2929L12 3.80762L20.4853 12.2929C21.0711 12.8787 22.0208 12.8787 22.6066 12.2929C23.1924 11.7071 23.1924 10.7574 22.6066 10.1716L13.0607 0.625645ZM13.5 24.3137V1.6863H10.5V24.3137H13.5Z" fill="#3A3EAB"/>
         </svg>
       </div>
-    </div>
+    </div> #}
   </div>
 
   {% endblock %}

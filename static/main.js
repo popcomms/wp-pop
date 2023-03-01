@@ -21,6 +21,25 @@ document.addEventListener("DOMContentLoaded", function () {
     return null
   }
 
+  function showContactForm() {
+    const contact = document.getElementById('contact-form')
+    if (contact && contact.style.display === 'none') {
+      contact.style.display = 'block'
+    }
+  }
+
+  function addContactTriggers () {
+    const parent = document.getElementById('site')
+    parent.addEventListener('click', function(e) {
+      console.log(e.target.parentElement.href)
+      if ((e.target.href && e.target.href.includes("#contact-form")) || (e.target.parentElement.href && e.target.parentElement.href.includes("#contact-form"))) {
+        e.preventDefault();
+        showContactForm();
+      }
+    }, false)
+  }
+  addContactTriggers()
+
   gsap.registerPlugin(ScrollTrigger)
 
   Vue.component("contact-form", {
@@ -44,7 +63,9 @@ document.addEventListener("DOMContentLoaded", function () {
         }
       },
       hide() {
+
         this.show = false
+        this.$el.style.display = 'none'
         document.querySelector("body").style.overflow = "auto"
         if (this.step === 6) {
           this.step = 1
@@ -854,17 +875,18 @@ document.addEventListener("DOMContentLoaded", function () {
             }
           }
           xhr.send(JSON.stringify(data))
-          console.log(this.$refs.downloadContainer.dataset.emailFile)
+          const containerEl = document.getElementById('download-form')
+
           const download = {
             name: this.form.firstName.value,
             email: this.form.email.value,
-            // title: "The Beginners’ Guide to Creating Interactive Touchscreen Experiences",
-            // url: 'https://www.popcomms.com/wp-content/uploads/2021/07/POP_Beginners-guide-to-touchscreens.pdf',
-            // image: 'https://www.popcomms.com/wp-content/uploads/2021/07/Touchscreen-cover.jpg'
-            title: this.$refs.downloadContainer.dataset.emailTitle,
-            url: this.$refs.downloadContainer.dataset.emailFile,
-            image: this.$refs.downloadContainer.dataset.emailImage,
+            title: containerEl.getAttribute('data-email-title'),
+            url: containerEl.getAttribute('data-email-file'),
+            image: containerEl.getAttribute('data-email-image'),
           }
+
+          // console.log('download', download)
+
           this.sendDownload(download)
 
           setTimeout(() => {
@@ -1064,7 +1086,7 @@ document.addEventListener("DOMContentLoaded", function () {
   var WpJsonUrl = document.querySelector('link[rel="https://api.w.org/"]').href
   // then take out the '/wp-json/' part
   var homeurl = WpJsonUrl.replace("/wp-json/", "")
-  // console.log(homeurl)
+
   Vue.component("3D-Turbine", {
     data() {
       return {
@@ -1398,30 +1420,30 @@ document.addEventListener("DOMContentLoaded", function () {
           (obj) => {
             if (!this.loaded) {
               this.loaded = true
-              
-              this.turbineGroup = new THREE.Group()  
-  
+
+              this.turbineGroup = new THREE.Group()
+
               this.turbineModel = obj.children[0]
               this.turbineModel.position.y = 0
               this.turbineModel.scale.set(0.1, 0.1, 0.1)
               this.turbineGroup.add(this.turbineModel)
-  
+
               this.redPointLight = obj.children[0]
               this.redPointLight.castShadow = true
               this.redPointLight.position.y = 0
               this.redPointLight.position.x = -4
               this.redPointLight.intensity = 0
               this.turbineGroup.add(this.redPointLight)
-  
+
               this.bluePointLight = obj.children[0]
               this.bluePointLight.castShadow = true
               this.bluePointLight.position.y = 0
               this.bluePointLight.position.x = 4
               this.bluePointLight.intensity = 0
               this.turbineGroup.add(this.bluePointLight)
-  
+
               this.scene.add(this.turbineGroup)
-  
+
               this.turbineBlades = this.turbineGroup.children[0].children[0].children[5]
               this.turbineTimeline = gsap.timeline({ paused: true, repeat: -1, repeatDelay: 1 })
                 .fromTo(
@@ -1440,7 +1462,7 @@ document.addEventListener("DOMContentLoaded", function () {
                   { duration: 1, intensity: 0, ease: "Power3.easeInOut" },
                   "-=2"
                 )
-  
+
               updateAllMaterials()
               this.initComplete = true
               if (window.innerWidth < 500) {
@@ -1719,10 +1741,6 @@ document.addEventListener("DOMContentLoaded", function () {
     el: document.getElementById("site-wrapper"),
   })
 
-  // new Vue({
-  //   el: document.getElementById('header')
-  // })
-
   // Apply highlight color to text
   const problems = document.querySelectorAll(".problems-list__item")
   if (problems.length > 0) {
@@ -1880,58 +1898,64 @@ document.addEventListener("DOMContentLoaded", function () {
   const fullscreenButton = document.querySelector('.fullscreen-button');
   const videoContainer = document.querySelector('.video-player');
   let isFullScreen = false;
-
-  playButton.addEventListener('click', function () {
-    if (video.paused) {
-      video.play();
-      videoContainer.classList.add('playing');
-      playButton.innerHTML = pause;
-    } else {
-      video.pause();
-      videoContainer.classList.remove('playing');
+  if (playButton) {
+    playButton.addEventListener('click', function () {
+      if (video.paused) {
+        video.play();
+        videoContainer.classList.add('playing');
+        playButton.innerHTML = pause;
+      } else {
+        video.pause();
+        videoContainer.classList.remove('playing');
+        playButton.innerHTML = play;
+      }
+    })
+  }
+  if (video) {
+    video.onended = function () {
       playButton.innerHTML = play;
     }
-  })
 
-  video.onended = function () {
-    playButton.innerHTML = play;
-  }
-
-  video.ontimeupdate = function () {
-    const percentagePosition = (100*video.currentTime) / video.duration;
-    timeline.style.backgroundSize = `${percentagePosition}% 100%`;
-    timeline.value = percentagePosition;
-  }
-
-  timeline.addEventListener('change', function () {
-    const time = (timeline.value * video.duration) / 100;
-    video.currentTime = time;
-  });
-
-  soundButton.addEventListener('click', function () {
-    video.muted = !video.muted;
-    soundButton.innerHTML = video.muted ? mute : sound;
-  });
-
-  fullscreenButton.addEventListener('click', function () {
-    if (!isFullScreen) {
-        if (video.requestFullscreen) {
-          video.requestFullscreen();
-        } else if (video.webkitRequestFullscreen) { /* Safari */
-          video.webkitRequestFullscreen();
-        } else if (video.msRequestFullscreen) { /* IE11 */
-          video.msRequestFullscreen();
-        }
-    } else {
-        if (document.exitFullscreen) {
-          document.exitFullscreen();
-        } else if (document.webkitExitFullscreen) { /* Safari */
-          document.webkitExitFullscreen();
-        } else if (document.msExitFullscreen) { /* IE11 */
-          document.msExitFullscreen();
-        }
+    video.ontimeupdate = function () {
+      const percentagePosition = (100*video.currentTime) / video.duration;
+      timeline.style.backgroundSize = `${percentagePosition}% 100%`;
+      timeline.value = percentagePosition;
     }
-  });
+  }
+
+  if (timeline) {
+    timeline.addEventListener('change', function () {
+      const time = (timeline.value * video.duration) / 100;
+      video.currentTime = time;
+    });
+  }
+  if (soundButton) {
+    soundButton.addEventListener('click', function () {
+      video.muted = !video.muted;
+      soundButton.innerHTML = video.muted ? mute : sound;
+    });
+  }
+  if (fullscreenButton) {
+    fullscreenButton.addEventListener('click', function () {
+      if (!isFullScreen) {
+          if (video.requestFullscreen) {
+            video.requestFullscreen();
+          } else if (video.webkitRequestFullscreen) { /* Safari */
+            video.webkitRequestFullscreen();
+          } else if (video.msRequestFullscreen) { /* IE11 */
+            video.msRequestFullscreen();
+          }
+      } else {
+          if (document.exitFullscreen) {
+            document.exitFullscreen();
+          } else if (document.webkitExitFullscreen) { /* Safari */
+            document.webkitExitFullscreen();
+          } else if (document.msExitFullscreen) { /* IE11 */
+            document.msExitFullscreen();
+          }
+      }
+    });
+  }
 
   // END VIDEO PLAYER
 

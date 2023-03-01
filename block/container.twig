@@ -47,10 +47,10 @@
     {# Content #}
     <div class="pop-container my-12">
       {% for item in fields.content %}
-        <div class="{{ loop.last ? '' : 'mb-20 sm:mb-28' }}">
+        <div class="{{ loop.last ? '' : 'mb-10 sm:mb-16' }}">
           {# <pre>{{ dump(item) }}</pre> #}
           {% set path = "/block/" ~ item.acf_fc_layout ~ ".twig" %}
-          {% include path with 
+          {% include path with
             {
               'fields': item,
               'theme': fields.theme,

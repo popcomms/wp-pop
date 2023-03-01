@@ -38,7 +38,7 @@
               <br>
             {% endif %}
 
-            <h4 class="text-xl font-bold leading-tight group-hover:text-pop-pink">
+            <h4 class="text-xl font-semibold leading-tight group-hover:text-pop-pink">
             {% if post.type == 'case-studies' %}
               {{ function('case_study_title', post.title, post.terms('client') | first, post.terms('category') | first) }}
             {% else %}

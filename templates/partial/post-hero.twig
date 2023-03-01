@@ -45,11 +45,11 @@
       {# {{ dump(post.get_post_type) }} #}
       {% if post.get_post_type == 'case-studies' %}
         <a class="flex items-center mb-2 text-xs text-pop-white hover:text-pop-pink transition-all" href="{{ site.url }}/work">
-          <div class="uppercase">work</div>
+          <div class="uppercase">CASE STUDIES</div>
         </a>
       {% endif %}
       {# Title #}
-      <h1 class="text-pop-{{fields.title_color}} font-black text-4xl sm:text-5xl mb-5">
+      <h1 class="text-pop-{{fields.title_color}} font-semibold text-4xl sm:text-5xl mb-5">
         {{ fields.title != null ? fields.title : post.title }}
       </h1>
       {# Excerpt #}
@@ -67,8 +67,8 @@
               class="flex items-center bg-pop-pink no-underline mr-4 mb-2 py-1 px-2 transition-all transform hover:scale-105"
             >
               <span
-                class=" uppercase font-semibold text-pop-white"
-                style="font-size: 12px;"
+                class="text-xs font-medium text-pop-white"
+                {# style="font-size: 12px;" #}
               >
                 {{ category }}
               </span>

@@ -8,6 +8,7 @@
     <div
       is="download"
       inline-template
+      id="download-form"
     >
       <div class="download-form-container"  data-email-title="{{ fields.email.title }}" data-email-image="{{ fields.email.image }}" data-email-file="{{ fields.email.download }}">
         <div class="border-2 {{ theme_border_color }}">
@@ -68,7 +69,7 @@
               {% include "partial/forms/download/thanks.twig" %}
             </div>
           </div>
-        </div> 
+        </div>
       </div>
     </div>
   </div>

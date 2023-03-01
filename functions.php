@@ -172,7 +172,6 @@ get_template_part('inc/taxonomies');
 // Helper Functions
 get_template_part('inc/helpers');
 
-
 // API
 get_template_part('inc/api/download');
 

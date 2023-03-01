@@ -9,9 +9,9 @@
     <div class="bg-pop-mid-gray flex-grow" style="height: 1px"></div>
   </div>
   {% for sub_item in item.content %}
-    <div class="section__item {{ loop.last ? '' : 'mb-0 sm:mb-28' }}">
+    <div class="section__item {{ loop.last ? '' : 'mb-0 sm:mb-16' }}">
       {% set path = "/block/" ~ sub_item.acf_fc_layout ~ ".twig" %}
-      {% include path with 
+      {% include path with
         {
           'fields': sub_item,
           'theme': theme,
