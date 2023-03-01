@@ -5,25 +5,25 @@
 {% if not is_preview %}
 <div class="container-narrow p-8 sm:p-16 md:p-8 relative {{ theme_text_color }}">
   <div class="relative">
-      <div class="scale-50 sm:scale-100 block z-0 absolute -top-2 sm:-top-8 -left-4 sm:-left-6 opacity-80 transform origin-top-left ">
-        <svg class="transform rotate-180 origin-center" width="100" height="80" viewBox="0 0 62 44" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path class="fill-current text-pop-pink" d="M19.9651 43.0856H0.674805L18.8304 0.155334H31.1232L19.9651 43.0856ZM50.6026 43.0856H31.3123L49.4678 0.155334H61.7607L50.6026 43.0856Z" fill="black"/>
-        </svg>
-      </div>
-      <div class="scale-50 sm:scale-100 transform block z-0 absolute bottom-0 sm:-bottom-4 right-0 sm:-right-6 opacity-80 origin-bottom-right" style="font-size: 20rem; line-height: 5rem;">
-        <svg class="" width="100" height="80" viewBox="0 0 62 44" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path class="fill-current text-pop-pink" d="M19.9651 43.0856H0.674805L18.8304 0.155334H31.1232L19.9651 43.0856ZM50.6026 43.0856H31.3123L49.4678 0.155334H61.7607L50.6026 43.0856Z" fill="black"/>
-        </svg>
-      </div>
-      <div class="text-xl md:text-2xl mb-6 leading-tight">
-        {{ fields.testimonial }}
-      </div>
+    <div class="scale-50 sm:scale-100 block z-0 absolute -top-2 sm:-top-8 -left-4 sm:-left-6 opacity-80 transform origin-top-left ">
+      <svg class="transform rotate-180 origin-center" width="100" height="80" viewBox="0 0 62 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path class="fill-current text-pop-pink" d="M19.9651 43.0856H0.674805L18.8304 0.155334H31.1232L19.9651 43.0856ZM50.6026 43.0856H31.3123L49.4678 0.155334H61.7607L50.6026 43.0856Z" fill="black"/>
+      </svg>
     </div>
-    {% if fields.quotee|length > 0 %}
-      <div class="font-normal">
-        <!-- One long line only way to remove space before comma -->
-        <span class="font-bold">{{ fields.quotee }}</span>{% if fields.quotee_role|length > 0 %}<span class="inline italic">, {{ fields.quotee_role }}</span>{% endif %}
-      </div>
-    {% endif %}
+    <div class="scale-50 sm:scale-100 transform block z-0 absolute bottom-0 sm:-bottom-4 right-0 sm:-right-6 opacity-80 origin-bottom-right" style="font-size: 20rem; line-height: 5rem;">
+      <svg class="" width="100" height="80" viewBox="0 0 62 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path class="fill-current text-pop-pink" d="M19.9651 43.0856H0.674805L18.8304 0.155334H31.1232L19.9651 43.0856ZM50.6026 43.0856H31.3123L49.4678 0.155334H61.7607L50.6026 43.0856Z" fill="black"/>
+      </svg>
+    </div>
+    <div class="text-xl md:text-2xl mb-6 leading-tight">
+      {{ fields.testimonial }}
+    </div>
   </div>
+  {% if fields.quotee|length > 0 %}
+    <div class="font-normal">
+      <!-- One long line only way to remove space before comma -->
+      <span class="font-semibold">{{ fields.quotee }}</span>{% if fields.quotee_role|length > 0 %}<span class="inline italic">, {{ fields.quotee_role }}</span>{% endif %}
+    </div>
+  {% endif %}
+</div>
 {% endif %}

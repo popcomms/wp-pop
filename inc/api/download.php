@@ -33,8 +33,8 @@ function sendDownload(WP_REST_Request $request) {
 
 add_action( 'rest_api_init', function () {
   register_rest_route( 'pop/v1', '/download-fulfilment', array(
-    'methods' => 'POST',
-    'callback' => 'sendDownload',
+    'methods'             => 'POST',
+    'callback'            => 'sendDownload',
     'permission_callback' => 'prefix_get_private_data_permissions_check',
   ) );
 });

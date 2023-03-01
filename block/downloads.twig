@@ -4,72 +4,75 @@
 
 {% if not is_preview %}
   {% if fields.show_block %}
-  <div
-    inline-template
-    is="download-form"
-  >
   <div class="container-wide">
-    <div class="border-2 {{ theme_border_color }}">
-      <div class="sm:hidden block relative" style="padding-bottom: 100%;">
-        <div
-          class="absolute top-0 left-0 w-full h-full bg-no-repeat bg-center bg-cover"
-          style="background-image: url({{ fields.image.url }})"
-        ></div>
-      </div>
-      <div
-        ref="downloadForm"
-        name="download_form"
-        method="post"
-        action=""
-        onsubmit="return false"
-        class="w-full relative"
-      >
-        <transition name="fade">
+    <div
+      is="download"
+      inline-template
+      id="download-form"
+    >
+      <div class="download-form-container"  data-email-title="{{ fields.email.title }}" data-email-image="{{ fields.email.image }}" data-email-file="{{ fields.email.download }}">
+        <div class="border-2 {{ theme_border_color }}">
+          <div class="sm:hidden block relative" style="padding-bottom: 100%;">
+            <div
+              class="absolute top-0 left-0 w-full h-full bg-no-repeat bg-center bg-cover"
+              style="background-image: url({{ fields.image.url }})"
+            ></div>
+          </div>
           <div
-            v-show="step !== 1"
-            class="absolute flex flex-col top-0 left-0 w-full h-full shadow-md bg-pop-black"
-            style="z-index: 1;"
-          ></div>
-        </transition>
-        <div ref="downloadFormStep1">
-          {% include "partial/forms/download/intro.twig" with { 'fields': fields } %}
-        </div>
-        <div
-          ref="downloadFormStep2"
-          v-show="step === 2"
-          class="absolute flex flex-col top-0 left-0 w-full h-full p-3 sm:p-10  text-pop-white z-10"
-        >
-          <div class="text-sm mb-4">1 / 3</div>
-          {% include "partial/forms/download/name.twig" %}
-        </div>
-        <div
-          ref="downloadFormStep3"
-          v-show="step === 3"
-          class="absolute flex flex-col top-0 left-0 w-full h-full p-3 sm:p-10 bg-pop-black text-pop-white z-10"
-        >
-          <div class="text-sm mb-4">2 / 3</div>
-          {% include "partial/forms/download/email-company.twig" %}
-        </div>
-        <div
-          ref="downloadFormStep4"
-          v-show="step === 4"
-          class="absolute flex flex-col top-0 left-0 w-full h-full p-3 sm:p-10 bg-pop-black text-pop-white z-10"
-        >
-          <div class="text-sm mb-4">3 / 3</div>
-          {% include "partial/forms/download/captcha.twig" %}
-        </div>
-        <div
-          ref="downloadFormStep5"
-          v-show="step === 5"
-          class="absolute top-0 left-0 w-full h-full p-3 sm:p-10 bg-pop-black text-pop-white z-10"
-        >
-          <div class="text-sm p-3 sm:p-10">Complete</div>
-          {% include "partial/forms/download/thanks.twig" %}
+            ref="downloadForm"
+            name="download_form"
+            method="post"
+            action=""
+            onsubmit="return false"
+            class="download-form w-full relative"
+          >
+            <transition name="fade">
+              <div
+                v-show="step !== 1"
+                class="absolute flex flex-col top-0 left-0 w-full h-full shadow-md bg-pop-black"
+                style="z-index: 1;"
+              ></div>
+            </transition>
+            <div ref="downloadFormStep1">
+              {% include "partial/forms/download/intro.twig" with { 'fields': fields } %}
+            </div>
+            <div
+              ref="downloadFormStep2"
+              v-show="step === 2"
+              class="absolute flex flex-col top-0 left-0 w-full h-full p-3 sm:p-10  text-pop-white z-10"
+            >
+              <div class="text-sm mb-4">1 / 3</div>
+              {% include "partial/forms/download/name.twig" %}
+            </div>
+            <div
+              ref="downloadFormStep3"
+              v-show="step === 3"
+              class="absolute flex flex-col top-0 left-0 w-full h-full p-3 sm:p-10 bg-pop-black text-pop-white z-10"
+            >
+              <div class="text-sm mb-4">2 / 3</div>
+              {% include "partial/forms/download/email-company.twig" %}
+            </div>
+            <div
+              ref="downloadFormStep4"
+              v-show="step === 4"
+              class="absolute flex flex-col top-0 left-0 w-full h-full p-3 sm:p-10 bg-pop-black text-pop-white z-10"
+            >
+              <div class="text-sm mb-4">3 / 3</div>
+              {% include "partial/forms/download/captcha.twig" %}
+            </div>
+            <div
+              ref="downloadFormStep5"
+              v-show="step === 5"
+              class="absolute top-0 left-0 w-full h-full p-3 sm:p-10 bg-pop-black text-pop-white z-10"
+            >
+              <div class="text-sm p-3 sm:p-10">Complete</div>
+              {% include "partial/forms/download/thanks.twig" %}
+            </div>
+          </div>
         </div>
       </div>
     </div>
-  <div>
-</div>
+  </div>
 
   {% endif %}
 {% endif %}

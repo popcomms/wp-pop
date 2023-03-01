@@ -30,18 +30,53 @@
     </div>
   </div>
 
-  <div class="container-banner flex flex-col justify-between z-10 h-3/4 sm:h-1/2 w-full  bg-pop-{{fields.bg_color}}">
+  <div class="container-banner flex flex-col justify-between z-10 w-full bg-pop-{{fields.bg_color}}">
+
     {% if fields.icons|length > 0 %}
-      <div class="flex">
+      <div class="flex mb-8">
         {% for item in fields.icons %}
-          <img class="h-16" src="{{ item.icon }}" />
+          <img class="h-12" src="{{ item.icon }}" alt="{{ item.icon.alt }}"/>
         {% endfor %}
       </div>
     {% endif %}
 
-    <h1 class="px-8 flex-grow flex items-center text-pop-{{fields.title_color}} font-black text-4xl sm:text-5xl">
-      {{ fields.title != null ? fields.title : post.title }}
-    </h1>
+    <div class="flex-grow flex flex-col justify-center items-start px-8 md:px-0 mb-8">
+      {# case study breadcrumb #}
+      {# {{ dump(post.get_post_type) }} #}
+      {% if post.get_post_type == 'case-studies' %}
+        <a class="flex items-center mb-2 text-xs text-pop-white hover:text-pop-pink transition-all" href="{{ site.url }}/work">
+          <div class="uppercase">CASE STUDIES</div>
+        </a>
+      {% endif %}
+      {# Title #}
+      <h1 class="text-pop-{{fields.title_color}} font-semibold text-4xl sm:text-5xl mb-5">
+        {{ fields.title != null ? fields.title : post.title }}
+      </h1>
+      {# Excerpt #}
+      {% if post.post_excerpt %}
+        <p class="text-pop-{{fields.title_color}} prose mt-0">
+          {{post.post_excerpt}}
+        </p>
+      {% endif %}
+      {# Categories #}
+      {% if post.categories|length > 0 %}
+        <div class="flex flex-wrap sm:flex-nowrap flex-shrink justify-start items-center">
+          {% for category in post.categories %}
+            <a
+              href="{{ category.link }}"
+              class="flex items-center bg-pop-pink no-underline mr-4 mb-2 py-1 px-2 transition-all transform hover:scale-105"
+            >
+              <span
+                class="text-xs font-medium text-pop-white"
+                {# style="font-size: 12px;" #}
+              >
+                {{ category }}
+              </span>
+            </a>
+          {% endfor %}
+        </div>
+      {% endif %}
+    </div>
 
     {% if fields.link.url != null %}
       <a href="{{ fields.link.url }}">

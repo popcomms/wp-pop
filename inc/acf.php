@@ -52,15 +52,15 @@ function my_acf_init() {
 		'keywords'		   	=> array( 'hero' ),
 	));
 
-	// acf_register_block(array(
-	// 	'name'				=> 'post-banner',
-	// 	'title'				=> __('Post Banner'),
-	// 	'description'		=> __('A custom banner block.'),
-	// 	'render_callback'	=> 'my_acf_block_render_callback',
-	// 	'category'			=> 'layout',
-	// 	'icon'				=> 'cover-image',
-	// 	'keywords'			=> array( 'banner' ),
-	// ));
+	acf_register_block(array(
+		'name'				=> 'downloads',
+		'title'				=> __('Download'),
+		'description'		=> __('A custom download block.'),
+		'render_callback'	=> 'my_acf_block_render_callback',
+		'category'			=> 'layout',
+		'icon'				=> 'cover-image',
+		'keywords'			=> array( 'download' ),
+	));
 
 	// Pop Container
 	acf_register_block(array(

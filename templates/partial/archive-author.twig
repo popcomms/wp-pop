@@ -2,11 +2,11 @@
   <div class="my-2">
     {% if post.author.meta('avatar') %}
       <div
-      class="inline-block align-middle w-8 h-8 rounded-full bg-cover mr-2"
+      class="inline-block align-middle w-6 h-6 rounded-full bg-cover mr-2"
       style="background-image: url({{ Image(post.author.meta('avatar')).src }})"
       ></div>
     {% endif %}
-    <div class="inline-block align-middle text-pop-pink mr-8 text-sm">
+    <div class="inline-block align-middle mr-8 text-xs">
       {{ post.author.display_name }}
     </div>
   </div>

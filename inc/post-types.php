@@ -1,5 +1,8 @@
 <?php
 
+
+add_post_type_support( 'page', 'excerpt' );
+
 // Case Studies
 
 function custom_case_study_post_type() {
@@ -13,7 +16,7 @@ function custom_case_study_post_type() {
 					'public'       => true,
 					'has_archive'  => true,
 					'show_in_rest' => true,
-					'taxonomies'   => array( 'category' )
+					'taxonomies'   => array( 'category', 'post_tag' )
 			)
 	);
 }

@@ -19,7 +19,6 @@ if (!empty($all_acf["post_options"])) {
 }
 
 // Related Posts
-
 $categories = wp_get_post_categories($timber_post->ID);
 $context["related"] = Timber::get_posts([
   'category__in'   => $categories,
@@ -38,6 +37,9 @@ if (!empty($all_acf["hero"])) {
   $context["hero"] = $all_acf["hero"]["value"];
 }
 
+// Get format
+$format = get_post_format($timber_post->ID);
+
 // Output
 
 if ( post_password_required( $timber_post->ID ) ) {
@@ -47,6 +49,7 @@ if ( post_password_required( $timber_post->ID ) ) {
     array(
       'single-' . $timber_post->ID . '.twig',
       'single-' . $timber_post->post_type . '.twig',
+      'single-' . $format . '.twig',
       'single-' . $timber_post->slug . '.twig',
       'single.twig'
     ),

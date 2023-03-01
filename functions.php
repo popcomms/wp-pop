@@ -154,6 +154,8 @@ class StarterSite extends Timber\Site {
 	}
 
 }
+// Enqueue Scripts
+get_template_part('inc/scripts');
 
 // WP Admin / Editor
 get_template_part('inc/admin');
@@ -169,9 +171,6 @@ get_template_part('inc/taxonomies');
 
 // Helper Functions
 get_template_part('inc/helpers');
-
-// Enqueue Scripts
-get_template_part('inc/scripts');
 
 // API
 get_template_part('inc/api/download');

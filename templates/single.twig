@@ -4,15 +4,15 @@
 
   {% if post.thumbnail.src %}
     <div
-      class="fixed w-full aspect-w-16 aspect-h-9 lg:aspect-h-7 bg-cover bg-pop-white max-h-screen max-w-screen"
+      class="fixed w-full aspect-w-16 aspect-h-9 lg:aspect-h-7 bg-center bg-cover bg-pop-white max-h-screen max-w-screen"
       style="background-image: url({{ post.thumbnail.src }})"
     ></div>
     <div
-      class="aspect-w-16 aspect-h-9 lg:aspect-h-7 bg-cover bg-pop-transparent max-h-screen max-w-screen"
+      class="bg-opacity-{{ post.hero_overlay_opacity }} bg-pop-black aspect-w-16 aspect-h-9 lg:aspect-h-7 bg-cover bg-pop-transparent max-h-screen max-w-screen"
     ></div>
   {% else %}
     <div
-      class="fixed w-full aspect-w-16 aspect-h-9 lg:aspect-h-7 bg-cover bg-pop-white max-h-screen max-w-screen"
+      class="fixed w-full aspect-w-16 aspect-h-9 bg-center lg:aspect-h-7 bg-cover bg-pop-white max-h-screen max-w-screen"
       style="background-image: url({{ theme.link }}/static/images/blogs-bg.png)"
     ></div>
     <div
@@ -32,19 +32,37 @@
       {% for path in icons %}
         <img
           src="{{ path }}"
+          alt="{{ path.alt }}"
           class="inline-block w-12"
         />
       {% endfor %}
 
       <div class="p-6 lg:p-8">
-        <h1 class="font-bold text-2xl sm:text-3xl lg:text-4xl">
+        <h1 class="font-semibold text-2xl sm:text-3xl lg:text-4xl">
           {{ post.title }}
         </h1>
       </div>
+      {# {% if post.categories|length > 0 %}
+        <div class="px-6 lg:px-8 flex flex-wrap flex-shrink justify-start items-center">
+          {% for category in post.categories %}
+            <a
+              href="{{ category.link }}"
+              class="flex items-center bg-pop-pink no-underline mr-4 mb-2 py-1 px-2 transition-all transform hover:scale-105"
+            >
+              <span
+                class=" uppercase font-semibold text-pop-white"
+                style="font-size: 12px;"
+              >
+                {{ category }}
+              </span>
+            </a>
+          {% endfor %}
+        </div>
+      {% endif %} #}
       <div class="px-6 lg:px-8 flex items-center justify-between">
         <div class="flex items-center">
-          {% include "/templates/partial/archive-author.twig" %}
-          <div class="text-pop-purple">
+          {# {% include "/templates/partial/archive-author.twig" %} #}
+          <div class="text-pop-purple text-xs uppercase font-medium">
             {{ post.date }}
           </div>
         </div>

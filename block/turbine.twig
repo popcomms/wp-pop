@@ -11,7 +11,7 @@
   {# <div
   class="scene"
   > #}
-<div class="container-wide mb-20 sm:mb-28" >
+<div class="container-wide mb-12 sm:mb-20" >
   <div class="{{ theme_bg_color }} md:shadow-md md:box-content">
     {% include "/templates/partial/component-title.twig" with
       {
@@ -31,6 +31,7 @@
         class="canvas-container"
         :class="fullScreen ? 'fixed top-0 left-0 w-screen h-screen bg-pop-black-dark z-50' : 'absolute top-0 bg-pop-black-dark left-0 w-full h-full'"
         @mouseenter="activateModel"
+        @click="activateModel"
       >
         <div
           class="z-10 absolute top-0 left-0 flex flex-col bg-pop-black-dark h-full w-0 transition-all"

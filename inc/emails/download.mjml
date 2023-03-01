@@ -28,7 +28,7 @@
     <mj-section>
       <mj-column>
         <mj-text line-height="22px" font-size="18px" color="#3d3d3d" font-family="sans-serif">
-          If you have any questions or an idea you’d like to chat through then please feel free to get in touch, we always like a chat.
+          If you have any questions or an idea you&rsquo;d like to chat through then please feel free to get in touch, we always like a chat.
           <br></br>
           Bye for now!
           <br /><br />
@@ -56,18 +56,41 @@
             Connect on LinkedIn
           </a><br />
         </mj-text>
-        <mj-text line-height="22px" font-size="16px" color="#fff" font-family="sans-serif">
-          <a href="https://www.popcomms.com/touchscreen-experiences/" style="color:#64ffe3">Touchscreens</a>
+        <mj-text line-height="22px" font-size="14px" color="#fff" font-family="sans-serif">
+          <strong>Platform</strong><br>
+          <a href="https://www.popcomms.com/" style="color:#ffff99">Intro</a>
           &emsp;&bull;&emsp;
-          <a href="https://www.popcomms.com/sales-enablement-tools/" style="color:#64ffe3">Sales&nbsp;Enablement</a>
+          <a href="https://www.popcomms.com/features-benefits/" style="color:#ffff99">Features</a>
           &emsp;&bull;&emsp;
-          <a href="https://www.popcomms.com/healthcare-and-pharma/" style="color:#ffff99">Healthcare&nbsp;&amp;&nbsp;Pharma</a>
+          <a href="https://www.popcomms.com/why-popcomms/" style="color:#ffff99">Why&nbsp;POPcomms? </a>
           &emsp;&bull;&emsp;
-          <a href="https://www.popcomms.com/built-environment/" style="color:#ffff99">Built&nbsp;Environment</a>
+          <a href="https://www.popcomms.com/pop-case-studies/" style="color:#ffff99">Case&nbsp;Studies</a>
           &emsp;&bull;&emsp;
-          <a href="https://www.popcomms.com/advanced-manufacturing/" style="color:#ffff99">Advanced&nbsp;Manufacturing</a>
+          <a href="https://www.popcomms.com/insights/" style="color:#ffff99">Insights</a>
+        </mj-text>
+        <mj-text line-height="22px" font-size="14px" color="#fff" font-family="sans-serif">
+          <strong>Industries&nbsp;&amp;&nbsp;Roles</strong><br>
+          <a href="https://www.popcomms.com/advanced-manufacturing/" style="color:#64ffe3">Advanced&nbsp;Manufacturing</a>
           &emsp;&bull;&emsp;
-          <a href="https://www.popcomms.com/technology/" style="color:#ffff99">Technology</a>
+          <a href="https://www.popcomms.com/healthcare-and-life-sciences/" style="color:#64ffe3">Healthcare&nbsp;&amp;&nbsp;Life Sciences</a>
+          &emsp;&bull;&emsp;
+          <a href="https://www.popcomms.com/construction/" style="color:#64ffe3">Construction </a>
+          &emsp;&bull;&emsp;
+          <a href="https://www.popcomms.com/technology/" style="color:#64ffe3">Technology</a>
+          &emsp;&bull;&emsp;
+          <a href="https://www.popcomms.com/marketing/" style="color:#64ffe3">Marketing</a>
+          &emsp;&bull;&emsp;
+          <a href="https://www.popcomms.com/sales/" style="color:#64ffe3">Sales</a>
+        </mj-text>
+        <mj-text line-height="22px" font-size="14px" color="#fff" font-family="sans-serif">
+          <strong>Use&nbsp;Cases</strong><br>
+          <a href="https://www.popcomms.com/interactive-sales-tools/" style="color:#f78da7">Interactive&nbsp;sales&nbsp;tools</a>
+          &emsp;&bull;&emsp;
+          <a href="https://www.popcomms.com/innovation-centres/" style="color:#f78da7">Innovation&nbsp;centres</a>
+          &emsp;&bull;&emsp;
+          <a href="https://www.popcomms.com/trade-retail-experiences/" style="color:#f78da7">Trade&nbsp;&amp;&nbsp;Retail&nbsp;experiences</a>
+          &emsp;&bull;&emsp;
+          <a href="https://www.popcomms.com/touchscreen-experiences/" style="color:#f78da7">Touchscreen Experiences</a>
         </mj-text>
       </mj-column>
     </mj-section>

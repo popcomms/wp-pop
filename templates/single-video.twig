@@ -1,0 +1,91 @@
+{% extends "base.twig" %}
+
+{% block content %}
+
+
+  <div class="video-player page-hero aspect-w-16 aspect-h-9 video-format-banner relative h-3/4 overflow-hidden flex justify-center" >
+    {% if post.hero_video_type == 'url' %}
+        {{ function('wp_oembed_get', post.hero_embed_video) }}
+    {% else %}
+    <div class="h-full w-screen">
+      <video class="min-w-full h-full object-cover object-center" id="video">
+        <source src="{{ function('wp_get_attachment_url', post.hero_video) }}" type="video/mp4">
+      </video>
+      <div class="controls py-2 px-2 w-screen h-full absolute top-0 left-0 flex flex-col">
+        <button class="flex-1 self-center justify-self-end play-button control-button ">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 transform -translate-x-1/2 filter drop-shadow" viewBox="0 0 26 26" fill="none">
+            <circle cx="13.1328" cy="12.9296" r="12.2461" fill="#FF0088" stroke="white"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M17.505 12.9296L10.25 8.72087V17.1384L17.505 12.9296ZM18.495 12.0596C18.6482 12.1474 18.7756 12.274 18.8642 12.4268C18.9527 12.5796 18.9994 12.753 18.9994 12.9296C18.9994 13.1062 18.9527 13.2797 18.8642 13.4324C18.7756 13.5852 18.6482 13.7119 18.495 13.7996L10.5412 18.4146C9.89125 18.7921 9 18.3609 9 17.5446V8.31462C9 7.49837 9.89125 7.06712 10.5412 7.44462L18.495 12.0596Z" fill="white"/>
+          </svg>
+        </button>
+        <div class="flex justify-between items-center">
+          <input type="range" min="0" max="100" class="timeline" value="0" />
+          <button class="sound-button mr-3 control-button">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
+            </svg>
+          </button>
+          <button class="control-button mr-3 fullscreen-button">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+    {% endif %}
+  </div>
+
+
+	<div class="relative content-wrapper">
+    <div class="relative max-w-3xl mx-auto  bg-pop-white">
+      {# class="absolute top-1/2 left-1/2 transform -translate-x-1/2 bg-pop-white h-full" #}
+      <div
+        style="max-width: 100vw; width: calc(100vw - 8px)"
+      ></div>
+
+      {# {% for path in icons %}
+        <img
+          src="{{ path }}"
+          alt="{{ path.alt }}"
+          class="inline-block w-12"
+        />
+      {% endfor %} #}
+
+      <div class="p-6 lg:p-8">
+        <h1 class="font-semibold text-2xl sm:text-3xl lg:text-4xl">
+          {{ post.title }}
+        </h1>
+      </div>
+      <div class="px-6 lg:px-8 flex items-center justify-between">
+        <div class="flex items-center">
+          <div class="text-pop-purple text-xs uppercase font-medium">
+            {{ post.date }}
+          </div>
+        </div>
+        {% include "/templates/partial/single-share.twig" %}
+      </div>
+    </div>
+
+		<article
+      id="post-{{ post.ID }}"
+      class="post-content pop-container post-type-{{ post.post_type }} bg-pop-white"
+    >
+			<div class="relative pb-12" >
+				<div
+          id="content"
+          class="entry-content pop-container md:my-12"
+        >
+					<div class="container-wide text-pop-{{ content.theme == 'black' ? 'white' : 'black' }}">
+						{{ post.content }}
+					</div>
+				</div>
+			</div>
+
+      {% include "/templates/partial/author.twig" %}
+      {% include "/templates/partial/single-categories.twig" %}
+      {% include "/templates/partial/related.twig" %}
+
+		</article>
+	</div>
+{% endblock %}

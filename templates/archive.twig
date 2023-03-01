@@ -1,9 +1,26 @@
-{# This file demonstrates using most of the index.twig template and modifying
-   just a small part. See `search.twig` for an example of another approach #}
-
-{% extends "index.twig" %}
+{% extends "base.twig" %}
 
 {% block content %}
-  <h3>This is my archive</h3>
-  {{ parent() }}
+<div class="relative content-wrapper">
+
+  {% include "/templates/partial/search-hero.twig" with
+    {
+      'post': post,
+      'title': title,
+      'categories': archiveCats
+    }
+  %}
+
+	<div class="px-4 md:mx-auto mb-20 sm:mb-0 mt-12 max-w-screen-lg">
+		{% for post in posts %}
+			<div class="mb-12">
+				{% include ['tease-'~post.post_type~'.twig', 'tease.twig'] %}
+			</div>
+		{% endfor %}
+	</div>
+</div>
+
+	<!-- Pagination -->
+	{% include 'partial/pagination.twig' %}
+
 {% endblock %}

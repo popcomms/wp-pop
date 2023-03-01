@@ -8,7 +8,7 @@
           <span class="inline-block py-4 text-gray-400">&#10094;&nbsp;Previous</span>
         {% endif %}
       </div>
-      <div>
+      <div class="hidden sm:block">
         {% for page in posts.pagination.pages %}
           {% if page.link %}
             <a class="inline-block p-4 transform hover:scale-125 transition-all hover:text-pop-blue {{ page.class }}" href="{{ page.link }}">{{ page.title }}</a>
