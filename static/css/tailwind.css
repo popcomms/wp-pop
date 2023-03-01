@@ -56,7 +56,7 @@
   h4, .h4,
   h5, .h5,
   h6, .h6 {
-    @apply font-semibold;
+    @apply font-normal;
     @apply leading-tight;
   }
 
@@ -332,4 +332,12 @@
   .h-screen-3\/4 {
     height: 75vh;
   }
+
+  .wp-image-13412 {
+    max-width: 10rem;
+  }
+  .wp-image-13413 {
+    max-width: 10rem;
+  }
+
 }

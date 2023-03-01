@@ -22,7 +22,7 @@
   {% if fields.quotee|length > 0 %}
     <div class="font-normal">
       <!-- One long line only way to remove space before comma -->
-      <span class="font-bold">{{ fields.quotee }}</span>{% if fields.quotee_role|length > 0 %}<span class="inline italic">, {{ fields.quotee_role }}</span>{% endif %}
+      <span class="font-semibold">{{ fields.quotee }}</span>{% if fields.quotee_role|length > 0 %}<span class="inline italic">, {{ fields.quotee_role }}</span>{% endif %}
     </div>
   {% endif %}
 </div>

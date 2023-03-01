@@ -625,7 +625,7 @@ pre {
 }
 
 h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
-  font-weight: 600;
+  font-weight: 400;
 }
 
 h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
@@ -1007,6 +1007,14 @@ hr.wp-block-separator {
   border-top-width: 1px;
   --tw-border-opacity: 1;
   border-color: rgba(209, 213, 219, var(--tw-border-opacity));
+}
+
+.wp-image-13412 {
+  max-width: 10rem;
+}
+
+.wp-image-13413 {
+  max-width: 10rem;
 }
 
 .container {
@@ -2070,6 +2078,10 @@ hr.wp-block-separator {
   width: 5rem;
 }
 
+.w-24 {
+  width: 6rem;
+}
+
 .w-28 {
   width: 7rem;
 }
@@ -3095,8 +3107,8 @@ hr.wp-block-separator {
   padding-right: 0.5rem;
 }
 
-.pr-4 {
-  padding-right: 1rem;
+.pr-3 {
+  padding-right: 0.75rem;
 }
 
 .pr-6 {
@@ -3141,6 +3153,10 @@ hr.wp-block-separator {
 
 .pl-4 {
   padding-left: 1rem;
+}
+
+.pl-8 {
+  padding-left: 2rem;
 }
 
 .text-left {
@@ -3213,14 +3229,6 @@ hr.wp-block-separator {
 
 .font-semibold {
   font-weight: 600;
-}
-
-.font-bold {
-  font-weight: 700;
-}
-
-.font-black {
-  font-weight: 900;
 }
 
 .uppercase {
@@ -3473,6 +3481,10 @@ hr.wp-block-separator {
 
 .drop-shadow {
   --tw-drop-shadow: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1)) drop-shadow(0 1px 1px rgba(0, 0, 0, 0.06));
+}
+
+.grayscale {
+  --tw-grayscale: grayscale(100%);
 }
 
 .invert {
@@ -5010,10 +5022,6 @@ canvas,
 
   .md\:text-4xl {
     font-size: 2.625rem;
-  }
-
-  .md\:text-5xl {
-    font-size: 3.5rem;
   }
 
   .md\:font-bold {

@@ -21,21 +21,23 @@ document.addEventListener("DOMContentLoaded", function () {
     return null
   }
 
-  function addContactTriggers () {
-
-    const triggers = document.querySelectorAll('[href="#contact-form"]')
-    if (triggers) {
-      triggers.forEach(trigger => {
-        trigger.addEventListener('click', () => {
-          const contact = document.getElementById('contact-form')
-          if (contact) {
-            contact.style.display = null
-          }
-        }, false);
-      })
+  function showContactForm() {
+    const contact = document.getElementById('contact-form')
+    if (contact && contact.style.display === 'none') {
+      contact.style.display = 'block'
     }
   }
 
+  function addContactTriggers () {
+    const parent = document.getElementById('site')
+    parent.addEventListener('click', function(e) {
+      console.log(e.target.parentElement.href)
+      if ((e.target.href && e.target.href.includes("#contact-form")) || (e.target.parentElement.href && e.target.parentElement.href.includes("#contact-form"))) {
+        e.preventDefault();
+        showContactForm();
+      }
+    }, false)
+  }
   addContactTriggers()
 
   gsap.registerPlugin(ScrollTrigger)
@@ -61,7 +63,9 @@ document.addEventListener("DOMContentLoaded", function () {
         }
       },
       hide() {
+
         this.show = false
+        this.$el.style.display = 'none'
         document.querySelector("body").style.overflow = "auto"
         if (this.step === 6) {
           this.step = 1

@@ -1,7 +1,7 @@
 
 <!-- Main Nav Headings -->
 
-<div class="flex h-full items-center">
+<div class="flex h-full justify-end items-center">
 
 	{% for item in items %}
 		{% if item.children %}
@@ -33,7 +33,7 @@
         target="{{ item.target }}"
         href="{{ item.link }}"
       >
-        <span class="contrast-el text-xs inline-block leading-tight">{{ item.title }}</span>
+        <span class="contrast-el text-xs inline-block leading-tight pointer-events-none  cursor-pointer">{{ item.title }}</span>
       </a>
     </div>
 
