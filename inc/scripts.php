@@ -9,54 +9,6 @@ function pop_enqueue_scripts() {
     array(),
     true
   );
-	// wp_enqueue_script(
-  //   'three',
-  //   'https://threejs.org/build/three.js',
-  //   array(),
-  //   true
-  // );
-  // wp_enqueue_script(
-  //   'OrbitControls',
-  //   get_template_directory_uri() . '/static/js/three/OrbitControls.js',
-  //   array(),
-  //   true
-  // );
-  // wp_enqueue_script(
-  //   'CopyShader',
-  //   get_template_directory_uri() . '/static/js/three/CopyShader.js',
-  //   array(),
-  //   true
-  // );
-  // wp_enqueue_script(
-  //   'EffectComposer',
-  //   get_template_directory_uri() . '/static/js/three/EffectComposer.js',
-  //   array(),
-  //   true
-  // );
-  // wp_enqueue_script(
-  //   'RenderPass',
-  //   get_template_directory_uri() . '/static/js/three/RenderPass.js',
-  //   array(),
-  //   true
-  // );
-  // wp_enqueue_script(
-  //   'ShaderPass',
-  //   get_template_directory_uri() . '/static/js/three/ShaderPass.js',
-  //   array(),
-  //   true
-  // );
-  // wp_enqueue_script(
-  //   'SMAAPass',
-  //   get_template_directory_uri() . '/static/js/three/SMAAPass.js',
-  //   array(),
-  //   true
-  // );
-  // wp_enqueue_script(
-  //   'CSS2DRenderer',
-  //   get_template_directory_uri() . '/static/js/three/CSS2DRenderer.js',
-  //   array(),
-  //   true
-  // );
 	wp_enqueue_script(
     'scrollTrigger',
     'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.6.1/ScrollTrigger.min.js',
