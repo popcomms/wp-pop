@@ -23,7 +23,7 @@
             {% if item.url %}
               <a class="transition-opacity hover:opacity-50" href="{{ item.url }}">
             {% endif %}
-                <img class="w-full object-contain" src="{{ item.logo }}" alt="">
+                <img class="w-full object-contain" src="{{ item.logo }}" alt="{{ item.alt }}" width="150">
             {% if item.url %}
               </a>
             {% endif %}
