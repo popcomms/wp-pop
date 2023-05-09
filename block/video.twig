@@ -3,10 +3,11 @@
 {% endif %}
 
 {% if not is_preview %}
-  <div class="container-wide relative " >
-    <div class="w-full embed-container">
-      {{ fields.video }}
-    </div>
+
+  <div class="container-wide relative" >
+
+    {% do action('pop_embed', fields.video) %}
+
     <div class="w-full border-l-4 border-pop-{{ theme == 'dark' ? 'white' : 'black' }} pl-4 text-sm">
       <p class="text-sm {{ theme_text_color }}">{{ fields.caption }}</p>
     </div>

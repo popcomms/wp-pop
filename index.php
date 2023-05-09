@@ -26,7 +26,7 @@ $categories = get_categories( array(
 	) );
 $context['categories'] = $categories;
 
-$templates        = array('index.twig');
+$templates = array('index.twig');
 if ( is_home() ) {
 	array_unshift( $templates, 'front-page.twig', 'home.twig' );
 }

@@ -21,15 +21,30 @@ function pop_enqueue_scripts() {
     array(),
     true
   );
+  wp_enqueue_script(
+    'lazyframe-js',
+    get_template_directory_uri().'/static/js/lazyframe.min.js',
+    array(),
+    '2.27',
+    true
+  );
 	wp_enqueue_script(
     'main',
     get_template_directory_uri().'/static/main.js',
-    array('gsap','scrollTrigger','vue'),
-    '0.10',
+    array('gsap','scrollTrigger','vue', 'lazyframe-js'),
+    '0.11',
     true
   );
 
+
   // CSS
+  wp_enqueue_style(
+    'lazyframe',
+    get_template_directory_uri().'/static/css/lazyframe.min.css',
+    array(),
+    '2.2.7',
+    'all'
+  );
   wp_enqueue_style(
     'main',
     get_template_directory_uri().'/style.css',
