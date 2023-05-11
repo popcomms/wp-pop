@@ -44,7 +44,12 @@
                 <div class="hidden opacity-0 full-width-image-popup fixed z-50 w-screen h-screen top-0 left-0 p-10">
                   <div class="absolute top-0 left-0 bg-pop-black-dark opacity-90 w-screen h-screen"></div>
                   <div class="relative w-full h-full bg-pop-black">
-                    <img class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full max-h-full object-contain" src="{{ item.image.url }}" alt="{{ item.image.alt }}"/>
+                    <img
+                      class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full max-h-full object-contain"
+                      src="{{ item.image.url }}"
+                      alt="{{ item.image.alt }}"
+                      loading="lazy"
+                    />
                     <div class="group image-hide absolute top-0 right-0 w-10 h-10 p-2 bg-pop-black bg-opacity-90 cursor-pointer">
                       <svg class="w-full absolute transform left-1/2 top-1/2 -translate-y-1/2 -translate-x-1/2 transition-transform group-hover:scale-125" width="25" height="25" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path class="stroke-current text-pop-pink" d="M18.2189 1.5682L1.78125 17.9892" stroke-width="3"/>
@@ -68,7 +73,12 @@
                 <a class="h-full relative" href="{{ link_post.guid }}" >
                   <div class="group bg-pop-white flex flex-col justify-between h-full">
                     <div class="absolute top-0 left-0 w-full h-full hover:opacity-100 transition-opacity overflow-hidden">
-                      <img class="w-full h-full object-cover origin-center transform group-hover:scale-110 transition-transform duration-500" src="{{ featured_img }}" alt="{{ featured_img.alt }}">
+                      <img
+                        class="w-full h-full object-cover origin-center transform group-hover:scale-110 transition-transform duration-500"
+                        src="{{ featured_img }}"
+                        alt="{{ featured_img.alt }}"
+                        loading="lazy"
+                      >
                       <div class="absolute top-0 left-0 h-full w-full bg-pop-black opacity-40 group-hover:opacity-0 transition-opacity duration-500"></div>
                     </div>
 
@@ -91,7 +101,12 @@
                 <a class="h-full relative" href="{{ link_post.guid }}" >
                   <div class="group bg-pop-white flex flex-col justify-between h-full">
                     <div class="absolute top-0 left-0 w-full h-full hover:opacity-100 transition-opacity overflow-hidden">
-                      <img class="w-full h-full object-cover origin-center transform group-hover:scale-110 transition-transform duration-500" src="{{ item.link_card.image.url }}" alt="{{ item.link_card.image.alt }}">
+                      <img
+                        class="w-full h-full object-cover origin-center transform group-hover:scale-110 transition-transform duration-500"
+                        src="{{ item.link_card.image.url }}"
+                        alt="{{ item.link_card.image.alt }}"
+                        loading="lazy"
+                      >
                       {# <div class="absolute top-0 left-0 h-full w-full bg-pop-black opacity-40 group-hover:opacity-0 transition-opacity duration-500"></div> #}
                     </div>
 

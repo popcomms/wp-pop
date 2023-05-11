@@ -180,15 +180,16 @@ function pop_embed( $url ) {
   $src = preg_match('/src="(.+?)"/', $url, $matches);
   $src = $matches[1];
 
+  $vendor = 'youtube';
+  if (strpos($src, 'vimeo.com')) {
+    $vendor = 'vimeo';
+  }
+
   $response = '<div
     class="lazyframe w-full"
-    data-vendor=""
-    data-title=""
-    data-thumbnail=""
+    data-vendor="' . $vendor . '"
     data-src="' . $src . '"
     data-ratio="16:9"
-    data-initinview="false"
-    data-autoplay="false"
     ></div>';
   echo $response;
 }

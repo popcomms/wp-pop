@@ -2082,14 +2082,6 @@ hr.wp-block-separator {
   width: 6rem;
 }
 
-.w-28 {
-  width: 7rem;
-}
-
-.w-32 {
-  width: 8rem;
-}
-
 .w-56 {
   width: 14rem;
 }
@@ -2190,10 +2182,6 @@ hr.wp-block-separator {
 
 .flex-grow {
   flex-grow: 1;
-}
-
-.border-collapse {
-  border-collapse: collapse;
 }
 
 .origin-center {
@@ -2429,10 +2417,6 @@ hr.wp-block-separator {
 
 .cursor-pointer {
   cursor: pointer;
-}
-
-.resize {
-  resize: both;
 }
 
 .auto-cols-auto {
@@ -3442,11 +3426,6 @@ hr.wp-block-separator {
   --tw-shadow: 0 0 #0000;
 }
 
-.shadow {
-  --tw-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
-  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
-}
-
 .shadow-md {
   --tw-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
@@ -3481,10 +3460,6 @@ hr.wp-block-separator {
 
 .drop-shadow {
   --tw-drop-shadow: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1)) drop-shadow(0 1px 1px rgba(0, 0, 0, 0.06));
-}
-
-.grayscale {
-  --tw-grayscale: grayscale(100%);
 }
 
 .invert {
@@ -4375,93 +4350,7 @@ select:-webkit-autofill:focus {
   opacity: 0;
 }
 
-/* TURBINE */
-
-.turbine-container {
-  padding-bottom: 50%;
-}
-
-@media (max-width: 500px) {
-
-.turbine-container {
-    padding-bottom: 100%
-}
-  }
-
-.turbine-info::-webkit-scrollbar-track {
-  border-radius: 0.25rem;
-  --tw-bg-opacity: 1;
-  background-color: rgba(142, 142, 142, var(--tw-bg-opacity));
-}
-
-.turbine-info::-webkit-scrollbar {
-  background-color: transparent;
-}
-
-.turbine-toggles {
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  /* -ms-user-select: none; */
-  -ms-user-select: none;
-      user-select: none;
-}
-
-.label-title {
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-  width: -webkit-max-content;
-  width: -moz-max-content;
-  width: max-content;
-  border: 0 solid #fff;
-  font-family: Poppins, Arial, Helvetica, sans-serif;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 21px;
-  line-height: 180%;
-  text-align: center;
-  cursor: pointer;
-  opacity: 0;
-  transition: opacity 0.2s ease-in-out;
-  pointer-events: none;
-  box-shadow: 0 0 4px 2px #27272750;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  padding: 0 16px;
-  border-radius: 10px;
-}
-
-@media (max-width: 500px) {
-
-.label-title {
-    font-size: 15px
-}
-  }
-
-canvas,
-.label-div {
-  display: block;
-  width: 100% !important;
-  height: 100% !important;
-}
-
-.label-title.visible {
-  opacity: 1;
-  pointer-events: all;
-}
-
-.point.visible .label-title:hover {
-  transform: scale(1.2, 1.2);
-}
-
-.point.visible .label-title {
-  transform: scale(1, 1);
-}
+/* @import 'turbine.css'; */
 
 @media (min-width: 640px) {
   

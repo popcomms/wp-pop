@@ -20,12 +20,14 @@
               src="{{ post.thumbnail.src }}"
               alt="{{ post.thumbnail.alt }}"
               style="font-size: 0"
+              loading="lazy"
             />
             {% else %}
             <img
               class="absolute top-0 left-0 bottom-0 right-0 object-cover"
               src="{{ theme.link }}/static/images/blogs-bg.png"
               style="font-size: 0"
+              loading="lazy"
             />
             {% endif %}
           </div>

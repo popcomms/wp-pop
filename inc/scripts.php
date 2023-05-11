@@ -42,14 +42,14 @@ function pop_enqueue_scripts() {
     'lazyframe',
     get_template_directory_uri().'/static/css/lazyframe.min.css',
     array(),
-    '2.2.7',
+    '2.2.8',
     'all'
   );
   wp_enqueue_style(
     'main',
     get_template_directory_uri().'/style.css',
     array(),
-    '1.41',
+    '1.43',
     'all'
   );
   wp_enqueue_style(
