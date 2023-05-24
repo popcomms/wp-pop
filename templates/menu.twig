@@ -15,7 +15,7 @@
       <div class="nav-child absolute top-full left-0 flex-col w-max group-hover:bg-pop-black py-2">
         {% for child in item.children %}
           <a
-            class="{{ child.current ? 'text-pop-green' : 'text-pop-white  hover:text-pop-pink'}} py-1 px-4 cursor-pointer text-xs inline-block leading-tight"
+            class="{{ item.classes|join(' ') }} {{ child.current ? 'text-pop-green' : 'text-pop-white  hover:text-pop-pink'}} py-1 px-4 cursor-pointer text-xs inline-block leading-tight"
             target="{{ child.target }}"
             href="{{ child.link }}"
           >
@@ -29,7 +29,7 @@
 
     <div class="nav-parent group hidden h-full md:flex items-center cursor-pointer">
       <a
-        class="{{ item.current ? 'text-pop-green' : 'text-pop-white  hover:text-pop-pink'}} py-1 px-4"
+        class="{{ item.classes|join(' ') }} {{ item.current ? 'text-pop-green' : 'text-pop-white  hover:text-pop-pink'}} py-1 px-4"
         target="{{ item.target }}"
         href="{{ item.link }}"
       >
@@ -89,7 +89,7 @@
 								</div>
 								<a
                   @click="changeSubMenu('{{ item.title }}')"
-                  class="text-xl leading-tight text-pop-white font-semibold"
+                  class="{{ item.classes|join(' ') }} text-xl leading-tight text-pop-white font-semibold"
                   target="{{ item.target }}"
                   href="{{ item.link }}"
                 >
@@ -123,7 +123,7 @@
 								<div class="absolute h-56 w-56 top-1/2 transform -translate-y-1/2 right-0 translate-x-1/2 opacity-0 pointer-events-none"></div>
 
 								<a
-                  class="text-xl leading-tight text-pop-white font-semibold"
+                  class="{{ item.classes|join(' ') }} text-xl leading-tight text-pop-white font-semibold"
                   target="{{ child.target }}"
                   href="{{ child.link }}"
                 >
