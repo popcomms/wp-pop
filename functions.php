@@ -194,7 +194,7 @@ function pop_embed( $url ) {
   if ($vendor === 'youtube') {
     preg_match('/\/embed\/([a-zA-Z0-9_-]+)/', $src, $matches);
     $id = $matches[1];
-    $thumbnail = 'https://i.ytimg.com/vi/' . $id . '/maxresdefault.jpg"';
+    $thumbnail = 'https://i.ytimg.com/vi/' . $id . '/maxresdefault.jpg';
   }
 
   if ($vendor === 'vimeo') {
