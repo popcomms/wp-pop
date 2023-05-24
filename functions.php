@@ -177,7 +177,9 @@ add_action( 'pop_embed', 'pop_embed' );
 
 function pop_embed( $url ) {
 
-  $src = preg_match('/src="(.+?)"/', $url, $matches);
+  // Provider
+
+  preg_match('/src="(.+?)"/', $url, $matches);
   $src = $matches[1];
 
   $vendor = 'youtube';
@@ -185,10 +187,32 @@ function pop_embed( $url ) {
     $vendor = 'vimeo';
   }
 
+  // High Res Thumbnails
+
+  $thumbnail = '';
+
+  if ($vendor === 'youtube') {
+    preg_match('/\/embed\/([a-zA-Z0-9_-]+)/', $src, $matches);
+    $id = $matches[1];
+    $thumbnail = 'https://i.ytimg.com/vi/' . $id . '/maxresdefault.jpg"';
+  }
+
+  if ($vendor === 'vimeo') {
+    $url = 'http://vimeo.com/api/oembed.json?url=' . $src;
+    $data = json_decode(file_get_contents($url));
+    if ($data) {
+      preg_match('/.*-(\w+)$/', $data->thumbnail_url, $matches);
+      $thumbnail = str_replace($matches[1], 'd_1113x577', $data->thumbnail_url);
+    }
+  }
+
+  // Create DOM element
+
   $response = '<div
     class="lazyframe w-full"
     data-vendor="' . $vendor . '"
     data-src="' . $src . '"
+    data-thumbnail="'. $thumbnail .'"
     data-ratio="16:9"
     ></div>';
   echo $response;
