@@ -74,3 +74,8 @@
 .distort__img {
   opacity: 0;
 }
+
+/* Workaround for Wordpress stripping out ':' when adding custom classes in CMS */
+.md-hidden {
+  @apply md:hidden;
+}

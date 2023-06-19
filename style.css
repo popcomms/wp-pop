@@ -1493,6 +1493,10 @@ hr.wp-block-separator {
   top: 3rem;
 }
 
+.top-16 {
+  top: 4rem;
+}
+
 .-top-2 {
   top: -0.5rem;
 }
@@ -2307,6 +2311,11 @@ hr.wp-block-separator {
 .scale-75 {
   --tw-scale-x: .75;
   --tw-scale-y: .75;
+}
+
+.scale-90 {
+  --tw-scale-x: .9;
+  --tw-scale-y: .9;
 }
 
 .scale-100 {
@@ -3996,6 +4005,14 @@ html::-webkit-scrollbar-thumb:window-inactive, body::-webkit-scrollbar-thumb:win
   opacity: 0;
 }
 
+/* Workaround for Wordpress stripping out ':' when adding custom classes in CMS */
+
+@media (min-width: 768px) {
+  .md-hidden {
+    display: none;
+  }
+}
+
 .logos-dark path {
     fill: #2d2d2d;
   }
@@ -4694,6 +4711,14 @@ select:-webkit-autofill:focus {
     position: relative;
   }
 
+  .md\:top-20 {
+    top: 5rem;
+  }
+
+  .md\:right-3 {
+    right: 0.75rem;
+  }
+
   .md\:z-0 {
     z-index: 0;
   }
@@ -4977,6 +5002,13 @@ select:-webkit-autofill:focus {
 }
 
 @media (min-width: 1280px) {
+  .xl\:top-16 {
+    top: 4rem;
+  }
+
+  .xl\:mt-2 {
+    margin-top: 0.5rem;
+  }
 }
 
 @media (min-width: 1536px) {

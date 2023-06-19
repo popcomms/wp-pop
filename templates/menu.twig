@@ -62,7 +62,7 @@
 							<svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
 								<path class="fill-current text-pop-white group-hover:text-pop-pink transition-colors" d="M14.5 16C14.5 15.1716 15.1716 14.5 16 14.5L29.5 14.5C30.3284 14.5 31 15.1716 31 16C31 16.8284 30.3284 17.5 29.5 17.5H17.5V29.5C17.5 30.3284 16.8284 31 16 31C15.1716 31 14.5 30.3284 14.5 29.5L14.5 16ZM30.9393 33.0607L14.9393 17.0607L17.0607 14.9393L33.0607 30.9393L30.9393 33.0607Z"/>
 							</svg>
-							<div class="hidden md:block ">
+							<div class="hidden md:block">
 								Main menu
 							</div>
 						</div>
@@ -99,7 +99,7 @@
 								{% else %}
 								<div class="absolute h-56 w-56 top-1/2 transform -translate-y-1/2 right-0 translate-x-1/2 opacity-0 pointer-events-none"></div>
 								<a
-                  class="text-xl leading-tight text-pop-white font-semibold"
+                  class="{{ item.classes|join(' ') }} text-xl leading-tight text-pop-white font-semibold"
                   target="{{ item.target }}"
                   href="{{ item.link }}"
                 >
