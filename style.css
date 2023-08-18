@@ -1826,10 +1826,6 @@ hr.wp-block-separator {
   margin-top: 2.5rem;
 }
 
-.mt-12 {
-  margin-top: 3rem;
-}
-
 .mt-16 {
   margin-top: 4rem;
 }
@@ -5044,6 +5040,10 @@ select:-webkit-autofill:focus {
     --tw-aspect-h: 7;
   }
 
+  .lg\:col-span-2 {
+    grid-column: span 2 / span 2;
+  }
+
   .lg\:mx-auto {
     margin-left: auto;
     margin-right: auto;
@@ -5055,6 +5055,10 @@ select:-webkit-autofill:focus {
 
   .lg\:max-w-screen-lg {
     max-width: 1024px;
+  }
+
+  .lg\:grid-cols-3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
   .lg\:flex-wrap {
@@ -5072,6 +5076,10 @@ select:-webkit-autofill:focus {
   .lg\:px-8 {
     padding-left: 2rem;
     padding-right: 2rem;
+  }
+
+  .lg\:pl-6 {
+    padding-left: 1.5rem;
   }
 
   .lg\:text-lg {

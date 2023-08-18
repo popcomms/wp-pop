@@ -8,15 +8,15 @@
     'subtitle': post.post_excerpt
   } %}
 
-  <div class="grid grid-cols-3 gap-6 w-full max-w-4xl mx-auto p-6">
-    <div class="col-span-2">
+  <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 w-full max-w-4xl mx-auto p-6">
+    <div class="lg:col-span-2">
       {% for post in posts %}
         <div class="mb-6">
           {% include ['tease-'~post.post_type~'.twig', 'tease.twig'] %}
         </div>
       {% endfor %}
     </div>
-    <div class="pl-6">
+    <div class="lg:pl-6">
       {% include "sidebar.twig" with { 'categories': categories, 'tags': tags } %}
     </div>
   </div>
