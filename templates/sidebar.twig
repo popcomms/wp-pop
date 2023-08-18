@@ -1,1 +1,35 @@
-Sidebar in Timber. Add HTML to your hearts content.
+{# <pre class="text-xs">{{ dump(categories) }}</pre> #}
+{# <pre class="text-xs">{{ dump(tags) }}</pre> #}
+{# <pre class="text-xs">{{ dump(site) }}</pre> #}
+
+{{ function('get_search_form') }}
+
+{% if categories %}
+  <div class="text-sm mb-2">Categories</div>
+  <div class="w-full flex flex-wrap mb-6">
+    {% for category in categories %}
+      <a
+        href="{{ site.site_url }}/category/{{category.slug}}/"
+        class="w-max inline-block mr-1 mt-1 no-underline py-1 px-2 font-medium rounded bg-pop-purple bg-opacity-25 text-pop-purple hover:bg-pop-pink hover:text-white hover:bg-opacity-100 transition-all text-xs"
+        style="font-size: 0.6rem"
+      >
+        {{ category.name }}
+      </a>
+    {% endfor %}
+  </div>
+{% endif %}
+
+{% if tags %}
+  <div class="text-sm mb-2">Popular Tags</div>
+  <div class="w-full flex flex-wrap mb-6">
+    {% for tag in tags %}
+      <a
+        href="{{ site.site_url }}/tag/{{tag.slug}}/"
+        class="w-max inline-block mr-1 mt-1 no-underline py-1 px-2 font-medium rounded bg-pop-purple bg-opacity-25 text-pop-purple hover:bg-pop-pink hover:text-white hover:bg-opacity-100 transition-all text-xs"
+        style="font-size: 0.6rem"
+      >
+        {{ tag.name }} <span class="opacity-40">&bull; {{ tag.count }}</span>
+      </a>
+    {% endfor %}
+  </div>
+{% endif %}

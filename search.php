@@ -25,11 +25,19 @@ $args = array(
 );
 $context['posts'] = new Timber\PostQuery($args);
 
-$cat_args = array(
-  'hide_empty' => true,
+$categories = get_categories( array(
 	'orderby'    => 'name',
-	'order'      => 'ASC'
-);
-$context['categories'] = get_categories($cat_args);
+	'order'      => 'ASC',
+	'hide_empty' => '1'
+) );
+$context['categories'] = $categories;
+
+$tags = get_tags( array(
+	'orderby'    => 'count',
+	'order'      => 'DESC',
+  'number'     => 20,
+	'hide_empty' => '1'
+) );
+$context['tags'] = $tags;
 
 Timber::render( $templates, $context );

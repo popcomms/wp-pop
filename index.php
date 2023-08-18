@@ -20,11 +20,19 @@ $timber_post     = new Timber\Post();
 $context['post'] = $timber_post;
 
 $categories = get_categories( array(
-	'orderby' => 'name',
-	'order' => 'ASC',
+	'orderby'    => 'name',
+	'order'      => 'ASC',
 	'hide_empty' => '1'
-	) );
+) );
 $context['categories'] = $categories;
+
+$tags = get_tags( array(
+	'orderby'    => 'count',
+	'order'      => 'DESC',
+  'number'     => 20,
+	'hide_empty' => '1'
+) );
+$context['tags'] = $tags;
 
 $templates = array('index.twig');
 if ( is_home() ) {

@@ -1,0 +1,29 @@
+<div class="relative flex flex-column items-end pt-48">
+  <div
+    class="absolute top-0 left-0 right-0 bottom-0 bg-center bg-cover no-repeat"
+    style="background-image: url({{ theme.link }}/static/images/blogs-bg.png);"
+  ></div>
+  <div
+    class="absolute top-0 left-0 right-0 bottom-0 bg-black opacity-50"
+    style="background: linear-gradient(0deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 100%);"
+  ></div>
+
+  <div class="w-full max-w-4xl mx-auto p-6">
+    {% if breadcrumb %}
+    <div
+      class="text-white uppercase text-xs font-semibold"
+      style="letter-spacing: 0.1em"
+    >
+      {{ breadcrumb }}
+    </div>
+    {% endif %}
+    <h1 class="text-white font-semibold text-4xl sm:text-5xl mb-5">
+      {{ title }}
+    </h1>
+    {% if subtitle %}
+    <div class="text-white">
+      {{ subtitle }}
+    </div>
+    {% endif %}
+  </div>
+</div>

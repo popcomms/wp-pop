@@ -4,29 +4,39 @@
 {% block content %}
 <div class="relative content-wrapper">
 
-  {% include "/templates/partial/search-hero.twig" with
-    {
-      'post': post,
-      'title': title,
-      'categories': categories
-    }
-  %}
-	{% if posts|length > 0 %}
-	<div class="container-narrow mb-20 mt-12">
-			{% for post in posts %}
-				<div class="mb-8">
-					{% include ['tease-'~post.post_type~'.twig', 'tease.twig'] %}
-				</div>
-    	{% endfor %}
-			{% include 'partial/pagination.twig' with { pagination: posts.pagination({show_all: false, mid_size: 3, end_size: 2}) } %}
-	</div>
-	{% endif %}
-	{% if posts|length == 0 %}
-	<div class="container-banner py-20 px-12 ">
-		<h3>Sorry, there are no insights on &ldquo;{{ s }}&rdquo; 😊, try another topic or clear your filters to start again.</h3>
-	</div>
-	{% endif %}
+  {% include 'partial/blog-hero.twig' with {
+    'breadcrumb': 'Search Results for:',
+    'title': s,
+    'subtitle': post.post_excerpt
+  } %}
 
 
+  <div class="grid grid-cols-3 gap-6 w-full max-w-4xl mx-auto p-6">
+    <div class="col-span-2">
+
+      {% if posts|length > 0 %}
+      {% for post in posts %}
+        <div class="mb-6">
+          {% include ['tease-'~post.post_type~'.twig', 'tease.twig'] %}
+        </div>
+      {% endfor %}
+      {% endif %}
+
+      {% if posts|length == 0 %}
+      <div class="mb-6">
+        <h3>Sorry, there are no results for &ldquo;{{ s }}&rdquo;</h3>
+        <p> Perhaps try searching for something else?</p>
+        {{ function('get_search_form') }}
+      </div>
+      {% endif %}
+
+    </div>
+    <div class="pl-6">
+      {% include "sidebar.twig" with { 'categories': categories, 'tags': tags } %}
+    </div>
+  </div>
 </div>
+<!-- Pagination -->
+{% include 'partial/pagination.twig' %}
+
 {% endblock %}
