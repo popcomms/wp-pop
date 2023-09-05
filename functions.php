@@ -175,14 +175,18 @@ get_template_part('inc/api/download');
 // Custom oEmbed
 add_action( 'pop_embed', 'pop_embed' );
 
-function pop_embed( $url ) {
+function pop_embed( $shortcode ) {
 
   // Provider
 
-  preg_match('/src="(.+?)"/', $url, $matches);
+  preg_match('/src="(.+?)"/', $shortcode, $matches);
   $src = $matches[1];
 
-  $vendor = 'youtube';
+  $vendor = null;
+
+  if (strpos($src, 'youtube.com') || strpos($src, 'youtu.be')) {
+    $vendor = 'youtube';
+  }
   if (strpos($src, 'vimeo.com')) {
     $vendor = 'vimeo';
   }
@@ -198,8 +202,8 @@ function pop_embed( $url ) {
   }
 
   if ($vendor === 'vimeo') {
-    $url = 'http://vimeo.com/api/oembed.json?url=' . $src;
-    $data = json_decode(file_get_contents($url));
+    $embed = 'http://vimeo.com/api/oembed.json?url=' . $src;
+    $data = json_decode(file_get_contents($embed));
     if ($data) {
       preg_match('/.*-(\w+)$/', $data->thumbnail_url, $matches);
       $thumbnail = str_replace($matches[1], 'd_1113x577', $data->thumbnail_url);
@@ -215,7 +219,16 @@ function pop_embed( $url ) {
     data-thumbnail="'. $thumbnail .'"
     data-ratio="16:9"
     ></div>';
-  echo $response;
+
+  // Return LazyFrame element for
+
+  if (in_array($vendor, ['vimeo', 'youtube'], true)) {
+    echo $response;
+  } else {
+    $updates = ' loop="on" autoplay="on" muted="on"]';
+    echo str_replace(']', $updates , $shortcode);
+  }
+
 }
 
 new StarterSite();

@@ -3954,6 +3954,65 @@ html::-webkit-scrollbar-thumb:window-inactive, body::-webkit-scrollbar-thumb:win
   background: transparent;
 }
 
+/* WP oEmbed Player */
+
+.mejs-container .mejs-inner {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+/* Progress and audio bar background */
+
+.mejs-container .mejs-controls .mejs-horizontal-volume-slider .mejs-horizontal-volume-total,
+.mejs-container .mejs-controls .mejs-time-rail .mejs-time-total {
+  background-color: #fff;
+}
+
+/* Track progress bar background (amount of track fully loaded)
+  We prefer to style these with the main accent color of our theme */
+
+.mejs-container .mejs-controls .mejs-time-rail .mejs-time-loaded {
+  background-color: rgba(219, 78, 136, 0.075);
+}
+
+/* Current track progress and active audio volume level bar */
+
+.mejs-container .mejs-controls .mejs-horizontal-volume-slider .mejs-horizontal-volume-current,
+.mejs-container .mejs-controls .mejs-time-rail .mejs-time-current {
+  background: #FF0088;
+}
+
+/* Reduce height of the progress and audio bars */
+
+/* .mejs-container .mejs-time-buffering,
+.mejs-container .mejs-time-current,
+.mejs-container .mejs-time-float,
+.mejs-container .mejs-time-float-corner,
+.mejs-container .mejs-time-float-current,
+.mejs-container .mejs-time-hovered,
+.mejs-container .mejs-time-loaded,
+.mejs-container .mejs-time-marker,
+.mejs-container .mejs-time-total,
+.mejs-container .mejs-horizontal-volume-total,
+.mejs-container .mejs-time-handle-content {
+  height: 3px;
+}
+
+.mejs-container .mejs-time-handle-content {
+  top: -6px;
+}
+
+.mejs-container .mejs-time-total {
+  margin-top: 8px;
+}
+
+.mejs-container .mejs-horizontal-volume-total {
+  top: 19px;
+} */
+
 .two-col_column > :first-child {
   margin-top: 0 !important;
   margin-left: 0 !important;

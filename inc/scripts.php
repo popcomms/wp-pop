@@ -32,7 +32,7 @@ function pop_enqueue_scripts() {
     'main',
     get_template_directory_uri().'/static/main.js',
     array('gsap','scrollTrigger','vue', 'lazyframe-js'),
-    '0.11',
+    '0.12',
     true
   );
 
