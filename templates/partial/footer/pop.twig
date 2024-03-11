@@ -1,11 +1,24 @@
+{% set address = function('get_field', 'address', 'option') %}
+{% set email_address = function('get_field', 'email_address', 'option') %}
+{% set telephone_number = function('get_field', 'telephone_number', 'option') %}
+{% set telephone_number_for_links = function('get_field', 'telephone_number_for_links', 'option') %}
+
+{% set address = address ? address : '155 Whiteladies Road<br>Bristol. BS8 2RF' %}
+{% set email_address = email_address ? email_address : 'hello@popcomms.com' %}
+{% set telephone_number = telephone_number ? telephone_number : '+44 (0)117 329 1712' %}
+{% set telephone_number_for_links = telephone_number_for_links ? telephone_number_for_links : 'tel:441173291712' %}
+
 <p class="font-semibold my-8">POP</p>
-155 Whiteladies Road<br>
-Bristol. BS8 2RF
+{% if address %}
+  <address class="address">
+    {{ address }}
+  </address>
+{% endif %}
 <br><br>
-<a href="tel:441173291712" class="hover:opacity-50">
-  +44 (0)117 329 1712
+<a href="{{ telephone_number_for_links }}" class="hover:opacity-50">
+  <span class="accessible-hide">Call us on: </span>{{ telephone_number }}
 </a>
 <br>
-<a href="mailto:hello@popcomms.com" class="underline hover:opacity-50">
-  hello@popcomms.com
+<a href="mailto:{{ email_address }}" class="underline hover:opacity-50">
+  <span class="accessible-hide">Email us at: </span>{{ email_address }}
 </a>

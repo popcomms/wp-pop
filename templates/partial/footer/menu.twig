@@ -1,71 +1,100 @@
-<p class="font-semibold my-8">Menu</p>
+{% if navigation.footer|length %}
+    
+  <nav class="footer-nav{% if function('get_field', 'emphasise_items_other_than_the_first', 'option') %} footer-nav--emphasise{% endif %}">
+    <ul class="footer-nav__list">
+      {% for item in navigation.footer %}
+        <li class="footer-nav__item">
+          {% if item.link %}<a href="{{ item.link }}" class="footer-nav__link"{% if item.external %} target="_blank" rel="noopener external"{% endif %}>{% endif %}
+          {% if not item.link %}<span class="footer-nav__link">{% endif %}
+            {{ item.text }}
+          {% if not item.link %}</span>{% endif %}
+          {% if item.link %}</a>{% endif %}
+          {% if item.children|length %}
+            <ul class="footer-nav__list footer-nav__list--secondary">
+              {% for child in item.children %}
+                <li class="footer-nav__item">
+                  <a href="{{ child.link }}" class="footer-nav__link"{% if child.external %} target="_blank" rel="noopener external"{% endif %}>{{ child.text }}</a>
+                </li>
+              {% endfor %}
+            </ul>
+          {% endif %}
+        </li>
+      {% endfor %}
+    </ul>
+  </nav>
+  
+{% else %}
 
-<a href="{{ site.url }}/" class="underline hover:opacity-50">Home</a>
-<br>
-<a href="{{ site.url }}/features-benefits/" class="underline hover:opacity-50">
-  Features
-</a>
-<br>
-<a href="{{ site.url }}/why-popcomms/" class="underline hover:opacity-50">
-  Why POPcomms?
-</a>
-<br>
-<a href="{{ site.url }}/pop-case-studies/" class="underline hover:opacity-50">
-  Case Studies
-</a>
-<br>
-<a href="{{ site.url }}/insights/" class="underline hover:opacity-50">
-  Insights
-</a>
-<br>
-<a href="{{ site.url }}/careers-at-pop/" class="underline hover:opacity-50">
-  Careers
-</a>
-<br>
-
-<br><br>
-
-<p class="font-semibold mt-0 mb-1 text-sm">Industries &amp; Roles</p>
-<a href="{{ site.url }}/advanced-manufacturing/" class="underline hover:opacity-50">
-  Advanced Manufacturing
-</a>
-<br>
-<a href="{{ site.url }}/healthcare-and-life-sciences/" class="underline hover:opacity-50">
-  Healthcare &amp; Life Sciences
-</a>
-<br>
-<a href="{{ site.url }}/construction/" class="underline hover:opacity-50">
-  Construction
-</a>
-<br>
-<a href="{{ site.url }}/technology/" class="underline hover:opacity-50">
-  Technology
-</a>
-<br>
-<a href="{{ site.url }}/marketing/" class="underline hover:opacity-50">
-  Marketing
-</a>
-<br>
-<a href="{{ site.url }}/sales/" class="underline hover:opacity-50">
-  Sales
-</a>
-<br>
-
-<br><br>
-
-<p class="font-semibold mt-0 mb-1 text-sm">Use cases</p>
-<a href="{{ site.url }}/interactive-sales-tools/" class="underline hover:opacity-50">
-  Interactive sales tools
-</a>
-<br>
-<a href="{{ site.url }}/innovation-centres/" class="underline hover:opacity-50">
-  Innovation centres
-</a>
-<br>
-<a href="{{ site.url }}/trade-retail-experiences/" class="underline hover:opacity-50">
-  Trade &amp; Retail experiences
-</a>
-<br>
-<a href="{{ site.url }}/touchscreen-experiences/" class="underline hover:opacity-50">
-  Touchscreen Experiences
-</a>
+  <p class="font-semibold my-8">Menu</p>
+  
+  <a href="{{ site.url }}/" class="underline hover:opacity-50">Home</a>
+  <br>
+  <a href="{{ site.url }}/features-benefits/" class="underline hover:opacity-50">
+    Features
+  </a>
+  <br>
+  <a href="{{ site.url }}/why-popcomms/" class="underline hover:opacity-50">
+    Why POPcomms?
+  </a>
+  <br>
+  <a href="{{ site.url }}/pop-case-studies/" class="underline hover:opacity-50">
+    Case Studies
+  </a>
+  <br>
+  <a href="{{ site.url }}/insights/" class="underline hover:opacity-50">
+    Insights
+  </a>
+  <br>
+  <a href="{{ site.url }}/careers-at-pop/" class="underline hover:opacity-50">
+    Careers
+  </a>
+  <br>
+  
+  <br><br>
+  
+  <p class="font-semibold mt-0 mb-1 text-sm">Industries &amp; Roles</p>
+  <a href="{{ site.url }}/advanced-manufacturing/" class="underline hover:opacity-50">
+    Advanced Manufacturing
+  </a>
+  <br>
+  <a href="{{ site.url }}/healthcare-and-life-sciences/" class="underline hover:opacity-50">
+    Healthcare &amp; Life Sciences
+  </a>
+  <br>
+  <a href="{{ site.url }}/construction/" class="underline hover:opacity-50">
+    Construction
+  </a>
+  <br>
+  <a href="{{ site.url }}/technology/" class="underline hover:opacity-50">
+    Technology
+  </a>
+  <br>
+  <a href="{{ site.url }}/marketing/" class="underline hover:opacity-50">
+    Marketing
+  </a>
+  <br>
+  <a href="{{ site.url }}/sales/" class="underline hover:opacity-50">
+    Sales
+  </a>
+  <br>
+  
+  <br><br>
+  
+  <p class="font-semibold mt-0 mb-1 text-sm">Use cases</p>
+  <a href="{{ site.url }}/interactive-sales-tools/" class="underline hover:opacity-50">
+    Interactive sales tools
+  </a>
+  <br>
+  <a href="{{ site.url }}/innovation-centres/" class="underline hover:opacity-50">
+    Innovation centres
+  </a>
+  <br>
+  <a href="{{ site.url }}/trade-retail-experiences/" class="underline hover:opacity-50">
+    Trade &amp; Retail experiences
+  </a>
+  <br>
+  <a href="{{ site.url }}/touchscreen-experiences/" class="underline hover:opacity-50">
+    Touchscreen Experiences
+  </a>
+  
+{% endif %}
