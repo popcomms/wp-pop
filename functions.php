@@ -237,6 +237,8 @@ new StarterSite();
 
 require_once('acf-field-groups/_all.php');
 
+// [21-Mar-2024 19:29:45 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /homepages/0/d200929606/htdocs/www/wp-content/themes/wp-pop/acf-field-groups/global-settings.php:1) in /homepages/0/d200929606/htdocs/www/wp-includes/functions.php on line 7049
+
 // Classes
 
 require_once('inc/classes/helpers.php');

@@ -1,4 +1,4 @@
-  <?php
+<?php
 
   $field_prefix = 'field_site_logo_collection_';
   
