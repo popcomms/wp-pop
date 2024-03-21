@@ -13,29 +13,16 @@
  * @since   Timber 0.1
  */
 
-$context          = Timber::context();
+$context = Timber::context();
 $context['posts'] = new Timber\PostQuery();
 
-$timber_post     = new Timber\Post();
+$timber_post = new Timber\Post();
 $context['post'] = $timber_post;
 
-$categories = get_categories( array(
-	'orderby'    => 'name',
-	'order'      => 'ASC',
-	'hide_empty' => '1'
-) );
-$context['categories'] = $categories;
-
-$tags = get_tags( array(
-	'orderby'    => 'count',
-	'order'      => 'DESC',
-  'number'     => 20,
-	'hide_empty' => '1'
-) );
-$context['tags'] = $tags;
+$context['categories'] = Site_Posts::get_categories();
+$context['tags'] = Site_Posts::get_tags();
+$context['post_format'] = '';
 
 $templates = array('index.twig');
-if ( is_home() ) {
-	array_unshift( $templates, 'front-page.twig', 'home.twig' );
-}
-Timber::render( $templates, $context );
+if (is_home()) { array_unshift( $templates, 'front-page.twig', 'home.twig'); }
+Timber::render($templates, $context);

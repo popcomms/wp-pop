@@ -44,27 +44,23 @@ if ( is_day() ) {
 	array_unshift( $templates, 'archive-' . get_post_type() . '.twig' );
 }
 
-$categories = get_categories( array(
-	'orderby'    => 'name',
-	'order'      => 'ASC',
-	'hide_empty' => '1'
-) );
-$context['categories'] = $categories;
+$post_format = '';
 
-$tags = get_tags( array(
-	'orderby'    => 'count',
-	'order'      => 'DESC',
-  'number'     => 20,
-	'hide_empty' => '1'
-) );
-$context['tags'] = $tags;
+global $post, $wp_query;
 
-$args = array(
-  'post_type'   => array('post', 'case-studies'),
-  'post_status' => 'publish',
-  'category'    => get_query_var('cat')
-);
+if (
+  isset($wp_query->query['post_format']) &&
+  !empty($wp_query->query['post_format'])
+) {
+  
+  $post_format = $wp_query->query['post_format'];
+  
+}
 
-$context['posts'] = new Timber\PostQuery($args);
+$context['categories'] = Site_Posts::get_categories($post_format);
+$context['tags'] = Site_Posts::get_tags($post_format);
+$context['post_format'] = $post_format;
 
-Timber::render( $templates, $context );
+$context['posts'] = new Timber\PostQuery();
+
+Timber::render($templates, $context);

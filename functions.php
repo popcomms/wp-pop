@@ -242,3 +242,4 @@ require_once('acf-field-groups/_all.php');
 require_once('inc/classes/helpers.php');
 require_once('inc/classes/global-settings.php');
 require_once('inc/classes/navigation.php');
+require_once('inc/classes/posts.php');
