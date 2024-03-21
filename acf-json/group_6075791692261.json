@@ -6,6 +6,7 @@
             "key": "field_60758922dc792",
             "label": "Hero",
             "name": "hero",
+            "aria-label": "",
             "type": "group",
             "instructions": "",
             "required": 0,
@@ -21,6 +22,7 @@
                     "key": "field_60b0c82f67f8b",
                     "label": "Overlay Opacity",
                     "name": "overlay_opacity",
+                    "aria-label": "",
                     "type": "range",
                     "instructions": "",
                     "required": 0,
@@ -30,7 +32,7 @@
                         "class": "",
                         "id": ""
                     },
-                    "default_value": 10,
+                    "default_value": 30,
                     "min": "",
                     "max": "",
                     "step": 10,
@@ -41,6 +43,7 @@
                     "key": "field_60b633cf53536",
                     "label": "Overlay Color",
                     "name": "overlay_color",
+                    "aria-label": "",
                     "type": "select",
                     "instructions": "",
                     "required": 0,
@@ -66,6 +69,7 @@
                     "key": "field_60758955dc793",
                     "label": "Title Background",
                     "name": "bg_color",
+                    "aria-label": "",
                     "type": "select",
                     "instructions": "",
                     "required": 0,
@@ -92,6 +96,7 @@
                     "key": "field_6075897edc794",
                     "label": "Title Color",
                     "name": "title_color",
+                    "aria-label": "",
                     "type": "select",
                     "instructions": "",
                     "required": 0,
@@ -117,6 +122,7 @@
                     "key": "field_6075899edc795",
                     "label": "Icons",
                     "name": "icons",
+                    "aria-label": "",
                     "type": "repeater",
                     "instructions": "",
                     "required": 0,
@@ -130,12 +136,13 @@
                     "min": 0,
                     "max": 2,
                     "layout": "table",
-                    "button_label": "",
+                    "button_label": "Add Row",
                     "sub_fields": [
                         {
                             "key": "field_607589b9dc796",
                             "label": "icon",
                             "name": "icon",
+                            "aria-label": "",
                             "type": "image",
                             "instructions": "",
                             "required": 0,
@@ -154,14 +161,17 @@
                             "max_width": "",
                             "max_height": "",
                             "max_size": "",
-                            "mime_types": ""
+                            "mime_types": "",
+                            "parent_repeater": "field_6075899edc795"
                         }
-                    ]
+                    ],
+                    "rows_per_page": 20
                 },
                 {
                     "key": "field_607589e2dc797",
                     "label": "Link",
                     "name": "link",
+                    "aria-label": "",
                     "type": "clone",
                     "instructions": "",
                     "required": 0,
@@ -185,6 +195,7 @@
             "key": "field_60758a10dc798",
             "label": "Post Options",
             "name": "post_options",
+            "aria-label": "",
             "type": "group",
             "instructions": "",
             "required": 0,
@@ -207,6 +218,7 @@
                     "key": "field_60758a26dc799",
                     "label": "Theme",
                     "name": "theme",
+                    "aria-label": "",
                     "type": "select",
                     "instructions": "",
                     "required": 0,
@@ -232,6 +244,7 @@
                     "key": "field_60758a3cdc79a",
                     "label": "Show Pop",
                     "name": "show_pop",
+                    "aria-label": "",
                     "type": "true_false",
                     "instructions": "",
                     "required": 0,
@@ -251,6 +264,7 @@
                     "key": "field_60758a5ddc79b",
                     "label": "Pop",
                     "name": "pop",
+                    "aria-label": "",
                     "type": "group",
                     "instructions": "",
                     "required": 0,
@@ -274,6 +288,7 @@
                             "key": "field_60758a68dc79c",
                             "label": "Pattern",
                             "name": "pattern",
+                            "aria-label": "",
                             "type": "radio",
                             "instructions": "",
                             "required": 0,
@@ -298,6 +313,7 @@
                             "key": "field_60758a8edc79d",
                             "label": "Color",
                             "name": "color",
+                            "aria-label": "",
                             "type": "select",
                             "instructions": "",
                             "required": 0,
@@ -333,9 +349,14 @@
     "location": [
         [
             {
-                "param": "post_format",
+                "param": "post_type",
+                "operator": "==",
+                "value": "post"
+            },
+            {
+                "param": "post_type",
                 "operator": "!=",
-                "value": "video"
+                "value": "site_logo_collection"
             }
         ]
     ],
@@ -347,5 +368,6 @@
     "hide_on_screen": "",
     "active": true,
     "description": "",
-    "modified": 1639413193
+    "show_in_rest": 0,
+    "modified": 1710177289
 }

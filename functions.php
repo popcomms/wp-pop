@@ -243,3 +243,5 @@ require_once('inc/classes/helpers.php');
 require_once('inc/classes/global-settings.php');
 require_once('inc/classes/navigation.php');
 require_once('inc/classes/posts.php');
+require_once('inc/classes/shared.php');
+require_once('inc/classes/admin.php');
