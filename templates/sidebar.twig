@@ -12,7 +12,7 @@
     {% for category in categories %}
       <a
         href="{{ site.site_url }}/category/{{category.slug}}/{% if post_format != '' %}?post_format={{ post_format }}{% endif %}"
-        class="w-max inline-block mr-1 mt-1 no-underline py-1 px-2 font-medium rounded bg-pop-purple bg-opacity-25 text-pop-purple hover:bg-pop-pink hover:text-white hover:bg-opacity-100 transition-all text-xs"
+        class="w-max inline-block mr-1 mt-1 no-underline py-1 px-2 font-medium rounded hover:bg-pop-pink hover:text-white hover:bg-opacity-100 transition-all text-xs{% if current_category and current_category == category.term_id %} bg-pop-pink text-white bg-opacity-100{% else %} bg-pop-purple bg-opacity-25 text-pop-purple{% endif %}"
         style="font-size: 0.6rem"
       >
         {{ category.name }}
@@ -27,7 +27,7 @@
     {% for tag in tags %}
       <a
         href="{{ site.site_url }}/tag/{{tag.slug}}/{% if post_format != '' %}?post_format={{ post_format }}{% endif %}"
-        class="w-max inline-block mr-1 mt-1 no-underline py-1 px-2 font-medium rounded bg-pop-purple bg-opacity-25 text-pop-purple hover:bg-pop-pink hover:text-white hover:bg-opacity-100 transition-all text-xs"
+        class="w-max inline-block mr-1 mt-1 no-underline py-1 px-2 font-medium rounded hover:bg-pop-pink hover:text-white hover:bg-opacity-100 transition-all text-xs{% if current_tag and current_tag == tag.term_id %} bg-pop-pink text-white bg-opacity-100{% else %} bg-pop-purple bg-opacity-25 text-pop-purple{% endif %}"
         style="font-size: 0.6rem"
       >
         {{ tag.name }}{% if post_format == '' %} <span class="opacity-40">&bull; {{ tag.count }}</span>{% endif %}

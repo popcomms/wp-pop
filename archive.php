@@ -60,6 +60,8 @@ if (
 $context['categories'] = Site_Posts::get_categories($post_format);
 $context['tags'] = Site_Posts::get_tags($post_format);
 $context['post_format'] = $post_format;
+$context['current_category'] = is_category() ? get_query_var('cat') : '';
+$context['current_tag'] = is_tag() ? get_query_var('tag_id') : '';
 
 $context['posts'] = new Timber\PostQuery();
 

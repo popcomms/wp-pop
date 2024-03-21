@@ -18,7 +18,7 @@
       {% endfor %}
     </div>
     <div class="lg:pl-6">
-      {% include "sidebar.twig" with { 'categories': categories, 'tags': tags, post_format: post_format } %}
+      {% include "sidebar.twig" with { 'categories': categories, 'tags': tags, post_format: post_format, current_category: current_category } %}
     </div>
   </div>
 
