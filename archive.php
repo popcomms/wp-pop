@@ -54,6 +54,7 @@ if (
 ) {
   
   $post_format = $wp_query->query['post_format'];
+  array_unshift($templates, $post_format . '.twig');
   
 }
 
