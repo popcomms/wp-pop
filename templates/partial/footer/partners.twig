@@ -1,58 +1,92 @@
-<p class="font-semibold my-8">Partners &amp; Awards</p>
-<div class="flex flex-wrap items-center justify-between">
+{% set partners_and_awards = function('get_field', 'partners_and_awards', 'option') %}
 
-  <div class="w-1/2 sm:w-1/5 md:w-1/2 pr-6 pb-8">
-    {% if color == 'white' %}
-      <img
-        src="https://www.popcomms.com/wp-content/uploads/2023/05/showpad-logo-white-300x188.png"
-        alt="Showpad"
-        class="inline-block w-24"
-        loading="lazy"
-        width="300"
-        height="188"
-      >
-    {% else %}
-      <img
-        src="https://www.popcomms.com/wp-content/uploads/2023/05/showpad-logo-black-300x188.png"
-        alt="Showpad"
-        class="inline-block w-24"
-        loading="lazy"
-        width="300"
-        height="188"
-      >
-    {% endif %}
+<p class="font-semibold my-8">Partners &amp; Awards</p>
+
+{% if partners_and_awards|length %}
+  
+  <div class="partners partners--restrict">
+    <ul class="partners__list">
+      {% for item in partners_and_awards %}
+      
+        {% set image_field = (color == 'white') ? 'white_image' : 'black_image' %}
+        
+        <li class="partners__item partners__item--{{ item.width }}">
+          {% if item.link %}<a href="{{ item.link }}" class="partners__item__inner" target="_blank" rel="noopener external">{% endif %}
+          {% if not item.link %}<div class="partners__item__inner">{% endif %}
+            <span class="accessible-hide">{{ item.text }}</span>
+            {%
+              include 'partial/image.twig' with {
+                image: item[image_field],
+                size: 'medium',
+                constrain_width: true
+              }
+            %}
+          {% if item.link %}</a>{% endif %}
+          {% if not item.link %}</div>{% endif %}
+        </li>
+        
+      {% endfor %}
+    </ul>
   </div>
 
-<div class="w-1/2 sm:w-1/5 md:w-1/2 pr-6 pb-8">
-  {% if color == 'white' %}
-  <img
-    src="https://www.popcomms.com/wp-content/uploads/2023/05/cyber-essentials-logo-white-300x255.png"
-    alt="Cyber Essentials"
-    class="inline-block w-20"
-    loading="lazy"
-    width="300"
-    height="255"
-  >
-    {% else %}
-  <img
-    src="https://www.popcomms.com/wp-content/uploads/2023/05/cyber-essentials-logo-black-300x251.png"
+{% else %}
 
-    alt="Cyber Essentials"
-    class="inline-block w-20"
-    loading="lazy"
-    width="300"
-    height="251"
-  >
-    {% endif %}
-</div>
-
-<div class="w-1/2 sm:w-1/5 md:w-full pr-6 pb-8">
-  <img
-    src="https://www.popcomms.com/wp-content/uploads/2023/05/cma-2021-best-application-of-marketing-technology-300x100.png"
-    alt="CMA Winner 2021 - Best Application of Marketing Technology"
-    class="inline-block"
-    loading="lazy"
-    width="300"
-    height="100"
-  >
-</div>
+  <div class="flex flex-wrap items-center justify-between">
+  
+    <div class="w-1/2 sm:w-1/5 md:w-1/2 pr-6 pb-8">
+      {% if color == 'white' %}
+        <img
+          src="https://www.popcomms.com/wp-content/uploads/2023/05/showpad-logo-white-300x188.png"
+          alt="Showpad"
+          class="inline-block w-24"
+          loading="lazy"
+          width="300"
+          height="188"
+        >
+      {% else %}
+        <img
+          src="https://www.popcomms.com/wp-content/uploads/2023/05/showpad-logo-black-300x188.png"
+          alt="Showpad"
+          class="inline-block w-24"
+          loading="lazy"
+          width="300"
+          height="188"
+        >
+      {% endif %}
+    </div>
+  
+  <div class="w-1/2 sm:w-1/5 md:w-1/2 pr-6 pb-8">
+    {% if color == 'white' %}
+    <img
+      src="https://www.popcomms.com/wp-content/uploads/2023/05/cyber-essentials-logo-white-300x255.png"
+      alt="Cyber Essentials"
+      class="inline-block w-20"
+      loading="lazy"
+      width="300"
+      height="255"
+    >
+      {% else %}
+    <img
+      src="https://www.popcomms.com/wp-content/uploads/2023/05/cyber-essentials-logo-black-300x251.png"
+  
+      alt="Cyber Essentials"
+      class="inline-block w-20"
+      loading="lazy"
+      width="300"
+      height="251"
+    >
+      {% endif %}
+  </div>
+  
+  <div class="w-1/2 sm:w-1/5 md:w-full pr-6 pb-8">
+    <img
+      src="https://www.popcomms.com/wp-content/uploads/2023/05/cma-2021-best-application-of-marketing-technology-300x100.png"
+      alt="CMA Winner 2021 - Best Application of Marketing Technology"
+      class="inline-block"
+      loading="lazy"
+      width="300"
+      height="100"
+    >
+  </div>
+  
+{% endif %}

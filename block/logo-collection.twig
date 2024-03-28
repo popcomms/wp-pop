@@ -1,0 +1,49 @@
+{% if is_preview %}
+  <p><strong>Logo collection</strong> - I will only appear in the editor.</p>
+{% endif %}
+
+{% if not is_preview %}
+  <div class="container-wide" >
+    <div class=" {{ theme_bg_color }} md:box-content">
+      {% include "/templates/partial/component-title.twig" with
+        {
+          'title': fields.title,
+          'subtitle': fields.subtitle,
+          'theme_text_color': theme_text_color,
+          'title_color': fields.title_color,
+          'pattern': fields.pattern.type,
+          'pattern_color': fields.pattern.color,
+          'pattern_opacity': fields.pattern.opacity
+        }
+      %}
+      {% if fields.logo_collection and fields.logo_collection|length %}
+        
+        {% set logo_collection_fields = function('get_fields', fields.logo_collection[0].ID) %}
+      
+        <div class="relative grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-1 sm:gap-3 items-center justify-start {{ theme == 'dark' ? 'bg-pop-black' : 'bg-pop-white'}}">
+          <!-- grid grid-flow-col grid-cols-4 gap-0.5 -->
+          {% for item in logo_collection_fields.items %}
+            <div class="{{ theme == 'dark' ? 'logos-light' : 'logos-dark'}} p-4 lg:p-6 h-full w-full flex justify-center items-center">
+              {% if item.link %}
+                {% set external = (site.url not in item.link.url) and ('#' not in item.link.url) %}
+                <a class="transition-opacity hover:opacity-50" href="{{ item.link.url }}"{% if item.link.target %} target="{{ item.link.target }}"{% endif %}{% if external %} rel="noopener external"{% endif %}>
+                  {% if item.link.title %}<span class="accessible-hide">{{ item.link.title }}</span>{% endif %}
+              {% endif %}
+                  <img
+                    class="w-full object-contain"
+                    src="{{ item.image.url }}"
+                    alt="{{ item.image.alt }}"
+                    width="150"
+                    height="150"
+                    loading="lazy"
+                  >
+              {% if item.link %}
+                </a>
+              {% endif %}
+            </div>
+          {% endfor %}
+        </div>
+      {% endif %}
+    </div>
+  </div>
+{% endif %}

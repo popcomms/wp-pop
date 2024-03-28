@@ -1,0 +1,6 @@
+/* Remove default editor */
+
+.post-type-site_logo_collection #postdivrich,
+.post-type-site_callout #postdivrich {
+  display: none !important;
+}
