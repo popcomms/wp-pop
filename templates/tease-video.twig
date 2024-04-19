@@ -1,0 +1,51 @@
+{% set video_fields = function('get_fields', post.id) %}
+{% set video_type = video_fields.hero.video_type == 'local' ? 'native' : 'iframe' %}
+{% set video_data = video_fields.hero.video_type == 'local' ? function('wp_get_attachment_url', video_fields.hero.video) : function(['Site_Helpers', 'parse_iframe_video'], video_fields.hero.embed_video).url %}
+
+{% extends "tease.twig" %}
+
+{% block content %}
+  
+  <button type="button" class="dialog-open-video" data-dialog-open-video="{{ video_type }}" data-dialog-open-video-data="{{ video_data }}" data-dialog-open-video-title="{{ post.title }}" aria-label="Open {{ post.title }} in dialog">
+    <div class="group sm:grid sm:grid-cols-2 sm:grid-rows-1 border border-gray-200 bg-black bg-opacity-5 transition-opacity cursor-pointer">
+      <div class="block h-full w-full bg-white aspect-w-16 aspect-h-9 sm:aspect-w-4 sm:aspect-h-3 group-hover:opacity-80 transition-opacity sm:border-r border-gray-200" >
+          {% if post.thumbnail.src %}
+            <img
+              class="object-cover"
+              src="{{ post.thumbnail.src }}"
+              alt="{{ post.thumbnail.alt }}"
+              style="font-size: 0"
+              loading="lazy"
+            />
+          {% else %}
+            <img
+              class="object-cover"
+              src="{{ theme.link }}/static/images/blogs-bg.png"
+              style="font-size: 0"
+              loading="lazy"
+            />
+          {% endif %}
+      </div>
+      <div class="relative flex flex-col items-start justify-between py-4 px-6">
+        <div class="w-full">
+          <h2 class="text-lg font-semibold leading-tight group-hover:text-pop-pink transition-all">
+            {{ post.title }}
+          </h2>
+          <div class="my-2 text-gray-500 group-hover:text-pop-pink transition-all">
+            {% include "/templates/partial/archive-author.twig" %}
+          </div>
+        </div>
+        <div class="w-full flex flex-wrap">
+          {% for category in post.categories %}
+            <div
+              class="w-max inline-block mr-1 mt-1 no-underline py-1 px-2 font-medium rounded bg-pop-purple bg-opacity-25 text-pop-purple group-hover:bg-pop-pink group-hover:text-white group-hover:bg-opacity-100 transition-all text-xs"
+              style="font-size: 0.6rem"
+            >
+              {{ category }}
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </button>
+{% endblock %}

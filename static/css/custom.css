@@ -137,3 +137,156 @@ a.footer-nav__link:hover {
     display: block;
   }
 }
+
+/* video */
+
+.video {
+  padding-top: 56.25%;
+  background: #000;
+  position: relative;
+}
+
+.video iframe,
+.video object,
+.video embed,
+.video video {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* dialog */
+
+@keyframes dialog-slide-in {
+  from { transform: translateY(15%); }
+  to { transform: translateY(0); }
+}
+
+@keyframes dialog-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.dialog-open-video {
+  display: block;
+  width: 100%;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  cursor: pointer;
+  background: none;
+  border: 0;
+  border-radius: 0;
+  text-align: left;
+}
+
+.dialog-open-video * {
+  pointer-events: none;
+}
+
+.dialog {
+  width: 100%;
+  height: 100%;
+  top: 0;
+  max-width: 100%;
+  max-height: 100%;
+  background: transparent;
+  padding: 40px 0;
+  color: #000;
+  overflow-y: scroll;
+}
+
+@media screen and (min-width: 768px) {
+  
+  .dialog {
+    padding: 40px;
+  }
+}
+
+.dialog::backdrop {
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.dialog__inner {
+  background: #fff;
+  padding: 40px;
+  margin: 0 auto;
+  max-width: 1200px;
+}
+
+.dialog__header {
+  position: relative;
+  margin: 0 0 40px 0;
+  padding: 0 84px 0 0;
+}
+
+.dialog__title {
+  
+}
+
+.dialog__header__close {
+  border: 0;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  margin: 0;
+  padding: 0;
+  background: none;
+  cursor: pointer;
+  display: block;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: -10px;
+  width: 44px;
+  height: 44px;
+  background: #fff;
+}
+
+.dialog__header__close:before,
+.dialog__header__close:after {
+  content: '';
+  display: block;
+  width: 30px;
+  height: 4px;
+  background: #000;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin: -2px 0 0 -15px;
+  transform: rotate(45deg);
+}
+
+.dialog__header__close:after {
+  transform: rotate(-45deg);
+}
+
+.dialog__header__close * {
+  pointer-events: none;
+}
+
+.dialog__header__close:hover:before,
+.dialog__header__close:hover:after {
+  background: #ff0088;
+}
+
+html:not(.prefers-reduce-motion) .dialog[open] .dialog__inner {
+  animation: dialog-slide-in .3s cubic-bezier(0, 0, .2, 1);
+}
+
+html:not(.prefers-reduce-motion) .dialog[open]::backdrop {
+  animation: dialog-fade-in .3s cubic-bezier(0.0, 0.0, 0.2, 1);
+}
+
+html.prefers-reduce-motion .dialog[open] {
+  transform: translateY(0);
+}
+
+html.prefers-reduce-motion .dialog[open]::backdrop {
+  opacity: 1;
+}
