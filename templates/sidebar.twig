@@ -6,13 +6,21 @@
   {{ function('get_search_form') }}
 {% endif %}
 
+{% set valid_post_format = post_format != '' %}
+{% set post_format_path = post_format|replace({'post-format-': ''}) ~ '/' %}
+
 {% if categories %}
   <div class="text-sm mb-2">Categories</div>
   <div class="w-full flex flex-wrap mb-6">
     {% for category in categories %}
+      {% set active = current_category and current_category == category.term_id %}
+      {% set path = '/category/' ~ category.slug ~ '/' %}
+      {% set path = active and valid_post_format ? '/type/' ~ post_format_path : path %}
+      {% set path = active and not valid_post_format ? '/blog/' : path %}
+      {% set query_string = valid_post_format and not active ? '?post_format=' ~ post_format : '' %}
       <a
-        href="{{ site.site_url }}/category/{{category.slug}}/{% if post_format != '' %}?post_format={{ post_format }}{% endif %}"
-        class="w-max inline-block mr-1 mt-1 no-underline py-1 px-2 font-medium rounded hover:bg-pop-pink hover:text-white hover:bg-opacity-100 transition-all text-xs{% if current_category and current_category == category.term_id %} bg-pop-pink text-white bg-opacity-100{% else %} bg-pop-purple bg-opacity-25 text-pop-purple{% endif %}"
+        href="{{ site.site_url }}{{ path }}{{ query_string }}"
+        class="w-max inline-block mr-1 mt-1 no-underline py-1 px-2 font-medium rounded hover:bg-pop-pink hover:text-white hover:bg-opacity-100 transition-all text-xs{% if active %} bg-pop-pink text-white bg-opacity-100{% else %} bg-pop-purple bg-opacity-25 text-pop-purple{% endif %}"
         style="font-size: 0.6rem"
       >
         {{ category.name }}
@@ -25,9 +33,14 @@
   <div class="text-sm mb-2">Popular Tags</div>
   <div class="w-full flex flex-wrap mb-6">
     {% for tag in tags %}
+      {% set active = current_tag and current_tag == tag.term_id %}
+      {% set path = '/tag/' ~ tag.slug ~ '/' %}
+      {% set path = active and valid_post_format ? '/type/' ~ post_format_path : path %}
+      {% set path = active and not valid_post_format ? '/blog/' : path %}
+      {% set query_string = valid_post_format and not active ? '?post_format=' ~ post_format : '' %}
       <a
-        href="{{ site.site_url }}/tag/{{tag.slug}}/{% if post_format != '' %}?post_format={{ post_format }}{% endif %}"
-        class="w-max inline-block mr-1 mt-1 no-underline py-1 px-2 font-medium rounded hover:bg-pop-pink hover:text-white hover:bg-opacity-100 transition-all text-xs{% if current_tag and current_tag == tag.term_id %} bg-pop-pink text-white bg-opacity-100{% else %} bg-pop-purple bg-opacity-25 text-pop-purple{% endif %}"
+        href="{{ site.site_url }}{{ path }}{{ query_string }}"
+        class="w-max inline-block mr-1 mt-1 no-underline py-1 px-2 font-medium rounded hover:bg-pop-pink hover:text-white hover:bg-opacity-100 transition-all text-xs{% if active %} bg-pop-pink text-white bg-opacity-100{% else %} bg-pop-purple bg-opacity-25 text-pop-purple{% endif %}"
         style="font-size: 0.6rem"
       >
         {{ tag.name }}{% if post_format == '' %} <span class="opacity-40">&bull; {{ tag.count }}</span>{% endif %}
