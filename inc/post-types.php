@@ -14,7 +14,7 @@ function custom_case_study_post_type() {
 					),
 					'supports'     => array('title', 'editor', 'thumbnail', 'excerpt'),
 					'public'       => true,
-					'has_archive'  => true,
+					'has_archive' => 'case-studies',
 					'show_in_rest' => true,
 					'taxonomies'   => array( 'category', 'post_tag' )
 			)

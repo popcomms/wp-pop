@@ -45,6 +45,8 @@ if ( is_day() ) {
 }
 
 $post_format = '';
+$post_type = !empty(get_post_type()) ? get_post_type() : get_query_var('post_type');
+$case_studies_archive = ($post_type === 'case-studies');
 
 global $post, $wp_query;
 
@@ -58,11 +60,20 @@ if (
   
 }
 
-$context['categories'] = Site_Posts::get_categories($post_format);
-$context['tags'] = Site_Posts::get_tags($post_format);
+$context['categories'] = $case_studies_archive ? Site_Case_Studies::get_categories() : Site_Posts::get_categories($post_format);
+$context['tags'] = $case_studies_archive ? Site_Case_Studies::get_tags() : Site_Posts::get_tags($post_format);
 $context['post_format'] = $post_format;
 $context['current_category'] = is_category() ? get_query_var('cat') : '';
 $context['current_tag'] = is_tag() ? get_query_var('tag_id') : '';
+$context['case_studies_archive'] = $case_studies_archive;
+$context['post_type'] = $post_type;
+
+if ($post_type === 'case-studies') {
+  
+  $context['current_category'] = isset($_GET['cs_category']) ? sanitize_text_field($_GET['cs_category']) : '';
+  $context['current_tag'] = isset($_GET['cs_tag']) ? sanitize_text_field($_GET['cs_tag']) : '';
+  
+}
 
 $context['posts'] = new Timber\PostQuery();
 
