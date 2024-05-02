@@ -6,7 +6,7 @@
 
 {% block content %}
   
-  <button type="button" class="dialog-open-video" data-dialog-open-video="{{ video_type }}" data-dialog-open-video-data="{{ video_data }}" data-dialog-open-video-title="{{ post.title }}" aria-label="Open {{ post.title }} in dialog">
+  <button type="button" class="dialog-open-video" data-dialog-open-video="{{ video_type }}" data-dialog-open-video-data="{{ video_data }}" data-dialog-open-video-title="{{ post.title }}" data-dialog-open-video-link="{{ post.link }}" aria-label="Open {{ post.title }} in dialog">
     <div class="group sm:grid sm:grid-cols-2 sm:grid-rows-1 border border-gray-200 bg-black bg-opacity-5 transition-opacity cursor-pointer">
       <div class="block h-full w-full bg-white aspect-w-16 aspect-h-9 sm:aspect-w-4 sm:aspect-h-3 group-hover:opacity-80 transition-opacity sm:border-r border-gray-200" >
           {% if post.thumbnail.src %}

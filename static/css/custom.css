@@ -199,6 +199,7 @@ a.footer-nav__link:hover {
   padding: 40px 0;
   color: #000;
   overflow-y: scroll;
+  position: fixed;
 }
 
 @media screen and (min-width: 768px) {

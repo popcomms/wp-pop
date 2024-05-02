@@ -322,6 +322,9 @@
   
   var dialogOpenVideoElements = document.querySelectorAll('[' + dialogOpenVideoAttribute + ']');
   
+  var currentUrl = window.location.href;
+  var currentTitle = document.title;
+  
   assignOpenEvents();
   assignCloseEvents();
   
@@ -348,6 +351,8 @@
       var isCloseElement = clickedElement.matches('[' + dialogCloseAttribute + ']');
     
       if (!isDialogElement && !isCloseElement) return;
+      
+      window.history.replaceState({}, currentTitle, currentUrl);
     
       var dialogParent = isDialogElement ? clickedElement : clickedElement.closest('[' + dialogAttribute + ']');
       const dialogParentName = dialogParent.getAttribute(dialogAttribute);
@@ -370,6 +375,9 @@
     var targetName = openVideoElement.getAttribute(dialogOpenVideoAttribute);
     var targetData = openVideoElement.getAttribute(dialogOpenVideoAttribute + '-data');
     var targetTitle = openVideoElement.getAttribute(dialogOpenVideoAttribute + '-title');
+    var targetLink = openVideoElement.getAttribute(dialogOpenVideoAttribute + '-link');
+    
+    window.history.replaceState({}, targetTitle, targetLink);
     
     var isNative = targetName === 'native';
     
@@ -421,6 +429,7 @@
       
       target.addEventListener('close', function(e) {
         
+        window.history.replaceState({}, currentTitle, currentUrl);
         bodyScrollLock.enableBodyScroll(target, bodyScrollSettings);
         target.remove();
         
