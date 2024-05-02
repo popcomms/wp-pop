@@ -17,7 +17,7 @@
           {% if button.link %}
             {% set external = (site.url not in button.link.url) and ('#' not in button.link.url) %}
             <p>
-              <a class="inline-flex justify-start sm:justify-center cursor-pointer shadow-md transition ease-in-out" href="{{ button.link.url }}"{% if button.link.target %} target="{{ button.link.target }}"{% endif %}{% if external %} rel="noopener external"{% endif %}>
+              <a class="inline-flex justify-start sm:justify-center cursor-pointer shadow-md transition ease-in-out{% if button.additional_classes %} {{ button.additional_classes }}{% endif %}" href="{{ button.link.url }}"{% if button.link.target %} target="{{ button.link.target }}"{% endif %}{% if external %} rel="noopener external"{% endif %}>
                 <span class="bg-{{ button.style }} text-pop-white m-0 px-4 py-3 h-10 leading-0 text-xs font-semibold">
                   {{ button.link.title }}
                 </span>
