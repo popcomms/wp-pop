@@ -24,6 +24,14 @@
     <meta name="msapplication-TileColor" content="#FF0088">
 
     {{function('wp_head')}}
+    <script>
+      (function() {
+        var html = document.getElementsByTagName('html')[0];
+        html.classList.remove('no-js');
+        html.classList.add('js');
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) html.classList.add('prefers-reduce-motion');
+      })();
+    </script>
     <style>
       {{ include('/static/css/custom.css') }}
     </style>

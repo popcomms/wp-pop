@@ -44,27 +44,37 @@ if ( is_day() ) {
 	array_unshift( $templates, 'archive-' . get_post_type() . '.twig' );
 }
 
-$categories = get_categories( array(
-	'orderby'    => 'name',
-	'order'      => 'ASC',
-	'hide_empty' => '1'
-) );
-$context['categories'] = $categories;
+$post_format = '';
+$post_type = !empty(get_post_type()) ? get_post_type() : get_query_var('post_type');
+$case_studies_archive = ($post_type === 'case-studies');
 
-$tags = get_tags( array(
-	'orderby'    => 'count',
-	'order'      => 'DESC',
-  'number'     => 20,
-	'hide_empty' => '1'
-) );
-$context['tags'] = $tags;
+global $post, $wp_query;
 
-$args = array(
-  'post_type'   => array('post', 'case-studies'),
-  'post_status' => 'publish',
-  'category'    => get_query_var('cat')
-);
+if (
+  isset($wp_query->query['post_format']) &&
+  !empty($wp_query->query['post_format'])
+) {
+  
+  $post_format = $wp_query->query['post_format'];
+  array_unshift($templates, $post_format . '.twig');
+  
+}
 
-$context['posts'] = new Timber\PostQuery($args);
+$context['categories'] = $case_studies_archive ? Site_Case_Studies::get_categories() : Site_Posts::get_categories($post_format);
+$context['tags'] = $case_studies_archive ? Site_Case_Studies::get_tags() : Site_Posts::get_tags($post_format);
+$context['post_format'] = $post_format;
+$context['current_category'] = is_category() ? get_query_var('cat') : '';
+$context['current_tag'] = is_tag() ? get_query_var('tag_id') : '';
+$context['case_studies_archive'] = $case_studies_archive;
+$context['post_type'] = $post_type;
 
-Timber::render( $templates, $context );
+if ($post_type === 'case-studies') {
+  
+  $context['current_category'] = isset($_GET['cs_category']) ? sanitize_text_field($_GET['cs_category']) : '';
+  $context['current_tag'] = isset($_GET['cs_tag']) ? sanitize_text_field($_GET['cs_tag']) : '';
+  
+}
+
+$context['posts'] = new Timber\PostQuery();
+
+Timber::render($templates, $context);

@@ -2,15 +2,28 @@
 {# <pre class="text-xs">{{ dump(tags) }}</pre> #}
 {# <pre class="text-xs">{{ dump(site) }}</pre> #}
 
-{{ function('get_search_form') }}
+{% if post_format == '' and post_type != 'case-studies' %}
+  {{ function('get_search_form') }}
+{% endif %}
+
+{% set valid_post_format = post_format != '' %}
+{% set post_format_path = post_format|replace({'post-format-': ''}) ~ '/' %}
 
 {% if categories %}
   <div class="text-sm mb-2">Categories</div>
   <div class="w-full flex flex-wrap mb-6">
     {% for category in categories %}
+      {% set active = current_category and current_category == category.term_id %}
+      {% set path = '/category/' ~ category.slug ~ '/' %}
+      {% set path = active and valid_post_format ? '/type/' ~ post_format_path : path %}
+      {% set path = active and not valid_post_format ? '/blog/' : path %}
+      {% set path = post_type == 'case-studies' ? '/case-studies/' : path %}
+      {% set query_string = valid_post_format and not active ? '?post_format=' ~ post_format : '' %}
+      {% set query_string = post_type == 'case-studies' ? '?cs_category=' ~ category.term_id : query_string %}
+      {% set query_string = post_type == 'case-studies' and active ? '' : query_string %}
       <a
-        href="{{ site.site_url }}/category/{{category.slug}}/"
-        class="w-max inline-block mr-1 mt-1 no-underline py-1 px-2 font-medium rounded bg-pop-purple bg-opacity-25 text-pop-purple hover:bg-pop-pink hover:text-white hover:bg-opacity-100 transition-all text-xs"
+        href="{{ site.site_url }}{{ path }}{{ query_string }}"
+        class="w-max inline-block mr-1 mt-1 no-underline py-1 px-2 font-medium rounded hover:bg-pop-pink hover:text-white hover:bg-opacity-100 transition-all text-xs{% if active %} bg-pop-pink text-white bg-opacity-100{% else %} bg-pop-purple bg-opacity-25 text-pop-purple{% endif %}"
         style="font-size: 0.6rem"
       >
         {{ category.name }}
@@ -19,16 +32,24 @@
   </div>
 {% endif %}
 
-{% if tags %}
+{% if tags and post_type != 'case-studies' %}
   <div class="text-sm mb-2">Popular Tags</div>
   <div class="w-full flex flex-wrap mb-6">
     {% for tag in tags %}
+      {% set active = current_tag and current_tag == tag.term_id %}
+      {% set path = '/tag/' ~ tag.slug ~ '/' %}
+      {% set path = active and valid_post_format ? '/type/' ~ post_format_path : path %}
+      {% set path = active and not valid_post_format ? '/blog/' : path %}
+      {% set path = post_type == 'case-studies' ? '/case-studies/' : path %}
+      {% set query_string = valid_post_format and not active ? '?post_format=' ~ post_format : '' %}
+      {% set query_string = post_type == 'case-studies' ? '?cs_tag=' ~ tag.term_id : query_string %}
+      {% set query_string = post_type == 'case-studies' and active ? '' : query_string %}
       <a
-        href="{{ site.site_url }}/tag/{{tag.slug}}/"
-        class="w-max inline-block mr-1 mt-1 no-underline py-1 px-2 font-medium rounded bg-pop-purple bg-opacity-25 text-pop-purple hover:bg-pop-pink hover:text-white hover:bg-opacity-100 transition-all text-xs"
+        href="{{ site.site_url }}{{ path }}{{ query_string }}"
+        class="w-max inline-block mr-1 mt-1 no-underline py-1 px-2 font-medium rounded hover:bg-pop-pink hover:text-white hover:bg-opacity-100 transition-all text-xs{% if active %} bg-pop-pink text-white bg-opacity-100{% else %} bg-pop-purple bg-opacity-25 text-pop-purple{% endif %}"
         style="font-size: 0.6rem"
       >
-        {{ tag.name }} <span class="opacity-40">&bull; {{ tag.count }}</span>
+        {{ tag.name }}{% if post_format == '' and post_type != 'case-studies' %} <span class="opacity-40">&bull; {{ tag.count }}</span>{% endif %}
       </a>
     {% endfor %}
   </div>
