@@ -1,0 +1,7 @@
+{%
+  include 'partial/sections/' ~ block_name ~ '.twig' with {
+    fields: fields,
+    preview: is_preview,
+    block_name: block_name
+  }
+%}

@@ -1,0 +1,11 @@
+{% set is_lazy = function('intval', block_index) > 1 %}
+
+<section class="section section--{{ block_name }} section--index-{{ block_index }}"{% if block_id %} id="{{ block_id }}"{% endif %}>
+  <div class="section__inner">
+      
+    {% block content %}
+      Sorry, no content
+    {% endblock %}
+    
+  </div>
+</section>
