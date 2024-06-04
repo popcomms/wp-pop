@@ -26,7 +26,8 @@
         'exclude_from_search' => true,
         'show_in_rest' => true,
         'rewrite' => array('slug' => 'ebooks', 'with_front' => false),
-        'menu_icon' => 'dashicons-book'
+        'menu_icon' => 'dashicons-book',
+        'supports' => array('title', 'editor', 'author', 'thumbnail')
       ));
     
     }
