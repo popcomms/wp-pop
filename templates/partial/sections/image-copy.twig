@@ -1,0 +1,74 @@
+{% extends 'partial/sections/generic/wrapper.twig' %}
+
+{% block content %}
+  
+  <div class="image-copy">
+    
+    <div class="image-copy__content">
+      
+      <div class="container-wide">
+      
+        {% if fields.heading_primary %}
+          <{{ fields.heading_primary_tag }} class="image-copy__title">{{ fields.heading_primary }}</{{ fields.heading_primary_tag }}>
+        {% endif %}
+        
+        {% if fields.heading_secondary %}
+          <{{ fields.heading_secondary_tag }} class="image-copy__subtitle alpha">{{ fields.heading_secondary }}</{{ fields.heading_secondary_tag }}>
+        {% endif %}
+        
+        <div class="grid grid--vertical-center grid--large">
+          <div class="grid__inner">
+            
+            {% if fields.copy or fields.button %}
+            
+              <div class="grid__col grid__col--6-wide">
+                <div class="grid__col__inner">
+                  
+                  {% if fields.copy %}
+                    <div class="cms cms--small image-copy__copy">
+                      {{ fields.copy }}
+                    </div>
+                  {% endif %}
+                  
+                  
+                  {% if fields.button %}
+                    <p class="image-copy__button">
+                      {%
+                        include 'partial/generic-button.twig' with {
+                          button: fields.button
+                        }
+                      %}
+                    </p>
+                  {% endif %}
+                </div>
+              </div>
+              
+            {% endif %}
+            
+            {% if fields.image %}
+            
+              <div class="grid__col grid__col--6-wide">
+                <div class="grid__col__inner">
+                  
+                  {%
+                    include 'partial/image.twig' with {
+                      image: fields.image,
+                      size: 'large'
+                    }
+                  %}
+                  
+                </div>
+              </div>
+              
+            {% endif %}
+            
+          </div>
+        </div>
+        
+      </div>
+      
+    </div>
+    
+  </div>
+
+{% endblock %}

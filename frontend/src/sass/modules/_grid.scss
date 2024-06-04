@@ -7,7 +7,7 @@ $grid-col: math.div(100, 12);
 }
 
 .grid {
-  margin-left: -#{spacing(4)};
+  margin-left: -#{spacing(default)};
   zoom: 1;
 
   &:before, &:after {
@@ -18,14 +18,10 @@ $grid-col: math.div(100, 12);
   &:after {
     clear: both;
   }
-  
-  @include mq(wide) {
-    margin-left: -#{spacing(5)};
-  }
 }
 
 .grid__inner {
-  margin: 0 0 -#{spacing(4)} 0;
+  margin: 0 0 -#{spacing(default)} 0;
   padding: 0;
   list-style: none;
   display: flex;
@@ -41,23 +37,14 @@ $grid-col: math.div(100, 12);
   &:after {
     clear: both;
   }
-  
-  @include mq(wide) {
-    margin: 0 0 -#{spacing(5)} 0;
-  }
 }
 
 .grid__col {
-  padding-left: spacing(4);
+  padding-left: spacing(default);
   width: 100%;
-  margin-bottom: spacing(4);
+  margin-bottom: spacing(default);
   flex-shrink: 1;
   display: flex;
-  
-  @include mq(wide) {
-    padding-left: spacing(5);
-    margin-bottom: spacing(5);
-  }
 
   .safari & {
     margin-left: -1px;
@@ -69,16 +56,43 @@ $grid-col: math.div(100, 12);
   width: 100%;
 }
 
-.grid--flush {
-  margin: 0;
+.grid--medium {
+  margin-left: -#{spacing(medium)};
   
   .grid__inner {
-    margin: 0;
+    margin: 0 0 -#{spacing(medium)} 0;
+  }
+  
+  .grid__col {
+    padding-left: spacing(medium);
+    margin-bottom: spacing(medium);
+  }
+}
 
-    > .grid__col {
-      margin-bottom: 0;
-      padding-left: 0;
-    }
+.grid--large {
+  margin-left: -#{spacing(large)};
+  
+  .grid__inner {
+    margin: 0 0 -#{spacing(large)} 0;
+  }
+  
+  .grid__col {
+    padding-left: spacing(large);
+    margin-bottom: spacing(large);
+  }
+}
+
+.grid--horizontal-center {
+
+  > .grid__inner {
+    justify-content: center;
+  }
+}
+
+.grid--vertical-center {
+  
+  > .grid__inner {
+    align-items: center;
   }
 }
 

@@ -40,19 +40,21 @@
 .video-banner__title {
   margin: 0;
   padding: 0;
-}
-
-.video-banner__title:not(:last-child) {
-  margin: 0 0 30px 0;
+  @include font-default();
+  @include font-size-default();
+  
+  &:not(:last-child) {
+    margin: 0 0 5px 0;
+  }
 }
 
 .video-banner__subtitle {
   margin: 0;
   padding: 0;
-}
-
-.video-banner__subtitle:not(:last-child) {
-  margin: 0 0 30px 0;
+  
+  &:not(:last-child) {
+    margin: 0 0 30px 0;
+  }
 }
 
 .video-banner__button {

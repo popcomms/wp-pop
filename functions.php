@@ -248,3 +248,4 @@ require_once('inc/classes/case-studies.php');
 require_once('inc/classes/shared.php');
 require_once('inc/classes/admin.php');
 require_once('inc/classes/ebooks.php');
+require_once('inc/classes/wysiwyg.php');

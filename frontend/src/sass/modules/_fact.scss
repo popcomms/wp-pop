@@ -1,14 +1,30 @@
 .fact {
   margin: 0;
   padding: 0;
+  text-align: center;
 }
 
 .fact__title {
   display: block;
+  margin: 0 0 spacing(small) 0;
+  @include font-bold();
+  @include font-size-small();
+  
+  @include mq(wide) {
+    margin: 0 0 spacing(default) 0;
+  }
 }
 
 .fact__chart {
   display: block;
+  
+  &:not(:last-child) {
+    margin: 0 0 spacing(small) 0;
+    
+    @include mq(wide) {
+      margin: 0 0 spacing(default) 0;
+    }
+  }
 }
 
 .fact__chart__bg {
@@ -21,13 +37,14 @@
   fill: none;
   stroke-width: 2.8;
   stroke-linecap: round;
+  animation-delay: 0.25s;
   animation: fact-chart-circle 1s ease-out forwards;
-  stroke: #FF0088;
+  stroke: color(pink);
 }
 
 .fact__chart__value {
   display: block;
-  fill: #FF0088;
+  fill: color(pink);
   font-family: sans-serif;
   font-size: 0.5em;
   text-anchor: middle;
@@ -35,4 +52,23 @@
 
 .fact__description {
   display: block;
+  @include font-default();
+  @include font-size-small();
+}
+
+html.js .fact[data-intersection-observer] {
+  opacity: 0;
+  transition: opacity 0.25s ease;
+  
+  .fact__chart__circle {
+    animation: none;
+  }
+}
+
+html.js .fact[data-intersection-observer="visible"] {
+  opacity: 1;
+  
+  .fact__chart__circle {
+    animation: fact-chart-circle 1s ease-out forwards;
+  }
 }

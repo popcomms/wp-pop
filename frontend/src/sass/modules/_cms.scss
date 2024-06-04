@@ -1,0 +1,16 @@
+.cms {
+  @include font-default();
+  @include font-size-default();
+  
+  > * {
+    margin: 0;
+    
+    &:not(:last-child) {
+      margin: 0 0 spacing(small) 0;
+    }
+  }
+}
+
+.cms--small {
+  @include font-size-small();
+}

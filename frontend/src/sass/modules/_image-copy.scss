@@ -1,8 +1,7 @@
-.facts {
-  text-align: center;
+.image-copy {
 }
 
-.facts__title {
+.image-copy__title {
   margin: 0;
   padding: 0;
   @include font-default();
@@ -13,7 +12,7 @@
   }
 }
 
-.facts__subtitle {
+.image-copy__subtitle {
   margin: 0;
   padding: 0;
   
@@ -26,13 +25,14 @@
   }
 }
 
-.facts__items {
+.image-copy__copy {
+  margin: 0;
   
   &:not(:last-child) {
-    margin: 0 0 spacing(medium) 0;
-    
-    @include mq(wide) {
-      margin: 0 0 spacing(large) 0;
-    }
+    margin: 0 0 spacing(default) 0;
   }
+}
+
+.image-copy__button {
+  margin: 0;
 }

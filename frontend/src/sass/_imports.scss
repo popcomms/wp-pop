@@ -1,7 +1,9 @@
 @import 'settings';
 @import 'mixins';
 @import 'animations';
+@import 'typography';
 
+@import 'modules/section';
 @import 'modules/accessible-hide';
 @import 'modules/address';
 @import 'modules/dialog';
@@ -13,3 +15,5 @@
 @import 'modules/partners';
 @import 'modules/video-banner';
 @import 'modules/video';
+@import 'modules/image-copy';
+@import 'modules/cms';

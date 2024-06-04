@@ -1,0 +1,8 @@
+.alpha {
+  @include font-default();
+  font-size: 2.25rem;
+  
+  @include mq(wide) {
+    font-size: 2.625rem;
+  }
+}

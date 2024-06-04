@@ -9,5 +9,16 @@ $breakpoints: (
 
 $colors: (
   white: #fff,
-  black: #000
+  black: #000,
+  grey: #2d2d2d,
+  pink: #FF0088,
+  purple: #6F62FF
 ) !default;
+
+$spacings: (
+  small: 15px,
+  default: 30px,
+  medium: 40px,
+  large: 60px,
+  massive: 100px
+);

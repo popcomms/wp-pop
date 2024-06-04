@@ -1,10 +1,8 @@
-(function() {
+window.addEventListener('load', function() {
   
   var elements = document.querySelectorAll('[data-video-banner]');
   
   if (!elements.length) return;
-  
-  return;
   
   setHeights();
   window.addEventListener('resize', debounce(setHeights, 500));
@@ -47,4 +45,4 @@
   
   }
   
-})();
+});

@@ -151,17 +151,10 @@
         
       }
       
-      $parsed_blocks = parse_blocks($post_content);
+      $context['auto_classes'] = '';
       
-      foreach($parsed_blocks as $key => $value) {
-        
-        if (empty($parsed_blocks[$key]['blockName'])) {
-          
-          unset($parsed_blocks[$key]);
-          
-        }
-        
-      }
+      if (in_array($context['block_name'], ['video-banner'])) { $context['auto_classes'] .= ' section--flush'; }
+      if (isset($context['fields']['style'])) { $context['auto_classes'] .= ' section--style-' . $context['fields']['style']; }
         
       return $context;
       

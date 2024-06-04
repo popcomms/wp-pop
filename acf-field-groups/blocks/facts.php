@@ -45,21 +45,6 @@
         'prefix_name' => 0,
       ),
       array(
-        'key' => $field_prefix . 'button',
-        'label' => 'Button',
-        'name' => 'button',
-        'type' => 'link',
-        'instructions' => '',
-        'required' => 0,
-        'conditional_logic' => 0,
-        'wrapper' => array(
-          'width' => '',
-          'class' => '',
-          'id' => '',
-        ),
-        'return_format' => 'array',
-      ),
-      array(
         'key' => $field_prefix . 'items',
         'label' => 'Items',
         'name' => 'items',
@@ -101,7 +86,7 @@
             'key' => $field_prefix . 'items_value',
             'label' => 'Value',
             'name' => 'value',
-            'type' => 'text',
+            'type' => 'number',
             'instructions' => '',
             'required' => 0,
             'conditional_logic' => 0,
@@ -114,7 +99,9 @@
             'placeholder' => '',
             'prepend' => '',
             'append' => '',
-            'maxlength' => '',
+            'min' => 0,
+            'max' => 100,
+            'step' => 1
           ),
           array(
             'key' => $field_prefix . 'items_description',

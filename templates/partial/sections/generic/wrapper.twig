@@ -1,6 +1,6 @@
 {% set is_lazy = function('intval', block_index) > 1 %}
 
-<section class="section section--{{ block_name }} section--index-{{ block_index }}"{% if block_id %} id="{{ block_id }}"{% endif %}>
+<section class="section section--{{ block_name }} section--index-{{ block_index }}{{ auto_classes }}"{% if block_id %} id="{{ block_id }}"{% endif %} data-intersection-observer>
   <div class="section__inner">
       
     {% block content %}

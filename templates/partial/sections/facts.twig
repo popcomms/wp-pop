@@ -11,42 +11,40 @@
       {% endif %}
       
       {% if fields.heading_secondary %}
-        <{{ fields.heading_secondary_tag }} class="facts__subtitle">{{ fields.heading_secondary }}</{{ fields.heading_secondary_tag }}>
+        <{{ fields.heading_secondary_tag }} class="facts__subtitle alpha">{{ fields.heading_secondary }}</{{ fields.heading_secondary_tag }}>
       {% endif %}
       
       {% if fields.items|length %}
-      
-        <ul class="facts__items">
         
-          {% for item in fields.items %}
-            <li class="facts__items__item">
-              <p class="fact">
-                <span class="fact__title">{{ item.title }}</span>
-                <svg viewBox="0 0 36 36" class="fact__chart">
-                  <path class="fact__chart__bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
-                  />
-                  <path class="fact__chart__circle" stroke-dasharray="{{ item.value }}, 100"
-                    d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
-                  />
-                  <text x="18" y="20.35" class="fact__chart__value">{{ item.value }}%</text>
-                </svg>
-                <span class="fact__description">{{ item.description }}</span>
-              </p>
-            </li>
-          {% endfor %}
+        <div class="facts__items">
+        
+          <div class="grid grid--horizontal-center grid--medium">
+            <ul class="grid__inner">
+              
+              {% for item in fields.items %}
+                <div class="grid__col grid__col--6-large-phone grid__col--4-desktop">
+                  <div class="grid__col__inner">
+                    <p class="fact" data-intersection-observer>
+                      <span class="fact__title">{{ item.title }}</span>
+                      <svg viewBox="0 0 36 36" class="fact__chart">
+                        <path class="fact__chart__bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
+                        />
+                        <path class="fact__chart__circle" stroke-dasharray="{{ item.value }}, 100"
+                          d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
+                        />
+                        <text x="18" y="20.35" class="fact__chart__value">{{ item.value }}%</text>
+                      </svg>
+                      <span class="fact__description">{{ item.description }}</span>
+                    </p>
+                  </div>
+                </div>
+              {% endfor %}
+              
+            </ul>
+          </div>
           
-        </ul>
+        </div>
       
-      {% endif %}
-      
-      {% if fields.button %}
-        <p class="facts__button">
-          {%
-            include 'partial/generic-button.twig' with {
-              button: fields.button
-            }
-          %}
-        </p>
       {% endif %}
       
     </div>
