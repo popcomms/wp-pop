@@ -1,3 +1,7 @@
+/* grid */
+
+
+
 /* footer */
 
 .footer-nav {
@@ -297,6 +301,7 @@ html.prefers-reduce-motion .dialog[open]::backdrop {
 .video-banner {
   position: relative;
   min-height: 550px;
+  background: #000;
 }
 
 @media screen and (min-width: 768px) {
@@ -352,5 +357,101 @@ html.prefers-reduce-motion .dialog[open]::backdrop {
 
 .video-banner__button {
   margin: 0;
+  padding: 0 0 5px 0;
+}
+
+/* facts */
+
+.facts {
+  padding: 50px 0;
+}
+
+.facts__title {
+  margin: 0;
   padding: 0;
+}
+
+.facts__title:not(:last-child) {
+  margin: 0 0 30px 0;
+}
+
+.facts__subtitle {
+  margin: 0;
+  padding: 0;
+}
+
+.facts__subtitle:not(:last-child) {
+  margin: 0 0 30px 0;
+}
+
+.facts__button {
+  margin: 0;
+  padding: 0 0 5px 0;
+}
+
+.facts__items {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+}
+
+.facts__items__item {
+  width: 33.333333333%;
+  padding: 0;
+}
+
+.facts__items__item:before {
+  display: none;
+}
+
+.facts__items:not(:last-child) .facts__items__item {
+  padding-bottom: 35px;
+}
+
+/* fact */
+
+.fact {
+  margin: 0;
+  padding: 0;
+}
+
+.fact__title {
+  display: block;
+}
+
+.fact__chart {
+  display: block;
+}
+
+.fact__chart__bg {
+  fill: none;
+  stroke: #eee;
+  stroke-width: 3.8;
+}
+
+.fact__chart__circle {
+  fill: none;
+  stroke-width: 2.8;
+  stroke-linecap: round;
+  animation: fact-chart-circle 1s ease-out forwards;
+  stroke: #FF0088;
+}
+
+@keyframes fact-chart-circle {
+  0% {
+    stroke-dasharray: 0 100;
+  }
+}
+
+.fact__chart__value {
+  display: block;
+  fill: #FF0088;
+  font-family: sans-serif;
+  font-size: 0.5em;
+  text-anchor: middle;
+}
+
+.fact__description {
+  display: block;
 }

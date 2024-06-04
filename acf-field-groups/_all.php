@@ -11,6 +11,7 @@
     require_once('video.php');
     
     require_once('blocks/video-banner.php');
+    require_once('blocks/facts.php');
     
   }
   

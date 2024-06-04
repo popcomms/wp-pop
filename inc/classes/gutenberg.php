@@ -19,8 +19,6 @@
       //add_action('enqueue_block_editor_assets', array($this, 'include_css'));
       add_filter('render_block', array($this, 'wrap_blocks'), 10, 2);
       remove_theme_support('core-block-patterns');
-      add_filter('acf/load_field/key=field_site_heading_fields_heading_tag', array($this, 'populate_heading_tag_select'));
-      add_filter('acf/load_field/key=field_site_heading_fields_subheading_tag', array($this, 'populate_heading_tag_select'));
       add_action('init', array($this, 'register_blocks'), 5);
   
     }
@@ -179,22 +177,6 @@
     public static function wrap_blocks($block_content, $block) {
   
       if (!empty(trim($block_content))) { return $block_content; }
-  
-    }
-  
-    public function populate_heading_tag_select($field) {
-  
-      $field['choices'] = array(
-        'h1' => 'h1',
-        'h2' => 'h2',
-        'h3' => 'h3',
-        'h4' => 'h4',
-        'h5' => 'h5',
-        'h6' => 'h6',
-        'p' => 'p'
-      );
-  
-      return $field;
   
     }
     

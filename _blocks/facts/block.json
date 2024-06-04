@@ -1,0 +1,13 @@
+{
+  "name": "acf/facts",
+  "title": "Facts",
+  "description": "",
+  "category": "general",
+  "icon": "info-outline",
+  "acf": {
+    "mode": "edit"
+  },
+  "supports": {
+    "align": false
+  }
+}
