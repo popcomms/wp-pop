@@ -1,0 +1,13 @@
+$breakpoints: (
+  large-phone: 375,
+  tablet: 481,
+  middle: 601,
+  desktop: 769,
+  wide: 1025,
+  widest: 1400
+) !default;
+
+$colors: (
+  white: #fff,
+  black: #000
+) !default;

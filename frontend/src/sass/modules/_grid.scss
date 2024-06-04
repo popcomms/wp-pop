@@ -1,0 +1,103 @@
+@use 'sass:math';
+
+$grid-col: math.div(100, 12);
+
+@mixin grid-column($cols) {
+  width: (($grid-col * $cols) * 1%);
+}
+
+.grid {
+  margin-left: -#{spacing(4)};
+  zoom: 1;
+
+  &:before, &:after {
+    display: table;
+    content: '';
+  }
+
+  &:after {
+    clear: both;
+  }
+  
+  @include mq(wide) {
+    margin-left: -#{spacing(5)};
+  }
+}
+
+.grid__inner {
+  margin: 0 0 -#{spacing(4)} 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  float: left;
+  width: 100%;
+
+  &:before, &:after {
+    display: table;
+    content: '';
+  }
+
+  &:after {
+    clear: both;
+  }
+  
+  @include mq(wide) {
+    margin: 0 0 -#{spacing(5)} 0;
+  }
+}
+
+.grid__col {
+  padding-left: spacing(4);
+  width: 100%;
+  margin-bottom: spacing(4);
+  flex-shrink: 1;
+  display: flex;
+  
+  @include mq(wide) {
+    padding-left: spacing(5);
+    margin-bottom: spacing(5);
+  }
+
+  .safari & {
+    margin-left: -1px;
+    margin-right: -1px;
+  }
+}
+
+.grid__col__inner {
+  width: 100%;
+}
+
+.grid--flush {
+  margin: 0;
+  
+  .grid__inner {
+    margin: 0;
+
+    > .grid__col {
+      margin-bottom: 0;
+      padding-left: 0;
+    }
+  }
+}
+
+@for $i from 1 through 12 {
+
+  .grid__col--#{$i} {
+    @include grid-column($cols: $i);
+  }
+}
+
+@each $name, $value in $breakpoints {
+
+  @media (min-width: $value + px) {
+
+    @for $i from 1 through 12 {
+
+      .grid__col--#{$i}-#{$name} {
+        @include grid-column($cols: $i);
+      }
+    }
+  }
+}

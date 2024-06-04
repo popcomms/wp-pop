@@ -1,0 +1,38 @@
+.fact {
+  margin: 0;
+  padding: 0;
+}
+
+.fact__title {
+  display: block;
+}
+
+.fact__chart {
+  display: block;
+}
+
+.fact__chart__bg {
+  fill: none;
+  stroke: #eee;
+  stroke-width: 3.8;
+}
+
+.fact__chart__circle {
+  fill: none;
+  stroke-width: 2.8;
+  stroke-linecap: round;
+  animation: fact-chart-circle 1s ease-out forwards;
+  stroke: #FF0088;
+}
+
+.fact__chart__value {
+  display: block;
+  fill: #FF0088;
+  font-family: sans-serif;
+  font-size: 0.5em;
+  text-anchor: middle;
+}
+
+.fact__description {
+  display: block;
+}
