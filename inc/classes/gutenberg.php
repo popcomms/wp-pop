@@ -153,8 +153,8 @@
       
       $context['auto_classes'] = '';
       
-      if (in_array($context['block_name'], ['video-banner'])) { $context['auto_classes'] .= ' section--flush'; }
-      if (isset($context['fields']['style'])) { $context['auto_classes'] .= ' section--style-' . $context['fields']['style']; }
+      if (in_array($context['block_name'], ['video-banner'])) { $context['auto_classes'] .= ' m-section--flush'; }
+      if (isset($context['fields']['style'])) { $context['auto_classes'] .= ' m-section--style-' . $context['fields']['style']; }
         
       return $context;
       

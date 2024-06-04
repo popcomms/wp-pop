@@ -1,0 +1,50 @@
+{% extends 'partial/sections/generic/wrapper.twig' %}
+
+{% block content %}
+  
+  <div class="m-ctas">
+    
+    <div class="m-ctas__content">
+      
+      <div class="container-wide">
+      
+        {% if fields.heading_primary %}
+          <{{ fields.heading_primary_tag }} class="m-ctas__title">{{ fields.heading_primary }}</{{ fields.heading_primary_tag }}>
+        {% endif %}
+        
+        {% if fields.heading_secondary %}
+          <{{ fields.heading_secondary_tag }} class="m-ctas__subtitle alpha">{{ fields.heading_secondary }}</{{ fields.heading_secondary_tag }}>
+        {% endif %}
+        
+        {% if fields.button_one or fields.button_two %}
+          <div class="m-ctas__buttons">
+            {% if fields.button_one %}
+              <div class="m-ctas__button">
+                {%
+                  include 'partial/generic-button.twig' with {
+                    button: fields.button_one,
+                    class: fields.button_one_class ? fields.button_one_class : ''
+                  }
+                %}
+              </div>
+            {% endif %}
+            {% if fields.button_two %}
+              <div class="m-ctas__button">
+                {%
+                  include 'partial/generic-button.twig' with {
+                    button: fields.button_two,
+                    class: fields.button_two_class ? fields.button_two_class : ''
+                  }
+                %}
+              </div>
+            {% endif %}
+          </div>
+        {% endif %}
+        
+      </div>
+      
+    </div>
+    
+  </div>
+
+{% endblock %}

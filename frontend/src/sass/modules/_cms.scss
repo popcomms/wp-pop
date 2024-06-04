@@ -1,4 +1,4 @@
-.cms {
+.m-cms {
   @include font-default();
   @include font-size-default();
   
@@ -11,6 +11,6 @@
   }
 }
 
-.cms--small {
+.m-cms--small {
   @include font-size-small();
 }

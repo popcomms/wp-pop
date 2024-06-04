@@ -1,0 +1,13 @@
+{
+  "name": "acf/ctas",
+  "title": "CTAS",
+  "description": "",
+  "category": "general",
+  "icon": "button",
+  "acf": {
+    "mode": "edit"
+  },
+  "supports": {
+    "align": false
+  }
+}

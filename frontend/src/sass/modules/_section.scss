@@ -1,4 +1,4 @@
-.section {
+.m-section {
   padding: spacing(large) 0;
   
   @include mq(wide) {
@@ -6,11 +6,11 @@
   }
 }
 
-.section--flush {
+.m-section--flush {
   padding: 0;
 }
 
-.section--style-dark {
+.m-section--style-dark {
   background: color(grey);
   color: color(white);
   position: relative;
@@ -29,14 +29,14 @@
     background-size: 40px 40px, 40px 40px, 20px 20px, 20px 20px;
   }
   
-  .section__inner {
+  .m-section__inner {
     position: relative;
   }
 }
 
-.section:not(.section--flush):not(.section--style-dark) {
+.m-section:not(.m-section--flush):not(.m-section--style-dark) {
   
-  & + .section:not(.section--flush):not(.section--style-dark) {
+  & + .m-section:not(.m-section--flush):not(.m-section--style-dark) {
     padding-top: 0;
   }
 }

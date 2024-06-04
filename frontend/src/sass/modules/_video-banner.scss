@@ -1,4 +1,4 @@
-.video-banner {
+.m-video-banner {
   position: relative;
   min-height: 550px;
   background: #000;
@@ -6,17 +6,17 @@
 
 @media screen and (min-width: 768px) {
   
-  .video-banner {
+  .m-video-banner {
     height: 75vh;
     min-height: 800px;
   }
 }
 
-.video-banner__video {
+.m-video-banner__video {
   position: static;
 }
 
-.video-banner video {
+.m-video-banner video {
   position: absolute;
   top: 0;
   left: 0;
@@ -25,7 +25,7 @@
   object-fit: cover;
 }
 
-.video-banner__content {
+.m-video-banner__content {
   position: absolute;
   top: 0;
   left: 0;
@@ -37,7 +37,7 @@
   align-items: center;
 }
 
-.video-banner__title {
+.m-video-banner__title {
   margin: 0;
   padding: 0;
   @include font-default();
@@ -48,7 +48,7 @@
   }
 }
 
-.video-banner__subtitle {
+.m-video-banner__subtitle {
   margin: 0;
   padding: 0;
   
@@ -57,7 +57,7 @@
   }
 }
 
-.video-banner__button {
+.m-video-banner__button {
   margin: 0;
   padding: 0 0 5px 0;
 }

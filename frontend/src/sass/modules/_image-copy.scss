@@ -1,7 +1,7 @@
-.image-copy {
+.m-image-copy {
 }
 
-.image-copy__title {
+.m-image-copy__title {
   margin: 0;
   padding: 0;
   @include font-default();
@@ -12,7 +12,7 @@
   }
 }
 
-.image-copy__subtitle {
+.m-image-copy__subtitle {
   margin: 0;
   padding: 0;
   
@@ -25,7 +25,7 @@
   }
 }
 
-.image-copy__copy {
+.m-image-copy__copy {
   margin: 0;
   
   &:not(:last-child) {
@@ -33,6 +33,6 @@
   }
 }
 
-.image-copy__button {
+.m-image-copy__button {
   margin: 0;
 }

@@ -1,6 +1,6 @@
 {% set external = (site.url not in button.url) and ('#' not in button.url) %}
 {% set pdf = '.pdf' in button.url %}
-<a class="inline-flex justify-start sm:justify-center cursor-pointer shadow-md transition ease-in-out" href="{{ button.url }}"{% if button.target %} target="{{ button.target }}"{% endif %}{% if external %} rel="noopener external"{% endif %}{% if pdf %} download{% endif %}>
+<a class="inline-flex justify-start sm:justify-center cursor-pointer shadow-md transition ease-in-out{% if class %} {{ class }}{% endif %}" href="{{ button.url }}"{% if button.target %} target="{{ button.target }}"{% endif %}{% if external %} rel="noopener external"{% endif %}{% if pdf %} download{% endif %}>
   <span class="bg-pop-purple text-pop-white m-0 px-4 py-3 h-10 leading-0 text-xs font-semibold">
     {{ button.title }}
   </span>

@@ -4,16 +4,16 @@
 
 {% if partners_and_awards|length %}
   
-  <div class="partners partners--restrict">
-    <ul class="partners__list">
+  <div class="m-partners m-partners--restrict">
+    <ul class="m-partners__list">
       {% for item in partners_and_awards %}
       
         {% set image_field = (color == 'white') ? 'white_image' : 'black_image' %}
         
-        <li class="partners__item partners__item--{{ item.width }}">
-          {% if item.link %}<a href="{{ item.link }}" class="partners__item__inner" target="_blank" rel="noopener external">{% endif %}
-          {% if not item.link %}<div class="partners__item__inner">{% endif %}
-            <span class="accessible-hide">{{ item.text }}</span>
+        <li class="m-partners__item m-partners__item--{{ item.width }}">
+          {% if item.link %}<a href="{{ item.link }}" class="m-partners__item__inner" target="_blank" rel="noopener external">{% endif %}
+          {% if not item.link %}<div class="m-partners__item__inner">{% endif %}
+            <span class="m-accessible-hide">{{ item.text }}</span>
             {%
               include 'partial/image.twig' with {
                 image: item[image_field],

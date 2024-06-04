@@ -1,10 +1,10 @@
-.fact {
+.m-fact {
   margin: 0;
   padding: 0;
   text-align: center;
 }
 
-.fact__title {
+.m-fact__title {
   display: block;
   margin: 0 0 spacing(small) 0;
   @include font-bold();
@@ -15,7 +15,7 @@
   }
 }
 
-.fact__chart {
+.m-fact__chart {
   display: block;
   
   &:not(:last-child) {
@@ -27,22 +27,22 @@
   }
 }
 
-.fact__chart__bg {
+.m-fact__chart__bg {
   fill: none;
   stroke: #eee;
   stroke-width: 3.8;
 }
 
-.fact__chart__circle {
+.m-fact__chart__circle {
   fill: none;
   stroke-width: 2.8;
   stroke-linecap: round;
   animation-delay: 0.25s;
-  animation: fact-chart-circle 1s ease-out forwards;
+  animation: m-fact-chart-circle 1s ease-out forwards;
   stroke: color(pink);
 }
 
-.fact__chart__value {
+.m-fact__chart__value {
   display: block;
   fill: color(pink);
   font-family: sans-serif;
@@ -50,25 +50,25 @@
   text-anchor: middle;
 }
 
-.fact__description {
+.m-fact__description {
   display: block;
   @include font-default();
   @include font-size-small();
 }
 
-html.js .fact[data-intersection-observer] {
+html.js .m-fact[data-intersection-observer] {
   opacity: 0;
   transition: opacity 0.25s ease;
   
-  .fact__chart__circle {
+  .m-fact__chart__circle {
     animation: none;
   }
 }
 
-html.js .fact[data-intersection-observer="visible"] {
+html.js .m-fact[data-intersection-observer="visible"] {
   opacity: 1;
   
-  .fact__chart__circle {
-    animation: fact-chart-circle 1s ease-out forwards;
+  .m-fact__chart__circle {
+    animation: m-fact-chart-circle 1s ease-out forwards;
   }
 }

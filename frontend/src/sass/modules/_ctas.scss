@@ -1,8 +1,8 @@
-.m-facts {
+.m-ctas {
   text-align: center;
 }
 
-.m-facts__title {
+.m-ctas__title {
   margin: 0;
   padding: 0;
   @include font-default();
@@ -13,7 +13,7 @@
   }
 }
 
-.m-facts__subtitle {
+.m-ctas__subtitle {
   margin: 0;
   padding: 0;
   
@@ -26,13 +26,23 @@
   }
 }
 
-.m-facts__items {
+.m-ctas__buttons {
+  margin: 0;
+  
+  @include mq(wide) {
+    display: flex;
+    justify-content: center;
+  }
+}
+
+.m-ctas__button {
+  margin: 0;
   
   &:not(:last-child) {
-    margin: 0 0 spacing(medium) 0;
+    margin: 0 0 spacing(default) 0;
     
     @include mq(wide) {
-      margin: 0 0 spacing(large) 0;
+      margin: 0 spacing(default) 0 0;
     }
   }
 }

@@ -6,7 +6,7 @@ $grid-col: math.div(100, 12);
   width: (($grid-col * $cols) * 1%);
 }
 
-.grid {
+.m-grid {
   margin-left: -#{spacing(default)};
   zoom: 1;
 
@@ -20,7 +20,7 @@ $grid-col: math.div(100, 12);
   }
 }
 
-.grid__inner {
+.m-grid__inner {
   margin: 0 0 -#{spacing(default)} 0;
   padding: 0;
   list-style: none;
@@ -39,7 +39,7 @@ $grid-col: math.div(100, 12);
   }
 }
 
-.grid__col {
+.m-grid__col {
   padding-left: spacing(default);
   width: 100%;
   margin-bottom: spacing(default);
@@ -52,53 +52,53 @@ $grid-col: math.div(100, 12);
   }
 }
 
-.grid__col__inner {
+.m-grid__col__inner {
   width: 100%;
 }
 
-.grid--medium {
+.m-grid--medium {
   margin-left: -#{spacing(medium)};
   
-  .grid__inner {
+  .m-grid__inner {
     margin: 0 0 -#{spacing(medium)} 0;
   }
   
-  .grid__col {
+  .m-grid__col {
     padding-left: spacing(medium);
     margin-bottom: spacing(medium);
   }
 }
 
-.grid--large {
+.m-grid--large {
   margin-left: -#{spacing(large)};
   
-  .grid__inner {
+  .m-grid__inner {
     margin: 0 0 -#{spacing(large)} 0;
   }
   
-  .grid__col {
+  .m-grid__col {
     padding-left: spacing(large);
     margin-bottom: spacing(large);
   }
 }
 
-.grid--horizontal-center {
+.m-grid--horizontal-center {
 
-  > .grid__inner {
+  > .m-grid__inner {
     justify-content: center;
   }
 }
 
-.grid--vertical-center {
+.m-grid--vertical-center {
   
-  > .grid__inner {
+  > .m-grid__inner {
     align-items: center;
   }
 }
 
 @for $i from 1 through 12 {
 
-  .grid__col--#{$i} {
+  .m-grid__col--#{$i} {
     @include grid-column($cols: $i);
   }
 }
@@ -109,7 +109,7 @@ $grid-col: math.div(100, 12);
 
     @for $i from 1 through 12 {
 
-      .grid__col--#{$i}-#{$name} {
+      .m-grid__col--#{$i}-#{$name} {
         @include grid-column($cols: $i);
       }
     }

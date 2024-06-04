@@ -1,4 +1,4 @@
-.dialog-open-video {
+.m-dialog-open-video {
   display: block;
   width: 100%;
   -webkit-appearance: none;
@@ -11,11 +11,11 @@
   text-align: left;
 }
 
-.dialog-open-video * {
+.m-dialog-open-video * {
   pointer-events: none;
 }
 
-.dialog {
+.m-dialog {
   width: 100%;
   height: 100%;
   top: 0;
@@ -30,33 +30,33 @@
 
 @media screen and (min-width: 768px) {
   
-  .dialog {
+  .m-dialog {
     padding: 40px;
   }
 }
 
-.dialog::backdrop {
+.m-dialog::backdrop {
   background: rgba(0, 0, 0, 0.5);
 }
 
-.dialog__inner {
+.m-dialog__inner {
   background: #fff;
   padding: 40px;
   margin: 0 auto;
   max-width: 1200px;
 }
 
-.dialog__header {
+.m-dialog__header {
   position: relative;
   margin: 0 0 40px 0;
   padding: 0 84px 0 0;
 }
 
-.dialog__title {
+.m-dialog__title {
   
 }
 
-.dialog__header__close {
+.m-dialog__header__close {
   border: 0;
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -75,8 +75,8 @@
   background: #fff;
 }
 
-.dialog__header__close:before,
-.dialog__header__close:after {
+.m-dialog__header__close:before,
+.m-dialog__header__close:after {
   content: '';
   display: block;
   width: 30px;
@@ -89,31 +89,31 @@
   transform: rotate(45deg);
 }
 
-.dialog__header__close:after {
+.m-dialog__header__close:after {
   transform: rotate(-45deg);
 }
 
-.dialog__header__close * {
+.m-dialog__header__close * {
   pointer-events: none;
 }
 
-.dialog__header__close:hover:before,
-.dialog__header__close:hover:after {
+.m-dialog__header__close:hover:before,
+.m-dialog__header__close:hover:after {
   background: #ff0088;
 }
 
-html:not(.prefers-reduce-motion) .dialog[open] .dialog__inner {
+html:not(.prefers-reduce-motion) .m-dialog[open] .m-dialog__inner {
   animation: dialog-slide-in .3s cubic-bezier(0, 0, .2, 1);
 }
 
-html:not(.prefers-reduce-motion) .dialog[open]::backdrop {
+html:not(.prefers-reduce-motion) .m-dialog[open]::backdrop {
   animation: dialog-fade-in .3s cubic-bezier(0.0, 0.0, 0.2, 1);
 }
 
-html.prefers-reduce-motion .dialog[open] {
+html.prefers-reduce-motion .m-dialog[open] {
   transform: translateY(0);
 }
 
-html.prefers-reduce-motion .dialog[open]::backdrop {
+html.prefers-reduce-motion .m-dialog[open]::backdrop {
   opacity: 1;
 }

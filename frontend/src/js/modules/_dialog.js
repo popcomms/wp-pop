@@ -69,7 +69,7 @@
     
     var isNative = targetName === 'native';
     
-    var html = isNative ? '<div class="video"><video controls preload="auto" autoplay><source src="' + targetData + '" type="video/mp4"></video></div>' : '<div class="video"><iframe allow="autoplay; encrypted-media" allowfullscreen src="' + targetData + '" loading="lazy" width="1280" height="720"title="' + targetTitle + ' (video)"></iframe></div>';
+    var html = isNative ? '<div class="m-video"><video controls preload="auto" autoplay><source src="' + targetData + '" type="video/mp4"></video></div>' : '<div class="m-video"><iframe allow="autoplay; encrypted-media" allowfullscreen src="' + targetData + '" loading="lazy" width="1280" height="720"title="' + targetTitle + ' (video)"></iframe></div>';
     
     injectDialog(html, targetTitle);
     
@@ -78,12 +78,12 @@
   function injectDialog(html, title) {
     
     var dialogHtml =
-    '<dialog class="dialog" data-dialog="injected">' +
-      '<div class="dialog__inner">' +
-        '<div class="dialog__header">' +
-          '<h2 class="dialog__title text-lg font-semibold leading-tight">' + title + '</h2>' +
-          '<button class="dialog__header__close" type="button" data-dialog-close>' +
-            '<span class="accessible-hide">Close dialog</span>' +
+    '<dialog class="m-dialog" data-dialog="injected">' +
+      '<div class="m-dialog__inner">' +
+        '<div class="m-dialog__header">' +
+          '<h2 class="m-dialog__title text-lg font-semibold leading-tight">' + title + '</h2>' +
+          '<button class="m-dialog__header__close" type="button" data-dialog-close>' +
+            '<span class="m-accessible-hide">Close dialog</span>' +
           '</button>' +
         '</div>' +
         '<div data-dialog-content>' + html + '</div>' +
