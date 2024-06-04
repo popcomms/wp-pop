@@ -2,21 +2,21 @@
 
 {% block content %}
   
-  <div class="m-m-facts">
+  <div class="m-facts">
     
     <div class="container-wide">
   
       {% if fields.heading_primary %}
-        <{{ fields.heading_primary_tag }} class="m-m-facts__title">{{ fields.heading_primary }}</{{ fields.heading_primary_tag }}>
+        <{{ fields.heading_primary_tag }} class="m-facts__title">{{ fields.heading_primary }}</{{ fields.heading_primary_tag }}>
       {% endif %}
       
       {% if fields.heading_secondary %}
-        <{{ fields.heading_secondary_tag }} class="m-m-facts__subtitle alpha">{{ fields.heading_secondary }}</{{ fields.heading_secondary_tag }}>
+        <{{ fields.heading_secondary_tag }} class="m-facts__subtitle alpha">{{ fields.heading_secondary }}</{{ fields.heading_secondary_tag }}>
       {% endif %}
       
       {% if fields.items|length %}
         
-        <div class="m-m-facts__items">
+        <div class="m-facts__items">
         
           <div class="m-grid m-grid--horizontal-center m-grid--medium">
             <ul class="m-grid__inner">

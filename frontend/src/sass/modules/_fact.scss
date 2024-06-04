@@ -38,7 +38,7 @@
   stroke-width: 2.8;
   stroke-linecap: round;
   animation-delay: 0.25s;
-  animation: m-fact-chart-circle 1s ease-out forwards;
+  animation: fact-chart-circle 1s ease-out forwards;
   stroke: color(pink);
 }
 
@@ -69,6 +69,6 @@ html.js .m-fact[data-intersection-observer="visible"] {
   opacity: 1;
   
   .m-fact__chart__circle {
-    animation: m-fact-chart-circle 1s ease-out forwards;
+    animation: fact-chart-circle 1s ease-out forwards;
   }
 }
