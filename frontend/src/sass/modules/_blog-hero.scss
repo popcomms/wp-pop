@@ -1,0 +1,27 @@
+.m-blog-hero__small-image,
+.m-blog-hero__large-image {
+  position: static;
+  
+  .m-image {
+    position: static;
+    padding-top: 0 !important;
+    
+    img {
+      object-fit: cover;
+    }
+  }
+}
+
+.m-blog-hero__small-image {
+  
+  @include mq(desktop) {
+    display: none;
+  }
+}
+
+.m-blog-hero__large-image {
+  
+  @include mq(0, desktop) {
+    display: none;
+  }
+}
