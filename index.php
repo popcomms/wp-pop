@@ -22,6 +22,10 @@ $context['post'] = $timber_post;
 $context['categories'] = Site_Posts::get_categories();
 $context['tags'] = Site_Posts::get_tags();
 $context['post_format'] = '';
+$context['banner_images'] = [
+  'small' => get_field('archives_post_banner_image_small', 'option'),
+  'large' => get_field('archives_post_banner_image_large', 'option')
+];
 
 $templates = array('index.twig');
 if (is_home()) { array_unshift( $templates, 'front-page.twig', 'home.twig'); }

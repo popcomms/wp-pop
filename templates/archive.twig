@@ -2,11 +2,12 @@
 
 {% block content %}
 <div class="relative content-wrapper">
-
+  
   {% include 'partial/blog-hero.twig' with {
     'breadcrumb': breadcrumb,
     'title': title,
-    'subtitle': description
+    'subtitle': description,
+    'banner_images': banner_images
   } %}
 
 	<div class="grid grid-cols-1 lg:grid-cols-3 gap-6 w-full max-w-4xl mx-auto p-6">
