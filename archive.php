@@ -47,6 +47,10 @@ if ( is_day() ) {
 $post_format = '';
 $post_type = !empty(get_post_type()) ? get_post_type() : get_query_var('post_type');
 $case_studies_archive = ($post_type === 'case-studies');
+$banner_images = [
+  'small' => get_field('archives_' . $post_type . '_banner_image_small', 'option'),
+  'large' => get_field('archives_' . $post_type . '_banner_image_large', 'option')
+];
 
 global $post, $wp_query;
 
@@ -58,6 +62,11 @@ if (
   $post_format = $wp_query->query['post_format'];
   array_unshift($templates, $post_format . '.twig');
   
+  $banner_images = [
+    'small' => get_field('archives_' . $post_format . '_banner_image_small', 'option'),
+    'large' => get_field('archives_' . $post_format . '_banner_image_large', 'option')
+  ];
+  
 }
 
 $context['categories'] = $case_studies_archive ? Site_Case_Studies::get_categories() : Site_Posts::get_categories($post_format);
@@ -67,6 +76,7 @@ $context['current_category'] = is_category() ? get_query_var('cat') : '';
 $context['current_tag'] = is_tag() ? get_query_var('tag_id') : '';
 $context['case_studies_archive'] = $case_studies_archive;
 $context['post_type'] = $post_type;
+$context['banner_images'] = $banner_images;
 
 if ($post_type === 'case-studies') {
   
