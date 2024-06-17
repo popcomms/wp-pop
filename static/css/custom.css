@@ -291,3 +291,35 @@ html.prefers-reduce-motion .dialog[open] {
 html.prefers-reduce-motion .dialog[open]::backdrop {
   opacity: 1;
 }
+
+/* blog hero */
+
+.m-blog-hero__small-image,
+.m-blog-hero__large-image {
+  position: static;
+}
+
+.m-blog-hero__small-image .image,
+.m-blog-hero__large-image .image {
+   position: static;
+   padding-top: 0 !important;
+}
+
+.m-blog-hero__small-image .image img,
+.m-blog-hero__large-image .image img {
+   object-fit: cover;
+}
+
+@media screen and (min-width: 769px) {
+  
+  .m-blog-hero__small-image {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  
+  .m-blog-hero__large-image {
+    display: none;
+  }
+}
