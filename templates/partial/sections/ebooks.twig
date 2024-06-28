@@ -1,0 +1,59 @@
+{% extends 'partial/sections/generic/wrapper.twig' %}
+
+{% block content %}
+  
+  <div class="m-ebooks">
+    
+    <div class="container-wide">
+  
+      {% if fields.heading_primary %}
+        <{{ fields.heading_primary_tag }} class="m-ebooks__title">{{ fields.heading_primary }}</{{ fields.heading_primary_tag }}>
+      {% endif %}
+      
+      {% if fields.heading_secondary %}
+        <{{ fields.heading_secondary_tag }} class="m-ebooks__subtitle alpha">{{ fields.heading_secondary }}</{{ fields.heading_secondary_tag }}>
+      {% endif %}
+      
+      {% if fields.items|length %}
+        
+        <div class="m-ebooks__items">
+        
+          <div class="m-grid m-grid--medium">
+            <ul class="m-grid__inner">
+              
+              {% for item in Post(fields.items) %}
+                <div class="m-grid__col m-grid__col--6-tablet m-grid__col--4-desktop">
+                  <div class="m-grid__col__inner">
+                    
+                    <div class="m-ebook">
+                      <a href="{{ item.link }}" class="m-ebook__link">
+                    
+                        <p class="m-ebook__title">{{ item.title }}</p>
+
+                        <div class="m-image m-image--cover m-image--hover" style="padding-top: 100%;">
+                          {% if item.thumbnail %}
+                            <img src="{{ item.thumbnail.src }}" alt="{{ item.thumbnail.alt }}" loading="lazy" />
+                          {% else %}
+                            <img src="{{ theme.link }}/static/images/blogs-bg.png" alt="" loading="lazy" />
+                          {% endif %}
+                        </div>
+                        
+                      </a>
+                    </div>
+  
+                  </div>
+                </div>
+              {% endfor %}
+              
+            </ul>
+          </div>
+          
+        </div>
+      
+      {% endif %}
+      
+    </div>
+    
+  </div>
+
+{% endblock %}

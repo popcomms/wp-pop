@@ -10,3 +10,25 @@
     display: block;
   }
 }
+
+.m-image--cover {
+  
+  img {
+    object-fit: cover;
+  }
+}
+
+.m-image--hover {
+  overflow: hidden;
+
+  img {
+    transition: transform 0.25s ease, opacity 0.5s ease
+  }
+
+  @include hover {
+
+    img {
+      transform: scale(1.025);
+    }
+  }
+}
