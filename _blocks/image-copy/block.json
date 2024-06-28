@@ -1,0 +1,13 @@
+{
+  "name": "acf/image-copy",
+  "title": "Image copy",
+  "description": "",
+  "category": "general",
+  "icon": "align-pull-left",
+  "acf": {
+    "mode": "edit"
+  },
+  "supports": {
+    "align": false
+  }
+}

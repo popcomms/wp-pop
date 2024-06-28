@@ -1,19 +1,19 @@
 {% if navigation.footer|length %}
     
-  <nav class="footer-nav{% if function('get_field', 'emphasise_items_other_than_the_first', 'option') %} footer-nav--emphasise{% endif %}">
-    <ul class="footer-nav__list">
+  <nav class="m-footer-nav{% if function('get_field', 'emphasise_items_other_than_the_first', 'option') %} m-footer-nav--emphasise{% endif %}">
+    <ul class="m-footer-nav__list">
       {% for item in navigation.footer %}
-        <li class="footer-nav__item">
-          {% if item.link %}<a href="{{ item.link }}" class="footer-nav__link"{% if item.external %} target="_blank" rel="noopener external"{% endif %}>{% endif %}
-          {% if not item.link %}<span class="footer-nav__link">{% endif %}
+        <li class="m-footer-nav__item">
+          {% if item.link %}<a href="{{ item.link }}" class="m-footer-nav__link"{% if item.external %} target="_blank" rel="noopener external"{% endif %}>{% endif %}
+          {% if not item.link %}<span class="m-footer-nav__link">{% endif %}
             {{ item.text }}
           {% if not item.link %}</span>{% endif %}
           {% if item.link %}</a>{% endif %}
           {% if item.children|length %}
-            <ul class="footer-nav__list footer-nav__list--secondary">
+            <ul class="m-footer-nav__list m-footer-nav__list--secondary">
               {% for child in item.children %}
-                <li class="footer-nav__item">
-                  <a href="{{ child.link }}" class="footer-nav__link"{% if child.external %} target="_blank" rel="noopener external"{% endif %}>{{ child.text }}</a>
+                <li class="m-footer-nav__item">
+                  <a href="{{ child.link }}" class="m-footer-nav__link"{% if child.external %} target="_blank" rel="noopener external"{% endif %}>{{ child.text }}</a>
                 </li>
               {% endfor %}
             </ul>

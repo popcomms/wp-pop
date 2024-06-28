@@ -1,0 +1,126 @@
+@use 'sass:math';
+
+@mixin hide() {
+  position: absolute;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  width: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0;
+}
+
+@mixin show() {
+  position: static;
+  overflow: visible;
+  clip: auto;
+  height: auto;
+  width: auto;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+@mixin font-default() {
+  font-family: 'Poppins', Arial, sans-serif;
+  font-weight: 300;
+}
+
+@mixin font-bold() {
+  font-family: 'Poppins', Arial, sans-serif;
+  font-weight: 700;
+}
+
+@function calculate-rem($a) {
+  $b: math.div($a, 16px);
+  @return $b * 1rem;
+}
+
+@mixin font-size($a) {
+  font-size: $a;
+  font-size: calculate-rem($a);
+}
+
+@mixin line-height($a) {
+  line-height: $a;
+  line-height: calculate-rem($a);
+}
+
+@mixin font-size-default() {
+  @include font-size(16px);
+  
+  @include mq(wide) {
+    @include font-size(21px)
+  }
+}
+
+@mixin font-size-small() {
+  @include font-size(16px);
+}
+
+@mixin ratio($width, $height, $important: false, $value: 'padding-top') {
+  @if $important {
+    #{$value}: (math.div($height, $width) * 100) * 1% !important;
+  } @else {
+    #{$value}: (math.div($height, $width) * 100) * 1%;
+  }
+}
+
+@mixin mq($from: false, $to: false) {
+
+  $width_from: $from;
+  $width_to: $to;
+
+  @if $width_from {
+
+    @if map-has-key($breakpoints, $from) {
+      $width_from: map-get($breakpoints, $from) + px;
+    }
+
+  }
+
+  @if $width_to {
+
+    @if map-has-key($breakpoints, $to) {
+      $width_to: (map-get($breakpoints, $to) - 1) + px;
+    }
+
+  }
+
+  @if $width_from and $width_to {
+
+    @media screen and (min-width: $width_from) and (max-width: $width_to) {
+      @content;
+    }
+
+  } @else if $width_from {
+
+    @media screen and (min-width: $width_from) {
+      @content;
+    }
+
+  } @else if $width_to {
+
+    @media screen and (max-width: $width_to) {
+      @content;
+    }
+
+  }
+}
+
+@function color($key) {
+  @if map-has-key($colors, $key) {
+    @return map-get($colors, $key);
+  } @else {
+    @return $key;
+  }
+}
+
+@function spacing($key) {
+  @if map-has-key($spacings, $key) {
+    @return map-get($spacings, $key);
+  } @else {
+    @return $key;
+  }
+}

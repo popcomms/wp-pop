@@ -2,7 +2,7 @@
 
 {% block content %}
 <div class="relative content-wrapper">
-
+  
   {% include 'partial/blog-hero.twig' with {
     'breadcrumb': breadcrumb,
     'title': title,
@@ -18,9 +18,11 @@
         </div>
       {% endfor %}
     </div>
-    <div class="lg:pl-6">
-      {% include "sidebar.twig" with { 'categories': categories, 'tags': tags, post_format: post_format, post_type: post_type, current_category: current_category } %}
-    </div>
+    {% if post_type != 'site_ebook' %}
+      <div class="lg:pl-6">
+        {% include "sidebar.twig" with { 'categories': categories, 'tags': tags, post_format: post_format, post_type: post_type, current_category: current_category } %}
+      </div>
+    {% endif %}
   </div>
 
 </div>

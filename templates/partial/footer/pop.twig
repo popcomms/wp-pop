@@ -10,15 +10,15 @@
 
 <p class="font-semibold my-8">POP</p>
 {% if address %}
-  <address class="address">
+  <address class="m-address">
     {{ address }}
   </address>
 {% endif %}
 <br><br>
 <a href="{{ telephone_number_for_links }}" class="hover:opacity-50">
-  <span class="accessible-hide">Call us on: </span>{{ telephone_number }}
+  <span class="m-accessible-hide">Call us on: </span>{{ telephone_number }}
 </a>
 <br>
 <a href="mailto:{{ email_address }}" class="underline hover:opacity-50">
-  <span class="accessible-hide">Email us at: </span>{{ email_address }}
+  <span class="m-accessible-hide">Email us at: </span>{{ email_address }}
 </a>

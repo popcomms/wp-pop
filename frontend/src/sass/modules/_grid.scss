@@ -1,0 +1,117 @@
+@use 'sass:math';
+
+$grid-col: math.div(100, 12);
+
+@mixin grid-column($cols) {
+  width: (($grid-col * $cols) * 1%);
+}
+
+.m-grid {
+  margin-left: -#{spacing(default)};
+  zoom: 1;
+
+  &:before, &:after {
+    display: table;
+    content: '';
+  }
+
+  &:after {
+    clear: both;
+  }
+}
+
+.m-grid__inner {
+  margin: 0 0 -#{spacing(default)} 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  float: left;
+  width: 100%;
+
+  &:before, &:after {
+    display: table;
+    content: '';
+  }
+
+  &:after {
+    clear: both;
+  }
+}
+
+.m-grid__col {
+  padding-left: spacing(default);
+  width: 100%;
+  margin-bottom: spacing(default);
+  flex-shrink: 1;
+  display: flex;
+
+  .safari & {
+    margin-left: -1px;
+    margin-right: -1px;
+  }
+}
+
+.m-grid__col__inner {
+  width: 100%;
+}
+
+.m-grid--medium {
+  margin-left: -#{spacing(medium)};
+  
+  .m-grid__inner {
+    margin: 0 0 -#{spacing(medium)} 0;
+  }
+  
+  .m-grid__col {
+    padding-left: spacing(medium);
+    margin-bottom: spacing(medium);
+  }
+}
+
+.m-grid--large {
+  margin-left: -#{spacing(large)};
+  
+  .m-grid__inner {
+    margin: 0 0 -#{spacing(large)} 0;
+  }
+  
+  .m-grid__col {
+    padding-left: spacing(large);
+    margin-bottom: spacing(large);
+  }
+}
+
+.m-grid--horizontal-center {
+
+  > .m-grid__inner {
+    justify-content: center;
+  }
+}
+
+.m-grid--vertical-center {
+  
+  > .m-grid__inner {
+    align-items: center;
+  }
+}
+
+@for $i from 1 through 12 {
+
+  .m-grid__col--#{$i} {
+    @include grid-column($cols: $i);
+  }
+}
+
+@each $name, $value in $breakpoints {
+
+  @media (min-width: $value + px) {
+
+    @for $i from 1 through 12 {
+
+      .m-grid__col--#{$i}-#{$name} {
+        @include grid-column($cols: $i);
+      }
+    }
+  }
+}

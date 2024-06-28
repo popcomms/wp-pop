@@ -1,0 +1,13 @@
+{
+  "name": "acf/video-banner",
+  "title": "Video banner",
+  "description": "",
+  "category": "general",
+  "icon": "format-video",
+  "acf": {
+    "mode": "edit"
+  },
+  "supports": {
+    "align": false
+  }
+}

@@ -1,0 +1,38 @@
+.m-image-copy {
+}
+
+.m-image-copy__title {
+  margin: 0;
+  padding: 0;
+  @include font-default();
+  @include font-size-default();
+  
+  &:not(:last-child) {
+    margin: 0 0 5px 0;
+  }
+}
+
+.m-image-copy__subtitle {
+  margin: 0;
+  padding: 0;
+  
+  &:not(:last-child) {
+    margin: 0 0 spacing(medium) 0;
+    
+    @include mq(wide) {
+      margin: 0 0 spacing(large) 0;
+    }
+  }
+}
+
+.m-image-copy__copy {
+  margin: 0;
+  
+  &:not(:last-child) {
+    margin: 0 0 spacing(default) 0;
+  }
+}
+
+.m-image-copy__button {
+  margin: 0;
+}

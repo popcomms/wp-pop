@@ -9,6 +9,7 @@
       add_action('admin_menu', array($this, 'remove_duplicate_admin_menu'), 100);
       add_action('init', array($this, 'create_logo_collections'));
       add_action('init', array($this, 'create_callouts'));
+      add_action('init', array($this, 'create_videos'));
   
     }
   
@@ -99,6 +100,28 @@
         'menu_icon' => 'dashicons-feedback'
       ));
     
+    }
+    
+    public function create_videos() {
+      
+      register_post_type('site_video', array(
+        'labels' => array(
+          'name' => 'Videos',
+          'singular_name' => 'Videos',
+          'add_new' => 'Add video',
+          'add_new_item' => 'Add video',
+          'edit_item' => 'Edit video'
+        ),
+        'public' => false,
+        'show_in_nav_menus' => true,
+        'show_in_menu' => 'shared',
+        'show_ui' => true,
+        'has_archive' => false,
+        'publicaly_queryable' => true,
+        'query_var' => false,
+        'menu_icon' => 'dashicons-format-video'
+      ));
+      
     }
   
   }

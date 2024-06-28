@@ -241,8 +241,11 @@ require_once('acf-field-groups/_all.php');
 
 require_once('inc/classes/helpers.php');
 require_once('inc/classes/global-settings.php');
+require_once('inc/classes/gutenberg.php');
 require_once('inc/classes/navigation.php');
 require_once('inc/classes/posts.php');
 require_once('inc/classes/case-studies.php');
 require_once('inc/classes/shared.php');
 require_once('inc/classes/admin.php');
+require_once('inc/classes/ebooks.php');
+require_once('inc/classes/wysiwyg.php');

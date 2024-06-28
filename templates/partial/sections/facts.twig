@@ -1,0 +1,54 @@
+{% extends 'partial/sections/generic/wrapper.twig' %}
+
+{% block content %}
+  
+  <div class="m-facts">
+    
+    <div class="container-wide">
+  
+      {% if fields.heading_primary %}
+        <{{ fields.heading_primary_tag }} class="m-facts__title">{{ fields.heading_primary }}</{{ fields.heading_primary_tag }}>
+      {% endif %}
+      
+      {% if fields.heading_secondary %}
+        <{{ fields.heading_secondary_tag }} class="m-facts__subtitle alpha">{{ fields.heading_secondary }}</{{ fields.heading_secondary_tag }}>
+      {% endif %}
+      
+      {% if fields.items|length %}
+        
+        <div class="m-facts__items">
+        
+          <div class="m-grid m-grid--horizontal-center m-grid--medium">
+            <ul class="m-grid__inner">
+              
+              {% for item in fields.items %}
+                <div class="m-grid__col m-grid__col--6-large-phone m-grid__col--4-desktop">
+                  <div class="m-grid__col__inner">
+                    <p class="m-fact" data-intersection-observer>
+                      <span class="m-fact__title">{{ item.title }}</span>
+                      <svg viewBox="0 0 36 36" class="m-fact__chart">
+                        <path class="m-fact__chart__bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
+                        />
+                        <path class="m-fact__chart__circle" stroke-dasharray="{{ item.value }}, 100"
+                          d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
+                        />
+                        <text x="18" y="20.35" class="m-fact__chart__value">{{ item.value }}%</text>
+                      </svg>
+                      <span class="m-fact__description">{{ item.description }}</span>
+                    </p>
+                  </div>
+                </div>
+              {% endfor %}
+              
+            </ul>
+          </div>
+          
+        </div>
+      
+      {% endif %}
+      
+    </div>
+    
+  </div>
+
+{% endblock %}

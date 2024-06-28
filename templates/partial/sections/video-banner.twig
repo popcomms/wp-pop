@@ -1,0 +1,47 @@
+{% extends 'partial/sections/generic/wrapper.twig' %}
+
+{% block content %}
+  
+  <div class="m-video-banner" data-m-video-banner>
+    
+    <div class="m-video-banner__content">
+      
+      <div class="container-wide">
+      
+        {% if fields.heading_primary %}
+          <{{ fields.heading_primary_tag }} class="m-video-banner__title">{{ fields.heading_primary }}</{{ fields.heading_primary_tag }}>
+        {% endif %}
+        
+        {% if fields.heading_secondary %}
+          <{{ fields.heading_secondary_tag }} class="m-video-banner__subtitle alpha">{{ fields.heading_secondary }}</{{ fields.heading_secondary_tag }}>
+        {% endif %}
+        
+        {% if fields.button %}
+          <p class="m-video-banner__button">
+            {%
+              include 'partial/generic-button.twig' with {
+                button: fields.button,
+                class: fields.button_class ? fields.button_class : ''
+              }
+            %}
+          </p>
+        {% endif %}
+        
+      </div>
+      
+    </div>
+    
+    {% if fields.video %}
+    
+      {%
+        include 'partial/autoplay-video.twig' with {
+          video: Post(fields.video),
+          class: 'm-video-banner__video'
+        }
+      %}
+      
+    {% endif %}
+    
+  </div>
+
+{% endblock %}

@@ -1,0 +1,60 @@
+.m-footer-nav {
+  padding: 2rem 0 0 0;
+}
+
+.m-footer-nav__list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.m-footer-nav__list--secondary {
+  padding: 2rem 0 0 0;
+}
+
+.m-footer-nav__item {
+  margin: 0;
+  padding: 0;
+}
+
+.m-footer-nav__item:not(:last-child) {
+  margin: 0 0 2rem 0;
+}
+
+.m-footer-nav__list--secondary .m-footer-nav__item:not(:last-child) {
+  margin: 0 0 0.5rem 0;
+}
+
+.m-footer-nav__item:before {
+  display: none;
+}
+
+a.m-footer-nav__link {
+  text-decoration: underline;
+}
+
+a.m-footer-nav__link:hover {
+  opacity: 0.5;
+}
+
+.m-footer-nav--emphasise > .m-footer-nav__list > .m-footer-nav__item:not(:first-child) > .m-footer-nav__link {
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.m-footer-nav--emphasise > .m-footer-nav__list > .m-footer-nav__item:not(:first-child) .m-footer-nav__list--secondary {
+  padding: 0.5rem 0 0 0;
+}
+
+
+@media screen and (max-width: 375px) {
+  
+  .m-footer-nav__link {
+    display: inline-block;
+    padding: 0.25rem 0; 
+  }
+  
+  .m-footer-nav--emphasise > .m-footer-nav__list > .m-footer-nav__item:first-child > .m-footer-nav__link {
+    font-size: 1rem;
+  }
+}

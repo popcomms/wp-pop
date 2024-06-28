@@ -4,3 +4,10 @@
 .post-type-site_callout #postdivrich {
   display: none !important;
 }
+
+/* Block styling */
+
+.acf-block-fields > .acf-field-message:first-child {
+  background: #2d2d2d;
+  color: #fff;
+}

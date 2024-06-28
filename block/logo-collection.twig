@@ -27,7 +27,7 @@
               {% if item.link %}
                 {% set external = (site.url not in item.link.url) and ('#' not in item.link.url) %}
                 <a class="transition-opacity hover:opacity-50" href="{{ item.link.url }}"{% if item.link.target %} target="{{ item.link.target }}"{% endif %}{% if external %} rel="noopener external"{% endif %}>
-                  {% if item.link.title %}<span class="accessible-hide">{{ item.link.title }}</span>{% endif %}
+                  {% if item.link.title %}<span class="m-accessible-hide">{{ item.link.title }}</span>{% endif %}
               {% endif %}
                   <img
                     class="w-full object-contain"

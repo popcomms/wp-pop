@@ -27,13 +27,15 @@
     <script>
       (function() {
         var html = document.getElementsByTagName('html')[0];
+        var ua = window.navigator.userAgent.toLowerCase();
         html.classList.remove('no-js');
         html.classList.add('js');
         if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) html.classList.add('prefers-reduce-motion');
+        if ((ua.indexOf('safari') > -1) && (ua.toLowerCase().indexOf('chrome') == -1)) html.classList.add('safari');
       })();
     </script>
     <style>
-      {{ include('/static/css/custom.css') }}
+      {{ include('/frontend/dist/css/main.min.css') }}
     </style>
     <!-- Hotjar Tracking Code for https://www.popcomms.com/ -->
     <script>

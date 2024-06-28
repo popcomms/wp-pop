@@ -1,0 +1,40 @@
+.m-partners {
+  
+}
+
+.m-partners__list {
+  margin: -2rem -1.5rem 0 -1.5rem;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.m-partners__item {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  padding: 2rem 1.5rem 0 1.5rem;
+}
+
+.m-partners__item--half {
+  width: 50%;
+}
+
+.m-partners__item__inner {
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  display: flex;
+}
+
+.m-partners__item:before {
+  display: none;
+}
+
+@media screen and (max-width: 767px) {
+  
+  .m-partners--restrict {
+    max-width: 250px;
+  }
+}
