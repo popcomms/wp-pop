@@ -1,0 +1,13 @@
+{
+  "name": "acf/ebooks",
+  "title": "Ebooks",
+  "description": "",
+  "category": "general",
+  "icon": "media-document",
+  "acf": {
+    "mode": "edit"
+  },
+  "supports": {
+    "align": false
+  }
+}

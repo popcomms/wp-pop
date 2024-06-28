@@ -27,6 +27,11 @@
   font-weight: 300;
 }
 
+@mixin font-medium() {
+  font-family: 'Poppins', Arial, sans-serif;
+  font-weight: 600;
+}
+
 @mixin font-bold() {
   font-family: 'Poppins', Arial, sans-serif;
   font-weight: 700;
@@ -122,5 +127,19 @@
     @return map-get($spacings, $key);
   } @else {
     @return $key;
+  }
+}
+
+@mixin hover {
+  
+  @media not all and (hover: none) {
+    
+    &:hover {
+      @content;
+    }
+  }
+  
+  .edge &:hover {
+    @content;
   }
 }

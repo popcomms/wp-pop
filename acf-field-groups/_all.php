@@ -15,6 +15,7 @@
     require_once('blocks/facts.php');
     require_once('blocks/image-copy.php');
     require_once('blocks/ctas.php');
+    require_once('blocks/ebooks.php');
     
   }
   

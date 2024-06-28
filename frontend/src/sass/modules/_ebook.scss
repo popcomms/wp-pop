@@ -1,0 +1,33 @@
+.m-ebook {
+  
+  
+}
+
+.m-ebook__link {
+  display: block;
+  position: relative;
+  
+  @include hover {
+    
+    .m-image--hover {
+      
+      img {
+        transform: scale(1.025);
+      } 
+    }
+  }
+}
+
+.m-ebook__title {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: color(purple);
+  color: color(white);
+  @include font-medium();
+  padding: 10px 15px;
+  z-index: 1;
+  margin: 0;
+  @include font-size-small();
+}
