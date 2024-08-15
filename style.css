@@ -4500,6 +4500,11 @@ select:-webkit-autofill:focus {
   opacity: 0;
 }
 
+.child-p-my-0 p {
+	margin-top: 0;
+	margin-bottom: 0;
+}
+
 /* @import 'turbine.css'; */
 
 @media (min-width: 640px) {
