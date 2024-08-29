@@ -1,1 +1,1 @@
-<div data-video="autoplay" data-video-small-source="{{ video.get_field('small_source') }}" data-video-large-source="{{ video.get_field('large_source') }}"{% if class %} class="{{ class }}"{% endif %}></div>
+<div data-video="autoplay" data-video-small-source="{{ video.get_field('small_source') }}" data-video-large-source="{{ video.get_field('large_source') }}"{% if class %} class="{{ class }}"{% endif %}{% if deferPlay %} data-video-defer{% endif %}></div>
