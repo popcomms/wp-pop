@@ -152,6 +152,42 @@
         'append' => ''
       ),
       array(
+        'key' => $field_prefix . 'telephone_number_two',
+        'label' => 'Telephone number two',
+        'name' => 'telephone_number_two',
+        'type' => 'text',
+        'instructions' => '',
+        'required' => 0,
+        'conditional_logic' => 0,
+        'wrapper' => array(
+          'width' => '',
+          'class' => '',
+          'id' => '',
+        ),
+        'default_value' => '',
+        'placeholder' => '',
+        'prepend' => '',
+        'append' => ''
+      ),
+      array(
+        'key' => $field_prefix . 'telephone_number_for_links_two',
+        'label' => 'Telephone number two (for links)',
+        'name' => 'telephone_number_for_links_two',
+        'type' => 'text',
+        'instructions' => 'Enter the telephone number in a suitable format for HTML anchor elements.',
+        'required' => 1,
+        'conditional_logic' => 0,
+        'wrapper' => array(
+          'width' => '',
+          'class' => '',
+          'id' => '',
+        ),
+        'default_value' => '',
+        'placeholder' => '',
+        'prepend' => '',
+        'append' => ''
+      ),
+      array(
         'key' => $field_prefix . 'linkedin_link',
         'label' => 'LinkedIn link',
         'name' => 'linkedin_link',

@@ -2,6 +2,8 @@
 {% set email_address = function('get_field', 'email_address', 'option') %}
 {% set telephone_number = function('get_field', 'telephone_number', 'option') %}
 {% set telephone_number_for_links = function('get_field', 'telephone_number_for_links', 'option') %}
+{% set telephone_number_two = function('get_field', 'telephone_number_two', 'option') %}
+{% set telephone_number_for_links_two = function('get_field', 'telephone_number_for_links_two', 'option') %}
 
 {% set address = address ? address : '155 Whiteladies Road<br>Bristol. BS8 2RF' %}
 {% set email_address = email_address ? email_address : 'hello@popcomms.com' %}
@@ -19,6 +21,12 @@
   <span class="m-accessible-hide">Call us on: </span>{{ telephone_number }}
 </a>
 <br>
+{% if telephone_number_two and telephone_number_for_links_two %}
+  <a href="{{ telephone_number_for_links_two }}" class="hover:opacity-50">
+    <span class="m-accessible-hide">Call us on: </span>{{ telephone_number_two }}
+  </a>
+  <br>
+{% endif %}
 <a href="mailto:{{ email_address }}" class="underline hover:opacity-50">
   <span class="m-accessible-hide">Email us at: </span>{{ email_address }}
 </a>
