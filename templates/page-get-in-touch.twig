@@ -1,0 +1,23 @@
+
+{% extends "base.twig" %}
+
+{% block content %}
+<div class="relative content-wrapper">
+	<div class="relative flex flex-column items-end pt-48 pb-16">
+    <div
+      class="absolute top-0 left-0 w-full h-full bg-center bg-cover no-repeat"
+      style="background-image: url({{ theme.link }}/static/images/blogs-bg.png);"
+    ></div>
+    <div
+      class="absolute top-0 left-0 w-full h-full bg-black bg-opacity-25"
+    ></div>
+    <div class="container-wide">
+      <h1 class="w-full text-4xl sm:text-5xl font-semibold text-white" style="text-shadow: 0 0.1rem 0.1rem rgba(0,0,0,0.4)">
+        {{ post.title }}
+      </h1>
+    </div>
+  </div>
+  <div class="entry-content container-wide ">
+    {{ post.content }}
+  </div>
+{% endblock %}
