@@ -580,13 +580,13 @@ strong {
   font-weight: 600;
 }
 
-ul li {
+.site-wrapper ul li:not(.wptb-in-element) {
   padding-left: 1.25rem;
   margin-top: 0.75rem;
   margin-bottom: 0.75rem;
 }
 
-ul li::before {
+.site-wrapper ul li:not(.wptb-in-element)::before {
     position: absolute;
     left: 0px;
     display: block;
@@ -656,38 +656,6 @@ h6, .h6 {
   font-size: .875rem;
 }
 
-/* @media only screen and (max-width: 640px) {
-    h1,
-    .h1 {
-      font-size: 36px;
-    }
-
-    h2,
-    .h2 {
-      font-size: 24px;
-    }
-
-    h3,
-    .h3 {
-      font-size: 28px;
-    }
-
-    h4,
-    .h4 {
-
-    }
-
-    h5,
-    .h5 {
-      font-size: 21px;
-    }
-
-    h6,
-    .h6 {
-
-    }
-  } */
-
 @media only screen and (min-width: 1024px) {
   h1, .h1 {
     font-size: 2.625rem;
@@ -713,77 +681,6 @@ h6, .h6 {
     font-size: 1rem;
   }
 }
-
-/*@media only screen and (min-width: 1280px) {
-    h1,
-    .h1 {
-      font-size: 64px;
-    }
-
-    h2,
-    .h2 {
-      font-size: 48px;
-    }
-
-    h3,
-    .h3 {
-      font-size: 36px;
-    }
-
-    h4,
-    .h4 {
-
-    }
-
-    h5,
-    .h5 {
-      font-size: 28px;
-    }
-
-    h6,
-    .h6 {
-
-    }
-  }
-
-  @media only screen and (min-width: 1536px) {
-    h1,
-    .h1 {
-      font-size: 64px;
-    }
-
-    h2,
-    .h2 {
-      font-size: 48px;
-    }
-
-    h3,
-    .h3 {
-      font-size: 36px;
-    }
-
-    h4,
-    .h4 {
-
-    }
-
-    h5,
-    .h5 {
-      font-size: 28px;
-    }
-
-    h6,
-    .h6 {
-
-    }
-  } */
-
-/* article p,
-  article li,
-  article pre {
-    @apply text-xl font-normal;
-    line-height: 140%;
-  } */
 
 /* --------------------
   Tables
@@ -1469,8 +1366,8 @@ hr.wp-block-separator {
   pointer-events: none;
 }
 
-.visible {
-  visibility: visible;
+.static {
+  position: static;
 }
 
 .fixed {
@@ -4326,11 +4223,6 @@ select:-webkit-autofill:focus {
   }
 }
 
-.video-format-banner iframe {
-  /* width: 100%;
-  min-height: 75vh; */
-}
-
 .post .entry-content h2,
     .post .entry-content h3,
     .post .entry-content h4,
@@ -4368,38 +4260,6 @@ select:-webkit-autofill:focus {
         --tw-text-opacity: 1;
         color: rgba(59, 130, 246, var(--tw-text-opacity));
       }
-
-/* h2 {
-      @apply block;
-      @apply text-3xl;
-      @apply font-semibold;
-      @apply leading-tight;
-    }
-    h3 {
-      @apply block;
-      @apply text-2xl;
-      @apply font-semibold;
-      @apply leading-tight;
-    }
-    h4 {
-      @apply block;
-      @apply text-xl;
-      @apply font-semibold;
-      @apply leading-tight;
-    }
-    h5 {
-      @apply block;
-      @apply text-lg;
-      @apply font-semibold;
-      @apply leading-tight;
-    }
-    h6 {
-      @apply block;
-      @apply text-base;
-      @apply font-semibold;
-      @apply leading-tight;
-
-    } */
 
 .post .entry-content .wp-block-image, .page .entry-content .wp-block-image {
       margin-top: 3rem;
@@ -4499,13 +4359,6 @@ select:-webkit-autofill:focus {
   transform: translateY(-50%);
   opacity: 0;
 }
-
-.child-p-my-0 p {
-	margin-top: 0;
-	margin-bottom: 0;
-}
-
-/* @import 'turbine.css'; */
 
 @media (min-width: 640px) {
   

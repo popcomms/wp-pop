@@ -27,15 +27,18 @@
     @apply font-semibold;
   }
 
-  ul li {
+  .site-wrapper ul li:not(.wptb-in-element) {
     @apply pl-5;
     @apply my-3;
+
     &::before {
       @apply block absolute left-0 transform -translate-y-1/2 w-1.5 h-1.5 bg-pop-pink rounded-full;
       content: '';
       top: 0.75em;
     }
   }
+
+
 
   ol {
     list-style: decimal-leading-zero;
@@ -90,39 +93,6 @@
     @apply text-sm;
   }
 
-
-  /* @media only screen and (max-width: 640px) {
-    h1,
-    .h1 {
-      font-size: 36px;
-    }
-
-    h2,
-    .h2 {
-      font-size: 24px;
-    }
-
-    h3,
-    .h3 {
-      font-size: 28px;
-    }
-
-    h4,
-    .h4 {
-
-    }
-
-    h5,
-    .h5 {
-      font-size: 21px;
-    }
-
-    h6,
-    .h6 {
-
-    }
-  } */
-
   @media only screen and (min-width: 1024px) {
     h1,
     .h1 {
@@ -155,78 +125,6 @@
     }
   }
 
-
-  /*@media only screen and (min-width: 1280px) {
-    h1,
-    .h1 {
-      font-size: 64px;
-    }
-
-    h2,
-    .h2 {
-      font-size: 48px;
-    }
-
-    h3,
-    .h3 {
-      font-size: 36px;
-    }
-
-    h4,
-    .h4 {
-
-    }
-
-    h5,
-    .h5 {
-      font-size: 28px;
-    }
-
-    h6,
-    .h6 {
-
-    }
-  }
-
-  @media only screen and (min-width: 1536px) {
-    h1,
-    .h1 {
-      font-size: 64px;
-    }
-
-    h2,
-    .h2 {
-      font-size: 48px;
-    }
-
-    h3,
-    .h3 {
-      font-size: 36px;
-    }
-
-    h4,
-    .h4 {
-
-    }
-
-    h5,
-    .h5 {
-      font-size: 28px;
-    }
-
-    h6,
-    .h6 {
-
-    }
-  } */
-
-
-  /* article p,
-  article li,
-  article pre {
-    @apply text-xl font-normal;
-    line-height: 140%;
-  } */
 
   /* --------------------
   Tables
