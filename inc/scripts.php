@@ -31,7 +31,7 @@ function pop_enqueue_scripts() {
 	wp_enqueue_script(
     'main',
     get_template_directory_uri().'/static/main.js',
-    array('gsap','scrollTrigger','vue', 'lazyframe-js'),
+    array('gsap','scrollTrigger','vue','lazyframe-js'),
     '0.12',
     true
   );
@@ -49,7 +49,7 @@ function pop_enqueue_scripts() {
     'main',
     get_template_directory_uri().'/style.css',
     array(),
-    '1.44',
+    '1.45',
     'all'
   );
   wp_enqueue_style(
