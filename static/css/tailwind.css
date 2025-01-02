@@ -27,7 +27,7 @@
     @apply font-semibold;
   }
 
-  .site-wrapper ul li:not(.wptb-in-element) {
+  #site-wrapper ul li:not(.wptb-in-element) {
     @apply pl-5;
     @apply my-3;
 
