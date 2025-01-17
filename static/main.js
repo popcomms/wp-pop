@@ -1351,9 +1351,4 @@ document.addEventListener("DOMContentLoaded", function () {
         gsap.to(searchNav, { duration: 0.5, delay: 0.5, opacity: 1 })
       })
   }
-
-  let elements = document.querySelectorAll(".lazyframe");
-  if (elements) {
-    lazyframe(elements);
-  }
 })

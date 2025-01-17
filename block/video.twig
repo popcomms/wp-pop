@@ -2,11 +2,15 @@
   <p><strong>Text Block</strong> - I will only appear in the editor.</p>
 {% endif %}
 
-{% if not is_preview %}
+{% set video_data = fields.video ? function(['Site_Helpers', 'parse_iframe_video'], fields.video) : null %}
+
+{% if not is_preview and video_data and video_data.url %}
 
   <div class="container-wide relative" >
-
-    {% do action('pop_embed', fields.video) %}
+    
+    <div class="m-video">
+      <iframe loading="lazy" src="{{ video_data.url }}"></iframe>
+    </div>
 
     <div class="w-full border-l-4 border-pop-{{ theme == 'dark' ? 'white' : 'black' }} pl-4 text-sm">
       <p class="text-sm {{ theme_text_color }}">{{ fields.caption }}</p>
