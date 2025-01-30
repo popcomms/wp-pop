@@ -35,7 +35,7 @@ function pop_enqueue_scripts() {
     'main',
     get_template_directory_uri().'/style.css',
     array(),
-    '1.46',
+    '1.47',
     'all'
   );
   wp_enqueue_style(

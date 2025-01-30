@@ -580,13 +580,13 @@ strong {
   font-weight: 600;
 }
 
-.site-wrapper ul li:not(.wptb-in-element) {
+#site-wrapper ul li:not(.wptb-in-element) {
   padding-left: 1.25rem;
   margin-top: 0.75rem;
   margin-bottom: 0.75rem;
 }
 
-.site-wrapper ul li:not(.wptb-in-element)::before {
+#site-wrapper ul li:not(.wptb-in-element)::before {
     position: absolute;
     left: 0px;
     display: block;
