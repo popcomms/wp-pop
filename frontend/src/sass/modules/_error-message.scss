@@ -1,0 +1,12 @@
+.m-error-message {
+	color: color(pink);
+}
+
+.m-error-message--standalone {
+	background: color(pink);
+	color: color(white);
+	padding: spacing(small);
+	@include font-bold();
+	@include font-size-small();
+	text-align: center;
+}

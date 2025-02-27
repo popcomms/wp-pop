@@ -1,0 +1,13 @@
+{
+	"name": "acf/form",
+	"title": "Form",
+	"description": "",
+	"category": "general",
+	"icon": "format-chat",
+	"acf": {
+		"mode": "edit"
+	},
+	"supports": {
+		"align": false
+	}
+}

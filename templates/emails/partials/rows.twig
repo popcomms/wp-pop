@@ -1,0 +1,168 @@
+<tr>
+  <td>
+    <table width="100%" cellspacing="0" cellpadding="0" border="0" bgcolor="#ffffff" style="border-collapse: collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt; text-align: left; background-color: #ffffff;" class="dark-background">
+      {% for row in rows %}
+        
+        {% set use_large_font = (row.large or row.type == 'title') and (row.type != 'cta') %}
+        {% set actual_font_size = use_large_font ? font_size_large : font_size %}
+        {% set actual_line_height = use_large_font ? line_height_large : line_height %}
+        {% set actual_text_transform = row.uppercase ? 'uppercase' : 'none' %}
+        {% set actual_text_align = row.centre ? 'center' : 'left' %}
+        
+        {% if row.type == 'paragraph' %}
+          
+          <tr data-row="paragraph">
+            <td width="25" style="line-height: 0px; font-size: 0px;"><img width="25" height="1" border="0" alt="" src="{{ img_path }}s.png" style="display: block;" /></td>
+            <td>
+              <table width="100%" cellspacing="0" cellpadding="0" border="0" bgcolor="#ffffff" style="border-collapse: collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt; text-align: left; background-color: #ffffff;" class="dark-background">
+                <tr>
+                  <td style="font-family: {{ font_family }}; font-size: {{ actual_font_size }}; line-height: {{ actual_line_height }}; color: {{ text_colour }}; font-weight: normal; text-align: {{ actual_text_align }}; text-transform: {{ actual_text_transform }};">
+                    {{ row.content }}
+                  </td>
+                </tr>
+              </table>
+            </td>
+            <td width="25" style="line-height: 0px; font-size: 0px;"><img width="25" height="1" border="0" alt="" src="{{ img_path }}s.png" style="display: block;" /></td>
+          </tr>
+        
+        {% elseif row.type == 'image' %}
+        
+          {% if function('is_object', row.content) %}
+            
+            {% set imageWidth = row.width %}
+            {% set ratio = imageWidth / row.content.width %}
+            {% set imageHeight = row.content.height * ratio %}
+            
+            {% if row.width > 550 %}
+              
+              <tr data-row="image">
+                <td colspan="3" style="line-height: 0px; font-size: 0px;">
+                  {% if row.link %}<a style="line-height: 0px; font-size: 0px; text-align: center; text-decoration: none; display: block;" href="{{ row.link }}">{% endif %}
+                    <img src="{{ TimberImage(row.content).src|resize(imageWidth, imageHeight) }}" alt="" width="{{ imageWidth }}" height="{{ imageHeight }}" border="0" style="display: block;" class="wFull" />
+                  {% if row.link %}</a>{% endif %}
+                </td>
+              </tr>
+              
+            {% else %}
+              
+              <tr data-row="image">
+                <td width="25" style="line-height: 0px; font-size: 0px;"><img width="25" height="1" border="0" alt="" src="{{ img_path }}s.png" style="display: block;" /></td>
+                <td>
+                  <table width="100%" cellspacing="0" cellpadding="0" border="0" bgcolor="#ffffff" style="border-collapse: collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt; text-align: left; background-color: #ffffff;" class="dark-background">
+                    <tr>
+                      <td style="line-height: 0px; font-size: 0px;">
+                        {% if row.link %}<a style="line-height: 0px; font-size: 0px; text-align: center; text-decoration: none; display: block;" href="{{ row.link }}">{% endif %}
+                          <img src="{{ TimberImage(row.content).src|resize(imageWidth, imageHeight) }}" alt="" width="{{ imageWidth }}" height="{{ imageHeight }}" border="0" style="display: block; margin: auto;" class="wFull" />
+                        {% if row.link %}</a>{% endif %}
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+                <td width="25" style="line-height: 0px; font-size: 0px;"><img width="25" height="1" border="0" alt="" src="{{ img_path }}s.png" style="display: block;" /></td>
+              </tr>
+              
+            {% endif %}
+            
+          {% else %}
+          
+            {% if row.width > 550 %}
+              
+              <tr data-row="image">
+                <td colspan="3" style="line-height: 0px; font-size: 0px;">
+                  {% if row.link %}<a style="line-height: 0px; font-size: 0px; text-align: center; text-decoration: none; display: block;" href="{{ row.link }}">{% endif %}
+                    <img src="{{ row.content }}" alt="" width="{{ row.width }}" height="{{ row.height }}" border="0" style="display: block;" class="wFull" />
+                  {% if row.link %}</a>{% endif %}
+                </td>
+              </tr>
+              
+            {% else %}
+              
+              <tr data-row="image">
+                <td width="25" style="line-height: 0px; font-size: 0px;"><img width="25" height="1" border="0" alt="" src="{{ img_path }}s.png" style="display: block;" /></td>
+                <td>
+                  <table width="100%" cellspacing="0" cellpadding="0" border="0" bgcolor="#ffffff" style="border-collapse: collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt; text-align: left; background-color: #ffffff;" class="dark-background">
+                    <tr>
+                      <td style="line-height: 0px; font-size: 0px;">
+                        {% if row.link %}<a style="line-height: 0px; font-size: 0px; text-align: center; text-decoration: none; display: block;" href="{{ row.link }}">{% endif %}
+                          <img src="{{ row.content }}" alt="" width="{{ row.width }}" height="{{ row.height }}" border="0" style="display: block; margin: auto;" class="wFull" />
+                        {% if row.link %}</a>{% endif %}
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+                <td width="25" style="line-height: 0px; font-size: 0px;"><img width="25" height="1" border="0" alt="" src="{{ img_path }}s.png" style="display: block;" /></td>
+              </tr>
+              
+            {% endif %}
+            
+          {% endif %}
+        
+        {% elseif row.type == 'title' %}
+          
+          <tr data-row="title">
+            <td width="25" style="line-height: 0px; font-size: 0px;"><img width="25" height="1" border="0" alt="" src="{{ img_path }}s.png" style="display: block;" /></td>
+            <td>
+              <table width="100%" cellspacing="0" cellpadding="0" border="0" bgcolor="#ffffff" style="border-collapse: collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt; text-align: left; background-color: #ffffff;" class="dark-background">
+                <tr>
+                  <td style="font-family: {{ font_family }}; font-size: {{ actual_font_size }}; line-height: {{ actual_line_height }}; color: {{ text_colour }}; font-weight: bold; text-align: {{ actual_text_align }}; text-transform: {{ actual_text_transform }};">
+                    <b style="font-family: {{ font_family }}; font-size: {{ actual_font_size }}; line-height:{{ lineHeight }}; color: {{ text_colour }}; font-weight: bold; text-align: {{ actual_text_align }}; text-transform: {{ actual_text_transform }};">{{ row.content }}</b>
+                  </td>
+                </tr>
+              </table>
+            </td>
+            <td width="25" style="line-height: 0px; font-size: 0px;"><img width="25" height="1" border="0" alt="" src="{{ img_path }}s.png" style="display: block;" /></td>
+          </tr>
+          
+        {% elseif row.type == 'button' %}
+        
+          <tr data-row="button">
+            <td width="25" style="line-height: 0px; font-size: 0px;"><img width="25" height="1" border="0" alt="" src="{{ img_path }}s.png" style="display: block;" /></td>
+            <td style="line-height: 0px; font-size: 0px;" align="center">
+              <table cellspacing="0" cellpadding="0" border="0" bgcolor="{{ button_background_colour }}" width="250" style="border-collapse: collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt; text-align: left; background: {{ button_background_colour }};">
+                <tr>
+                  <td colspan="3" style="line-height: 0px; font-size: 0px;"><img height="7" border="0" width="1" style="display: block;" alt="" src="{{ img_path }}s.png"></td>
+                </tr>
+                <tr>
+                  <td width="7" style="line-height: 0px; font-size: 0px;"><img height="7" border="0" width="1" style="display: block;" alt="" src="{{ img_path }}s.png"></td>
+                  <td align="center" valign="middle" style="font-family: {{ font_family }}; font-size: {{ actual_font_size }}; line-height: {{ actual_line_height }}; color: #ffffff; font-weight: bold; text-decoration: none; text-align: center; vertical-align: middle;">
+                    <a style="font-family: {{ font_family }}; font-size: {{ actual_font_size }}; line-height: {{ actual_line_height }}; color: #ffffff; font-weight: bold; text-decoration: none; text-align: center; display: block; text-transform: uppercase;" href="{{ row.link }}">{{ row.content }}</a>
+                  </td>
+                  <td width="7" style="line-height: 0px; font-size: 0px;"><img height="7" border="0" width="1" style="display: block;" alt="" src="{{ img_path }}s.png"></td>
+                </tr>
+                <tr>
+                  <td colspan="3" style="line-height: 0px; font-size: 0px;"><img height="7" border="0" width="1" style="display: block;" alt="" src="{{ img_path }}s.png"></td>
+                </tr>
+              </table>
+            </td>
+            <td width="25" style="line-height: 0px; font-size: 0px;"><img width="25" height="1" border="0" alt="" src="{{ img_path }}s.png" style="display: block;" /></td>
+          </tr>
+        
+        {% elseif row.type == 'product' %}
+          
+          <tr data-row="product">
+            <td width="25" style="line-height: 0px; font-size: 0px;"><img width="25" height="1" border="0" alt="" src="{{ img_path }}s.png" style="display: block;" /></td>
+            <td style="line-height: 0px; font-size: 0px;" align="center">
+              <table width="100%" cellspacing="0" cellpadding="0" border="0" bgcolor="#ffffff" style="border-collapse: collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt; text-align: left; background-color: #ffffff;" class="dark-background">
+                <tr>
+                  <td width="80" style="line-height: 0px; font-size: 0px;">
+                    <img height="80" border="0" width="80" style="display: block;" alt="" src="{{ row.image }}">
+                  </td>
+                  <td width="25" style="line-height: 0px; font-size: 0px;"><img height="7" border="0" width="25" style="display: block;" alt="" src="{{ img_path }}s.png"></td>
+                  <td style="font-family: {{ font_family }}; font-size: {{ actual_font_size }}; line-height: {{ actual_line_height }}; color: {{ text_colour }}; font-weight: normal; text-align: {{ actual_text_align }}; text-transform: {{ actual_text_transform }};">
+                    {{ row.content }}
+                  </td>
+                </tr>
+              </table>
+            </td>
+            <td width="25" style="line-height: 0px; font-size: 0px;"><img width="25" height="1" border="0" alt="" src="{{ img_path }}s.png" style="display: block;" /></td>
+          </tr>
+        
+        {% endif %}
+        
+        <tr data-row="spacer"><td colspan="3" style="line-height: 0px; font-size: 0px;"><img width="1" height="25" border="0" alt="" src="{{ img_path }}s.png" style="display: block;" /></td></tr>
+        
+      {% endfor %}
+
+    </table>
+  </td>
+</tr>

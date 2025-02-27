@@ -1,0 +1,52 @@
+{% set fields = function(['Site_Forms', 'get_fields'], post) %}
+
+{% if post %}
+	
+	<form class="m-form" novalidate data-form="generic">          
+		{% for row in fields.rows %}
+			{% set id = 'form_field_' ~ function('sanitize_title', row.label) %}
+			{% set is_checkbox = row.acf_fc_layout == 'checkbox' %}
+			{% set show_label = not is_checkbox %}
+			<div class="m-form__row m-form__row--{{ row.acf_fc_layout }}">
+				{% if show_label %}
+					<label class="m-form__label" for="{{ id }}">{{ row.label }}{% if row.required %}<span class="m-accessible-hide"> (required field)</span>{% else %} (optional<span class="m-accessible-hide">field</span>){% endif %}</label>
+				{% endif %}
+				{% if row.acf_fc_layout == 'text' %}
+					{% if row.type == 'telephone' %}
+						<input type="number" inputmode="tel" class="m-text-input" name="{{ id }}" id="{{ id }}"{% if row.required %} data-form-required="{{ row.error }}"{% endif %}{% if row.autocomplete_attribute %} autocomplete="{{ row.autocomplete_attribute }}"{% endif %}>
+					{% elseif row.type == 'name' %}
+						<input type="text" class="m-text-input" name="{{ id }}" id="{{ id }}"{% if row.required %} data-form-required="{{ row.error }}"{% endif %}{% if row.autocomplete_attribute %} autocomplete="{{ row.autocomplete_attribute }}"{% endif %} data-form-name>
+					{% elseif row.type == 'single' %}
+						<input type="text" class="m-text-input" name="{{ id }}" id="{{ id }}"{% if row.required %} data-form-required="{{ row.error }}"{% endif %}{% if row.autocomplete_attribute %} autocomplete="{{ row.autocomplete_attribute }}"{% endif %}>
+					{% elseif row.type == 'multi' %}
+						<textarea class="m-text-input" name="{{ id }}" id="{{ id }}"{% if row.required %} data-form-required="{{ row.error }}"{% endif %}{% if row.autocomplete_attribute %} autocomplete="{{ row.autocomplete_attribute }}"{% endif %}></textarea>
+					{% elseif row.type == 'email' %}
+						<input type="email" class="m-text-input" name="{{ id }}" id="{{ id }}"{% if row.required %} required {% endif %}{% if row.autocomplete_attribute %} autocomplete="{{ row.autocomplete_attribute }}"{% endif %}>
+					{% endif %}
+				{% elseif row.acf_fc_layout == 'checkbox' %}
+					{# <ul class="m-checkboxes">
+						<li class="m-checkboxes__item">
+							<input id="{{ id }}" name="{{ id }}" type="checkbox" value="Yes"{% if row.required %} required data-form-required="{{ row.error }}" data-bouncer-target="#{{ id }}_error_target"{% endif %}>
+							<label for="{{ id }}" class="m-checkboxes__label">{{ row.label }}</label>
+							<div id="{{ id }}_error_target"></div>
+						</li>
+					</ul> #}
+				{% endif %}
+			</div>
+		{% endfor %}
+		<div class="m-form__row m-form__row--action">
+			<button type="submit" class="m-button m-button--full" data-form-button>{{ fields.custom.button_text }}</button>
+			{% include 'partial/honeypot-field.twig' %}
+			<input type="hidden" value="{{ function('wp_create_nonce', 'site_form_nonce') }}" name="nonce">
+			<input type="hidden" value="{{ post.ID }}" name="form_id">
+		</div>
+		<div class="m-form__row">
+			<div class="cloudflare-turnstile-wrapper">
+				<div class="cf-turnstile" data-sitekey="0x4AAAAAAA-0OhL9i-vj4sjf" data-theme="light" data-size="flexible"></div>
+			</div>
+		</div>
+	</form>
+	
+	<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" defer></script>
+	
+{% endif %}
