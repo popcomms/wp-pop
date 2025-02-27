@@ -1,0 +1,32 @@
+.m-form {
+	
+
+}
+
+.m-form__row {
+		
+	&:not(:last-child) {
+		margin: 0 0 spacing(default) 0;
+	}
+	
+	.m-error-message {
+		 margin: 0 0 spacing(small) 0;
+	}
+}
+
+.m-form__row--action {
+	padding-top: 10px;
+}
+
+.m-form__row--error {
+	padding: 0 0 0 spacing(default);
+	border-left: 4px solid color(pink);
+}
+
+.m-form__label {
+	display: block;
+	
+	&:not(:last-child) {
+		margin: 0 0 spacing(small) 0;
+	}
+}

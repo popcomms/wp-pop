@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>{{ subject }}</title>
+  <meta charset="utf-8" />
+  <meta name="color-scheme" content="light dark">
+  <meta name="supported-color-schemes" content="light dark">
+  <style type="text/css">
+    @media only screen and (max-width: 480px) {
+      body, table, td, p, a { -webkit-text-size-adjust: none !important; }
+      body { width: 100% !important; min-width: 100% !important; }
+      table[class="wFull"] { width: 100% !important; }
+      table[class="button"] { width: 100% !important; }
+      img[class="wFull"], a[class="wFull"] { width: 100% !important; height: auto !important; }
+      img[class="w25"], td[class="w25"], table[class="w25"] { width: 25px !important; }
+      img[class="w0"], td[class="w0"], table[class="w0"] { width: 0px !important; }
+    }
+    
+    @media (prefers-color-scheme: dark) {
+      .dark-banner { display: block !important; width: auto !important; overflow: visible !important; float: none !important; max-height: inherit !important; max-width: inherit !important; line-height: auto !important; margin-top: 0px !important; visibility: inherit !important; }
+      .light-banner { display: none; display: none !important; }
+      .dark-background { background-color: #000000 !important; }
+      td, a, .link, b { color: #ffffff !important; }
+      .johnson-box { color: #000000 !important; }
+    }
+    
+    [data-ogsc] .dark-banner { display: block !important; width: auto !important; overflow: visible !important; float: none !important; max-height: inherit !important; max-width: inherit !important; line-height: auto !important; margin-top: 0px !important; visibility: inherit !important; }
+    [data-ogsc] .light-banner { display: none; display: none !important; }
+    [data-ogsc] .dark-background { background-color: #000000 !important; }
+    [data-ogsc] td, [data-ogsc] a, [data-ogsc] .link, [data-ogsc] b { color: #ffffff !important; }
+    [data-ogsc] .johnson-box { color: #000000 !important; }
+  </style>
+</head>
+<body link="{{ link_colour }}" alink="{{ link_colour }}" vlink="{{ link_colour }}" bgcolor="{{ background_colour }}" leftmargin="0" marginwidth="0" topmargin="0" marginheight="0" style="margin: 0px; padding: 0px; width: 100%; background-color: {{ background_colour }}; -webkit-text-size-adjust: none;">
+  {% if preview %}
+    <div style="display:none;">{{ preview }}</div>
+  {% endif %}
+  <table width="100%" bgcolor="{{ background_colour }}" border="0" cellspacing="0" cellpadding="0" style="border-collapse: collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt; background-color: {{ background_colour }};">
+    <tr>
+      <td style="text-align: center;">
+        <table width="600" bgcolor="{{ background_colour }}" align="center" border="0" cellspacing="0" cellpadding="0" style="border-collapse: collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt; text-align: left; background-color: {{ background_colour }};" class="wFull">

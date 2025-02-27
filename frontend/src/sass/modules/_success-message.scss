@@ -1,0 +1,12 @@
+.m-success-message {
+	color: color(purple);
+}
+
+.m-success-message--standalone {
+	background: color(purple);
+	color: color(white);
+	padding: spacing(small);
+	@include font-bold();
+	@include font-size-small();
+	text-align: center;
+}

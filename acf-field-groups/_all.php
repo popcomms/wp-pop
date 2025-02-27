@@ -10,12 +10,14 @@
     require_once('logo-collection.php'); 
     require_once('callout.php');
     require_once('video.php');
+    require_once('form.php');
     
     require_once('blocks/video-banner.php');
     require_once('blocks/facts.php');
     require_once('blocks/image-copy.php');
     require_once('blocks/ctas.php');
     require_once('blocks/ebooks.php');
+    require_once('blocks/form.php');
     
   }
   

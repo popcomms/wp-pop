@@ -1,0 +1,26 @@
+.m-text-input {
+	display: block;
+	width: 100%;
+	border: 2px solid color(grey);
+	padding: spacing(small);
+	margin: 0;
+	color: color(black);
+	border-radius: 0;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+	background: color(white);
+	@include font-default();
+	@include font-size-small();
+	
+	&::-ms-reveal,
+	&::-ms-clear {
+		display: none;
+	}
+}
+
+textarea.m-text-input {
+	height: 285px;
+	resize: none;
+	overflow: auto;
+}

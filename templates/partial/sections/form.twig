@@ -1,0 +1,31 @@
+{% extends 'partial/sections/generic/wrapper.twig' %}
+
+{% block content %}
+	
+	<div class="m-form-block">
+		
+		<div class="container-wide">
+	
+			{% if fields.heading_primary %}
+				<{{ fields.heading_primary_tag }} class="m-form-block__title">{{ fields.heading_primary }}</{{ fields.heading_primary_tag }}>
+			{% endif %}
+			
+			{% if fields.heading_secondary %}
+				<{{ fields.heading_secondary_tag }} class="m-form-block__subtitle alpha">{{ fields.heading_secondary }}</{{ fields.heading_secondary_tag }}>
+			{% endif %}
+			
+			{% if fields.form %}
+			
+				{%
+					include 'partial/form.twig' with {
+						post: fields.form
+					}
+				%}
+				
+			{% endif %}
+			
+		</div>
+		
+	</div>
+
+{% endblock %}

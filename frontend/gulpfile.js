@@ -48,6 +48,7 @@ function moveImg() {
 
 function mainCss() { return css('main'); }
 function mainJs() { return js('main'); }
+function formJs() { return js('form'); }
 
 function swallowError(error) {
   console.log(error.toString());
@@ -60,7 +61,8 @@ gulp.task('build', gulp.series(
   cleanImg,
   moveImg,
   mainCss,
-  mainJs
+  mainJs,
+  formJs
 ));
 
 gulp.task('watch', function () {
@@ -72,7 +74,8 @@ gulp.task('watch', function () {
   
   gulp.watch('./src/js/**/*', gulp.series(
     cleanJs,
-    mainJs
+    mainJs,
+    formJs
   ));
 
 });

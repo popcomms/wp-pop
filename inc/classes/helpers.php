@@ -116,6 +116,33 @@
       return $output;
     
     }
+    
+    public static function cachebust($file_url, $file_in_parent_theme = false) {
+      
+      $uri = $file_in_parent_theme ? get_template_directory_uri() : get_stylesheet_directory_uri();
+      $directory = $file_in_parent_theme ? get_template_directory() : get_stylesheet_directory();
+      
+      return $uri . $file_url . '?v=' . filemtime($directory . $file_url);
+      
+    }
+    
+    public static function verify_turnstile_token($token) {
+      
+      if (!$token) return 0;
+      
+      $response = wp_remote_post('https://challenges.cloudflare.com/turnstile/v0/siteverify',
+        array(
+          'body' => array(
+            'secret' => '0x4AAAAAAA-0OsikYATkSjAwSojiXDAbW0k',
+            'response' => $token
+          )
+        )
+      );
+      
+      $response_body = json_decode(wp_remote_retrieve_body($response));
+      return isset($response_body->success) ? $response_body->success : 0;
+      
+    }
   
   }
   

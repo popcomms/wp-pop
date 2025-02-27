@@ -190,3 +190,6 @@ require_once('inc/classes/shared.php');
 require_once('inc/classes/admin.php');
 require_once('inc/classes/ebooks.php');
 require_once('inc/classes/wysiwyg.php');
+require_once('inc/classes/forms.php');
+require_once('inc/classes/emails.php');
+require_once('inc/classes/bundles.php');
