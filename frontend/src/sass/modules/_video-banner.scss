@@ -5,6 +5,10 @@
   display: flex;
   align-items: center;
   
+  .container-narrow {
+    margin-bottom: 0;
+  }
+  
   .bg-pop-black {
     background: rgba(0, 0, 0, 0.5);
   }
@@ -36,6 +40,10 @@
   color: #fff;
   width: 100%;
   padding: 100px 0;
+  
+  // @include mq(0, wide) {
+  //   padding-bottom: 50px;
+  // }
 }
 
 .m-video-banner__title {
@@ -82,9 +90,29 @@
   }
 }
 
-.m-video-banner__button {
+.m-video-banner__buttons {
   margin: 0;
   padding: 0 0 5px 0;
+  
+  &:not(:last-child) {
+    margin: 0 0 spacing(default) 0;
+  }
+  
+  @include mq(wide) {
+    display: flex;
+  }
+}
+
+.m-video-banner__button {
+  margin: 0;
+  
+  &:not(:last-child) {
+    margin: 0 0 spacing(default) 0;
+    
+    @include mq(wide) {
+      margin: 0 spacing(default) 0 0;
+    }
+  }
 }
 
 .m-video-banner--overlay-dark {

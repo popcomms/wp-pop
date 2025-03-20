@@ -26,15 +26,29 @@
           <p class="m-video-banner__copy">{{ fields.copy }}</p>
         {% endif %}
         
-        {% if fields.button %}
-          <p class="m-video-banner__button">
-            {%
-              include 'partial/generic-button.twig' with {
-                button: fields.button,
-                class: fields.button_class ? fields.button_class : ''
-              }
-            %}
-          </p>
+        {% if fields.button or fields.button_two %}
+          <div class="m-video-banner__buttons">
+            {% if fields.button %}
+              <div class="m-video-banner__button">
+                {%
+                  include 'partial/generic-button.twig' with {
+                    button: fields.button,
+                    class: fields.button_class ? fields.button_class : ''
+                  }
+                %}
+              </div>
+            {% endif %}
+            {% if fields.button_two %}
+              <div class="m-video-banner__button">
+                {%
+                  include 'partial/generic-button.twig' with {
+                    button: fields.button_two,
+                    class: fields.button_two_class ? fields.button_two_class : ''
+                  }
+                %}
+              </div>
+            {% endif %}
+          </div>
         {% endif %}
         
         {% if fields.logo_collection %}
