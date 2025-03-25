@@ -2,29 +2,87 @@
 
 {% block content %}
   
-  <div class="m-video-banner" data-m-video-banner>
+  {% set one_title = fields.heading_primary and not fields.heading_secondary %}
+  {% set video_banner_class = fields.video_overlay ? ' m-video-banner--overlay-' ~ fields.video_overlay : '' %}
+  {% set video_banner_class = video_banner_class ~ (one_title ? ' m-video-banner--one-title' : video_banner_class) %}
+  {% set video_banner_class = video_banner_class ~ (fields.container_height ? ' m-video-banner--height-' ~ fields.container_height : '') %}
+  {% set video_banner_class = video_banner_class ~ (fields.logo_collection ? ' m-video-banner--with-logos' : '') %}
+  {% set container_width = fields.container_width ? fields.container_width : 'wide' %}
+  
+  <div class="m-video-banner{{ video_banner_class }}" data-m-video-banner>
     
     <div class="m-video-banner__content">
       
-      <div class="container-wide">
+      <div class="container-{{ container_width }}">
       
         {% if fields.heading_primary %}
-          <{{ fields.heading_primary_tag }} class="m-video-banner__title">{{ fields.heading_primary }}</{{ fields.heading_primary_tag }}>
+          <{{ fields.heading_primary_tag }} class="m-video-banner__title{% if one_title %} beta{% endif %}">{{ fields.heading_primary }}</{{ fields.heading_primary_tag }}>
         {% endif %}
         
         {% if fields.heading_secondary %}
           <{{ fields.heading_secondary_tag }} class="m-video-banner__subtitle alpha">{{ fields.heading_secondary }}</{{ fields.heading_secondary_tag }}>
         {% endif %}
         
-        {% if fields.button %}
-          <p class="m-video-banner__button">
-            {%
-              include 'partial/generic-button.twig' with {
-                button: fields.button,
-                class: fields.button_class ? fields.button_class : ''
-              }
-            %}
-          </p>
+        {% if fields.copy %}
+          <p class="m-video-banner__copy">{{ fields.copy }}</p>
+        {% endif %}
+        
+        {% if fields.logo_collection %}
+        
+          <div class="m-video-banner__logos">
+          
+            {% set logo_collection_fields = function('get_fields', fields.logo_collection.ID) %}
+          
+            <div class="relative grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-1 sm:gap-3 items-center justify-start bg-pop-black">
+              {% for item in logo_collection_fields.items %}
+                <div class="logos-light p-4 lg:p-6 h-full w-full flex justify-center items-center">
+                  {% if item.link %}
+                    {% set external = (site.url not in item.link.url) and ('#' not in item.link.url) %}
+                    <a class="transition-opacity hover:opacity-50" href="{{ item.link.url }}"{% if item.link.target %} target="{{ item.link.target }}"{% endif %}{% if external %} rel="noopener external"{% endif %}>
+                      {% if item.link.title %}<span class="m-accessible-hide">{{ item.link.title }}</span>{% endif %}
+                  {% endif %}
+                      <img
+                        class="w-full object-contain"
+                        src="{{ item.image.url }}"
+                        alt="{{ item.image.alt }}"
+                        width="150"
+                        height="150"
+                        loading="lazy"
+                      >
+                  {% if item.link %}
+                    </a>
+                  {% endif %}
+                </div>
+              {% endfor %}
+            </div>
+            
+          </div>
+          
+        {% endif %}
+        
+        {% if fields.button or fields.button_two %}
+          <div class="m-video-banner__buttons">
+            {% if fields.button %}
+              <div class="m-video-banner__button">
+                {%
+                  include 'partial/generic-button.twig' with {
+                    button: fields.button,
+                    class: fields.button_class ? fields.button_class : ''
+                  }
+                %}
+              </div>
+            {% endif %}
+            {% if fields.button_two %}
+              <div class="m-video-banner__button">
+                {%
+                  include 'partial/generic-button.twig' with {
+                    button: fields.button_two,
+                    class: fields.button_two_class ? fields.button_two_class : ''
+                  }
+                %}
+              </div>
+            {% endif %}
+          </div>
         {% endif %}
         
       </div>
