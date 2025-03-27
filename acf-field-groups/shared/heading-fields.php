@@ -11,7 +11,7 @@
         'label' => 'Heading primary',
         'name' => 'heading_primary',
         'type' => 'text',
-        'instructions' => '',
+        'instructions' => 'You can force a line break at all screen widths by wrapping content in a &lt;span class="block"&gt;span&lt;/span&gt;',
         'required' => 0,
         'conditional_logic' => 0,
         'wrapper' => array(
@@ -60,7 +60,7 @@
         'label' => 'Heading secondary',
         'name' => 'heading_secondary',
         'type' => 'text',
-        'instructions' => '',
+        'instructions' => 'You can force a line break at all screen widths by wrapping content in a &lt;span class="block"&gt;span&lt;/span&gt;',
         'required' => 0,
         'conditional_logic' => 0,
         'wrapper' => array(

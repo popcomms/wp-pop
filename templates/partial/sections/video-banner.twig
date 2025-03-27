@@ -24,7 +24,7 @@
         {% endif %}
         
         {% if fields.copy %}
-          <p class="m-video-banner__copy">{{ fields.copy }}</p>
+          <p class="m-video-banner__copy{% if fields.logo_collection %} text-base md:text-xl{% endif %}">{{ fields.copy }}</p>
         {% endif %}
         
         {% if fields.logo_collection %}
@@ -33,7 +33,7 @@
           
             {% set logo_collection_fields = function('get_fields', fields.logo_collection.ID) %}
           
-            <div class="relative grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-1 sm:gap-3 items-center justify-start bg-pop-black">
+            <div class="relative grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-1 sm:gap-3 items-center justify-start">
               {% for item in logo_collection_fields.items %}
                 <div class="logos-light p-4 lg:p-6 h-full w-full flex justify-center items-center">
                   {% if item.link %}
