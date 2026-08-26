@@ -1,0 +1,33 @@
+<article class="group rounded-xl border border-gray-200 bg-white overflow-hidden hover:shadow-md transition-shadow">
+  <a href="{{ post.link }}" class="block">
+    {# optional: if you have a thumbnail #}
+    {% if post.thumbnail %}
+      <div class="aspect-[16/9] bg-gray-100 overflow-hidden">
+        <img
+          src="{{ post.thumbnail.src('large') }}"
+          alt="{{ post.thumbnail.alt|e }}"
+          class="h-full w-full object-cover group-hover:scale-[1.02] transition-transform"
+          loading="lazy"
+        />
+      </div>
+    {% endif %}
+
+    <div class="p-5">
+      <h3 class="text-lg font-semibold text-gray-900 leading-snug">
+        {{ post.title }}
+      </h3>
+
+      {# excerpt: prefers WP excerpt; falls back to preview from content #}
+      <p class="mt-2 text-sm text-gray-600 leading-relaxed">
+        {{ post.excerpt ? post.excerpt : post.preview.length(24).read_more('') }}
+      </p>
+
+      {# optional: meta chips (categories/tags) — if you want, not required #}
+      {# <div class="mt-4 flex flex-wrap gap-2">
+        {% for term in post.terms('glossary_category')|slice(0, 3) %}
+          <span class="text-xs px-2 py-1 rounded-full bg-gray-100 text-gray-700">{{ term.name }}</span>
+        {% endfor %}
+      </div> #}
+    </div>
+  </a>
+</article>

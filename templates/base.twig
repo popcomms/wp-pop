@@ -12,11 +12,11 @@
 
 		<div id="site-wrapper">
 
-      {% include 'partial/nav.twig' with
+      {% include header_template|default('partial/nav.twig')  with
 				{
 					'fields': post,
 				}
-			%}
+			%} <!-- include 'partial/nav.twig' -->
 
 			<section role="main" class="content-wrapper bg-pop-white">
 				<div class="wrapper relative">
@@ -38,11 +38,11 @@
 
 		{% block footer %}
 			<footer id="footer">
-				{% include 'footer.twig' with
+				{% include footer_template|default('footer.twig') with
 					{
 						'fields': content,
 					}
-				%}
+				%} <!--include 'footer.twig'-->
 			</footer>
 			{{ function('wp_footer') }}
 		{% endblock %}

@@ -1,0 +1,36 @@
+{% if post.post_type == 'page' %}
+  {% set bg = 'black' %}
+  {% set color = 'white' %}
+{% endif %}
+
+{% if post.post_type != 'page' %}
+  {% set bg = post.hero_theme == 'white' ? 'white' : 'black' %}
+  {% set color = post.hero_theme == 'white' ? 'black' : 'white' %}
+{% endif %}
+
+<div class="footer__top container-new">
+		<div class="section_in">
+			<div class="flex">
+      <div class="col-lg-6">
+				<div class="footer__col">
+          {% include "/templates/partial/footer/pop-new.twig" %}
+          {% include "/templates/partial/footer/social.twig" %}
+          <a href="/get-in-touch/" target="_blank" class="small__button button button--primary">
+              Contact us
+          </a>
+        </div>
+      </div>
+      <div class="col-lg-6 footer-menu-flex">
+				<div class="footer__col">
+          {% include "/templates/partial/footer/menu-new.twig" %}
+        </div>
+				<div class="footer__col">
+          {% include "/templates/partial/footer/partners-new.twig" %}
+        </div>
+      </div>
+    </div>
+			<div class="footer__copyright">
+        &copy; {{"now"|date('Y')}} POPcomms Ltd&emsp;&bull;&emsp;155 Whiteladies Road. Bristol. BS8 2RF. United Kingdom&emsp;&bull;&emsp;Company&nbsp;13906686 <a href="{{ site.url }}/privacy-policy/" class="underline hover:opacity-50">Privacy Policy</a>
+      </div>
+  </div>
+</div>

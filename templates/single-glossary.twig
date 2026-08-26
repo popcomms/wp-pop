@@ -1,0 +1,63 @@
+{% extends "base.twig" %}
+
+{% block content %}
+
+<div class="relative content-wrapper">
+
+  {# HERO (matches your blog style) #}
+  <div class="relative flex flex-column items-end pt-48 pb-16">
+    <div
+      class="absolute top-0 left-0 w-full h-full bg-center bg-cover no-repeat"
+      style="background-image: url({{ theme.link }}/static/images/blogs-bg.png);"
+    ></div>
+    <div class="absolute top-0 left-0 w-full h-full bg-black bg-opacity-25"></div>
+
+    <div class="container-wide">
+    <p>
+        <a href="/glossary/" class="text-sm text-white p-2 border">
+            &#8592; Return to glossary
+        </a>
+    </p>
+      <h1 class="w-full text-4xl sm:text-5xl font-semibold text-white"
+          style="text-shadow: 0 0.1rem 0.1rem rgba(0,0,0,0.4)">
+        {{ post.title }}
+      </h1>
+    </div>
+  </div>
+
+  {# BODY #}
+  <div class="entry-content container-wide py-8 sm:py-16">
+
+    {% if post.excerpt %}
+      <p class="text-lg font-semibold mb-6">
+        <strong>Definition:</strong> {{ post.excerpt }}
+      </p>
+    {% endif %}
+
+    <div class="prose max-w-none">
+      {{ post.content }}
+    </div>
+
+    {% if related_terms is defined and related_terms|length > 0 %}
+      <div class="mt-16">
+        <h2 class="text-2xl font-semibold mb-6">
+          Related glossary terms
+        </h2>
+
+        <ul class="grid md:grid-cols-2 gap-4">
+          {% for term in related_terms %}
+            <li>
+              <a href="{{ term.link }}"
+                 class="text-primary hover:underline font-medium">
+                {{ term.title }}
+              </a>
+            </li>
+          {% endfor %}
+        </ul>
+      </div>
+    {% endif %}
+  </div>
+
+</div>
+
+{% endblock %}

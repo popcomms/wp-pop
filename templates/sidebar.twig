@@ -17,7 +17,7 @@
       {% set path = '/category/' ~ category.slug ~ '/' %}
       {% set path = active and valid_post_format ? '/type/' ~ post_format_path : path %}
       {% set path = active and not valid_post_format ? '/blog/' : path %}
-      {% set path = post_type == 'case-studies' ? '/case-studies/' : path %}
+      {% set path = post_type == 'case-studies' ? '/customer-stories/' : path %}
       {% set query_string = valid_post_format and not active ? '?post_format=' ~ post_format : '' %}
       {% set query_string = post_type == 'case-studies' ? '?cs_category=' ~ category.term_id : query_string %}
       {% set query_string = post_type == 'case-studies' and active ? '' : query_string %}

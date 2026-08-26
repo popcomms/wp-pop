@@ -1,0 +1,9 @@
+{% set width = image['sizes'][size ~ '-width'] %}
+{% set height = image['sizes'][size ~ '-height'] %}
+{% set ratio = height / width %}
+
+{% if constrain_width %}<div style="width: auto; min-width: 40px; max-width: {{ width }}px;">{% endif %}
+<div class="m-image-new">
+  <img src="{{ image['sizes'][size] }}" alt="{{ image['alt'] }}" width="auto" height="40" loading="lazy" />
+</div>
+{% if constrain_width %}</div>{% endif %}

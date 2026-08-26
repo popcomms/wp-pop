@@ -1,0 +1,55 @@
+{% extends 'partial/sections/generic/wrapper.twig' %}
+
+{% block content %}
+
+	<div class="m-iframe">
+
+		{% if fields.full_width %}
+
+			{% if fields.heading_primary %}
+				<div class="container-wide">
+					<{{ fields.heading_primary_tag }} class="m-iframe__title">{{ fields.heading_primary }}</{{ fields.heading_primary_tag }}>
+				</div>
+			{% endif %}
+
+			{% if fields.heading_secondary %}
+				<div class="container-wide">
+					<{{ fields.heading_secondary_tag }} class="m-iframe__subtitle alpha">{{ fields.heading_secondary }}</{{ fields.heading_secondary_tag }}>
+				</div>
+			{% endif %}
+
+			{% if fields.url %}
+				<iframe
+					src="{{ fields.url }}"
+					{% if fields.custom_style %}style="{{ fields.custom_style }}"{% endif %}
+					allowfullscreen
+				></iframe>
+			{% endif %}
+
+		{% else %}
+
+			<div class="container-wide">
+
+				{% if fields.heading_primary %}
+					<{{ fields.heading_primary_tag }} class="m-iframe__title">{{ fields.heading_primary }}</{{ fields.heading_primary_tag }}>
+				{% endif %}
+
+				{% if fields.heading_secondary %}
+					<{{ fields.heading_secondary_tag }} class="m-iframe__subtitle alpha">{{ fields.heading_secondary }}</{{ fields.heading_secondary_tag }}>
+				{% endif %}
+
+				{% if fields.url %}
+					<iframe
+						src="{{ fields.url }}"
+						{% if fields.custom_style %}style="{{ fields.custom_style }}"{% endif %}
+						allowfullscreen
+					></iframe>
+				{% endif %}
+
+			</div>
+
+		{% endif %}
+
+	</div>
+
+{% endblock %}

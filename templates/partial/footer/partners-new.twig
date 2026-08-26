@@ -1,0 +1,194 @@
+{% set partners_and_awards = function('get_field', 'partners_and_awards', 'option') %}
+
+{% if navigation.footer|length %}
+    
+  <nav class="m-footer-nav{% if function('get_field', 'emphasise_items_other_than_the_first', 'option') %} m-footer-nav--emphasise{% endif %}">
+    <ul class="m-footer-nav__list">
+      {% for item in navigation.footer %}
+        <li class="m-footer-nav__item">
+          {% if item.link %}<a href="{{ item.link }}" class="m-footer-nav__link"{% if item.external %} target="_blank" rel="noopener external"{% endif %}>{% endif %}
+          {% if not item.link %}<span class="m-footer-nav__link">{% endif %}
+            {{ item.text }}
+          {% if not item.link %}</span>{% endif %}
+          {% if item.link %}</a>{% endif %}
+          {% if item.children|length %}
+            <ul class="m-footer-nav__list m-footer-nav__list--secondary">
+              {% for child in item.children %}
+                <li class="m-footer-nav__item">
+                  <a href="{{ child.link }}" class="m-footer-nav__link"{% if child.external %} target="_blank" rel="noopener external"{% endif %}>{{ child.text }}</a>
+                </li>
+              {% endfor %}
+            </ul>
+          {% endif %}
+        </li>
+      {% endfor %}
+    </ul>
+  </nav>
+  
+{% else %}
+
+  <p class="font-semibold my-8">Menu</p>
+  
+  <a href="{{ site.url }}/" class="underline hover:opacity-50">Home</a>
+  <br>
+  <a href="{{ site.url }}/features-benefits/" class="underline hover:opacity-50">
+    Features
+  </a>
+  <br>
+  <a href="{{ site.url }}/why-popcomms/" class="underline hover:opacity-50">
+    Why POPcomms?
+  </a>
+  <br>
+  <a href="{{ site.url }}/pop-case-studies/" class="underline hover:opacity-50">
+    Case Studies
+  </a>
+  <br>
+  <a href="{{ site.url }}/insights/" class="underline hover:opacity-50">
+    Insights
+  </a>
+  <br>
+  <a href="{{ site.url }}/careers-at-pop/" class="underline hover:opacity-50">
+    Careers
+  </a>
+  <br>
+  
+  <br><br>
+  
+  <p class="font-semibold mt-0 mb-1 text-sm">Industries &amp; Roles</p>
+  <a href="{{ site.url }}/advanced-manufacturing/" class="underline hover:opacity-50">
+    Advanced Manufacturing
+  </a>
+  <br>
+  <a href="{{ site.url }}/healthcare-and-life-sciences/" class="underline hover:opacity-50">
+    Healthcare &amp; Life Sciences
+  </a>
+  <br>
+  <a href="{{ site.url }}/construction/" class="underline hover:opacity-50">
+    Construction
+  </a>
+  <br>
+  <a href="{{ site.url }}/technology/" class="underline hover:opacity-50">
+    Technology
+  </a>
+  <br>
+  <a href="{{ site.url }}/marketing/" class="underline hover:opacity-50">
+    Marketing
+  </a>
+  <br>
+  <a href="{{ site.url }}/sales/" class="underline hover:opacity-50">
+    Sales
+  </a>
+  <br>
+  
+  <br><br>
+  
+  <p class="font-semibold mt-0 mb-1 text-sm">Use cases</p>
+  <a href="{{ site.url }}/interactive-sales-tools/" class="underline hover:opacity-50">
+    Interactive sales tools
+  </a>
+  <br>
+  <a href="{{ site.url }}/innovation-centres/" class="underline hover:opacity-50">
+    Innovation centres
+  </a>
+  <br>
+  <a href="{{ site.url }}/trade-retail-experiences/" class="underline hover:opacity-50">
+    Trade &amp; Retail experiences
+  </a>
+  <br>
+  <a href="{{ site.url }}/touchscreen-experiences/" class="underline hover:opacity-50">
+    Touchscreen Experiences
+  </a>
+  
+{% endif %}
+
+
+<p class="m-partners-title font-semibold my-8">Partners &amp; Awards</p>
+
+{% if partners_and_awards|length %}
+  
+  <div class="m-partners m-partners--restrict">
+    <ul class="m-partners__list">
+      {% for item in partners_and_awards %}
+      
+        {% set image_field = (color == 'white') ? 'white_image' : 'black_image' %}
+        
+        <li class="m-partners__item m-partners__item--{{ item.width }}">
+          {% if item.link %}<a href="{{ item.link }}" class="m-partners__item__inner" target="_blank" rel="noopener external">{% endif %}
+          {% if not item.link %}<div class="m-partners__item__inner">{% endif %}
+            <span class="m-accessible-hide">{{ item.text }}</span>
+            {%
+              include 'partial/image-new.twig' with {
+                image: item[image_field],
+                size: 'medium',
+                constrain_width: true
+              }
+            %}
+          {% if item.link %}</a>{% endif %}
+          {% if not item.link %}</div>{% endif %}
+        </li>
+        
+      {% endfor %}
+    </ul>
+  </div>
+
+{% else %}
+
+  <div class="flex flex-wrap items-center justify-between">
+  
+    <div class="w-1/2 sm:w-1/5 md:w-1/2 pr-6 pb-8">
+      {% if color == 'white' %}
+        <img
+          src="https://www.popcomms.com/wp-content/uploads/2023/05/showpad-logo-white-300x188.png"
+          alt="Showpad"
+          class="inline-block w-24"
+          loading="lazy"
+          width="300"
+          height="188"
+        >
+      {% else %}
+        <img
+          src="https://www.popcomms.com/wp-content/uploads/2023/05/showpad-logo-black-300x188.png"
+          alt="Showpad"
+          class="inline-block w-24"
+          loading="lazy"
+          width="300"
+          height="188"
+        >
+      {% endif %}
+    </div>
+  
+  <div class="w-1/2 sm:w-1/5 md:w-1/2 pr-6 pb-8">
+    {% if color == 'white' %}
+    <img
+      src="https://www.popcomms.com/wp-content/uploads/2023/05/cyber-essentials-logo-white-300x255.png"
+      alt="Cyber Essentials"
+      class="inline-block w-20"
+      loading="lazy"
+      width="300"
+      height="255"
+    >
+      {% else %}
+    <img
+      src="https://www.popcomms.com/wp-content/uploads/2023/05/cyber-essentials-logo-black-300x251.png"
+  
+      alt="Cyber Essentials"
+      class="inline-block w-20"
+      loading="lazy"
+      width="300"
+      height="251"
+    >
+      {% endif %}
+  </div>
+  
+  <div class="w-1/2 sm:w-1/5 md:w-full pr-6 pb-8">
+    <img
+      src="https://www.popcomms.com/wp-content/uploads/2023/05/cma-2021-best-application-of-marketing-technology-300x100.png"
+      alt="CMA Winner 2021 - Best Application of Marketing Technology"
+      class="inline-block"
+      loading="lazy"
+      width="300"
+      height="100"
+    >
+  </div>
+  
+{% endif %}

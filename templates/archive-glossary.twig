@@ -1,0 +1,26 @@
+{% extends "base.twig" %}
+
+{% block content %}
+  <div class="relative content-wrapper">
+
+    {# keep your hero if you want it #}
+    {% include 'partial/blog-hero.twig' with {
+      breadcrumb: breadcrumb,
+      title: title,
+      subtitle: description,
+      banner_images: banner_images
+    } %}
+
+    {# NO SIDEPANEL, 3-COL TILES #}
+    <div class="w-full max-w-6xl mx-auto p-6">
+      <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6">
+        {% for post in posts %}
+          {% include "tease-glossary.twig" with { post: post } %}
+        {% endfor %}
+      </div>
+    </div>
+
+  </div>
+
+  {% include 'partial/pagination.twig' %}
+{% endblock %}
