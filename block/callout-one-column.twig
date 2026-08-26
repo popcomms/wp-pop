@@ -1,0 +1,45 @@
+{% if is_preview %}
+  <p><strong>Callout</strong> - I will only appear in the editor.</p>
+{% endif %}
+
+{% if not is_preview %}
+  {% if fields.callout and fields.callout|length %}
+    
+    {% set callout_fields = function('get_fields', fields.callout[0].ID) %}
+  
+    <div class="container-new container-new__callout bg-blue bg-pop-{{ fields.accent_background_color }} {{ fields.two_column == '1' ? 'column_two':'column_one' }}" >
+      <div class="two-col_column text-block {{ theme_text_color }}">
+        <div class="two-col_column-one">
+          {{ callout_fields.column_one }}
+            <div class="container-new__callout-btn flex items-center">
+              {% for button in callout_fields.buttons %}
+                {% if button.link %}
+                  {% set external = (site.url not in button.link.url) and ('#' not in button.link.url) %}
+                  <p class="text-right">
+                    <a href="{{ button.link.url }}" target="{{ button.link.target }}" class="header__button button button--primary {{ button.style }} {% if button.additional_classes %} {{ button.additional_classes }}{% endif %}">
+                        {{ button.link.title}}
+                    </a>
+                  </p>
+                {% endif %}
+              {% endfor %}
+            </div>
+          </div>
+        <div class="two-col_column-two">
+          {{ callout_fields.column_two }}
+                      <div class="container-new__callout-btn flex items-center">
+              {% for button in callout_fields.buttons %}
+                {% if button.link %}
+                  {% set external = (site.url not in button.link.url) and ('#' not in button.link.url) %}
+                  <p class="text-right">
+                    <a href="{{ button.link.url }}" target="{{ button.link.target }}" class="header__button button button--primary {% if button.additional_classes %} {{ button.additional_classes }}{% endif %}">
+                        {{ button.link.title}}
+                    </a>
+                  </p>
+                {% endif %}
+              {% endfor %}
+            </div>
+        </div>
+      </div>
+    </div>
+  {% endif %}
+{% endif %}

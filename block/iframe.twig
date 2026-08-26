@@ -1,0 +1,58 @@
+{% if is_preview %}
+	<p><strong>iFrame</strong> - I will only appear in the editor.</p>
+{% endif %}
+
+{% if not is_preview and fields.url %}
+
+	{% set is_full_width = fields.width == 'full' %}
+
+	<div class="m-iframe">
+
+		{% if is_full_width %}
+
+			{% if fields.heading_primary or fields.heading_secondary %}
+				<div class="container-wide">
+					{% if fields.heading_primary %}
+						<{{ fields.heading_primary_tag }} class="m-iframe__title">{{ fields.heading_primary }}</{{ fields.heading_primary_tag }}>
+					{% endif %}
+					{% if fields.heading_secondary %}
+						<{{ fields.heading_secondary_tag }} class="m-iframe__subtitle alpha">{{ fields.heading_secondary }}</{{ fields.heading_secondary_tag }}>
+					{% endif %}
+				</div>
+			{% endif %}
+
+			<div style="display:flex;justify-content:center;">
+				<iframe
+					src="{{ fields.url }}"
+					{% if fields.custom_style %}style="{{ fields.custom_style }}"{% endif %}
+					allowfullscreen
+				></iframe>
+			</div>
+
+		{% else %}
+
+			<div class="{{ fields.width ?: 'container-wide' }}">
+
+				{% if fields.heading_primary %}
+					<{{ fields.heading_primary_tag }} class="m-iframe__title">{{ fields.heading_primary }}</{{ fields.heading_primary_tag }}>
+				{% endif %}
+
+				{% if fields.heading_secondary %}
+					<{{ fields.heading_secondary_tag }} class="m-iframe__subtitle alpha">{{ fields.heading_secondary }}</{{ fields.heading_secondary_tag }}>
+				{% endif %}
+
+				<div style="display:flex;justify-content:center;">
+					<iframe
+						src="{{ fields.url }}"
+						{% if fields.custom_style %}style="{{ fields.custom_style }}"{% endif %}
+						allowfullscreen
+					></iframe>
+				</div>
+
+			</div>
+
+		{% endif %}
+
+	</div>
+
+{% endif %}

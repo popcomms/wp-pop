@@ -1,0 +1,61 @@
+{% if is_preview %}
+  <p><strong>Copy / Media</strong> - I will only appear in the editor.</p>
+{% endif %}
+
+{% if not is_preview %}
+  <div class="copy-media-button m-copy-media m-copy-media--{{ fields.media_position }}">
+    <div class="container-new">
+    
+      <div class="{{ theme_bg_color }} md:box-content  {% if fields.additional_class %} {{ fields.additional_class }}{% endif %}">
+        {% if fields.show_title %}
+          {% include "/templates/partial/component-title-clear.twig" with
+            {
+              'title': fields.title,
+              'subtitle': fields.subtitle,
+              'theme_text_color': theme_text_color,
+              'title_color': fields.title_color,
+              'pattern': fields.pattern.type,
+              'pattern_color': fields.pattern.color,
+              'pattern_opacity': fields.pattern.opacity
+            }
+          %}
+        {% endif %}
+        <div class="flex flex-wrap justify-between items-center md:flex-nowrap">
+          <div class="copy-media-button__text m-copy-media__copy flex flex-col items-start justify-center text-block p-5 sm:p-12 w-full sm:w-1/2 bg-pop-{{ fields.accent_background_color }} {{ theme_text_color }} {{ fields.padding_left == '1' ? 'remove_pl':'' }}">
+            {{ fields.copy }}
+            {% if fields.button.url %}
+                <a href="{{ fields.button.url }}" target="{{ fields.button.target }}" class="header__button button button--primary">
+                    {{ fields.button.title}}
+                </a>
+            {% endif %}
+          </div>
+          <div class="text-block w-full sm:w-1/2 flex items-center {{ theme_text_color }}">
+            <div class="m-copy-media__media {{ fields.media_height == '1' ? 'media-height480':'' }}">
+              {% if fields.video %}
+                
+                {%
+                  include 'partial/autoplay-video.twig' with {
+                    video: Post(fields.video),
+                    class: 'm-copy-media__video'
+                  }
+                %}
+                
+              {% elseif fields.image %}
+              
+                {%
+                  include 'partial/image.twig' with {
+                    image: fields.image,
+                    size: 'large'
+                  }
+                %}
+                
+              {% endif %}
+            </div>
+          </div>
+        </div>
+    
+      </div>
+    
+    </div>
+  </div>
+{% endif %}

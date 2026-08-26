@@ -7,13 +7,24 @@
 {% if not is_preview and video_data and video_data.url %}
 
   <div class="container-wide relative" >
-    
-    <div class="m-video">
-      <iframe loading="lazy" src="{{ video_data.url }}"></iframe>
+    <div class="container-new video-text__wrapper flex justify-between border-pop-{{ theme == 'dark' ? 'white' : 'black' }} pl-4 text-sm">
+      <h3 class="w-full {{ theme_text_color }}">
+        {{ fields.caption }}
+      </h3>
+      {% if fields.text %}
+        <div class="w-full {{ theme_text_color }} descr">
+          {{ fields.text }}
+        </div>
+      {% endif %}
     </div>
-
-    <div class="w-full border-l-4 border-pop-{{ theme == 'dark' ? 'white' : 'black' }} pl-4 text-sm">
-      <p class="text-sm {{ theme_text_color }}">{{ fields.caption }}</p>
+    <div class="m-video">
+      <iframe loading="lazy" id="video" src="{{ video_data.url }}"></iframe>
+      {% if fields.image_poster %}
+        <div class="btnWrap absolute">
+          <a id="play-video" class="btn" href="#"></a>
+          <img src="{{fields.image_poster.url}}" id="videoPoster" class="" >
+        </div>
+      {% endif %}
     </div>
   </div>
 {% endif %}

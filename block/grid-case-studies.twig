@@ -1,0 +1,68 @@
+{% if is_preview %}
+  <p><strong>Portfolio</strong> - I will only appear in the editor.</p>
+{% endif %}
+
+{% if not is_preview %}
+  <div class="container-new container-case-studies" >
+    <div class="{{ theme_bg_color }} md:box-content">
+      {% if fields.show_title %}
+      {% include "/templates/partial/component-title-clear.twig" with
+        {
+          'title': fields.title,
+          'subtitle': fields.subtitle,
+          'theme_text_color': theme_text_color,
+          'title_color': fields.title_color,
+          'pattern': fields.pattern.type,
+          'pattern_color': fields.pattern.color,
+          'pattern_opacity': fields.pattern.opacity
+        }
+      %}
+      {% endif %}
+      <div class="case-studies__grid grid gap-0.5 grid-cols-1 sm:grid-cols-2 relative border {{ theme_border_color }} {{ theme_bg_color }}">
+        {% for item in fields.case_studies %}
+          {% set width = 'col-span-1' %}
+          {% set height = 'row-span-1' %}
+          {% if loop.index == 3 %}
+            {% set width = 'col-span-1 sm:col-span-2' %}
+          {% elseif loop.index == 4 %}
+            {% set height = 'row-span-1 sm:row-span-2' %}
+          {% endif %}
+
+          {% set case_study = TimberPost(item.case_study.ID) %}
+          {% set link = case_study.get_permalink(item.case_study.ID) %}
+
+          <div class="grid__item image-container relative">
+            <div class="link-card flex flex-col h-full w-full">
+              <!--<a class="h-full relative block" href="{{ link }}"> -->
+                <div class="group flex flex-col h-full">
+                  <div class="grid__item-img w-full h-full overflow-hidden">
+                    <a class="h-full relative block" href="{{ link }}">
+                    <img
+                      class="w-full h-full object-cover origin-center transform group-hover:scale-110 transition-transform duration-500"
+                      src="{{ case_study.thumbnail.src }}"
+                      alt="{{ case_study.thumbnail.alt }}"
+                      loading="lazy"
+                    >
+                    </a>
+                    <div class="h-full w-full bg-pop-black opacity-40 group-hover:opacity-0 transition-opacity duration-500"></div>
+                  </div>
+
+                    <div class="grid__item-content text-xl leading-tight  duration-500 p-6 m-0 text-pop-white" style="text-shadow: 0 0.1rem 0.2rem rgba(0,0,0,0.4);">
+                      <h4><a href="{{ link }}">{{ case_study.post_title }}</a></h4>
+                      <div class="post-categories-container">
+                        <ul class="post-categories">
+                            {% for category in case_study.terms('category') %}
+                                <li class="border-pop-{{ fields.case_title_color }} text-pop-{{ fields.case_title_color }}"><a href="{{ category.link }}">{{ category.name }}</a></li>
+                            {% endfor %}
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                <!--</a>-->
+              </div>
+            </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+{% endif %}

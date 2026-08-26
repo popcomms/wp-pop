@@ -1,0 +1,33 @@
+{% if is_preview %}
+  <p><strong>Text Block</strong> - I will only appear in the editor.</p>
+{% endif %}
+
+{% if not is_preview %}
+  <div class="container-new container-hero-image relative flex flex-nowrap md:flex-nowrap {% if fields.image_below == 1 %} flex-column container-hero-image-vert {% endif %}" >
+    <div class="hero-text-box">
+    {% if fields.hero_subtitle %}
+      <div class="w-full {{ theme_text_color }} subtitle">
+        {{ fields.hero_subtitle }}
+      </div>
+    {% endif %}
+      <h1 class="w-full {{ theme_text_color }}">
+        {{ fields.hero_title }}
+      </h1>
+      <div class="w-full {{ theme_text_color }} descr">
+        {{ fields.text }}
+      </div>
+      {% if fields.button_url != null %}
+        <a href="{{ fields.button_url }}" class="button button--primary">
+          {% if fields.button_text %}
+              {{ fields.button_text }}
+            {% endif %}
+        </a>
+      {% endif %}
+    </div>
+      {% if fields.image %}
+      <div class="hero-image-box">
+        <img src="{{ fields.image }}">
+      </div>
+      {% endif %}
+  </div>
+{% endif %}

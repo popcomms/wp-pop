@@ -21,7 +21,7 @@
           %}
         {% endif %}
         <div class="flex flex-wrap items-stretch md:flex-nowrap">
-          <div class="m-copy-media__copy flex flex-col items-start justify-center text-block p-5 sm:p-12 w-full sm:w-1/2 bg-pop-{{ fields.accent_background_color }} {{ theme_text_color }}">
+          <div class="m-copy-media__copy flex flex-col items-start justify-center text-block p-5 sm:p-12 w-full sm:w-1/2 bg-pop-{{ fields.accent_background_color }} {{ theme_text_color }} {{ fields.padding_left == '1' ? 'remove_pl':'' }}">
             {{ fields.copy }}
           </div>
           <div class="text-block w-full sm:w-1/2 flex items-center {{ theme_text_color }}">

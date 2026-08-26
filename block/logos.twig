@@ -3,20 +3,22 @@
 {% endif %}
 
 {% if not is_preview %}
-  <div class="container-wide" >
+  <div class="container-wide container-logos" >
     <div class=" {{ theme_bg_color }} md:box-content">
-      {% include "/templates/partial/component-title.twig" with
+      {% include "/templates/partial/component-title-clear.twig" with
         {
           'title': fields.title,
           'subtitle': fields.subtitle,
           'theme_text_color': theme_text_color,
+          'theme_text_align': theme_text_align,
           'title_color': fields.title_color,
+          'text_align': fields.text_align,
           'pattern': fields.pattern.type,
           'pattern_color': fields.pattern.color,
           'pattern_opacity': fields.pattern.opacity
         }
       %}
-      <div class="relative grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-1 sm:gap-3 items-center justify-start {{ theme == 'dark' ? 'bg-pop-black' : 'bg-pop-white'}}">
+      <div class="relative container-logos__wrapper grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-1 sm:gap-3 items-center justify-start {{ theme == 'dark' ? 'bg-pop-black' : 'bg-pop-white'}} {{ fields.logos_gap == true ? 'logos-gap' : '' }}">
         <!-- grid grid-flow-col grid-cols-4 gap-0.5 -->
         {% for item in fields.logos %}
           <div class="{{ theme == 'dark' ? 'logos-light' : 'logos-dark'}} p-4 lg:p-6 h-full w-full flex justify-center items-center">

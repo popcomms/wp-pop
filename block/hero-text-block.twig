@@ -1,0 +1,24 @@
+{% if is_preview %}
+  <p><strong>Text Block</strong> - I will only appear in the editor.</p>
+{% endif %}
+
+{% if not is_preview %}
+  <div class="container-new container-new-hero relative flex flex-wrap md:flex-nowrap" >
+    <div class="w-full {{ theme_text_color }} subtitle">
+      {{ fields.hero_subtitle }}
+    </div>
+    <h1 class="w-full {{ theme_text_color }}">
+      {{ fields.hero_title }}
+    </h1>
+    <div class="w-full {{ theme_text_color }} descr">
+      {{ fields.text }}
+    </div>
+      {% if fields.button_url != null %}
+        <a href="{{ fields.button_url }}" class="button button--primary">
+          {% if fields.button_text %}
+              {{ fields.button_text }}
+            {% endif %}
+        </a>
+      {% endif %}
+  </div>
+{% endif %}

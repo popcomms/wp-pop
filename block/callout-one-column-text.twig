@@ -1,0 +1,31 @@
+{% if is_preview %}
+  <p><strong>Callout</strong> - I will only appear in the editor.</p>
+{% endif %}
+
+{% if not is_preview %}
+  {% if fields.callout and fields.callout|length %}
+    
+    {% set callout_fields = function('get_fields', fields.callout[0].ID) %}
+  
+    <div class="container-new container-new__callout container-new__callout-text bg-blue two-col relative flex items-center md:flex-nowrap bg-pop-{{ fields.accent_background_color }}" >
+      <div class="container-new__callout-content two-col_column text-block mb-5 sm:mb-0 md:mr-6 w-full md:w-1/2 {{ theme_text_color }}">
+        {{ callout_fields.column_one }}
+        <div class="two-col_column_descr">
+          {{ callout_fields.column_two }}
+        </div>
+      </div>
+      <div class="two-col_column text-block md:ml-6 w-full md:w-1/2 {{ theme_text_color }}">
+        {% for button in callout_fields.buttons %}
+          {% if button.link %}
+            {% set external = (site.url not in button.link.url) and ('#' not in button.link.url) %}
+            <p class="text-right">
+              <a href="{{ button.link.url }}" target="{{ button.link.target }}" class="header__button button button--primary">
+                  {{ button.link.title}}
+              </a>
+            </p>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+  {% endif %}
+{% endif %}

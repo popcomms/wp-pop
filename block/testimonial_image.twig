@@ -1,0 +1,25 @@
+{% if is_preview %}
+  <p><strong>Testimonials</strong> - I will only appear in the editor.</p>
+{% endif %}
+
+{% if not is_preview %}
+<div class="container-new testimonial-container flex items-center bg-gradient p-8 sm:p-16 md:p-8 {{ theme_text_color }}">
+  <div class="testimonial-container__img flex items-center {% if fields.full_width|length > 0 %}full_width{% endif %}"> 
+      <img src="{{ fields.quotee_img }}">
+  </div>
+  <div class="relative">
+    <div class="testimonial-container__icon">
+      <img src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMTUiIHZpZXdCb3g9IjAgMCAyMCAxNSIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTEuNDI4NTcgMTQuMjg1N0g1LjcxNDI5TDguNTcxNDMgOC41NzE0M1YwSDBWOC41NzE0M0g0LjI4NTcxTDEuNDI4NTcgMTQuMjg1N1pNMTIuODU3MSAxNC4yODU3SDE3LjE0MjlMMjAgOC41NzE0M1YwSDExLjQyODZWOC41NzE0M0gxNS43MTQzTDEyLjg1NzEgMTQuMjg1N1oiIGZpbGw9IndoaXRlIi8+Cjwvc3ZnPgo='/>
+    </div>
+    <div class="testimonial-container__text text-xl md:text-2xl mb-6 leading-tight">
+      {{ fields.testimonial }}
+    </div>
+    {% if fields.quotee|length > 0 %}
+      <div class="testimonial-container__author font-normal">
+        <!-- One long line only way to remove space before comma -->
+        <span class="font-semibold">{{ fields.quotee }}</span>{% if fields.quotee_role|length > 0 %}<span class="inline italic"> • {{ fields.quotee_role }}</span>{% endif %}
+      </div>
+    {% endif %}
+  </div>
+</div>
+{% endif %}
